@@ -1,9 +1,0 @@
-.free-stock {
-  height: 62px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to right, rgb(0, 200, 2), rgb(195, 244, 59));
-  font-weight: 700;
-}
