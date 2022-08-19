@@ -4,6 +4,7 @@ import "./WatchListPage.css";
 
 function WatchListPage() {
     const [isLoaded, setIsLoaded] = useState(false)
+    const [wlStocks, setWlStocks] = useState([])
     useEffect(() => {
 
         setIsLoaded(true)
@@ -31,7 +32,19 @@ function WatchListPage() {
                     </div>
 
                     <div className="watchlist-itemnum">5 items</div>
-
+                    {/* <div className="market-news-container">
+                        {wlStocks.length > 0 &&
+                            wlStocks.map((article) => (
+                                // <NewsArticle
+                                //     key={article.id}
+                                //     headline={article.headline}
+                                //     image={article.image}
+                                //     summary={article.summary}
+                                //     url={article.url}
+                                //     source={article.source}
+                                // />
+                            ))}
+                    </div> */}
                     <div>
                         <table className="watchlist-table">
                             <thead>
