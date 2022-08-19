@@ -1,0 +1,51 @@
+.home-page-gntee-sec {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 1020px;
+    color: white;
+    text-align: center;
+}
+
+.gntee-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 720px;
+    height: 116px;
+    margin: 50px 0px;
+    font-size: 58px;
+}
+
+.gntee-icons {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 656px;
+    height: 672px;
+    padding: 50px 0;
+}
+
+.gntee-icon-ind {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 286px;
+    max-height: 286px;
+    margin-bottom: 70px;
+}
+
+.gntee-icon-ind img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 25px;
+}
+
+.gntee-icon-ind .gntee-content {
+    font-size: 18px;
+}

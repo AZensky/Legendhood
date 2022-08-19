@@ -1,0 +1,222 @@
+.first-sec {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 738px;
+  left: 10%;
+  background-color: rgb(1, 64, 34);
+}
+
+.first-sec .first-sec-left-panel {
+  height: 100%;
+  width: 60%;
+  position: relative;
+  left: -10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.first-sec .first-sec-left-panel img {
+  width: 188px;
+  height: 481px;
+}
+
+.first-sec .first-sec-left-panel .phone1 {
+  position: absolute;
+  top: 200px;
+  left: 75%;
+  z-index: 4;
+  animation: change1 20s infinite;
+}
+
+@keyframes change1 {
+  0% {
+    top: 200px;
+    left: 75%;
+    z-index: 4;
+  }
+
+  25% {
+    top: 50px;
+    left: 45%;
+    z-index: 1;
+  }
+
+  50% {
+    top: 100px;
+    left: 55%;
+    z-index: 2;
+  }
+
+  75% {
+    top: 150px;
+    left: 65%;
+    z-index: 3;
+  }
+
+  100% {
+    top: 200px;
+    left: 75%;
+    z-index: 4;
+  }
+}
+
+.first-sec .first-sec-left-panel .phone2 {
+  position: absolute;
+  top: 150px;
+  left: 65%;
+  z-index: 3;
+  animation: change2 20s infinite;
+}
+
+@keyframes change2 {
+  0% {
+    top: 150px;
+    left: 65%;
+    z-index: 3;
+  }
+
+  25% {
+    top: 200px;
+    left: 75%;
+    z-index: 4;
+  }
+
+  50% {
+    top: 50px;
+    left: 45%;
+    z-index: 1;
+  }
+
+  75% {
+    top: 100px;
+    left: 55%;
+    z-index: 2;
+  }
+
+  100% {
+    top: 150px;
+    left: 65%;
+    z-index: 3;
+  }
+}
+
+.first-sec .first-sec-left-panel .phone3 {
+  position: absolute;
+  top: 100px;
+  left: 55%;
+  animation: change3 20s infinite;
+}
+
+@keyframes change3 {
+  0% {
+    top: 100px;
+    left: 55%;
+    z-index: 2;
+  }
+
+  25% {
+    top: 150px;
+    left: 65%;
+    z-index: 3;
+  }
+
+  50% {
+    top: 200px;
+    left: 75%;
+    z-index: 4;
+  }
+
+  75% {
+    top: 50px;
+    left: 45%;
+    z-index: 1;
+  }
+
+  100% {
+    top: 100px;
+    left: 55%;
+    z-index: 2;
+  }
+}
+
+.first-sec .first-sec-left-panel .phone4 {
+  position: absolute;
+  top: 50px;
+  left: 45%;
+  animation: change4 20s infinite;
+}
+
+@keyframes change4 {
+  0% {
+    top: 50px;
+    left: 45%;
+    z-index: 1;
+  }
+
+  25% {
+    top: 100px;
+    left: 55%;
+    z-index: 2;
+  }
+
+  50% {
+    top: 150px;
+    left: 65%;
+    z-index: 3;
+  }
+
+  75% {
+    top: 200px;
+    left: 75%;
+    z-index: 4;
+  }
+
+  100% {
+    top: 50px;
+    left: 45%;
+    z-index: 1;
+  }
+}
+
+.first-sec-right-panel {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 500px;
+}
+
+.first-sec-right-panel p {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 62px;
+  line-height: 62px;
+  color: rgb(194, 245, 60);
+  margin-top: 0px;
+  margin-bottom: 2rem;
+}
+
+.first-sec-right-panel button {
+  min-width: 144px;
+  height: 48px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  background-color: rgb(195, 245, 60);
+  cursor: pointer;
+  padding: 0px 36px;
+  white-space: nowrap;
+}
+
+.first-sec-right-panel button:hover {
+  box-shadow: 2px 2px 2px black;
+}
