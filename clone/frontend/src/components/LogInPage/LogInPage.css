@@ -1,0 +1,133 @@
+.login-page {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}
+
+.login-page-left-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100vh;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.login-page-left-panel img {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.login-page-right-panel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 50%;
+    height: 100%;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 20%;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 420px;
+    height: 500px;
+    margin-left: 52px;
+    margin-right: 52px;
+}
+
+.login-form p {
+    font-size: 21px;
+}
+
+.form-element {
+    width: 100%;
+    margin: 0 0 24px;
+}
+
+.form-element label {
+    font-size: 13px;
+}
+
+.form-element input[type="text"],
+.form-element input[type="password"] {
+    margin: 8px 0 0 0;
+    display: flex;
+    width: 100%;
+    height: 36px;
+    padding: 0 12px;
+    outline: none;
+    border: 1px solid rgb(226, 233, 236);
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-element input[type="text"]:focus,
+.form-element input[type="password"]:focus {
+    /* background-color: rgb(231, 240, 254); */
+    border: 1px solid rgb(0, 200, 7);
+}
+
+.form-element input[type="text"]:active,
+.form-element input[type="password"]:active {
+    border: 1px solid rgb(180, 189, 193);
+}
+
+.form-element-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.form-element-button button {
+    height: 44px;
+    width: 132px;
+    background-color: black;
+    color: white;
+    border-radius: 24px;
+    border: none;
+    margin-top: 30px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.form-element-button button:hover {
+    box-shadow: 3px 3px 3px lightgrey;
+}
+
+.login-page-signup {
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 20px;
+    width: 100%;
+    display: flex;
+    margin-top: 30px;
+}
+
+.login-page-signup span {
+    margin-right: 3px;
+}
+
+.login-page-signup a {
+    color: black;
+    font-weight: bold;
+}
