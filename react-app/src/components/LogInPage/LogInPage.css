@@ -131,3 +131,7 @@
     color: black;
     font-weight: bold;
 }
+
+.login-form form ul {
+    color: red;
+}

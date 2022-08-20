@@ -1,39 +1,56 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { Redirect, Link } from 'react-router-dom';
+import { signUp, login } from '../../store/session';
 import { ReactComponent as SignupLogo } from "../../assets/RBSignupLogo.svg";
 import "./SignUpPage.css";
 
 function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [errors, setErrors] = useState([]);
 
+  const user = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+
   const history = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // setErrors([]);
-    // return dispatch(
-    //   sessionActions.signup({ firstName, lastName, email, password })
-    // ).catch(async (res) => {
-    //   const data = await res.json();
-    //   if (data && data.errors) setErrors(Object.values(data.errors));
-    // });
-
-    history.push("/dashboard");
+    if (password === repeatPassword) {
+      const data = await dispatch(signUp(firstName, lastName, email, password));
+      if (data) {
+        setErrors(data)
+      }
+    } else {
+      setErrors(["Your password and confirmation password do not match."])
+    }
   };
+
+  const loginDemoUser = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'))
+    if (data) {
+      setErrors(data)
+    }
+  }
+
+  if (user) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <div className="signup-page-container">
       {/* Signup Left Side */}
       <div className="left-signup-container">
         {/* Signup Logo */}
-        <div className="signup-logo-container">
+        <Link to='/' className="signup-logo-container">
           <SignupLogo className="signup-logo" />
-        </div>
+        </Link>
         <h1 className="signup-title">Invest with zero commission fees</h1>
 
         <p>Plus, request 24/7 live support right from the app.</p>
@@ -49,12 +66,12 @@ function SignUpPage() {
       <div className="right-signup-container">
         <div className="signup-form-container">
           <form onSubmit={handleSubmit} className="signup-form">
+            <h1 className="signup-form__title">Sign up</h1>
             <ul className="signup-form__validation-errors">
               {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
               ))}
             </ul>
-            <h1 className="signup-form__title">Sign up</h1>
             <div className="signup-name-inputs">
               <label>
                 <input
@@ -94,7 +111,23 @@ function SignUpPage() {
                 placeholder="Password"
               />
             </label>
-            <button type="submit">Sign Up</button>
+            <label>
+              <input
+                type="password"
+                value={repeatPassword}
+                onChange={(e) => setRepeatPassword(e.target.value)}
+                required
+                placeholder="Repeat Password"
+              />
+            </label>
+            <div className="signup-form-buttons">
+              <button onClick={loginDemoUser}>Demo User</button>
+              <button type="submit">Sign Up</button>
+            </div>
+            <div className='signup-page-login'>
+              <span>Already have an account on Robinhood?</span>
+              <Link to='/login'>Log in</Link>
+            </div>
           </form>
         </div>
       </div>
