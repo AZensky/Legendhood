@@ -3,25 +3,20 @@ import DashboardNav from "../DashboardNavbar";
 import LineChart from "../LineChart";
 import PopularStock from "../PopularStock";
 import NewsArticle from "../NewsArticle";
-import {
-  fetchStockData,
-  fetchMarketNews,
-  fetchCompanyNews,
-} from "../../util/stocks-api";
 import "./Dashboard.css";
 
 function Dashboard() {
   const [companyData, setCompanyData] = useState([]);
   const [marketNews, setMarketNews] = useState([]);
 
-  // Utilize the fetch function written in util folder to get the data for the companies from finnhub
   useEffect(() => {
-    let fetchedData = [];
     const stocks = ["AAPL", "TSLA", "AMZN", "META"];
+    let fetchedData = [];
 
-    const getStockData = async (stock) => {
-      let data = await fetchStockData(stock);
-      data["name"] = stock;
+    const getStockData = async (symbol) => {
+      let res = await fetch(`/api/finnhub/stock-data/${symbol}`);
+      let data = await res.json();
+      data["name"] = symbol;
       fetchedData.push(data);
 
       if (fetchedData.length === stocks.length) {
@@ -30,7 +25,8 @@ function Dashboard() {
     };
 
     const getMarketNews = async () => {
-      let data = await fetchMarketNews();
+      let res = await fetch("/api/finnhub/market-news");
+      let data = await res.json();
       let topNews = data.slice(0, 5);
       setMarketNews(topNews);
     };
@@ -39,13 +35,7 @@ function Dashboard() {
       getStockData(stock);
     }
 
-    // const getCompanyNews = async () => {
-    //   let data = await fetchCompanyNews("AAPL");
-    //   console.log("COMPANY NEWS", data);
-    // };
-
     getMarketNews();
-    // getCompanyNews();
   }, []);
 
   console.log("COMPANY DATA", companyData);
