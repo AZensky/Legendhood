@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime
 
 
 class Transaction(db.Model):
@@ -6,13 +7,13 @@ class Transaction(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(5), nullable=False)
-    date = db.Column(db.Date, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
     quantity = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    price = db.Column(db.Float(precision=2, asdecimal=False), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship(
-        "User", back_populates='transactions', cascade='all, delete')
+        "User", back_populates='transactions')
 
     def to_dict(self):
         return {

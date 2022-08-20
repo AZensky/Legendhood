@@ -4,14 +4,15 @@ from .db import db
 class Portfolio(db.Model):
     __tablename__ = 'portfolios'
 
-    id = db.Column(db.Interger, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(5), nullable=False)
     quantity_owned = db.Column(db.Integer, nullable=False)
-    total_purchase_price = db.Column(db.Float, nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
+    total_purchase_price = db.Column(
+        db.Float(precision=2, asdecimal=False), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship(
-        "User", back_populates='portfolios', cascade='all, delete')
+        "User", back_populates='portfolios')
 
     def to_dict(self):
         return {
