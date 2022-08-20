@@ -3,11 +3,16 @@ import DashboardNav from "../DashboardNavbar";
 import LineChart from "../LineChart";
 import PopularStock from "../PopularStock";
 import NewsArticle from "../NewsArticle";
+import { unixToDate } from "../../util/stocks-api";
 import "./Dashboard.css";
 
 function Dashboard() {
   const [companyData, setCompanyData] = useState([]);
   const [marketNews, setMarketNews] = useState([]);
+  // const [tickDataToday, setTickDataToday] = useState([]);
+  const [weekClosingPrices, setWeekClosingPrices] = useState([]);
+  const [weekDateLabels, setWeekDateLabels] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const stocks = ["AAPL", "TSLA", "AMZN", "META"];
@@ -38,7 +43,7 @@ function Dashboard() {
     const todayTickData = async (symbol) => {
       let res = await fetch(`/api/finnhub/today-tick/${symbol}`);
       let data = await res.json();
-      console.log("TICK", data);
+      // console.log("TICK", data);
     };
 
     const pastMonthClosingPrices = async (symbol) => {
@@ -46,23 +51,42 @@ function Dashboard() {
         `/api/finnhub/candlestick-data/one-month/${symbol}`
       );
       let data = await res.json();
-      console.log("CANDLE MONTH", data);
+      // console.log("CANDLE MONTH", data);
     };
 
     const pastWeekClosingPrices = async (symbol) => {
       let res = await fetch(`/api/finnhub/candlestick-data/week/${symbol}`);
       let data = await res.json();
-      console.log("CANDLE WEEK", data);
+      let closingPrices = data.c;
+      let datetimes = data.t;
+
+      let datetimeLabels = [];
+
+      datetimes.forEach((unixtime) => {
+        let datetime = unixToDate(unixtime);
+        datetimeLabels.push(datetime);
+      });
+
+      setWeekClosingPrices(closingPrices);
+      setWeekDateLabels(datetimeLabels);
     };
 
-    getMarketNews();
-    todayTickData("AAPL");
-    pastMonthClosingPrices("AAPL");
-    pastWeekClosingPrices("AAPL");
+    const initalizeDashboard = async () => {
+      await getMarketNews();
+      await todayTickData("AAPL");
+      await pastMonthClosingPrices("AAPL");
+      await pastWeekClosingPrices("AAPL");
+      setIsLoaded(true);
+    };
+
+    initalizeDashboard();
   }, []);
 
-  console.log("COMPANY DATA", companyData);
-  console.log("MARKET NEWS", marketNews);
+  // console.log("COMPANY DATA", companyData);
+  // console.log("MARKET NEWS", marketNews);
+  // console.log("CHART DATA", weekClosingData);
+  console.log("WEEK CLOSING PRICES", weekClosingPrices);
+  console.log("WEEK DATE LABELS", weekDateLabels);
 
   return (
     <div className="dashboard-container">
@@ -74,7 +98,9 @@ function Dashboard() {
           <div className="portfolio-graph">
             <p>$260</p>
             <p>+50.38(+23.05%) All time</p>
-            <LineChart />
+            {isLoaded && (
+              <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
+            )}
           </div>
 
           {/* User's Buying Power */}

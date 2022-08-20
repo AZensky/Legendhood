@@ -22,29 +22,21 @@ ChartJS.register(
   Legend
 );
 
-function LineChart() {
+function LineChart({ labels, prices }) {
   const [chartData, setChartData] = useState({
     datasets: [],
   });
+
+  console.log("IN LINECHART", "labels:", labels, "prices", prices);
 
   const [chartOptions, setChartOptions] = useState();
 
   useEffect(() => {
     setChartData({
-      labels: [
-        "John",
-        "Kevin",
-        "George",
-        "Oreo",
-        "John",
-        "Kevin",
-        "George",
-        "Oreo",
-      ],
+      labels: labels,
       datasets: [
         {
-          label: "Who let the dogs out",
-          data: [12, 55, 34, 120, 44, 78, 8, 289],
+          data: prices,
           type: "line",
           backgroundColor: "black",
           borderColor: "#5AC53B",

@@ -48,3 +48,10 @@ export const fetchCompanyNews = async (symbol) => {
   const data = await res.json();
   return data;
 };
+
+export const unixToDate = (unixTime) => {
+  const milliseconds = unixTime * 1000;
+  const dateObject = new Date(milliseconds);
+  const humanDateFormat = dateObject.toLocaleString();
+  return humanDateFormat;
+};
