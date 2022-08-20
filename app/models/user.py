@@ -39,7 +39,7 @@ class User(db.Model, UserMixin):
             'firstName': self.first_name,
             'lastName': self.last_name,
             'buyingPower': self.buying_power,
-            'watchlists': [w.to_dict_no_user() for w in self.watchlists],
+            'watchlists': [w.to_dict_no_additions() for w in self.watchlists],
             'transactions': [t.to_dict_no_user() for t in self.transactions],
             'portfolios': [p.to_dict_no_user() for p in self.portfolios]
         }
