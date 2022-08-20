@@ -35,7 +35,30 @@ function Dashboard() {
       getStockData(stock);
     }
 
+    const todayTickData = async (symbol) => {
+      let res = await fetch(`/api/finnhub/today-tick/${symbol}`);
+      let data = await res.json();
+      console.log("TICK", data);
+    };
+
+    const pastMonthClosingPrices = async (symbol) => {
+      let res = await fetch(
+        `/api/finnhub/candlestick-data/one-month/${symbol}`
+      );
+      let data = await res.json();
+      console.log("CANDLE MONTH", data);
+    };
+
+    const pastWeekClosingPrices = async (symbol) => {
+      let res = await fetch(`/api/finnhub/candlestick-data/week/${symbol}`);
+      let data = await res.json();
+      console.log("CANDLE WEEK", data);
+    };
+
     getMarketNews();
+    todayTickData("AAPL");
+    pastMonthClosingPrices("AAPL");
+    pastWeekClosingPrices("AAPL");
   }, []);
 
   console.log("COMPANY DATA", companyData);
