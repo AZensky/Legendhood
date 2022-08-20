@@ -12,6 +12,7 @@ function Dashboard() {
   // const [tickDataToday, setTickDataToday] = useState([]);
   const [weekClosingPrices, setWeekClosingPrices] = useState([]);
   const [weekDateLabels, setWeekDateLabels] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const stocks = ["AAPL", "TSLA", "AMZN", "META"];
@@ -70,17 +71,22 @@ function Dashboard() {
       setWeekDateLabels(datetimeLabels);
     };
 
-    getMarketNews();
-    todayTickData("AAPL");
-    pastMonthClosingPrices("AAPL");
-    pastWeekClosingPrices("AAPL");
+    const initalizeDashboard = async () => {
+      await getMarketNews();
+      await todayTickData("AAPL");
+      await pastMonthClosingPrices("AAPL");
+      await pastWeekClosingPrices("AAPL");
+      setIsLoaded(true);
+    };
+
+    initalizeDashboard();
   }, []);
 
   // console.log("COMPANY DATA", companyData);
   // console.log("MARKET NEWS", marketNews);
   // console.log("CHART DATA", weekClosingData);
-  // console.log("WEEK CLOSING PRICES", weekClosingPrices);
-  // console.log("WEEK DATE LABELS", weekDateLabels);
+  console.log("WEEK CLOSING PRICES", weekClosingPrices);
+  console.log("WEEK DATE LABELS", weekDateLabels);
 
   return (
     <div className="dashboard-container">
@@ -92,7 +98,9 @@ function Dashboard() {
           <div className="portfolio-graph">
             <p>$260</p>
             <p>+50.38(+23.05%) All time</p>
-            <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
+            {isLoaded && (
+              <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
+            )}
           </div>
 
           {/* User's Buying Power */}
