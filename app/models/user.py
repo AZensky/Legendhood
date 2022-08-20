@@ -18,8 +18,6 @@ class User(db.Model, UserMixin):
         "Watchlist", back_populates='user', cascade='all, delete')
     transactions = db.relationship(
         'Transaction', back_populates='user', cascade='all, delete')
-    portfolios = db.relationship(
-        'Portfolio', back_populates='user', cascade='all, delete')
 
     @property
     def password(self):
@@ -40,8 +38,7 @@ class User(db.Model, UserMixin):
             'lastName': self.last_name,
             'buyingPower': self.buying_power,
             'watchlists': [w.to_dict_no_additions() for w in self.watchlists],
-            'transactions': [t.to_dict_no_user() for t in self.transactions],
-            'portfolios': [p.to_dict_no_user() for p in self.portfolios]
+            'transactions': [t.to_dict_no_user() for t in self.transactions]
         }
 
     def to_dict_no_additions(self):
@@ -50,5 +47,5 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'firstName': self.first_name,
             'lastName': self.last_name,
-            'buyingPower': self.buying_power,
+            'buyingPower': self.buying_power
         }
