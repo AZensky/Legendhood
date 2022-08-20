@@ -43,6 +43,10 @@
   border-radius: 5px;
 }
 
+.stock-search-form:focus-within {
+  box-shadow: 2px 2px 5px rgb(227, 233, 237);
+}
+
 .stock-search-form input[type="text"] {
   height: 100%;
   background: none;
@@ -81,4 +85,10 @@
   background-color: transparent;
   color: black;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.social-links-account-container a:hover,
+.social-links-account-container button:hover {
+  color: rgb(0, 200, 7)
 }
