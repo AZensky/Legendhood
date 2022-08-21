@@ -8,15 +8,15 @@
 
 .dashboard-content-container {
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   height: 94vh;
   display: flex;
   justify-content: center;
-  gap: 8rem;
+  gap: 6rem;
 }
 
 .dashboard-left-section {
-  width: 50%;
+  width: 43%;
 }
 
 .portfolio-graph {
@@ -24,9 +24,35 @@
   border-bottom: 1px solid rgb(227, 233, 237);
 }
 
+.user-portfolio-market-value {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.user-portfolio-percent-changed {
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+.dashboard-chart-container {
+  /* position: relative;
+  width: 100%; */
+  height: 200px;
+}
+
+.dashboard-buying-power-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem;
+  font-weight: 700;
+}
+
 .dashboard-right-side-container {
   padding: 1.5rem;
-  width: 15%;
+  width: 18%;
   height: 75%;
   position: sticky;
   top: 76px;

@@ -1,0 +1,29 @@
+.chart-time-container {
+  display: flex;
+}
+
+.chart-time-btns {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: 0px;
+}
+.time-btn {
+  font-weight: bold;
+  padding: 10px 10px 12px 10px;
+  cursor: pointer;
+}
+
+.time-btn:hover {
+  color: #5ac53b;
+  cursor: pointer;
+}
+
+.time-btn.active {
+  color: #5ac53b;
+}
+
+.time-btn.active {
+  border-bottom: 2px solid #5ac53b;
+}

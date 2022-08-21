@@ -58,9 +58,3 @@
   gap: 2rem;
   margin-right: 3rem;
 }
-
-.dashboard-buying-power-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
