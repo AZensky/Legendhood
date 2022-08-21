@@ -10,7 +10,6 @@ function WatchlistStock({
   labels,
   prices,
 }) {
-  console.log("PS", labels, prices);
   return (
     <div className="watchlist-stock-container">
       <div className="watchlist-stock-left">
