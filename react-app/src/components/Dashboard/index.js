@@ -6,7 +6,15 @@ import NewsArticle from "../NewsArticle";
 import ChartTimeLine from "../ChartTimeLine";
 import LoadingSpinner from "../LoadingSpinner";
 import GraphLoadingSpinner from "../GraphLoadingSpinner";
-import { unixToDate } from "../../util/stocks-api";
+import {
+  unixToDate,
+  fetchPastWeekClosingPrices,
+  fetchStockData,
+  fetchMarketNews,
+  fetchPastMonthClosingPrices,
+  fetchPastThreeMonthClosingPrices,
+  fetchPastYearClosingPrices,
+} from "../../util/stocks-api";
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -23,9 +31,7 @@ function Dashboard() {
     let fetchedData = [];
 
     const getStockData = async (symbol) => {
-      let res = await fetch(`/api/finnhub/stock-data/${symbol}`);
-      let data = await res.json();
-      data["name"] = symbol;
+      let data = await fetchStockData(symbol);
       fetchedData.push(data);
 
       if (fetchedData.length === stocks.length) {
@@ -34,10 +40,8 @@ function Dashboard() {
     };
 
     const getMarketNews = async () => {
-      let res = await fetch("/api/finnhub/market-news");
-      let data = await res.json();
-      let topNews = data.slice(0, 5);
-      setMarketNews(topNews);
+      let data = await fetchMarketNews();
+      setMarketNews(data);
     };
 
     for (let stock of stocks) {
@@ -49,6 +53,8 @@ function Dashboard() {
 
   useEffect(() => {
     setGraphLoaded(false);
+
+    let map = {};
 
     const todayTickData = async (symbol) => {
       let res = await fetch(`/api/finnhub/today-tick/${symbol}`);
@@ -66,76 +72,32 @@ function Dashboard() {
       setTimeLabels(datetimeLabels);
     };
 
+    const pastWeekClosingPrices = async (symbol) => {
+      let res = await fetchPastWeekClosingPrices(symbol);
+
+      setPrices(res["closingPrices"]);
+      setTimeLabels(res["datetimeLabels"]);
+    };
+
     const pastMonthClosingPrices = async (symbol) => {
-      let res = await fetch(
-        `/api/finnhub/candlestick-data/one-month/${symbol}`
-      );
-      let data = await res.json();
-      let closingPrices = data.c;
-      let datetimes = data.t;
+      let res = await fetchPastMonthClosingPrices(symbol);
 
-      let datetimeLabels = [];
-
-      datetimes.forEach((unixtime) => {
-        let datetime = unixToDate(unixtime);
-        datetimeLabels.push(datetime);
-      });
-
-      setPrices(closingPrices);
-      setTimeLabels(datetimeLabels);
+      setPrices(res["closingPrices"]);
+      setTimeLabels(res["datetimeLabels"]);
     };
 
     const pastThreeMonthClosingPrices = async (symbol) => {
-      let res = await fetch(
-        `/api/finnhub/candlestick-data/three-month/${symbol}`
-      );
-      let data = await res.json();
-      let closingPrices = data.c;
-      let datetimes = data.t;
+      let res = await fetchPastThreeMonthClosingPrices(symbol);
 
-      let datetimeLabels = [];
-
-      datetimes.forEach((unixtime) => {
-        let datetime = unixToDate(unixtime);
-        datetimeLabels.push(datetime);
-      });
-
-      setPrices(closingPrices);
-      setTimeLabels(datetimeLabels);
-    };
-
-    const pastWeekClosingPrices = async (symbol) => {
-      let res = await fetch(`/api/finnhub/candlestick-data/week/${symbol}`);
-      let data = await res.json();
-      let closingPrices = data.c;
-      let datetimes = data.t;
-
-      let datetimeLabels = [];
-
-      datetimes.forEach((unixtime) => {
-        let datetime = unixToDate(unixtime);
-        datetimeLabels.push(datetime);
-      });
-
-      setPrices(closingPrices);
-      setTimeLabels(datetimeLabels);
+      setPrices(res["closingPrices"]);
+      setTimeLabels(res["datetimeLabels"]);
     };
 
     const pastYearClosingPrices = async (symbol) => {
-      let res = await fetch(`/api/finnhub/candlestick-data/year/${symbol}`);
-      let data = await res.json();
-      let closingPrices = data.c;
-      let datetimes = data.t;
+      let res = await fetchPastYearClosingPrices(symbol);
 
-      let datetimeLabels = [];
-
-      datetimes.forEach((unixtime) => {
-        let datetime = unixToDate(unixtime);
-        datetimeLabels.push(datetime);
-      });
-
-      setPrices(closingPrices);
-      setTimeLabels(datetimeLabels);
+      setPrices(res["closingPrices"]);
+      setTimeLabels(res["datetimeLabels"]);
     };
 
     const initializeCharts = async () => {
