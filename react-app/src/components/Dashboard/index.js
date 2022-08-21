@@ -5,6 +5,7 @@ import WatchlistStock from "../WatchlistStock";
 import NewsArticle from "../NewsArticle";
 import ChartTimeLine from "../ChartTimeLine";
 import LoadingSpinner from "../LoadingSpinner";
+import GraphLoadingSpinner from "../GraphLoadingSpinner";
 import { unixToDate } from "../../util/stocks-api";
 import "./Dashboard.css";
 
@@ -16,6 +17,7 @@ function Dashboard() {
   const [prices, setPrices] = useState([]);
   const [timeLabels, setTimeLabels] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [graphLoaded, setGraphLoaded] = useState(false);
 
   useEffect(() => {
     const stocks = ["AAPL", "TSLA", "AMZN", "META"];
@@ -53,7 +55,8 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    setIsLoaded(false);
+    setGraphLoaded(false);
+
     const todayTickData = async (symbol) => {
       let res = await fetch(`/api/finnhub/today-tick/${symbol}`);
       let data = await res.json();
@@ -101,6 +104,7 @@ function Dashboard() {
       if (timeSelection === "1W") await pastWeekClosingPrices("AAPL");
       else if (timeSelection === "1M") await pastMonthClosingPrices("AAPL");
       setIsLoaded(true);
+      setGraphLoaded(true);
     };
 
     initializeCharts();
@@ -128,9 +132,13 @@ function Dashboard() {
               <p className={`user-portfolio-percent-changed positive`}>
                 +50.38(+23.05%) All time
               </p>
-              {isLoaded && (
+              {graphLoaded ? (
                 <div className="dashboard-chart-container">
                   <LineChart labels={timeLabels} prices={prices} />
+                </div>
+              ) : (
+                <div className="dashboard-chart-container">
+                  <GraphLoadingSpinner />
                 </div>
               )}
               <ChartTimeLine handleClick={handleTimeSelection} />
