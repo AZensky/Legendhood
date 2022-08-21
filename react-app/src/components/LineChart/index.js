@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
+import ChartTimeLine from "../ChartTimeLine";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   LineElement,
   PointElement,
-  Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 
 import { Line } from "react-chartjs-2";
@@ -17,9 +16,7 @@ ChartJS.register(
   LinearScale,
   LineElement,
   PointElement,
-  Title,
-  Tooltip,
-  Legend
+  Tooltip
 );
 
 function LineChart({ labels, prices }) {
@@ -58,6 +55,23 @@ function LineChart({ labels, prices }) {
           display: false,
         },
       },
+      hover: {
+        intersect: false,
+      },
+      elements: {
+        line: {
+          tension: 0,
+        },
+        point: {
+          radius: 0,
+        },
+      },
+      maintainAspectRatio: false,
+      tooltips: {
+        mode: "index",
+        intersect: false,
+        callbacks: {},
+      },
       scales: {
         x: {
           display: false,
@@ -76,9 +90,9 @@ function LineChart({ labels, prices }) {
   }, []);
 
   return (
-    <div>
+    <>
       <Line options={chartOptions} data={chartData} />
-    </div>
+    </>
   );
 }
 

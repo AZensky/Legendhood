@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import DashboardNav from "../DashboardNavbar";
 import LineChart from "../LineChart";
-import PopularStock from "../PopularStock";
+import WatchlistStock from "../WatchlistStock";
 import NewsArticle from "../NewsArticle";
+import ChartTimeLine from "../ChartTimeLine";
 import { unixToDate } from "../../util/stocks-api";
 import "./Dashboard.css";
 
@@ -96,10 +97,15 @@ function Dashboard() {
         <div className="dashboard-left-section">
           {/* User's Portfolio Graph */}
           <div className="portfolio-graph">
-            <p>$260</p>
-            <p>+50.38(+23.05%) All time</p>
+            <p className="user-portfolio-market-value">$260.91</p>
+            <p className={`user-portfolio-percent-changed positive`}>
+              +50.38(+23.05%) All time
+            </p>
             {isLoaded && (
-              <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
+              <div className="dashboard-chart-container">
+                <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
+                <ChartTimeLine />
+              </div>
             )}
           </div>
 
@@ -130,13 +136,16 @@ function Dashboard() {
           <div className="dashboard-right-side-content-container">
             <p className="dashboard-right-side-title">Stocks</p>
             {companyData.length > 0 &&
+              isLoaded &&
               companyData.map((company) => (
-                <PopularStock
+                <WatchlistStock
                   key={company.name}
                   name={company.name}
-                  currentPrice={company.c}
-                  percentChanged={company.dp}
+                  currentPrice={company.c.toFixed(2)}
+                  percentChanged={company.dp.toFixed(2)}
                   sharesOwned={2}
+                  labels={weekDateLabels}
+                  prices={weekClosingPrices}
                 />
               ))}
           </div>
