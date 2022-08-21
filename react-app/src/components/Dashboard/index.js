@@ -123,6 +123,7 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <DashboardNav />
+
       {isLoaded ? (
         <div className="dashboard-content-container">
           <div className="dashboard-left-section">
@@ -163,6 +164,7 @@ function Dashboard() {
                   />
                 ))}
             </div>
+
           </div>
 
           {/* Right Side of Dashboard */}

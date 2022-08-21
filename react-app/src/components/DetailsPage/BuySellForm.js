@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./DetailsPage.css"
+import { purchaseStocksThunk } from "../../store/portfolio";
 
 function BuySellForm({ quote }) {
     const { symbol } = useParams()
@@ -8,12 +10,31 @@ function BuySellForm({ quote }) {
     const [shares, setShares] = useState(0)
     const [buySell, setBuySell] = useState("Buy")
 
+
+    const dispatch = useDispatch()
+    let user = useSelector(state => state.session.user)
+
     useEffect(() => {
         setIsLoaded(true)
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const order = {
+            symbol: symbol,
+            quantity: buySell === "Buy"? shares: -shares,
+            price: buySell === "Buy"? (shares*quote.c).toFixed(2): (-shares*quote.c).toFixed(2),
+            user_id: user.id
+        }
+        if (buySell === "Buy") {
+            console.log(order)
+            const result = await dispatch(purchaseStocksThunk(order))
+            const data = result.json()
+            console.log(data)
+        } else {
+            console.log(order)
+            // const result = dispatch(sellStocksThunk(order))
+        }
     }
 
 
@@ -46,17 +67,17 @@ function BuySellForm({ quote }) {
                 </label>
                 <div className="details-page-buy-sell-stock-market-price">
                     <span>Market Price</span>
-                    <span>${quote.c}</span>
+                    <span> ${quote.c}</span>
                 </div>
                 <div>
                     <span>Estimated Cost</span>
-                    <span>${shares * quote.c}</span>
+                    <span> ${(shares * quote.c).toFixed(2)}</span>
                 </div>
                 <button className="details-page-buy-sell-stock">
                     {buySell === "Buy" ? "Place Order" : "Sell Stock"}
                 </button>
                 <div>
-                    { } buying power available
+                    ${user.buyingPower.toFixed(2)} buying power available
                 </div>
             </form>
         </>

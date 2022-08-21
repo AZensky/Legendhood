@@ -8,6 +8,7 @@ import requests
 finnhub_routes = Blueprint('finnhub', __name__)
 
 FINNHUB_API_KEY = os.environ.get('FINNHUB_API_KEY')
+ALPHA_VANTAGE_API_KEY = os.environ.get('ALPHA_VANTAGE_API_KEY')
 
 # API route to get stock data for a specific company
 # Example output: https://finnhub.io/docs/api/quote
@@ -74,3 +75,11 @@ def fetch_week_candlestick_data(symbol):
     res = requests.get(f'https://finnhub.io/api/v1/stock/candle?symbol={symbol}&resolution=60&from={unix_one_week_ago}&to={unix_today}&token={FINNHUB_API_KEY}')
     data = res.json()
     return jsonify(data)
+
+
+# API route to get company data
+@finnhub_routes.route('/company-data/<symbol>')
+def fetch_company_data(symbol):
+    res = requests.get(f'https://www.alphavantage.co/query?function=OVERVIEW&symbol={symbol}&apikey={ALPHA_VANTAGE_API_KEY}')
+    data = res.json()
+    return data
