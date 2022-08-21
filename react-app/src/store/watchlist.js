@@ -1,26 +1,46 @@
-const GET_WATCHLIST = 'watchlist/GET_WATCHLIST'
+const CLEAR_CURRENT_WATCHLIST = 'watchlist/CLEAR_CURRENTWATCHLIST'
+const SET_CURRENT_WATCHLIST = 'watchlist/SET_CURRENT_WATCHLIST'
 
-const getWatchlist = (watchlist) => ({
-    type: GET_WATCHLIST,
+// Actions
+const setCurrentWatchlist = (watchlist) => ({
+    type: SET_CURRENT_WATCHLIST,
     payload: watchlist,
 })
 
-const initialState = { watchlist: null };
+const unsetCurrentWatchlist = () => ({
+    type: CLEAR_CURRENT_WATCHLIST,
+    payload: null,
+})
 
-export const getOneWatchlist = (id) => async (dispatch) => {
+
+// Thunks
+export const getWatchlist = (id) => async (dispatch) => {
+    dispatch(unsetCurrentWatchlist())
+
     const response = await fetch(`/api/watchlists/${id}`);
     if (response.ok) {
         const watchlist = await response.json();
-        dispatch(getWatchlist(watchlist))
+        dispatch(setCurrentWatchlist(watchlist))
     }
 }
+
+export const clearCurrentWatchlist = () => (dispatch) => {
+    dispatch(unsetCurrentWatchlist())
+}
+
+
+// Reducer
+const initialState = { watchlists: [], currentWatchlist: null };
 
 export default function watchlistRuducer(state = initialState, action) {
     let newState;
     switch (action.type) {
-        case GET_WATCHLIST:
-            newState = [action.payload]
+        case SET_CURRENT_WATCHLIST:
+            newState = { ...state, currentWatchlist: action.payload }
             return newState;
+        case clearCurrentWatchlist:
+            newState = { ...state, currentWatchlist: null }
+            return newState
         default:
             return state;
     }
