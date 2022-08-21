@@ -12,8 +12,7 @@ import "./Dashboard.css";
 function Dashboard() {
   const [companyData, setCompanyData] = useState([]);
   const [marketNews, setMarketNews] = useState([]);
-  // const [tickDataToday, setTickDataToday] = useState([]);
-  const [timeSelection, setTimeSelection] = useState("1W");
+  const [timeSelection, setTimeSelection] = useState("Live");
   const [prices, setPrices] = useState([]);
   const [timeLabels, setTimeLabels] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,12 +44,6 @@ function Dashboard() {
       getStockData(stock);
     }
 
-    // const initalizeDashboard = async () => {
-    //   await getMarketNews();
-    // };
-
-    // initalizeDashboard();
-
     getMarketNews();
   }, []);
 
@@ -60,12 +53,41 @@ function Dashboard() {
     const todayTickData = async (symbol) => {
       let res = await fetch(`/api/finnhub/today-tick/${symbol}`);
       let data = await res.json();
-      // console.log("TICK", data);
+      let datetimes = data.t;
+
+      let datetimeLabels = [];
+
+      datetimes.forEach((unixtime) => {
+        let datetime = unixToDate(unixtime);
+        datetimeLabels.push(datetime);
+      });
+
+      setPrices(data.p);
+      setTimeLabels(datetimeLabels);
     };
 
     const pastMonthClosingPrices = async (symbol) => {
       let res = await fetch(
         `/api/finnhub/candlestick-data/one-month/${symbol}`
+      );
+      let data = await res.json();
+      let closingPrices = data.c;
+      let datetimes = data.t;
+
+      let datetimeLabels = [];
+
+      datetimes.forEach((unixtime) => {
+        let datetime = unixToDate(unixtime);
+        datetimeLabels.push(datetime);
+      });
+
+      setPrices(closingPrices);
+      setTimeLabels(datetimeLabels);
+    };
+
+    const pastThreeMonthClosingPrices = async (symbol) => {
+      let res = await fetch(
+        `/api/finnhub/candlestick-data/three-month/${symbol}`
       );
       let data = await res.json();
       let closingPrices = data.c;
@@ -99,10 +121,31 @@ function Dashboard() {
       setTimeLabels(datetimeLabels);
     };
 
+    const pastYearClosingPrices = async (symbol) => {
+      let res = await fetch(`/api/finnhub/candlestick-data/year/${symbol}`);
+      let data = await res.json();
+      let closingPrices = data.c;
+      let datetimes = data.t;
+
+      let datetimeLabels = [];
+
+      datetimes.forEach((unixtime) => {
+        let datetime = unixToDate(unixtime);
+        datetimeLabels.push(datetime);
+      });
+
+      setPrices(closingPrices);
+      setTimeLabels(datetimeLabels);
+    };
+
     const initializeCharts = async () => {
       // await todayTickData("AAPL");
-      if (timeSelection === "1W") await pastWeekClosingPrices("AAPL");
+      if (timeSelection === "Live") await todayTickData("AAPL");
+      else if (timeSelection === "1W") await pastWeekClosingPrices("AAPL");
       else if (timeSelection === "1M") await pastMonthClosingPrices("AAPL");
+      else if (timeSelection === "3M")
+        await pastThreeMonthClosingPrices("AAPL");
+      else if (timeSelection === "1Y") await pastYearClosingPrices("AAPL");
       setIsLoaded(true);
       setGraphLoaded(true);
     };
@@ -110,15 +153,9 @@ function Dashboard() {
     initializeCharts();
   }, [timeSelection]);
 
-  // console.log("COMPANY DATA", companyData);
-  // console.log("MARKET NEWS", marketNews);
-  // console.log("CHART DATA", weekClosingData);
-
   function handleTimeSelection(selection) {
     setTimeSelection(selection);
   }
-
-  console.log("TIME SELECTION", timeSelection);
 
   return (
     <div className="dashboard-container">
@@ -142,7 +179,10 @@ function Dashboard() {
                   <GraphLoadingSpinner />
                 </div>
               )}
-              <ChartTimeLine handleClick={handleTimeSelection} />
+              <ChartTimeLine
+                handleClick={handleTimeSelection}
+                time={timeSelection}
+              />
             </div>
 
             {/* User's Buying Power */}
@@ -164,7 +204,6 @@ function Dashboard() {
                   />
                 ))}
             </div>
-
           </div>
 
           {/* Right Side of Dashboard */}

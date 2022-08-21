@@ -1,19 +1,40 @@
 import React from "react";
 import "./ChartTimeLine.css";
 
-function ChartTimeLine({ handleClick }) {
+function ChartTimeLine({ handleClick, time }) {
   return (
     <div className="chart-time-container">
       <div className="chart-time-btns">
-        <div className="time-btn">LIVE</div>
-        <div className="time-btn">1D</div>
-        <div className="time-btn active" onClick={() => handleClick("1W")}>
+        <div
+          className={`time-btn ${time === "Live" && "active"}`}
+          onClick={() => handleClick("Live")}
+        >
+          LIVE
+        </div>
+        <div
+          className={`time-btn ${time === "1W" && "active"}`}
+          onClick={() => handleClick("1W")}
+        >
           1W
         </div>
-        <div className="time-btn" onClick={() => handleClick("1M")}>
+        <div
+          className={`time-btn ${time === "1M" && "active"}`}
+          onClick={() => handleClick("1M")}
+        >
           1M
         </div>
-        <div className="time-btn">1Y</div>
+        <div
+          className={`time-btn ${time === "3M" && "active"}`}
+          onClick={() => handleClick("3M")}
+        >
+          3M
+        </div>
+        <div
+          className={`time-btn ${time === "1Y" && "active"}`}
+          onClick={() => handleClick("1Y")}
+        >
+          1Y
+        </div>
       </div>
     </div>
   );
