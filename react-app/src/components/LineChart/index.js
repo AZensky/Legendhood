@@ -24,8 +24,6 @@ function LineChart({ labels, prices }) {
     datasets: [],
   });
 
-  // console.log("IN LINECHART", "labels:", labels, "prices", prices);
-
   const [chartOptions, setChartOptions] = useState();
 
   useEffect(() => {
