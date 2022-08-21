@@ -1,41 +1,55 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import DashboardNav from "../DashboardNavbar";
-import WatchlistStockCard from "./WatchlistStockCard";
 import { getOneWatchlist } from "../../store/watchlist";
+import DashboardNav from "../DashboardNavbar";
+// import WatchlistStockCard from "./WatchlistStockCard";
 import "./WatchListPage.css";
 
 function WatchListPage() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false)
-    // const [watchlist, setWatchlist] = useState({})
-    const [watchlistStocks, setWatchlistStocks] = useState([])
 
+    //get watchlist by id
     const { watchlistId } = useParams();
 
-    const watchlist = useSelector((state) => state.watchlist);
-    console.log('123:watchlist', watchlist)
-
-    // let watchlist = useSelector(state => {
-    //     return state.group && state.group.length === 1 && state.group[0]
-    // })
     useEffect(() => {
         if (!watchlistId) {
             return;
         }
-        dispatch(getOneWatchlist(watchlistId));
 
-        // (async () => {
-        //     const response = await fetch(`/api/watchlist/${watchlistId}`);
-        //     const watchlist = await response.json();
-        //     setWatchlist(watchlist);
-        // })();
+        dispatch(getOneWatchlist(watchlistId));
 
         setIsLoaded(true)
 
     }, [dispatch, watchlistId]);
 
+    //set backend returned data into variable
+    // const watchlist = useSelector(state => state.watchlist[0]);
+    let watchlist = useSelector((state) => {
+        return state.watchlist && state.watchlist.length === 1 && state.watchlist[0]
+    })
+
+    //get all stocks symbols in the watchlist
+    const stockSymbols = []
+    for (let stock of watchlist.watchlistStocks) {
+        stockSymbols.push(stock.symbol)
+    }
+
+    //get all stocks data from API call
+    let fetchedData = [];
+    const getStockData = async (symbol) => {
+        let res = await fetch(`/api/finnhub/stock-data/${symbol}`);
+        let data = await res.json();
+        data["name"] = symbol;
+        fetchedData.push(data);
+    };
+    for (let symbol of stockSymbols) {
+        getStockData(symbol);
+    }
+    console.log(fetchedData)
+
+    //render component
     if (!watchlist) {
         return null;
     }
@@ -61,7 +75,7 @@ function WatchListPage() {
 
                     </div>
 
-                    <div className="watchlist-itemnum">5 items</div>
+                    <div className="watchlist-itemnum"> {watchlist.watchlistStocks.length} items</div>
                     {/* <div className="market-news-container">
                         {wlStocks.length > 0 &&
                             wlStocks.map((article) => (
@@ -95,9 +109,9 @@ function WatchListPage() {
                                     url={article.url}
                                     source={article.source}
                                 /> */}
-                                {/* <tr>
+                                <tr>
                                     <td >Gamestop</td>
-                                    <td>GME</td>
+                                    <td>{stockSymbols[0]}</td>
                                     <td>$41.88</td>
                                     <td>-0.76%</td>
                                     <td>12.74B</td>
@@ -144,7 +158,7 @@ function WatchListPage() {
                                     <td>
                                         <button className="watchlist-button">x</button>
                                     </td>
-                                </tr> */}
+                                </tr>
 
 
                             </tbody>
