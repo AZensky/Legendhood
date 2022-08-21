@@ -20,7 +20,6 @@ function WatchListPage() {
     // let watchlist = useSelector(state => {
     //     return state.group && state.group.length === 1 && state.group[0]
     // })
-
     useEffect(() => {
         if (!watchlistId) {
             return;

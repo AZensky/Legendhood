@@ -38,7 +38,7 @@ function App() {
         <Route path="/dashboard">
           <DashBoard />
         </Route>
-        <Route path="/watchlist/:id">
+        <Route path="/watchlists/:watchlistId">
           <WatchListPage />
         </Route>
         <Route path="/login" exact={true}>
