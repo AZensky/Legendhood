@@ -1,32 +1,41 @@
 import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import DashboardNav from "../DashboardNavbar";
 import WatchlistStockCard from "./WatchlistStockCard";
+import { getOneWatchlist } from "../../store/watchlist";
 import "./WatchListPage.css";
 
 function WatchListPage() {
-
+    const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false)
-    const [watchlist, setWatchlist] = useState({})
+    // const [watchlist, setWatchlist] = useState({})
     const [watchlistStocks, setWatchlistStocks] = useState([])
 
     const { watchlistId } = useParams();
 
+    const watchlist = useSelector((state) => state.watchlist);
+    console.log('123:watchlist', watchlist)
+
+    // let watchlist = useSelector(state => {
+    //     return state.group && state.group.length === 1 && state.group[0]
+    // })
 
     useEffect(() => {
         if (!watchlistId) {
             return;
         }
+        dispatch(getOneWatchlist(watchlistId));
 
-        (async () => {
-            const response = await fetch(`/api/watchlist/${watchlistId}`);
-            const watchlist = await response.json();
-            setWatchlist(watchlist);
-        })();
+        // (async () => {
+        //     const response = await fetch(`/api/watchlist/${watchlistId}`);
+        //     const watchlist = await response.json();
+        //     setWatchlist(watchlist);
+        // })();
 
         setIsLoaded(true)
 
-    }, [watchlist]);
+    }, [dispatch, watchlistId]);
 
     if (!watchlist) {
         return null;

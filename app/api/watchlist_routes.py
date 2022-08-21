@@ -1,4 +1,3 @@
-from app.models.watchlist import Watchlist
 from flask import Blueprint
 from flask_login import login_required
 from app.models import Watchlist
@@ -12,3 +11,6 @@ watchlist_routes = Blueprint('watchlist', __name__)
 def get_watchlist(id):
     watchlist = Watchlist.query.get(id)
     return {'watchlist': watchlist.to_dict()}
+    # return {'watchlist': {
+    #     "name": "hello"
+    # }}
