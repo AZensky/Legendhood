@@ -4,6 +4,7 @@ import LineChart from "../LineChart";
 import WatchlistStock from "../WatchlistStock";
 import NewsArticle from "../NewsArticle";
 import ChartTimeLine from "../ChartTimeLine";
+import LoadingSpinner from "../LoadingSpinner";
 import { unixToDate } from "../../util/stocks-api";
 import "./Dashboard.css";
 
@@ -92,65 +93,71 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <DashboardNav />
+      {isLoaded ? (
+        <div className="dashboard-content-container">
+          <div className="dashboard-left-section">
+            {/* User's Portfolio Graph */}
+            <div className="portfolio-graph">
+              <p className="user-portfolio-market-value">$260.91</p>
+              <p className={`user-portfolio-percent-changed positive`}>
+                +50.38(+23.05%) All time
+              </p>
+              {isLoaded && (
+                <div className="dashboard-chart-container">
+                  <LineChart
+                    labels={weekDateLabels}
+                    prices={weekClosingPrices}
+                  />
+                </div>
+              )}
+              <ChartTimeLine />
+            </div>
 
-      <div className="dashboard-content-container">
-        <div className="dashboard-left-section">
-          {/* User's Portfolio Graph */}
-          <div className="portfolio-graph">
-            <p className="user-portfolio-market-value">$260.91</p>
-            <p className={`user-portfolio-percent-changed positive`}>
-              +50.38(+23.05%) All time
-            </p>
-            {isLoaded && (
-              <div className="dashboard-chart-container">
-                <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
-              </div>
-            )}
-            <ChartTimeLine />
+            {/* User's Buying Power */}
+            <div className="dashboard-buying-power-container">
+              <p>Buying Power</p>
+              <p>$0.00</p>
+            </div>
+
+            <div className="market-news-container">
+              {marketNews.length > 0 &&
+                marketNews.map((article) => (
+                  <NewsArticle
+                    key={article.id}
+                    headline={article.headline}
+                    image={article.image}
+                    summary={article.summary}
+                    url={article.url}
+                    source={article.source}
+                  />
+                ))}
+            </div>
           </div>
 
-          {/* User's Buying Power */}
-          <div className="dashboard-buying-power-container">
-            <p>Buying Power</p>
-            <p>$0.00</p>
-          </div>
+          {/* Right Side of Dashboard */}
 
-          <div className="market-news-container">
-            {marketNews.length > 0 &&
-              marketNews.map((article) => (
-                <NewsArticle
-                  key={article.id}
-                  headline={article.headline}
-                  image={article.image}
-                  summary={article.summary}
-                  url={article.url}
-                  source={article.source}
-                />
-              ))}
+          <div className="dashboard-right-side-container">
+            <div className="dashboard-right-side-content-container">
+              <p className="dashboard-right-side-title">Stocks</p>
+              {companyData.length > 0 &&
+                isLoaded &&
+                companyData.map((company) => (
+                  <WatchlistStock
+                    key={company.name}
+                    name={company.name}
+                    currentPrice={company.c.toFixed(2)}
+                    percentChanged={company.dp.toFixed(2)}
+                    sharesOwned={2}
+                    labels={weekDateLabels}
+                    prices={weekClosingPrices}
+                  />
+                ))}
+            </div>
           </div>
         </div>
-
-        {/* Right Side of Dashboard */}
-
-        <div className="dashboard-right-side-container">
-          <div className="dashboard-right-side-content-container">
-            <p className="dashboard-right-side-title">Stocks</p>
-            {companyData.length > 0 &&
-              isLoaded &&
-              companyData.map((company) => (
-                <WatchlistStock
-                  key={company.name}
-                  name={company.name}
-                  currentPrice={company.c.toFixed(2)}
-                  percentChanged={company.dp.toFixed(2)}
-                  sharesOwned={2}
-                  labels={weekDateLabels}
-                  prices={weekClosingPrices}
-                />
-              ))}
-          </div>
-        </div>
-      </div>
+      ) : (
+        <LoadingSpinner />
+      )}
     </div>
   );
 }
