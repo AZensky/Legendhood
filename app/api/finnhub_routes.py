@@ -99,6 +99,7 @@ def fetch_week_candlestick_data(symbol):
     data = res.json()
     return jsonify(data)
 
+# API request to get candlestick data for a company for the past year
 @finnhub_routes.route('/candlestick-data/year/<symbol>')
 def fetch_year_candlestick_data(symbol):
     today = datetime.datetime.today()
@@ -111,6 +112,12 @@ def fetch_year_candlestick_data(symbol):
     data = res.json()
     return jsonify(data)
 
+# Finnhub version of company data
+# @finnhub_routes.route('/company-data/<symbol>')
+# def fetch_company_data(symbol):
+#     res = requests.get(f'https://finnhub.io/api/v1/stock/profile?symbol={symbol}&token={FINNHUB_API_KEY}')
+#     data = res.json()
+#     return data
 
 # API route to get company data
 @finnhub_routes.route('/company-data/<symbol>')
