@@ -1,38 +1,42 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getOneWatchlist } from "../../store/watchlist";
+import { clearCurrentWatchlist, getWatchlist } from "../../store/watchlist";
 import DashboardNav from "../DashboardNavbar";
 // import WatchlistStockCard from "./WatchlistStockCard";
 import "./WatchListPage.css";
 
 function WatchListPage() {
     const dispatch = useDispatch();
-    const [isLoaded, setIsLoaded] = useState(false)
 
     //get watchlist by id
     const { watchlistId } = useParams();
 
     useEffect(() => {
-        if (!watchlistId) {
-            return;
+        dispatch(getWatchlist(watchlistId))
+
+        return () => {
+            dispatch(clearCurrentWatchlist())
         }
-
-        dispatch(getOneWatchlist(watchlistId));
-
-        setIsLoaded(true)
-
     }, [dispatch, watchlistId]);
 
     //set backend returned data into variable
-    // const watchlist = useSelector(state => state.watchlist[0]);
-    let watchlist = useSelector((state) => {
-        return state.watchlist && state.watchlist.length === 1 && state.watchlist[0]
+    const watchlist = useSelector((state) => {
+        const currentWatchlist = state.watchlist.currentWatchlist;
+
+        return String(currentWatchlist?.id) === watchlistId ? currentWatchlist : null;
     })
+
+    //render component
+    if (!watchlist) {
+        return <></>;
+    }
+
 
     //get all stocks symbols in the watchlist
     const stockSymbols = []
     for (let stock of watchlist.watchlistStocks) {
+        debugger
         stockSymbols.push(stock.symbol)
     }
 
@@ -49,12 +53,7 @@ function WatchListPage() {
     }
     console.log(fetchedData)
 
-    //render component
-    if (!watchlist) {
-        return null;
-    }
-
-    return isLoaded && (
+    return (
         <>
             <DashboardNav />
             <div className="watchlist-container">
