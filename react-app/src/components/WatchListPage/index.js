@@ -1,14 +1,45 @@
 import React, { useState, useEffect } from "react"
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import DashboardNav from "../DashboardNavbar";
+import WatchlistStockCard from "./WatchlistStockCard";
+import { getOneWatchlist } from "../../store/watchlist";
 import "./WatchListPage.css";
 
 function WatchListPage() {
+    const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false)
-    const [wlStocks, setWlStocks] = useState([])
+    // const [watchlist, setWatchlist] = useState({})
+    const [watchlistStocks, setWatchlistStocks] = useState([])
+
+    const { watchlistId } = useParams();
+
+    const watchlist = useSelector((state) => state.watchlist);
+    console.log('123:watchlist', watchlist)
+
+    // let watchlist = useSelector(state => {
+    //     return state.group && state.group.length === 1 && state.group[0]
+    // })
+
     useEffect(() => {
+        if (!watchlistId) {
+            return;
+        }
+        dispatch(getOneWatchlist(watchlistId));
+
+        // (async () => {
+        //     const response = await fetch(`/api/watchlist/${watchlistId}`);
+        //     const watchlist = await response.json();
+        //     setWatchlist(watchlist);
+        // })();
 
         setIsLoaded(true)
-    }, [])
+
+    }, [dispatch, watchlistId]);
+
+    if (!watchlist) {
+        return null;
+    }
 
     return isLoaded && (
         <>
@@ -22,7 +53,7 @@ function WatchListPage() {
 
                     <div className="watchlist-scroll-title">
                         <div className="watchlist-scroll-listname">
-                            My First List
+                            {watchlist.name}
                         </div>
                         <div className="watchlist-scroll-ellipsisicon">
                             <button className="watchlist-button">...</button>
@@ -57,7 +88,15 @@ function WatchListPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                {/* <WatchlistStockCard
+                                    name={stock.name}
+                                    headline={article.headline}
+                                    image={article.image}
+                                    summary={article.summary}
+                                    url={article.url}
+                                    source={article.source}
+                                /> */}
+                                {/* <tr>
                                     <td >Gamestop</td>
                                     <td>GME</td>
                                     <td>$41.88</td>
@@ -106,7 +145,7 @@ function WatchListPage() {
                                     <td>
                                         <button className="watchlist-button">x</button>
                                     </td>
-                                </tr>
+                                </tr> */}
 
 
                             </tbody>

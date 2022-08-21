@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import session from './session'
-import portfolio from './portfolio'
+import session from './session';
+import watchlist from './watchlist';
 
 const rootReducer = combineReducers({
   session,
-  portfolio
+  watchlist,
 });
 
 
