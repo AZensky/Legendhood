@@ -18,7 +18,7 @@ function NewsArticle({ headline, image, summary, url, source }) {
             <p>{headline}</p>
             <p className="news-article-summary">{summary}</p>
           </div>
-          <img src={image} alt="News Cover" className="news-article-img" />
+          <img src={image} alt="News Cover" className="news-article-img" style={{visibility: `${image.length > 0? "visible": "hidden"}`}}/>
         </div>
       </a>
     </div>

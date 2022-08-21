@@ -101,11 +101,13 @@ function Dashboard() {
             <p className={`user-portfolio-percent-changed positive`}>
               +50.38(+23.05%) All time
             </p>
-            {isLoaded && (
-              <div className="dashboard-chart-container">
-                <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
-              </div>
-            )}
+            <div className="dashboard-chart-container">
+              {isLoaded && (
+                <>
+                  <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
+                </>
+              )}
+            </div>
             <ChartTimeLine />
           </div>
 

@@ -26,17 +26,18 @@ def purchase_stock(userid):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        user = User.get(userid)
+
+        user = User.query.get(userid)
         if user.buying_power < form.data['price']:
             return {"message": "Insufficent Funds", "statusCode": 400}, 400
         else:
-            user.buying_power -= round(form.data['price'] * form.data['quantity'], 2)
+            user.buying_power = user.buying_power - float(round(form.data['price'] * form.data['quantity'], 2))
 
-        transaction = Transaction(
-            symbol=form.data['symbol'], quantity=form.data['quantity'], price=form.data['price'], user_id=userid)
+            transaction = Transaction(symbol=form.data['symbol'], quantity=form.data['quantity'], price=form.data['price'], user_id=userid)
 
-        db.session.add(transaction)
-        db.session.commit()
+            db.session.add(transaction)
+            db.session.commit()
+            return transaction.to_dict()
 
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
