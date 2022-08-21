@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react"
+import { useParams } from 'react-router-dom';
 import DashboardNav from "../DashboardNavbar";
 import WatchlistStockCard from "./WatchlistStockCard";
 import "./WatchListPage.css";
 
 function WatchListPage() {
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [watchlist, setWatchlist] = useState()
-    const [wlStocks, setWlStocks] = useState([])
 
-    // stock:{
-    //    "" 
-    // }
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [watchlist, setWatchlist] = useState({})
+    const [watchlistStocks, setWatchlistStocks] = useState([])
+
+    const { watchlistId } = useParams();
+
 
     useEffect(() => {
+        if (!watchlistId) {
+            return;
+        }
+
+        (async () => {
+            const response = await fetch(`/api/watchlist/${watchlistId}`);
+            const watchlist = await response.json();
+            setWatchlist(watchlist);
+        })();
 
         setIsLoaded(true)
-    }, [])
+
+    }, [watchlist]);
+
+    if (!watchlist) {
+        return null;
+    }
 
     return isLoaded && (
         <>
@@ -29,7 +44,7 @@ function WatchListPage() {
 
                     <div className="watchlist-scroll-title">
                         <div className="watchlist-scroll-listname">
-                            My First List
+                            {watchlist.name}
                         </div>
                         <div className="watchlist-scroll-ellipsisicon">
                             <button className="watchlist-button">...</button>
