@@ -1,10 +1,9 @@
 .chart-time-container {
   display: flex;
-  border-bottom: 1px solid rgb(227, 233, 237);
 }
 
 .chart-time-btns {
-  font-size: 16px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -12,7 +11,7 @@
 }
 .time-btn {
   font-weight: bold;
-  padding: 10px 10px 20px 10px;
+  padding: 10px 10px 12px 10px;
   cursor: pointer;
 }
 

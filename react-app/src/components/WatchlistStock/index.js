@@ -21,7 +21,7 @@ function WatchlistStock({
         <LineChart labels={labels} prices={prices} />
       </div>
       <div className="watchlist-stock-right">
-        <span>{currentPrice}</span>
+        <span>${currentPrice}</span>
         <span className={percentChanged >= 0 ? "positive" : "negative"}>
           {percentChanged}%
         </span>

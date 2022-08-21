@@ -104,9 +104,9 @@ function Dashboard() {
             {isLoaded && (
               <div className="dashboard-chart-container">
                 <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
-                <ChartTimeLine />
               </div>
             )}
+            <ChartTimeLine />
           </div>
 
           {/* User's Buying Power */}

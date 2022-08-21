@@ -42,6 +42,14 @@
   height: 200px;
 }
 
+.dashboard-buying-power-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem;
+  font-weight: 700;
+}
+
 .dashboard-right-side-container {
   padding: 1.5rem;
   width: 18%;
