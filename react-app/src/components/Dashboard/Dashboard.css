@@ -1,6 +1,7 @@
 .dashboard-container {
   background-color: var(--color-dashboard-background);
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,15 +9,17 @@
 
 .dashboard-content-container {
   width: 100%;
-  margin-top: 1.5rem;
-  height: 94vh;
+  height: 100%;
   display: flex;
   justify-content: center;
-  gap: 6rem;
+  /* gap: 2rem; */
 }
 
 .dashboard-left-section {
-  width: 43%;
+  width: 60%;
+  max-width: 1038px;
+  margin-left: 12px;
+  margin-right: 20px;
 }
 
 .portfolio-graph {
@@ -46,30 +49,25 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 1.5rem;
+  padding: 24px 0;
   font-weight: 700;
 }
 
 .dashboard-right-side-container {
   padding: 1.5rem;
-  width: 18%;
-  height: 75%;
+  width: 330px;
+  max-width: 40%;
+  height: 633px;
   position: sticky;
   top: 76px;
-  /* align-items: center; */
-}
-
-.dashboard-buying-power-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  align-items: center;
 }
 
 .dashboard-right-side-content-container {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 5px;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgb(227, 233, 237);
+  border: 1px solid rgb(226, 233, 237);
   border-radius: 0.25rem;
   width: 100%;
   height: 100%;
