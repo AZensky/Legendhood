@@ -46,11 +46,11 @@ function BuySellForm({ quote }) {
                 </label>
                 <div className="details-page-buy-sell-stock-market-price">
                     <span>Market Price</span>
-                    <span>${quote.c}</span>
+                    <span> ${quote.c}</span>
                 </div>
                 <div>
                     <span>Estimated Cost</span>
-                    <span>${shares * quote.c}</span>
+                    <span> ${(shares * quote.c).toFixed(2)}</span>
                 </div>
                 <button className="details-page-buy-sell-stock">
                     {buySell === "Buy" ? "Place Order" : "Sell Stock"}

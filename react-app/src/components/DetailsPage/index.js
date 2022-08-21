@@ -12,18 +12,26 @@ function DetailsPage() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [assetDetails, setAssetDetails] = useState()
     const [assetQuote, setAssetQuote] = useState()
+    const [news, setNews] = useState()
 
     useEffect(() => {
         // const getDetails = async () => {
         //     return await fetchStockDetails(symbol)
         // }
-        // const details = getDetails()
+        // const details = getDetails();
 
         // const getQuote = async () => {
         //     return await fetchStockData(symbol)
         // }
-        // const quote = getQuote()
+        // const quote = getQuote();
 
+        const getNews = async () => {
+            let res = await fetch("/api/finnhub/market-news");
+            let data = await res.json();
+            let topNews = data.slice(0, 3);
+            setNews(topNews);
+        };
+        getNews();
 
         const details = {
             "Symbol": "IBM",
@@ -83,7 +91,7 @@ function DetailsPage() {
             "o": 136.46,
             "pc": 136.56,
             "t": 1660766402
-            }
+        }
 
         setAssetDetails(details)
         setAssetQuote(quote)
