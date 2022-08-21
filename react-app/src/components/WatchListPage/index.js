@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react"
 import DashboardNav from "../DashboardNavbar";
+import WatchlistStockCard from "./WatchlistStockCard";
 import "./WatchListPage.css";
 
 function WatchListPage() {
     const [isLoaded, setIsLoaded] = useState(false)
+    const [watchlist, setWatchlist] = useState()
     const [wlStocks, setWlStocks] = useState([])
+
+    // stock:{
+    //    "" 
+    // }
+
     useEffect(() => {
 
         setIsLoaded(true)
@@ -57,7 +64,15 @@ function WatchListPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                {/* <WatchlistStockCard
+                                    name={stock.name}
+                                    headline={article.headline}
+                                    image={article.image}
+                                    summary={article.summary}
+                                    url={article.url}
+                                    source={article.source}
+                                /> */}
+                                {/* <tr>
                                     <td >Gamestop</td>
                                     <td>GME</td>
                                     <td>$41.88</td>
@@ -106,7 +121,7 @@ function WatchListPage() {
                                     <td>
                                         <button className="watchlist-button">x</button>
                                     </td>
-                                </tr>
+                                </tr> */}
 
 
                             </tbody>
