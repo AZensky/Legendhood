@@ -1,61 +1,102 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { logout } from '../../store/session';
-import './AccountDropdown.css';
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { logout } from "../../store/session";
+import "./AccountDropdown.css";
 
 function AccountDropdown() {
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const user = useSelector(state => state.session.user)
-    const [showMenu, setShowMenu] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector((state) => state.session.user);
+  const [showMenu, setShowMenu] = useState(false);
+  const [portfolioValue, setPortfolioValue] = useState(0);
 
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+  useEffect(() => {
+    const getStockData = async (symbol) => {
+      let res = await fetch(`/api/finnhub/stock-data/${symbol}`);
+      let data = await res.json();
+      let currentPrice = data.c;
+      return currentPrice;
     };
 
-    useEffect(() => {
-        if (!showMenu) return;
+    const getPortfolioValue = async () => {
+      const res = await fetch(`/api/portfolio/${user.id}`);
+      const data = await res.json();
+      let assets = data["Assets"];
 
-        const closeMenu = () => {
-            setShowMenu(false);
-        };
+      let portfolioValue = 0;
 
-        document.addEventListener('click', closeMenu);
+      let map = {};
 
-        return () => document.removeEventListener('click', closeMenu)
-    }, [showMenu]);
+      for (let asset of assets) {
+        map[asset.symbol]
+          ? (map[asset.symbol] += asset.quantity)
+          : (map[asset.symbol] = asset.quantity);
+      }
 
-    const onlogout = (e) => {
-        e.preventDefault();
-        dispatch(logout()).then(() => history.push('/'))
-    }
+      for (let stock in map) {
+        const currentPrice = await getStockData(stock);
+        portfolioValue += currentPrice * map[stock];
+      }
 
-    return (
-        <>
-            <button className='account-btn' onClick={openMenu}>Account</button>
-            {showMenu && (
-                <div className='account-dropdown'>
-                    <h3 className='account-name'>{user.firstName} {user.lastName}</h3>
-                    <div className='account-balance-summary'>
-                        <div className='account-portfolio-value'>
-                            <h3>$30,000.62</h3>
-                            <div>Portfolio Value</div>
-                        </div>
-                        <div className='account-buying-power'>
-                            <h3>{user.buyingPower}</h3>
-                            <div>Buying Power</div>
-                        </div>
-                    </div>
-                    <div className='account-logout-btn'>
-                        <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                        <button onClick={onlogout}>Log Out</button>
-                    </div>
-                </div>
-            )}
-        </>
-    );
+      setPortfolioValue(portfolioValue.toFixed(2));
+    };
+
+    getPortfolioValue();
+  }, []);
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = () => {
+      setShowMenu(false);
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  const onlogout = (e) => {
+    e.preventDefault();
+    dispatch(logout()).then(() => history.push("/"));
+  };
+
+  console.log("USER ID", user);
+
+  return (
+    <>
+      <button className="account-btn" onClick={openMenu}>
+        Account
+      </button>
+      {showMenu && (
+        <div className="account-dropdown">
+          <h3 className="account-name">
+            {user.firstName} {user.lastName}
+          </h3>
+          <div className="account-balance-summary">
+            <div className="account-portfolio-value">
+              <h3>{portfolioValue}</h3>
+              <div>Portfolio Value</div>
+            </div>
+            <div className="account-buying-power">
+              <h3>{user.buyingPower}</h3>
+              <div>Buying Power</div>
+            </div>
+          </div>
+          <div className="account-logout-btn">
+            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+            <button onClick={onlogout}>Log Out</button>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default AccountDropdown;
