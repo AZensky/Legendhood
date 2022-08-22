@@ -146,30 +146,7 @@ export const fetchPastYearClosingPrices = async (symbol) => {
   return { closingPrices: closingPrices, datetimeLabels: datetimeLabels };
 };
 
-<<<<<<< HEAD
-// converts numbers to shorthand values. e.g 1520000000 -> 1.52M
-export function convertNum(inputNum) {
-  let num = Number(inputNum.toString().split(".")[0])
-  const lng = num.toString().length
 
-  const denominator = ["", "K", "M", "B", "t", "q", "Q", "s", "S", "o", "n", "d", "U", "D", "T"]
-
-  const denomCheck = Math.floor((lng-1)/3)
-  let newnum;
-  let decimals;
-
-  if (Number(num.toString()[lng - (1 + 3 * (denomCheck - 1))]) >= 5) {
-      const roundedUp = Number(num.toString().slice(0, lng - (1 + 3 * (denomCheck - 1)))) + 1
-      newnum = roundedUp.toString().slice(0, lng - 3*denomCheck)
-      decimals = roundedUp.toString().slice(lng - 3*denomCheck, lng - (1 + 3 * (denomCheck - 1)))
-  } else {
-      newnum = num.toString().slice(0, lng - 3*denomCheck)
-      decimals = num.toString().slice(lng - 3*denomCheck, lng - (1 + 3 * (denomCheck - 1)))
-  }
-
-  return `$${newnum}${lng >= 4? ".":""}${decimals}${denominator[Math.floor((lng-1)/3)]}`
-}
-=======
 export const numberWithCommas = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
@@ -187,5 +164,3 @@ export const fetchCompanyDataWatchlist = async (symbol) => {
   let data = await res.json();
   return data;
 }
-
->>>>>>> fdd9f18949bbdc36e6e84e117f3f1d1248b32a1f
