@@ -45,6 +45,14 @@ export const fetchStockData = async (symbol) => {
   return data;
 };
 
+// Get a company's profile, useful for watchlist
+export const fetchCompanyProfile = async (symbol) => {
+  let res = await fetch(`/api/finnhub/company-profile/${symbol}`);
+  let data = await res.json();
+
+  return data;
+};
+
 // Fetch the first 5 stories from top market news
 export const fetchMarketNews = async () => {
   let res = await fetch("/api/finnhub/market-news");
