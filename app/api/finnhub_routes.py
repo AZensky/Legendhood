@@ -1,3 +1,4 @@
+from re import U
 from flask import Blueprint, jsonify
 import datetime
 import time
@@ -57,6 +58,29 @@ def fetch_today_tick_data(symbol):
     res = requests.get(f'https://tick.finnhub.io/api/v1/stock/tick?symbol={symbol}&date={query_date}&limit=100&skip=0&format=json&token={FINNHUB_API_KEY}')
     data = res.json()
     return jsonify(data)
+
+# API route to get a specific stock's candlestick data for the live feature. Candlestick data consist of closing and opening prices for selected timeframe, along with the timestamp in unix form. We should probably use closing prices for consistency.
+# Example output: https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1572651390&to=1575243390&token=cbu2r6iad3i96b4mbifg
+@finnhub_routes.route('/candlestick-data/live/<symbol>')
+def fetch_live_candlestick_data(symbol):
+    now = datetime.datetime.today()
+    query_day = now
+    if now.weekday() == 5:
+        query_day = now - datetime.timedelta(days=1)
+
+    if now.weekday() == 6:
+        query_day = now.datetime.timedelta(days=2)
+
+    query_day_beginning = datetime.datetime.combine(query_day.today(), datetime.time())
+
+    unix_today = int(time.mktime(query_day.timetuple()))
+    unix_start = int(time.mktime(query_day_beginning.timetuple()))
+
+    res = requests.get(f'https://finnhub.io/api/v1/stock/candle?symbol={symbol}&resolution=5&from={unix_start}&to={unix_today}&token={FINNHUB_API_KEY}')
+    data = res.json()
+    return jsonify(data)
+
+
 
 # API route to get a specific stock's candlestick data for the past month. Candlestick data consist of closing and opening prices for selected timeframe, along with the timestamp in unix form. We should probably use closing prices for consistency.
 # Example output: https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1572651390&to=1575243390&token=cbu2r6iad3i96b4mbifg
