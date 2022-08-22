@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { clearCurrentWatchlist, getWatchlist, loadWatchlists } from "../../store/watchlist";
 import DashboardNav from "../DashboardNavbar";
+import LoadingSpinner from "../LoadingSpinner";
 // import WatchlistStockCard from "./WatchlistStockCard";
 import "./WatchListPage.css";
 
 function WatchListPage() {
+    const [isLoaded, setIsLoaded] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -105,7 +107,7 @@ function WatchListPage() {
     return (
         <>
             <DashboardNav />
-            <div className="watchlist-container">
+            {isLoaded ? (<div className="watchlist-container">
                 <div className="watchlist-scrolllist">
 
                     <div>
@@ -194,7 +196,9 @@ function WatchListPage() {
                     )}
 
                 </div>
-            </div >
+            </div >) : (
+                <LoadingSpinner />
+            )}
         </>
     )
 }
