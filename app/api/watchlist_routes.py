@@ -25,7 +25,7 @@ def get_watchlist_by_id(id):
 
 @watchlist_routes.route('/<int:id>/<symbol>/delete')
 @login_required
-def get_watchlist_by_id(id):
+def delete_watchlist_by_id(id):
     watchlist = Watchlist.query.filter(
         Watchlist.user_id == current_user.id,  Watchlist.id == id).one_or_none()
     # else should throw 404
