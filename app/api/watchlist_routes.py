@@ -23,7 +23,7 @@ def get_watchlist_by_id(id):
     return watchlist.to_dict() if watchlist else {"id": id, "watchlistStocks": []}
 
 
-@watchlist_routes.route('/<int:id>/stocks/<symbol>', methods=['DELETE', 'GET'])
+@watchlist_routes.route('/<int:id>/stocks/<symbol>', methods=['DELETE'])
 @login_required
 def delete_watchlist_stock_by_id(id, symbol):
     watchlist = Watchlist.query.filter(
