@@ -28,20 +28,47 @@ function Dashboard() {
   const [timeLabels, setTimeLabels] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [graphLoaded, setGraphLoaded] = useState(false);
+  const [amountChanged, setAmountChanged] = useState(0);
+  const [portfolioPercentChanged, setPortfolioPercentChanged] = useState(0);
+  const [portfolioMarketValue, setPortfolioMarketValue] = useState(0);
 
   const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    const stocks = ["AAPL", "TSLA", "AMZN", "META"];
     let fetchedData = [];
 
     const getStockData = async (symbol) => {
       let data = await fetchStockData(symbol);
-      fetchedData.push(data);
+      // fetchedData.push(data);
+      // let currentPrice = data.c;
+      return data;
+      // return currentPrice;
+    };
 
-      if (fetchedData.length === stocks.length) {
-        setCompanyData(fetchedData);
+    const getPortfolioValue = async () => {
+      const res = await fetch(`/api/portfolio/${user.id}`);
+      const data = await res.json();
+      let assets = data["Assets"];
+
+      let portfolioValue = 0;
+
+      let map = {};
+
+      for (let asset of assets) {
+        map[asset.symbol]
+          ? (map[asset.symbol] += asset.quantity)
+          : (map[asset.symbol] = asset.quantity);
       }
+
+      for (let stock in map) {
+        const data = await getStockData(stock);
+        data["sharesOwned"] = map[stock];
+        const currentPrice = data.c;
+        portfolioValue += currentPrice * map[stock];
+        fetchedData.push(data);
+      }
+
+      setPortfolioMarketValue(portfolioValue.toFixed(2));
     };
 
     const getMarketNews = async () => {
@@ -49,11 +76,14 @@ function Dashboard() {
       setMarketNews(data);
     };
 
-    for (let stock of stocks) {
-      getStockData(stock);
-    }
+    const initializeDashboard = async () => {
+      await getMarketNews();
+      await getPortfolioValue();
 
-    getMarketNews();
+      setCompanyData(fetchedData);
+    };
+
+    initializeDashboard();
   }, []);
 
   useEffect(() => {
@@ -76,8 +106,17 @@ function Dashboard() {
         datetimeLabels.push(datetime);
       });
 
+      let priceChanged =
+        -1 * (data.p[0] - data.p[data.p.length - 1]).toFixed(2);
+      let perChanged = data.p[0] / data.p[data.p.length - 1];
+
+      let portPercentChanged =
+        perChanged > 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+
       setPrices(data.p);
       setTimeLabels(datetimeLabels);
+      setAmountChanged(priceChanged);
+      setPortfolioPercentChanged(portPercentChanged.toFixed(2));
     };
 
     const pastWeekClosingPrices = async (userStocks) => {
@@ -107,8 +146,18 @@ function Dashboard() {
         if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
       }
 
+      let priceChanged =
+        -1 *
+        (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
+      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+
+      let portPercentChanged =
+        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+
       setPrices(sharedPrices);
       setTimeLabels(commonDatetimeLabels);
+      setAmountChanged(priceChanged);
+      setPortfolioPercentChanged(portPercentChanged.toFixed(2));
     };
 
     const pastMonthClosingPrices = async (userStocks) => {
@@ -138,8 +187,18 @@ function Dashboard() {
         if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
       }
 
+      let priceChanged =
+        -1 *
+        (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
+      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+
+      let portPercentChanged =
+        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+
       setPrices(sharedPrices);
       setTimeLabels(commonDatetimeLabels);
+      setAmountChanged(priceChanged);
+      setPortfolioPercentChanged(portPercentChanged.toFixed(2));
     };
 
     const pastThreeMonthClosingPrices = async (userStocks) => {
@@ -169,8 +228,18 @@ function Dashboard() {
         if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
       }
 
+      let priceChanged =
+        -1 *
+        (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
+      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+
+      let portPercentChanged =
+        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+
       setPrices(sharedPrices);
       setTimeLabels(commonDatetimeLabels);
+      setAmountChanged(priceChanged);
+      setPortfolioPercentChanged(portPercentChanged.toFixed(2));
     };
 
     const pastYearClosingPrices = async (userStocks) => {
@@ -200,8 +269,18 @@ function Dashboard() {
         if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
       }
 
+      let priceChanged =
+        -1 *
+        (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
+      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+
+      let portPercentChanged =
+        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+
       setPrices(sharedPrices);
       setTimeLabels(commonDatetimeLabels);
+      setAmountChanged(priceChanged);
+      setPortfolioPercentChanged(portPercentChanged.toFixed(2));
     };
 
     const initializeCharts = async () => {
@@ -232,9 +311,17 @@ function Dashboard() {
           <div className="dashboard-left-section">
             {/* User's Portfolio Graph */}
             <div className="portfolio-graph">
-              <p className="user-portfolio-market-value">$260.91</p>
-              <p className={`user-portfolio-percent-changed positive`}>
-                +50.38(+23.05%) All time
+              <p className="user-portfolio-market-value">
+                ${portfolioMarketValue}
+              </p>
+              <p
+                className={`user-portfolio-percent-changed ${
+                  portfolioPercentChanged >= 0 ? "positive" : "negative"
+                }`}
+              >
+                {amountChanged >= 0 && "+"}
+                {amountChanged}({portfolioPercentChanged >= 0 && "+"}
+                {portfolioPercentChanged}%) All time
               </p>
               {graphLoaded ? (
                 <div className="dashboard-chart-container">
@@ -285,7 +372,7 @@ function Dashboard() {
                     name={company.name}
                     currentPrice={company.c.toFixed(2)}
                     percentChanged={company.dp.toFixed(2)}
-                    sharesOwned={2}
+                    sharesOwned={company.sharesOwned}
                     labels={timeLabels}
                     prices={prices}
                   />
