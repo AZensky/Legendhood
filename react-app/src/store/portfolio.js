@@ -17,8 +17,8 @@ export const purchaseStocksThunk = (order) => async (dispatch) => {
     const data = await response.json();
     console.log("HERE",data)
     if (response.ok) {
-        const returnData = await dispatch(getUserPortfolioThunk(order.user_id))
-        return returnData;
+        await dispatch(getUserPortfolioThunk(order.user_id))
+        return data;
     } else {
         return data;
     }
@@ -29,8 +29,8 @@ export const getUserPortfolioThunk = (userId) => async (dispatch) => {
 
     const data = await response.json();
     if (response.ok) {
-        const returnData = await dispatch(setPortfolio(data))
-        return returnData;
+        await dispatch(setPortfolio(data))
+        return data;
     } else {
         return data;
     }
@@ -45,7 +45,11 @@ export default function reducer(state = initialState, action) {
       case SET_PORTFOLIO:
         const newportfolio = {}
         action.payload.Assets.forEach(ele => {
-            newportfolio[ele.symbol] = ele
+            if (newportfolio[ele.symbol]) {
+                newportfolio[ele.symbol].quantity += ele.quantity
+            } else {
+                newportfolio[ele.symbol] = ele
+            }
         });
         return newportfolio
       default:

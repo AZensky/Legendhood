@@ -7,7 +7,8 @@ import BuySellForm from "./BuySellForm";
 import KeyStatistics from "./KeyStatistics";
 import { unixToDate } from "../../util/stocks-api";
 import ChartTimeLine from "../ChartTimeLine";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserPortfolioThunk } from "../../store/portfolio";
 
 function DetailsPage() {
     const { symbol } = useParams()
@@ -17,11 +18,14 @@ function DetailsPage() {
     const [news, setNews] = useState()
     const [weekClosingPrices, setWeekClosingPrices] = useState([]);
     const [weekDateLabels, setWeekDateLabels] = useState([]);
-    const [showLink, setShowLink] = useState(false)
-    const [toggleShowMore, setToggleShowMore] = useState(false)
+    const [showLink, setShowLink] = useState(false);
+    const [toggleShowMore, setToggleShowMore] = useState(false);
+    const [ownedStocks, setOwnedStocks] = useState(0)
 
-    const user = useSelector(state => state.session.user)
-    console.log(user)
+    const portfolio = useSelector(state => state.portfolio)
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+
     useEffect(() => {
 
         const getDetails = async (symbol) => {
@@ -280,9 +284,9 @@ function DetailsPage() {
         //     setIsLoaded(true)
         // }
         // prepDetailsPage()
+
         setIsLoaded(true)
     }, [])
-
 
     return isLoaded && (
         <>
