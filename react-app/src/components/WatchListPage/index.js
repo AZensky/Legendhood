@@ -27,6 +27,28 @@ function WatchListPage() {
         }
     }
 
+    function convertNum(inputNum) {
+        let num = Number(inputNum.toString().split(".")[0])
+        const lng = num.toString().length
+
+        const denominator = ["", "K", "M", "B", "t", "q", "Q", "s", "S", "o", "n", "d", "U", "D", "T"]
+
+        const denomCheck = Math.floor((lng - 1) / 3)
+        let newnum;
+        let decimals;
+
+        if (Number(num.toString()[lng - (1 + 3 * (denomCheck - 1))]) >= 5) {
+            const roundedUp = Number(num.toString().slice(0, lng - (1 + 3 * (denomCheck - 1)))) + 1
+            newnum = roundedUp.toString().slice(0, lng - 3 * denomCheck)
+            decimals = roundedUp.toString().slice(lng - 3 * denomCheck, lng - (1 + 3 * (denomCheck - 1)))
+        } else {
+            newnum = num.toString().slice(0, lng - 3 * denomCheck)
+            decimals = num.toString().slice(lng - 3 * denomCheck, lng - (1 + 3 * (denomCheck - 1)))
+        }
+
+        return `$${newnum}${lng >= 4 ? "." : ""}${decimals}${denominator[Math.floor((lng - 1) / 3)]}`
+    }
+
     //get watchlist by id
     const { watchlistId } = useParams();
 
@@ -116,6 +138,7 @@ function WatchListPage() {
                                         <td >{stock.symbol}</td>
                                         <td>${getPercentOnly(stock.currentPrice)}</td>
                                         <td>{getPercentChangeCell(stock.percentChange)}</td>
+                                        {/* <td>{convertNum(stock.marketCap)}</td> */}
                                         <td>{stock.marketCap}</td>
                                         <td>
                                             <button className="watchlist-button">x</button>

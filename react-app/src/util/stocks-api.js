@@ -146,9 +146,16 @@ export const fetchPastYearClosingPrices = async (symbol) => {
   return { closingPrices: closingPrices, datetimeLabels: datetimeLabels };
 };
 
-//Get company data
+//Get company data for detail page
 export const fetchCompanyData = async (symbol) => {
   let res = await fetch(`/api/finnhub/company-data/${symbol}`);
+  let data = await res.json();
+  return data;
+}
+
+//Get company data for watchlist
+export const fetchCompanyDataWatchlist = async (symbol) => {
+  let res = await fetch(`/api/finnhub/company-profile/${symbol}`);
   let data = await res.json();
   return data;
 }
