@@ -9,10 +9,6 @@ ENV FLASK_APP=app
 ENV FLASK_ENV=production
 # SQLALCHEMY_ECHO -> Just set it to true
 ENV SQLALCHEMY_ECHO=True
-
-ENV FINNHUB_API_KEY=cbvhecaad3ibve99hkj0
-
-ENV ALPHA_VANTAGE_API_KEY=2929A6H0IO1K13UK
 # Set the directory for upcoming commands to /var/www
 WORKDIR /var/www
 # Copy all the files from your repo to the working directory
