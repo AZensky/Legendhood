@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 // import LoginForm from "./components/auth/LoginForm";
 // import SignUpForm from "./components/auth/SignUpForm";
 import SignUpPage from "./components/SignUpPage";
-import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 // import UsersList from './components/UsersList';
 // import User from "./components/User";
@@ -32,17 +31,16 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar /> */}
       <Switch>
-        <Route path="/stocks/:symbol">
+        <ProtectedRoute path="/stocks/:symbol">
           <DetailsPage />
-        </Route>
-        <Route path="/dashboard">
+        </ProtectedRoute>
+        <ProtectedRoute path="/dashboard">
           <DashBoard />
-        </Route>
-        <Route path="/watchlist">
+        </ProtectedRoute>
+        <ProtectedRoute path="/watchlists/:watchlistId">
           <WatchListPage />
-        </Route>
+        </ProtectedRoute>
         <Route path="/login" exact={true}>
           <LogInPage />
         </Route>

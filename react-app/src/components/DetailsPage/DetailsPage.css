@@ -1,5 +1,118 @@
+
+.details-page-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.details-page-left-container {
+    width: 35%;
+    padding-right: 3%;
+    padding-top: 1%;
+}
+
+.details-page-title {
+    margin-bottom: 0;
+    font-size: 32px;
+}
+
+.details-page-price {
+    font-size: 32px;
+}
+
+.details-page-delta {
+    padding: 1% 0%;
+    border-bottom: 1px dotted rgb(190, 190, 190);
+}
+
+.details-page-delta.red {
+    color: rgb(255,80,0);
+}
+
+.details-page-delta.green {
+    color: rgb(0,200,5);
+}
+
+.details-page-graph-container {
+    max-height: 200px;
+}
+
+.details-page-graph-timeline {
+    border-bottom: 1px solid rgb(190, 190, 190);
+}
+
+.details-page-about-header {
+    padding: 6% 0% 2% 0%;
+    font-size: 24px;
+    border-bottom: 1px solid rgb(190, 190, 190);
+}
+
+.details-page-about-header.news {
+    border-bottom: none;
+}
+
+.details-page-about.narrow {
+    max-height:200px;
+    overflow-y: hidden;
+}
+
+.details-page-about-details{
+    font-size: 15px;
+}
+
+.details-page-about-key-statistics-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.details-page-about-key-statistic {
+    padding: 1% 1%;
+    width: 23%;
+}
+
+.details-page-about-key-statistic-item {
+    font-size: 13px;
+}
+
+.details-page-about-key-statistic-item.header {
+    font-weight: bold;
+    padding-bottom: 5%;
+}
+
+
+.details-page-right-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    padding-top: 2%;
+}
+
+/* buy and sell stock form */
+
+
+.details-page-buy-sell-stock-form {
+    width: 90%;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    height: 400px;
+}
+
+.details-page-buy-sell-switch {
+    display: flex;
+    justify-content: space-around;
+    padding: 5% 10%;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    font-weight: bold;
+}
+
 .details-page-buy-active {
-    color: red;
+    color: black;
+    text-decoration: underline;
 }
 
 .details-page-buy-inactive {
@@ -12,7 +125,8 @@
 }
 
 .details-page-sell-active {
-    color: red;
+    color: black;
+    text-decoration: underline;
 }
 
 .details-page-sell-inactive {
@@ -24,6 +138,42 @@
     color: rgb(89, 89, 89);
 }
 
-.details-page-buy-sell-stock-form {
-    border: 1px solid black;
+.details-page-buy-in-labels,
+.details-page-buy-sell-stock,
+.details-page-buy-sell-stock-market-price,
+.details-page-buy-sell-stock-estimated-cost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3% 10%;
+}
+
+.details-page-buy-sell-stock-input {
+    width: 50%;
+    height: 35px;
+}
+
+
+.details-page-buy-sell-stock-button-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.details-page-buy-sell-stock.button {
+    width: 80%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    border: none;
+    color: white;
+    background-color: rgb(0,200,5);
+}
+
+.details-page-buy-sell-stock.button.green {
+    background-color: rgb(0,200,5);
+}
+
+.details-page-buy-sell-stock.button.red {
+    background-color: rgb(255,80,0);
 }

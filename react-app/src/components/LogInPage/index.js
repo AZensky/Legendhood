@@ -1,25 +1,34 @@
-import { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom';
+import { login } from '../../store/session'
 import './LogInPage.css';
 
 function LogInPage() {
-    const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
+    const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // TODO: hookup redux handling validation, login, catch errors
-        return history.push('/dashboard');
+        const data = await dispatch(login(email, password))
+        if (data) {
+            setErrors(data)
+        }
     };
 
-    const loginDemoUser = (e) => {
+    const loginDemoUser = async (e) => {
         e.preventDefault();
+        const data = await dispatch(login('demo@aa.io', 'password'))
+        if (data) {
+            setErrors(data)
+        }
+    }
 
-        // TODO: hookup redux handling validation, login, catch errors
-        return history.push('/dashboard');
+    if (user) {
+        return <Redirect to='/dashboard' />;
     }
 
     return (

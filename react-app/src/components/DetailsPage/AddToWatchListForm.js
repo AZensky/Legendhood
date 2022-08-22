@@ -2,51 +2,86 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./DetailsPage.css"
 
-function AddToWatchListForm({ quote }) {
+function AddToWatchListForm() {
     const { symbol } = useParams()
     const [isLoaded, setIsLoaded] = useState(false)
-    const [shares, setShares] = useState(0)
-    const [buySell, setBuySell] = useState("Buy")
+    const [lists, setLists] = useState([])
 
     useEffect(() => {
+        // get all lists as an array
+        setLists([
+            {
+                id: 1,
+                name: "test list 1",
+                watchlist_stocks: [
+                    {
+                        id: 1,
+                        symbol: "TEST",
+                        name: "test1"
+                    },
+                    {
+                        id: 1,
+                        symbol: "TST",
+                        name: "test2"
+                    },
+                    {
+                        id: 1,
+                        symbol: "TEEST",
+                        name: "Test 3"
+                    },
+                ]
+            },
+            {
+                id: 1,
+                name: "test list 2",
+                watchlist_stocks: [
+                    {
+                        id: 1,
+                        symbol: "IBM",
+                        name: "test1"
+                    },
+                ]
+            }
+        ])
+
+
         setIsLoaded(true)
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
     }
 
 
     return isLoaded && (
-        <>
+        <div className="details-page-watchlist-form">
             <form
                 onSubmit={handleSubmit}
                 className="details-page-watch-list-form"
             >
-                <label className="details-page-buy-sell-stock">Shares
-                    <input
-                        type=""
-                        onChange={e => setShares(e.target.value)}
-                        value={shares}
-                    >
-                    </input>
-                </label>
-                <div className="details-page-buy-sell-stock-market-price">
-                    <span>Market Price</span>
-                    <span>${quote.c}</span>
-                </div>
-                <div>
-                    <span>Estimated Cost</span>
-                    <span>${shares * quote.c}</span>
-                </div>
-                <button className="details-page-buy-sell-stock">
-                    {buySell === "Buy" ? "Place Order" : "Sell Stock"}
-                </button>
-                <div>
-                    { } buying power available
-                </div>
+                {lists.length > 0 && (
+                    lists.map((list, i) => {
+
+
+                        return (
+                            <label
+
+                            >
+                                <input
+                                    type="checkbox"
+                                    className="details-page-watchlist-form-listitem"
+                                >
+                                </input>
+                                <div className="details-page-watchlist-form-list-logo">LOGO</div>
+                                <div className="details-page-watchlist-form-list-name">{list.name}</div>
+                            </label>
+                        )
+                    })
+                )}
+                <button className="details-page-watch-list-button">Save Changes</button>
             </form>
-        </>
+        </div>
     );
 }
 
