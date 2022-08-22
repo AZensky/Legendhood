@@ -28,10 +28,11 @@ function WatchListPage() {
     }
 
     function convertNum(inputNum) {
-        let num = Number(inputNum.toString().split(".")[0])
+        let num = Number(inputNum.toString().split(".")[0]) * 1000000
         const lng = num.toString().length
 
-        const denominator = ["", "K", "M", "B", "t", "q", "Q", "s", "S", "o", "n", "d", "U", "D", "T"]
+        const denominator = ["", "K", "M", "B", "T", "q", "Q", "s", "S", "o", "n", "d", "U", "D", "t"]
+
 
         const denomCheck = Math.floor((lng - 1) / 3)
         let newnum;
@@ -90,6 +91,11 @@ function WatchListPage() {
 
     }
 
+    function deleteStock(e) {
+        const stocksym = e.currentTarget.id;
+        dispatch(watchlistId, stocksym)
+    }
+
     //get all stocks symbols in the watchlist
     // const stockSymbols = []
     // for (let stock of watchlist.watchlistStocks) {
@@ -118,6 +124,17 @@ function WatchListPage() {
                     </div>
 
                     <div className="watchlist-itemnum"> {watchlist.watchlistStocks.length} items</div>
+                    {/* <div className="watchlist-table-1">
+                        <header>
+                            <div>Name</div>
+                            <div>Symbol</div>
+                            <div>Price</div>
+                            <div>Today</div>
+                            <div>Market Cap</div>
+                            <div></div>
+                        </header>
+                    </div> */}
+
                     <div>
                         <table className="watchlist-table">
                             <thead>
@@ -140,7 +157,7 @@ function WatchListPage() {
                                         <td>{getPercentChangeCell(stock.percentChange)}</td>
                                         <td>{convertNum(stock.marketCap)}</td>
                                         <td>
-                                            <button className="watchlist-button">x</button>
+                                            <button id={stock.symbol} className="watchlist-button" onClick={deleteStock}>x</button>
                                         </td>
                                     </tr>
                                 )}
