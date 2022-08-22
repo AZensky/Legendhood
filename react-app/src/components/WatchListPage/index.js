@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { clearCurrentWatchlist, getWatchlist } from "../../store/watchlist";
+import { clearCurrentWatchlist, getWatchlist, loadWatchlists } from "../../store/watchlist";
 import DashboardNav from "../DashboardNavbar";
 // import WatchlistStockCard from "./WatchlistStockCard";
 import "./WatchListPage.css";
@@ -14,6 +14,7 @@ function WatchListPage() {
 
     useEffect(() => {
         dispatch(getWatchlist(watchlistId))
+        dispatch(loadWatchlists())
 
         return () => {
             dispatch(clearCurrentWatchlist())
@@ -27,6 +28,10 @@ function WatchListPage() {
         return String(currentWatchlist?.id) === watchlistId ? currentWatchlist : null;
     })
 
+    const watchlists = useSelector(state => {
+        return state.watchlist.watchlists;
+    })
+
     //render component
     if (!watchlist) {
         return <></>;
@@ -36,7 +41,7 @@ function WatchListPage() {
     //get all stocks symbols in the watchlist
     const stockSymbols = []
     for (let stock of watchlist.watchlistStocks) {
-        debugger
+
         stockSymbols.push(stock.symbol)
     }
 
@@ -97,6 +102,7 @@ function WatchListPage() {
                                     <th>Price</th>
                                     <th>Today</th>
                                     <th>Market Cap</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -176,18 +182,21 @@ function WatchListPage() {
                         </div>
                     </div>
 
-                    <div className="watchlist-list-card">
-                        <div>
-                            <img className="watchlist-lightning-logo-2" alt="⚡" src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"></img>
-                        </div>
-                        <div className="watchlist-list-name">
-                            My watch list
-                        </div>
-                        <div className="watchlist-hide">
-                            ...
-                        </div>
-
-                    </div>
+                    {watchlists.map((list) =>
+                        <>
+                            <div className="watchlist-list-card">
+                                <div>
+                                    <img className="watchlist-lightning-logo-2" alt="⚡" src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"></img>
+                                </div>
+                                <div className="watchlist-list-name">
+                                    {list.name}
+                                </div>
+                                <div className="watchlist-hide">
+                                    ...
+                                </div>
+                            </div>
+                        </>
+                    )}
 
                 </div>
 

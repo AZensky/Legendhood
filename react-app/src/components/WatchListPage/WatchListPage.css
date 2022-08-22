@@ -46,6 +46,7 @@
 }
 
 .watchlist-table tr {
+
     height: 50px;
     padding: 0 25px 0 0;
     border-bottom: 1px solid rgb(227, 233, 237);
@@ -53,19 +54,30 @@
 
 .watchlist-table th {
     margin-top: 30px;
+    height: 47px;
     color: #6a7278;
     font-weight: 30;
     text-align: left;
     padding: 0 25px 0 0;
 }
 
+.watchlist-table th:first-child {
+    width: 250px;
+}
+
+.watchlist-table th:last-child {
+    width: 40px;
+}
+
+
 .watchlist-table tr {
-    height: 50px;
+    height: 59px;
     padding: 0 25px 0 0;
     border-bottom: 1px solid rgb(227, 233, 237);
 }
 
 .watchlist-table tr>td:first-child {
+    font-weight: bold;
     table-layout: fixed;
     width: 180px;
 }
@@ -130,9 +142,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    border-bottom-style: solid;
-    border-width: 1px;
-    border-color: rgb(227, 233, 237);
     margin: auto;
 }
 
