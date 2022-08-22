@@ -2,35 +2,52 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./DetailsPage.css"
-import { purchaseStocksThunk } from "../../store/portfolio";
+import { purchaseStocksThunk, getUserPortfolioThunk } from "../../store/portfolio";
 
 function BuySellForm({ quote }) {
     const { symbol } = useParams()
     const [isLoaded, setIsLoaded] = useState(false)
     const [shares, setShares] = useState(0)
     const [buySell, setBuySell] = useState("Buy")
+    const [ownedStocks, setOwnedStocks] = useState(0)
 
 
     const dispatch = useDispatch()
     let user = useSelector(state => state.session.user)
+    let portfolio = useSelector(state => state.portfolio)
 
     useEffect(() => {
+        const getPortfolio = async () => {
+            await dispatch(getUserPortfolioThunk(user.id))
+            const stocks = portfolio[symbol]? portfolio[symbol].quantity : 0;
+            setOwnedStocks(stocks);
+        }
+        getPortfolio()
+
         setIsLoaded(true)
     }, [])
+
+    // useEffect(() => {
+    //     const getPortfolio = async () => {
+    //         await dispatch(getUserPortfolioThunk(user.id))
+    //         const stocks = portfolio[symbol].quantity || 0;
+    //         setOwnedStocks(stocks);
+    //     }
+    //     getPortfolio()
+    // }, [portfolio])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const order = {
             symbol: symbol,
-            quantity: buySell === "Buy"? shares: -shares,
-            price: buySell === "Buy"? (shares*quote.c).toFixed(2): (-shares*quote.c).toFixed(2),
+            quantity: buySell === "Buy" ? shares : -shares,
+            price: buySell === "Buy" ? (shares * quote.c).toFixed(2) : (-shares * quote.c).toFixed(2),
             user_id: user.id
         }
         if (buySell === "Buy") {
             console.log(order)
             const result = await dispatch(purchaseStocksThunk(order))
-            const data = result.json()
-            console.log(data)
+            console.log(result)
         } else {
             console.log(order)
             // const result = dispatch(sellStocksThunk(order))
@@ -64,6 +81,12 @@ function BuySellForm({ quote }) {
                         value={shares}
                     >
                     </input>
+                    <div
+                        className=""
+                        style={{visibility: buySell === "Sell"? "visible" : "hidden"}}
+                    >
+                        {`(${portfolio[symbol]? portfolio[symbol].quantity : 0} Shares owned)`}
+                    </div>
                 </label>
                 <div className="details-page-buy-sell-stock-market-price">
                     <span>Market Price</span>
