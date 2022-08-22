@@ -15,6 +15,10 @@ function WatchListPage() {
         return <>{getArrow(change)} {Math.round(Math.abs(change) * 100) / 100}%</>
     }
 
+    const getPercentOnly = (change) => {
+        return <>{Math.round(Math.abs(change) * 100) / 100}</>
+    }
+
     const getArrow = (change) => {
         if (change < 0) {
             return <span style={{ color: "red" }}>▼</span>
@@ -51,6 +55,7 @@ function WatchListPage() {
         return <></>;
     }
 
+    //onClick fucntions
     function ClickStock(e) {
         const stocksym = e.currentTarget.id;
         history.push(`/stocks/${stocksym}`)
@@ -64,10 +69,10 @@ function WatchListPage() {
     }
 
     //get all stocks symbols in the watchlist
-    const stockSymbols = []
-    for (let stock of watchlist.watchlistStocks) {
-        stockSymbols.push(stock.symbol)
-    }
+    // const stockSymbols = []
+    // for (let stock of watchlist.watchlistStocks) {
+    //     stockSymbols.push(stock.symbol)
+    // }
 
     return (
         <>
@@ -107,11 +112,11 @@ function WatchListPage() {
 
                                 {watchlist.watchlistStocks.map((stock) =>
                                     <tr id={stock.symbol} onClick={ClickStock}>
-                                        <td>TODO</td>
+                                        <td>{stock.name}</td>
                                         <td >{stock.symbol}</td>
-                                        <td>${stock.currentPrice}</td>
+                                        <td>${getPercentOnly(stock.currentPrice)}</td>
                                         <td>{getPercentChangeCell(stock.percentChange)}</td>
-                                        <td>TODO</td>
+                                        <td>{stock.marketCap}</td>
                                         <td>
                                             <button className="watchlist-button">x</button>
                                         </td>
