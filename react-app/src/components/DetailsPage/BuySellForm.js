@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./DetailsPage.css"
-import { purchaseStocksThunk, getUserPortfolioThunk } from "../../store/portfolio";
+import { purchaseSellStocksThunk, getUserPortfolioThunk } from "../../store/portfolio";
+import { authenticate } from "../../store/session";
 
 function BuySellForm({ quote }) {
     const { symbol } = useParams()
@@ -17,41 +18,36 @@ function BuySellForm({ quote }) {
     let portfolio = useSelector(state => state.portfolio)
 
     useEffect(() => {
+
         const getPortfolio = async () => {
             await dispatch(getUserPortfolioThunk(user.id))
             const stocks = portfolio[symbol]? portfolio[symbol].quantity : 0;
             setOwnedStocks(stocks);
         }
-        getPortfolio()
+
+        if (user) {
+            getPortfolio()
+        }
 
         setIsLoaded(true)
     }, [])
 
-    // useEffect(() => {
-    //     const getPortfolio = async () => {
-    //         await dispatch(getUserPortfolioThunk(user.id))
-    //         const stocks = portfolio[symbol].quantity || 0;
-    //         setOwnedStocks(stocks);
-    //     }
-    //     getPortfolio()
-    // }, [portfolio])
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         const order = {
-            symbol: symbol,
+            symbol: symbol.toUpperCase(),
             quantity: buySell === "Buy" ? shares : -shares,
-            price: buySell === "Buy" ? (shares * quote.c).toFixed(2) : (-shares * quote.c).toFixed(2),
+            price: (quote.c).toFixed(2),
             user_id: user.id
         }
         if (buySell === "Buy") {
-            console.log(order)
-            const result = await dispatch(purchaseStocksThunk(order))
+            const result = await dispatch(purchaseSellStocksThunk(order))
             console.log(result)
         } else {
-            console.log(order)
-            // const result = dispatch(sellStocksThunk(order))
+            const result = await dispatch(purchaseSellStocksThunk(order))
+            console.log(result)
         }
+        await dispatch(authenticate())
     }
 
 
