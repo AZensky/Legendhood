@@ -58,10 +58,11 @@ function WatchListPage() {
     useEffect(() => {
         dispatch(getWatchlist(watchlistId))
         dispatch(loadWatchlists())
-
+        setIsLoaded(true)
         return () => {
             dispatch(clearCurrentWatchlist())
         }
+
     }, [dispatch, watchlistId]);
 
     //set backend returned data into variable
