@@ -32,6 +32,7 @@ function WatchListPage() {
         return state.watchlist.watchlists;
     })
 
+    const userId = useSelector(state => state.session.user.id)
 
 
     //render component
