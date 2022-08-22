@@ -12,6 +12,7 @@ import {
   fetchPastWeekClosingPrices,
   fetchStockData,
   fetchMarketNews,
+  fetchLiveStockData,
   fetchPastMonthClosingPrices,
   fetchPastThreeMonthClosingPrices,
   fetchPastYearClosingPrices,
@@ -26,6 +27,8 @@ function Dashboard() {
   const [timeSelection, setTimeSelection] = useState("Live");
   const [prices, setPrices] = useState([]);
   const [timeLabels, setTimeLabels] = useState([]);
+  // const [individualTimeLabels, setIndividualTimeLabels] = useState([]);
+  const [individualPriceLabels, setIndividualPriceLabels] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [graphLoaded, setGraphLoaded] = useState(false);
   const [amountChanged, setAmountChanged] = useState(0);
@@ -39,10 +42,7 @@ function Dashboard() {
 
     const getStockData = async (symbol) => {
       let data = await fetchStockData(symbol);
-      // fetchedData.push(data);
-      // let currentPrice = data.c;
       return data;
-      // return currentPrice;
     };
 
     const getPortfolioValue = async () => {
@@ -94,27 +94,64 @@ function Dashboard() {
       return data;
     };
 
-    const todayTickData = async (symbol) => {
-      let res = await fetch(`/api/finnhub/today-tick/${symbol}`);
-      let data = await res.json();
-      let datetimes = data.t;
+    const getLiveData = async (userStocks) => {
+      let map = {};
+      let individualStockArr = [];
+      let commonDatetimeLabels = [];
+      const individualPricesArr = [];
 
-      let datetimeLabels = [];
+      for (let stock in userStocks) {
+        let res = await fetchLiveStockData(stock);
 
-      datetimes.forEach((unixtime) => {
-        let datetime = unixToDate(unixtime);
-        datetimeLabels.push(datetime);
-      });
+        let quantityOwned = userStocks[stock];
+        let closingPrices = res["closingPrices"];
+        let datetimeLabels = res["datetimeLabels"];
+
+        // individualTimesArr.push(datetimeLabels);
+        // individualPricesArr.push(closingPrices);
+
+        let commonDates = getCommonKeys(datetimeLabels, commonDatetimeLabels);
+        commonDatetimeLabels = commonDates;
+
+        let stockData = {};
+
+        closingPrices.forEach((price, idx) => {
+          stockData[datetimeLabels[idx]] = price;
+          map[datetimeLabels[idx]]
+            ? (map[datetimeLabels[idx]] += quantityOwned * price)
+            : (map[datetimeLabels[idx]] = quantityOwned * price);
+        });
+
+        individualStockArr.push(stockData);
+      }
+
+      let sharedPrices = [];
+
+      for (let date in map) {
+        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+      }
 
       let priceChanged =
-        -1 * (data.p[0] - data.p[data.p.length - 1]).toFixed(2);
-      let perChanged = data.p[0] / data.p[data.p.length - 1];
+        -1 *
+        (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
+      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
 
       let portPercentChanged =
-        perChanged > 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
 
-      setPrices(data.p);
-      setTimeLabels(datetimeLabels);
+      for (let stock of individualStockArr) {
+        let newArr = [];
+        for (let datetime in stock) {
+          if (commonDatetimeLabels.includes(datetime)) {
+            newArr.push(stock[datetime]);
+          }
+        }
+        individualPricesArr.push(newArr);
+      }
+
+      setPrices(sharedPrices);
+      setTimeLabels(commonDatetimeLabels);
+      setIndividualPriceLabels(individualPricesArr);
       setAmountChanged(priceChanged);
       setPortfolioPercentChanged(portPercentChanged.toFixed(2));
     };
@@ -285,7 +322,7 @@ function Dashboard() {
 
     const initializeCharts = async () => {
       let userStocks = await getUserStocks();
-      if (timeSelection === "Live") await todayTickData("AAPL");
+      if (timeSelection === "Live") await getLiveData(userStocks);
       else if (timeSelection === "1W") await pastWeekClosingPrices(userStocks);
       else if (timeSelection === "1M") await pastMonthClosingPrices(userStocks);
       else if (timeSelection === "3M")
@@ -301,6 +338,8 @@ function Dashboard() {
   function handleTimeSelection(selection) {
     setTimeSelection(selection);
   }
+
+  console.log("HERE", individualPriceLabels);
 
   return (
     <div className="dashboard-container">
@@ -366,7 +405,7 @@ function Dashboard() {
               <p className="dashboard-right-side-title">Stocks</p>
               {companyData.length > 0 &&
                 isLoaded &&
-                companyData.map((company) => (
+                companyData.map((company, idx) => (
                   <WatchlistStock
                     key={company.name}
                     name={company.name}
@@ -374,7 +413,7 @@ function Dashboard() {
                     percentChanged={company.dp.toFixed(2)}
                     sharesOwned={company.sharesOwned}
                     labels={timeLabels}
-                    prices={prices}
+                    prices={individualPriceLabels[idx]}
                   />
                 ))}
             </div>

@@ -6,6 +6,7 @@ export const unixToDate = (unixTime) => {
   return humanDateFormat;
 };
 
+// Function to get common keys amongst objects
 export const getCommonKeys = (dateArr, sharedArr) => {
   if (sharedArr.length === 0) return dateArr;
   else {
@@ -50,6 +51,23 @@ export const fetchMarketNews = async () => {
   let data = await res.json();
   let topNews = data.slice(0, 5);
   return topNews;
+};
+
+// Get a company's live data (past day)
+export const fetchLiveStockData = async (symbol) => {
+  let res = await fetch(`/api/finnhub/candlestick-data/live/${symbol}`);
+  let data = await res.json();
+  let closingPrices = data.c;
+  let datetimes = data.t;
+
+  let datetimeLabels = [];
+
+  datetimes.forEach((unixtime) => {
+    let datetime = unixToDate(unixtime);
+    datetimeLabels.push(datetime);
+  });
+
+  return { closingPrices: closingPrices, datetimeLabels: datetimeLabels };
 };
 
 // Get a company's closing prices for the past week
