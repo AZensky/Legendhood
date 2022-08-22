@@ -137,3 +137,7 @@ export const fetchPastYearClosingPrices = async (symbol) => {
 
   return { closingPrices: closingPrices, datetimeLabels: datetimeLabels };
 };
+
+export const numberWithCommas = (num) => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};

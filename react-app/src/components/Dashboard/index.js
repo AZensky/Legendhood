@@ -18,6 +18,7 @@ import {
   fetchPastYearClosingPrices,
   fetchUserStocks,
   getCommonKeys,
+  numberWithCommas,
 } from "../../util/stocks-api";
 import "./Dashboard.css";
 
@@ -350,7 +351,7 @@ function Dashboard() {
             {/* User's Portfolio Graph */}
             <div className="portfolio-graph">
               <p className="user-portfolio-market-value">
-                ${portfolioMarketValue}
+                ${numberWithCommas(portfolioMarketValue)}
               </p>
               <p
                 className={`user-portfolio-percent-changed ${
@@ -358,7 +359,8 @@ function Dashboard() {
                 }`}
               >
                 {amountChanged >= 0 && "+"}
-                {amountChanged}({portfolioPercentChanged >= 0 && "+"}
+                {numberWithCommas(amountChanged)}(
+                {portfolioPercentChanged >= 0 && "+"}
                 {portfolioPercentChanged}%) All time
               </p>
               {graphLoaded ? (
@@ -379,7 +381,7 @@ function Dashboard() {
             {/* User's Buying Power */}
             <div className="dashboard-buying-power-container">
               <p>Buying Power</p>
-              <p>${user.buyingPower.toFixed(2)}</p>
+              <p>${numberWithCommas(user.buyingPower.toFixed(2))}</p>
             </div>
 
             <div className="market-news-container">

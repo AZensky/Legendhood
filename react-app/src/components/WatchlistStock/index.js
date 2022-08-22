@@ -1,5 +1,6 @@
 import React from "react";
 import LineChart from "../LineChart";
+import { numberWithCommas } from "../../util/stocks-api";
 import "./WatchlistStock.css";
 
 function WatchlistStock({
@@ -14,13 +15,13 @@ function WatchlistStock({
     <div className="watchlist-stock-container">
       <div className="watchlist-stock-left">
         <span className="watchlist-stock-name">{name}</span>
-        <span>{sharesOwned}</span>
+        <span>{numberWithCommas(sharesOwned)}</span>
       </div>
       <div className="watchlist-stock-mid">
         <LineChart labels={labels} prices={prices} />
       </div>
       <div className="watchlist-stock-right">
-        <span>${currentPrice}</span>
+        <span>${numberWithCommas(currentPrice)}</span>
         <span className={percentChanged >= 0 ? "positive" : "negative"}>
           {percentChanged}%
         </span>
