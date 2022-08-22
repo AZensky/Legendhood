@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import DashboardNav from "../DashboardNavbar";
 import LineChart from "../LineChart";
 import NewsArticle from "../NewsArticle";
@@ -8,7 +8,6 @@ import KeyStatistics from "./KeyStatistics";
 import { unixToDate } from "../../util/stocks-api";
 import ChartTimeLine from "../ChartTimeLine";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserPortfolioThunk } from "../../store/portfolio";
 
 function DetailsPage() {
     const { symbol } = useParams()
@@ -20,13 +19,18 @@ function DetailsPage() {
     const [weekDateLabels, setWeekDateLabels] = useState([]);
     const [showLink, setShowLink] = useState(false);
     const [toggleShowMore, setToggleShowMore] = useState(false);
-    const [ownedStocks, setOwnedStocks] = useState(0)
 
     const portfolio = useSelector(state => state.portfolio)
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    const history = useHistory()
 
     useEffect(() => {
+
+        if (!user) {
+            window.alert("Please log in to access this page.")
+            history.push("/")
+        }
 
         const getDetails = async (symbol) => {
             const res = await fetch(`/api/finnhub/company-data/${symbol}`);
@@ -275,15 +279,6 @@ function DetailsPage() {
                 "summary": "The company will be a silver sponsor of the event with our top experts standing by at booth #402.Rocket Software, a global technology leader that develops enterprise software for some of the world's... | August 19, 2022",
                 "url": "https://finnhub.io/api/news?id=f4e146430bc36739346311f17fbe4ccc7b456a6a0a334cc09b9e60882614c2ab"
             }])
-
-        // const prepDetailsPage = async () => {
-        //     await getNews(symbol)
-        //     await getDetails(symbol)
-        //     await getQuote(symbol)
-        //     await pastWeekClosingPrices(symbol)
-        //     setIsLoaded(true)
-        // }
-        // prepDetailsPage()
 
         setIsLoaded(true)
     }, [])

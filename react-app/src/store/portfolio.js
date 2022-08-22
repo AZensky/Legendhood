@@ -5,7 +5,7 @@ const setPortfolio = (portfolio) => ({
   payload: portfolio
 });
 
-export const purchaseStocksThunk = (order) => async (dispatch) => {
+export const purchaseSellStocksThunk = (order) => async (dispatch) => {
     const response = await fetch(`/api/portfolio/${order.user_id}/stocks`,{
         method: "POST",
         headers: {
@@ -15,7 +15,6 @@ export const purchaseStocksThunk = (order) => async (dispatch) => {
     })
 
     const data = await response.json();
-    console.log("HERE",data)
     if (response.ok) {
         await dispatch(getUserPortfolioThunk(order.user_id))
         return data;
