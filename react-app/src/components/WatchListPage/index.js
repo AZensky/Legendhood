@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { clearCurrentWatchlist, getWatchlist, loadWatchlists } from "../../store/watchlist";
 import DashboardNav from "../DashboardNavbar";
 // import WatchlistStockCard from "./WatchlistStockCard";
@@ -8,6 +8,20 @@ import "./WatchListPage.css";
 
 function WatchListPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    //fucntions
+    const getPercentChangeCell = (change) => {
+        return <>{getArrow(change)} {Math.round(Math.abs(change) * 100) / 100}%</>
+    }
+
+    const getArrow = (change) => {
+        if (change < 0) {
+            return <span style={{ color: "red" }}>▼</span>
+        } else {
+            return <span style={{ color: "green" }}>▲</span>
+        }
+    }
 
     //get watchlist by id
     const { watchlistId } = useParams();
@@ -32,30 +46,21 @@ function WatchListPage() {
         return state.watchlist.watchlists;
     })
 
-    const userId = useSelector(state => state.session.user.id)
-
-
     //render component
     if (!watchlist) {
         return <></>;
     }
 
+    function ClickStock(e) {
+        const stocksym = e.currentTarget.id;
+        history.push(`/stocks/${stocksym}`)
 
+    }
     //get all stocks symbols in the watchlist
     const stockSymbols = []
     for (let stock of watchlist.watchlistStocks) {
         stockSymbols.push(stock.symbol)
     }
-
-    // Get a company's data, useful for getting the current price and percent changed.
-
-    // const fetchStockData = async (symbol) => {
-    //     let res = await fetch(`/api/finnhub/stock-data/${symbol}`);
-    //     let data = await res.json();
-    //     data["name"] = symbol;
-
-    //     return data;
-    // };
 
     return (
         <>
@@ -79,19 +84,6 @@ function WatchListPage() {
                     </div>
 
                     <div className="watchlist-itemnum"> {watchlist.watchlistStocks.length} items</div>
-                    {/* <div className="market-news-container">
-                        {wlStocks.length > 0 &&
-                            wlStocks.map((article) => (
-                                // <NewsArticle
-                                //     key={article.id}
-                                //     headline={article.headline}
-                                //     image={article.image}
-                                //     summary={article.summary}
-                                //     url={article.url}
-                                //     source={article.source}
-                                // />
-                            ))}
-                    </div> */}
                     <div>
                         <table className="watchlist-table">
                             <thead>
@@ -105,17 +97,9 @@ function WatchListPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* <WatchlistStockCard
-                                    name={stock.name}
-                                    headline={article.headline}
-                                    image={article.image}
-                                    summary={article.summary}
-                                    url={article.url}
-                                    source={article.source}
-                                /> */}
-                                {watchlist.watchlistStocks.map((stock) =>
 
-                                    <tr id={stock.symbol}>
+                                {watchlist.watchlistStocks.map((stock) =>
+                                    <tr id={stock.symbol} onClick={ClickStock}>
                                         <td>TODO</td>
                                         <td >{stock.symbol}</td>
                                         <td>${stock.currentPrice}</td>
@@ -125,7 +109,6 @@ function WatchListPage() {
                                             <button className="watchlist-button">x</button>
                                         </td>
                                     </tr>
-
                                 )}
                             </tbody>
                         </table>
@@ -160,23 +143,10 @@ function WatchListPage() {
                     )}
 
                 </div>
-
             </div >
         </>
-
     )
 }
 
-const getPercentChangeCell = (change) => {
-    return <>{getArrow(change)} {Math.round(Math.abs(change) * 100) / 100}%</>
-}
-
-const getArrow = (change) => {
-    if (change < 0) {
-        return <span style={{ color: "red" }}>▼</span>
-    } else {
-        return <span style={{ color: "green" }}>▲</span>
-    }
-}
 
 export default WatchListPage
