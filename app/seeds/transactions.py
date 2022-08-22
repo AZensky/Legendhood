@@ -3,13 +3,13 @@ from datetime import datetime
 
 
 def seed_transactions():
-    t1 = Transaction(
-        symbol='AAPL',
-        date=datetime.fromisoformat('2018-10-05'),
-        quantity=10,
-        price=56.07,
-        user_id=1
-    )
+    # t1 = Transaction(
+    #     symbol='AAPL',
+    #     date=datetime.fromisoformat('2018-10-05'),
+    #     quantity=10,
+    #     price=56.07,
+    #     user_id=1
+    # )
     t2 = Transaction(
         symbol='BOX',
         date=datetime.fromisoformat('2019-01-11'),
@@ -31,13 +31,13 @@ def seed_transactions():
         price=244.09,
         user_id=1
     )
-    t5 = Transaction(
-        symbol='TSLA',
-        date=datetime.fromisoformat('2021-01-08'),
-        quantity=6,
-        price=880.02,
-        user_id=1
-    )
+    # t5 = Transaction(
+    #     symbol='TSLA',
+    #     date=datetime.fromisoformat('2021-01-08'),
+    #     quantity=6,
+    #     price=880.02,
+    #     user_id=1
+    # )
 
     t6 = Transaction(
         symbol='BOX',
@@ -55,11 +55,11 @@ def seed_transactions():
         user_id=1
     )
 
-    db.session.add(t1)
+    # db.session.add(t1)
     db.session.add(t2)
     db.session.add(t3)
     db.session.add(t4)
-    db.session.add(t5)
+    # db.session.add(t5)
     db.session.add(t6)
     db.session.add(t7)
 
