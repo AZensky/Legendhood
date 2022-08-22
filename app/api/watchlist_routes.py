@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_login import login_required, current_user
-from app.models import Watchlist
+from app.models import Watchlist, WatchlistStock, db
 
 
 watchlist_routes = Blueprint('watchlist', __name__)
@@ -22,15 +22,19 @@ def get_watchlist_by_id(id):
     # else should throw 404
     return watchlist.to_dict() if watchlist else {"id": id, "watchlistStocks": []}
 
-
-@watchlist_routes.route('/<int:id>/stocks/<symbol>')
+@watchlist_routes.route('/<int:id>/stocks/<symbol>', methods=['DELETE'])
 @login_required
+def delete_watchlist_stock_by_id(id, symbol):
 
-def delete_watchlist_by_id(id):
-    watchlist = Watchlist.query.filter(
-        Watchlist.user_id == current_user.id,  Watchlist.id == id).one_or_none()
+    watchlist_stock = WatchlistStock.query.filter(WatchlistStock.watchlist_id == id, WatchlistStock.symbol == symbol)
+
+    if watchlist_stock is not None:
+        db.session.delete(watchlist_stock)
+        db.session.commit()
+
+        return {"message": "Successfully deleted"}
+
     # else should throw 404
-    return watchlist.to_dict() if watchlist else {"id": id, "watchlistStocks": []}, 404
+    else:
+        return {"message": "Stock not found"}, 404
 
-def delete_stock_from_watchlist():
-    return
