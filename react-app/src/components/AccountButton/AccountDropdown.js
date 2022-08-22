@@ -39,8 +39,6 @@ function AccountDropdown() {
           : (map[asset.symbol] = asset.quantity);
       }
 
-      console.log("USER STOCKS", map);
-
       for (let stock in map) {
         const currentPrice = await getStockData(stock);
         portfolioValue += currentPrice * map[stock];
@@ -69,8 +67,6 @@ function AccountDropdown() {
     dispatch(logout()).then(() => history.push("/"));
   };
 
-  console.log("USER ID", user);
-
   return (
     <>
       <button className="account-btn" onClick={openMenu}>
@@ -87,7 +83,7 @@ function AccountDropdown() {
               <div>Portfolio Value</div>
             </div>
             <div className="account-buying-power">
-              <h3>{user.buyingPower}</h3>
+              <h3>{user.buyingPower.toFixed(2)}</h3>
               <div>Buying Power</div>
             </div>
           </div>

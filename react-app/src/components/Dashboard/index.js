@@ -27,7 +27,6 @@ function Dashboard() {
   const [timeSelection, setTimeSelection] = useState("Live");
   const [prices, setPrices] = useState([]);
   const [timeLabels, setTimeLabels] = useState([]);
-  // const [individualTimeLabels, setIndividualTimeLabels] = useState([]);
   const [individualPriceLabels, setIndividualPriceLabels] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [graphLoaded, setGraphLoaded] = useState(false);
@@ -380,7 +379,7 @@ function Dashboard() {
             {/* User's Buying Power */}
             <div className="dashboard-buying-power-container">
               <p>Buying Power</p>
-              <p>$0.00</p>
+              <p>${user.buyingPower.toFixed(2)}</p>
             </div>
 
             <div className="market-news-container">
