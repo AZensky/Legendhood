@@ -42,8 +42,19 @@ def fetch_company_news(symbol):
 # Documentation with examples output: https://finnhub.io/docs/api/stock-tick
 @finnhub_routes.route('/today-tick/<symbol>')
 def fetch_today_tick_data(symbol):
-    today = datetime.datetime.today().strftime('%Y-%m-%d')
-    res = requests.get(f'https://tick.finnhub.io/api/v1/stock/tick?symbol={symbol}&date={today}&limit=500&skip=0&format=json&token={FINNHUB_API_KEY}')
+    today = datetime.datetime.now()
+    curr_weekday = today.weekday()
+    last_weekday = today
+    if curr_weekday == 5:
+        last_weekday = today - datetime.timedelta(days=1)
+
+    if curr_weekday == 6:
+        last_weekday = today - datetime.timedelta(days=2)
+
+    query_date = last_weekday.strftime('%Y-%m-%d')
+    print(query_date)
+
+    res = requests.get(f'https://tick.finnhub.io/api/v1/stock/tick?symbol={symbol}&date={query_date}&limit=100&skip=0&format=json&token={FINNHUB_API_KEY}')
     data = res.json()
     return jsonify(data)
 
@@ -59,7 +70,19 @@ def fetch_month_candlestick_data(symbol):
 
     res = requests.get(f'https://finnhub.io/api/v1/stock/candle?symbol={symbol}&resolution=D&from={unix_one_month_ago}&to={unix_today}&token={FINNHUB_API_KEY}')
     data = res.json()
-    print('DATTTAAA', data)
+    return jsonify(data)
+
+# API route to get a specific stock's candlestick data for the past three months. Candlestick data consist of closing and opening prices for selected timeframe, along with the timestamp in unix form.
+@finnhub_routes.route('/candlestick-data/three-month/<symbol>')
+def fetch_three_month_candlestick_data(symbol):
+    today = datetime.datetime.today()
+    one_month_ago = today - datetime.timedelta(days=90)
+
+    unix_today = int(time.mktime(today.timetuple()))
+    unix_one_month_ago = int(time.mktime(one_month_ago.timetuple()))
+
+    res = requests.get(f'https://finnhub.io/api/v1/stock/candle?symbol={symbol}&resolution=D&from={unix_one_month_ago}&to={unix_today}&token={FINNHUB_API_KEY}')
+    data = res.json()
     return jsonify(data)
 
 # API route to get a specific stock's candlestick data for the past week. Candlestick data consist of closing and opening prices for selected timeframe, along with the timestamp in unix form. We should probably use closing prices for consistency.
@@ -76,6 +99,25 @@ def fetch_week_candlestick_data(symbol):
     data = res.json()
     return jsonify(data)
 
+# API request to get candlestick data for a company for the past year
+@finnhub_routes.route('/candlestick-data/year/<symbol>')
+def fetch_year_candlestick_data(symbol):
+    today = datetime.datetime.today()
+    one_year_ago = today - datetime.timedelta(days=365)
+
+    unix_today = int(time.mktime(today.timetuple()))
+    unix_one_year_ago = int(time.mktime(one_year_ago.timetuple()))
+
+    res = requests.get(f'https://finnhub.io/api/v1/stock/candle?symbol={symbol}&resolution=W&from={unix_one_year_ago}&to={unix_today}&token={FINNHUB_API_KEY}')
+    data = res.json()
+    return jsonify(data)
+
+# Finnhub version of company data
+# @finnhub_routes.route('/company-data/<symbol>')
+# def fetch_company_data(symbol):
+#     res = requests.get(f'https://finnhub.io/api/v1/stock/profile?symbol={symbol}&token={FINNHUB_API_KEY}')
+#     data = res.json()
+#     return data
 
 # API route to get company data
 @finnhub_routes.route('/company-data/<symbol>')

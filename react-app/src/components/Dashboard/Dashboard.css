@@ -12,12 +12,11 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  gap: 2rem;
 }
 
 .dashboard-left-section {
-  width: 45%;
-  max-width: 1038px;
+  width: 35%;
+  max-width: 1014px;
   margin-left: 12px;
   margin-right: 20px;
 }
@@ -53,9 +52,12 @@
 
 .dashboard-right-side-container {
   padding: 1.5rem;
-  width: 18%;
-  /* max-width: 40%; */
+  /* width: calc(25% - 24px); */
+  max-width: 330px;
+  min-width: 200px;
+  width: 15%;
   height: 633px;
+  max-height: 96%;
   position: sticky;
   top: 76px;
   align-items: center;

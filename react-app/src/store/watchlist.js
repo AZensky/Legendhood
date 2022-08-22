@@ -1,26 +1,71 @@
-const GET_WATCHLIST = 'watchlist/GET_WATCHLIST'
+import { fetchStockData } from "../util/stocks-api"
 
-const getWatchlist = (watchlist) => ({
-    type: GET_WATCHLIST,
+const CLEAR_CURRENT_WATCHLIST = 'watchlist/CLEAR_CURRENTWATCHLIST'
+const SET_CURRENT_WATCHLIST = 'watchlist/SET_CURRENT_WATCHLIST'
+const LOAD_WATCHLISTS = 'watchlist/LOAD_WATCHLISTS'
+
+// Actions
+const unsetCurrentWatchlist = () => ({
+    type: CLEAR_CURRENT_WATCHLIST,
+    payload: null,
+})
+
+const setCurrentWatchlist = (watchlist) => ({
+    type: SET_CURRENT_WATCHLIST,
     payload: watchlist,
 })
 
-const initialState = { watchlist: null };
+const loadAllWatchlists = (watchlists) => ({
+    type: LOAD_WATCHLISTS,
+    payload: watchlists
+})
 
-export const getOneWatchlist = (id) => async (dispatch) => {
+
+// Thunks
+export const clearCurrentWatchlist = () => (dispatch) => {
+    dispatch(unsetCurrentWatchlist())
+}
+
+export const getWatchlist = (id) => async (dispatch) => {
+    dispatch(unsetCurrentWatchlist())
+
     const response = await fetch(`/api/watchlists/${id}`);
     if (response.ok) {
         const watchlist = await response.json();
-        dispatch(getWatchlist(watchlist))
+        for (let stock of watchlist.watchlistStocks) {
+            let data = await fetchStockData(stock.symbol)
+            stock.currentPrice = data["c"]
+            stock.percentChange = data["dp"]
+        }
+        dispatch(setCurrentWatchlist(watchlist))
     }
 }
+
+export const loadWatchlists = () => async (dispatch) => {
+    const response = await fetch(`/api/watchlists`)
+    if (response.ok) {
+        const watchlists = await response.json();
+        dispatch(loadAllWatchlists(watchlists.watchlists))
+    }
+
+}
+
+// Reducer
+const initialState = { watchlists: [], currentWatchlist: null };
 
 export default function watchlistRuducer(state = initialState, action) {
     let newState;
     switch (action.type) {
-        case GET_WATCHLIST:
-            newState = [action.payload]
+
+        case SET_CURRENT_WATCHLIST:
+            newState = { ...state, currentWatchlist: action.payload }
             return newState;
+        case LOAD_WATCHLISTS:
+            newState = { ...state, watchlists: action.payload }
+            return newState;
+        case CLEAR_CURRENT_WATCHLIST:
+            newState = { ...state, currentWatchlist: null }
+            return newState
         default:
             return state;
     }

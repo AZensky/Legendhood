@@ -24,9 +24,11 @@ function LineChart({ labels, prices }) {
     datasets: [],
   });
 
-  // console.log("IN LINECHART", "labels:", labels, "prices", prices);
-
   const [chartOptions, setChartOptions] = useState();
+
+  const increasing = prices[0] <= prices[prices.length - 1];
+
+  const graphColor = increasing ? "rgb(0, 200, 5)" : "rgb(255,80,0)";
 
   useEffect(() => {
     setChartData({
@@ -36,7 +38,7 @@ function LineChart({ labels, prices }) {
           data: prices,
           type: "line",
           backgroundColor: "black",
-          borderColor: "#5AC53B",
+          borderColor: graphColor,
           borderWidth: 2,
           pointBorderColor: "rgba(0, 0, 0, 0)",
           pointBackgroundColor: "rgba(0, 0, 0, 0)",

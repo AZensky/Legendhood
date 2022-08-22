@@ -1,0 +1,79 @@
+.search-bar-drop-down {
+    height: 450px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    box-sizing: border-box;
+    padding: 18px 20px;
+    background-color: white;
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    position: absolute;
+    top: 40px;
+}
+
+.search-bar-drop-down a {
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.search-bar-drop-down a:hover {
+    background-color: rgb(245, 248, 250);
+    cursor: pointer;
+}
+
+.search-bar-drop-down .search-dropdown-stock-name {
+    display: flex;
+    position: absolute;
+    left: 150px;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 500px;
+    position: relative;
+    top: -18px;
+}
+
+.stock-search-form {
+    display: flex;
+    flex-direction: row;
+    height: 28px;
+    padding: 0.2rem 0.2rem 0.2rem 1rem;
+    border: 1px solid rgb(227, 233, 237);
+    background: none;
+    width: 100%;
+    max-width: 478px;
+    border-radius: 5px;
+    position: absolute;
+
+}
+
+.stock-search-form:focus-within {
+    box-shadow: 2px 2px 5px rgb(227, 233, 237);
+}
+
+.stock-search-form input[type="text"] {
+    height: 100%;
+    background: none;
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.fa-magnifying-glass {
+    color: rgb(105, 114, 120);
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+    align-items: center;
+    padding-top: 4px;
+
+}
