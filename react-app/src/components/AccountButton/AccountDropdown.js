@@ -62,9 +62,10 @@ function AccountDropdown() {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const onlogout = (e) => {
+  const onlogout = async (e) => {
     e.preventDefault();
-    dispatch(logout()).then(() => history.push("/"));
+    await dispatch(logout());
+    history.push("/");
   };
 
   return (

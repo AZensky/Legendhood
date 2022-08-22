@@ -26,6 +26,7 @@ function Dashboard() {
   const [companyData, setCompanyData] = useState([]);
   const [marketNews, setMarketNews] = useState([]);
   const [timeSelection, setTimeSelection] = useState("Live");
+  const [timeSelectionLabel, setTimeSelectionLabel] = useState("Live");
   const [prices, setPrices] = useState([]);
   const [timeLabels, setTimeLabels] = useState([]);
   const [individualPriceLabels, setIndividualPriceLabels] = useState([]);
@@ -107,9 +108,6 @@ function Dashboard() {
         let closingPrices = res["closingPrices"];
         let datetimeLabels = res["datetimeLabels"];
 
-        // individualTimesArr.push(datetimeLabels);
-        // individualPricesArr.push(closingPrices);
-
         let commonDates = getCommonKeys(datetimeLabels, commonDatetimeLabels);
         commonDatetimeLabels = commonDates;
 
@@ -128,16 +126,23 @@ function Dashboard() {
       let sharedPrices = [];
 
       for (let date in map) {
-        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+        if (commonDatetimeLabels.includes(date))
+          sharedPrices.push([date, map[date]]);
       }
+
+      sharedPrices.sort((a, b) => {
+        if (new Date(a[0]) > new Date(b[0])) return 1;
+        else return -1;
+      });
+
+      sharedPrices = sharedPrices.map((arr) => arr[1]);
 
       let priceChanged =
         -1 *
         (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
-      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+      let perChanged = priceChanged / sharedPrices[0];
 
-      let portPercentChanged =
-        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+      let portPercentChanged = perChanged * 100;
 
       for (let stock of individualStockArr) {
         let newArr = [];
@@ -154,6 +159,7 @@ function Dashboard() {
       setIndividualPriceLabels(individualPricesArr);
       setAmountChanged(priceChanged);
       setPortfolioPercentChanged(portPercentChanged.toFixed(2));
+      setTimeSelectionLabel("Live");
     };
 
     const pastWeekClosingPrices = async (userStocks) => {
@@ -180,21 +186,29 @@ function Dashboard() {
       let sharedPrices = [];
 
       for (let date in map) {
-        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+        if (commonDatetimeLabels.includes(date))
+          sharedPrices.push([date, map[date]]);
       }
+
+      sharedPrices.sort((a, b) => {
+        if (new Date(a[0]) > new Date(b[0])) return 1;
+        else return -1;
+      });
+
+      sharedPrices = sharedPrices.map((arr) => arr[1]);
 
       let priceChanged =
         -1 *
         (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
-      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+      let perChanged = priceChanged / sharedPrices[0];
 
-      let portPercentChanged =
-        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+      let portPercentChanged = perChanged * 100;
 
       setPrices(sharedPrices);
       setTimeLabels(commonDatetimeLabels);
       setAmountChanged(priceChanged);
       setPortfolioPercentChanged(portPercentChanged.toFixed(2));
+      setTimeSelectionLabel("Past Week");
     };
 
     const pastMonthClosingPrices = async (userStocks) => {
@@ -221,21 +235,29 @@ function Dashboard() {
       let sharedPrices = [];
 
       for (let date in map) {
-        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+        if (commonDatetimeLabels.includes(date))
+          sharedPrices.push([date, map[date]]);
       }
+
+      sharedPrices.sort((a, b) => {
+        if (new Date(a[0]) > new Date(b[0])) return 1;
+        else return -1;
+      });
+
+      sharedPrices = sharedPrices.map((arr) => arr[1]);
 
       let priceChanged =
         -1 *
         (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
-      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+      let perChanged = priceChanged / sharedPrices[0];
 
-      let portPercentChanged =
-        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+      let portPercentChanged = perChanged * 100;
 
       setPrices(sharedPrices);
       setTimeLabels(commonDatetimeLabels);
       setAmountChanged(priceChanged);
       setPortfolioPercentChanged(portPercentChanged.toFixed(2));
+      setTimeSelectionLabel("Past Month");
     };
 
     const pastThreeMonthClosingPrices = async (userStocks) => {
@@ -262,21 +284,29 @@ function Dashboard() {
       let sharedPrices = [];
 
       for (let date in map) {
-        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+        if (commonDatetimeLabels.includes(date))
+          sharedPrices.push([date, map[date]]);
       }
+
+      sharedPrices.sort((a, b) => {
+        if (new Date(a[0]) > new Date(b[0])) return 1;
+        else return -1;
+      });
+
+      sharedPrices = sharedPrices.map((arr) => arr[1]);
 
       let priceChanged =
         -1 *
         (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
-      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+      let perChanged = priceChanged / sharedPrices[0];
 
-      let portPercentChanged =
-        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+      let portPercentChanged = perChanged * 100;
 
       setPrices(sharedPrices);
       setTimeLabels(commonDatetimeLabels);
       setAmountChanged(priceChanged);
       setPortfolioPercentChanged(portPercentChanged.toFixed(2));
+      setTimeSelectionLabel("Past 3 Months");
     };
 
     const pastYearClosingPrices = async (userStocks) => {
@@ -303,21 +333,29 @@ function Dashboard() {
       let sharedPrices = [];
 
       for (let date in map) {
-        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+        if (commonDatetimeLabels.includes(date))
+          sharedPrices.push([date, map[date]]);
       }
+
+      sharedPrices.sort((a, b) => {
+        if (new Date(a[0]) > new Date(b[0])) return 1;
+        else return -1;
+      });
+
+      sharedPrices = sharedPrices.map((arr) => arr[1]);
 
       let priceChanged =
         -1 *
         (sharedPrices[0] - sharedPrices[sharedPrices.length - 1]).toFixed(2);
-      let perChanged = sharedPrices[0] / sharedPrices[sharedPrices.length - 1];
+      let perChanged = priceChanged / sharedPrices[0];
 
-      let portPercentChanged =
-        perChanged >= 1 ? -1 * (perChanged - 1) : 1 - perChanged;
+      let portPercentChanged = perChanged * 100;
 
       setPrices(sharedPrices);
       setTimeLabels(commonDatetimeLabels);
       setAmountChanged(priceChanged);
       setPortfolioPercentChanged(portPercentChanged.toFixed(2));
+      setTimeSelectionLabel("Past Year");
     };
 
     const initializeCharts = async () => {
@@ -339,8 +377,6 @@ function Dashboard() {
     setTimeSelection(selection);
   }
 
-  console.log("HERE", individualPriceLabels);
-
   return (
     <div className="dashboard-container">
       <DashboardNav />
@@ -358,9 +394,9 @@ function Dashboard() {
                   portfolioPercentChanged >= 0 ? "positive" : "negative"
                 }`}
               >
-                {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)}(
+                {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
-                {portfolioPercentChanged}%) All time
+                {portfolioPercentChanged}%) {timeSelectionLabel}
               </p>
               {graphLoaded ? (
                 <div className="dashboard-chart-container">
@@ -380,7 +416,7 @@ function Dashboard() {
             {/* User's Buying Power */}
             <div className="dashboard-buying-power-container">
               <p>Buying Power</p>
-              <p>${numberWithCommas(user.buyingPower.toFixed(2))}</p>
+              <p>${user && numberWithCommas(user.buyingPower.toFixed(2))}</p>
             </div>
 
             <div className="market-news-container">

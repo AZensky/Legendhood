@@ -32,15 +32,15 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/stocks/:symbol">
+        <ProtectedRoute path="/stocks/:symbol">
           <DetailsPage />
-        </Route>
-        <Route path="/dashboard">
+        </ProtectedRoute>
+        <ProtectedRoute path="/dashboard">
           <DashBoard />
-        </Route>
-        <Route path="/watchlists/:watchlistId">
+        </ProtectedRoute>
+        <ProtectedRoute path="/watchlists/:watchlistId">
           <WatchListPage />
-        </Route>
+        </ProtectedRoute>
         <Route path="/login" exact={true}>
           <LogInPage />
         </Route>
