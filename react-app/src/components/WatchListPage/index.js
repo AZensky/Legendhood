@@ -15,12 +15,38 @@ function WatchListPage() {
         return <>{getArrow(change)} {Math.round(Math.abs(change) * 100) / 100}%</>
     }
 
+    const getPercentOnly = (change) => {
+        return <>{Math.round(Math.abs(change) * 100) / 100}</>
+    }
+
     const getArrow = (change) => {
         if (change < 0) {
             return <span style={{ color: "red" }}>▼</span>
         } else {
             return <span style={{ color: "green" }}>▲</span>
         }
+    }
+
+    function convertNum(inputNum) {
+        let num = Number(inputNum.toString().split(".")[0])
+        const lng = num.toString().length
+
+        const denominator = ["", "K", "M", "B", "t", "q", "Q", "s", "S", "o", "n", "d", "U", "D", "T"]
+
+        const denomCheck = Math.floor((lng - 1) / 3)
+        let newnum;
+        let decimals;
+
+        if (Number(num.toString()[lng - (1 + 3 * (denomCheck - 1))]) >= 5) {
+            const roundedUp = Number(num.toString().slice(0, lng - (1 + 3 * (denomCheck - 1)))) + 1
+            newnum = roundedUp.toString().slice(0, lng - 3 * denomCheck)
+            decimals = roundedUp.toString().slice(lng - 3 * denomCheck, lng - (1 + 3 * (denomCheck - 1)))
+        } else {
+            newnum = num.toString().slice(0, lng - 3 * denomCheck)
+            decimals = num.toString().slice(lng - 3 * denomCheck, lng - (1 + 3 * (denomCheck - 1)))
+        }
+
+        return `$${newnum}${lng >= 4 ? "." : ""}${decimals}${denominator[Math.floor((lng - 1) / 3)]}`
     }
 
     //get watchlist by id
@@ -51,6 +77,7 @@ function WatchListPage() {
         return <></>;
     }
 
+    //onClick fucntions
     function ClickStock(e) {
         const stocksym = e.currentTarget.id;
         history.push(`/stocks/${stocksym}`)
@@ -64,10 +91,10 @@ function WatchListPage() {
     }
 
     //get all stocks symbols in the watchlist
-    const stockSymbols = []
-    for (let stock of watchlist.watchlistStocks) {
-        stockSymbols.push(stock.symbol)
-    }
+    // const stockSymbols = []
+    // for (let stock of watchlist.watchlistStocks) {
+    //     stockSymbols.push(stock.symbol)
+    // }
 
     return (
         <>
@@ -107,11 +134,11 @@ function WatchListPage() {
 
                                 {watchlist.watchlistStocks.map((stock) =>
                                     <tr id={stock.symbol} onClick={ClickStock}>
-                                        <td>TODO</td>
+                                        <td>{stock.name}</td>
                                         <td >{stock.symbol}</td>
-                                        <td>${stock.currentPrice}</td>
+                                        <td>${getPercentOnly(stock.currentPrice)}</td>
                                         <td>{getPercentChangeCell(stock.percentChange)}</td>
-                                        <td>TODO</td>
+                                        <td>{convertNum(stock.marketCap)}</td>
                                         <td>
                                             <button className="watchlist-button">x</button>
                                         </td>

@@ -1,4 +1,4 @@
-import { fetchStockData } from "../util/stocks-api"
+import { fetchStockData, fetchCompanyDataWatchlist } from "../util/stocks-api"
 
 const CLEAR_CURRENT_WATCHLIST = 'watchlist/CLEAR_CURRENTWATCHLIST'
 const SET_CURRENT_WATCHLIST = 'watchlist/SET_CURRENT_WATCHLIST'
@@ -34,8 +34,11 @@ export const getWatchlist = (id) => async (dispatch) => {
         const watchlist = await response.json();
         for (let stock of watchlist.watchlistStocks) {
             let data = await fetchStockData(stock.symbol)
+            let res = await fetchCompanyDataWatchlist(stock.symbol)
+            stock.name = res["name"]
             stock.currentPrice = data["c"]
             stock.percentChange = data["dp"]
+            stock.marketCap = res["marketCapitalization"]
         }
         dispatch(setCurrentWatchlist(watchlist))
     }
