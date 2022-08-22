@@ -40,7 +40,7 @@ def purchase_stock(userid):
             return transaction.to_dict()
 
     else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # API route to sell stock
 @portfolio_routes.route('/<userid>/stocks/<symbol>', methods=["DELETE", "GET"])
@@ -76,4 +76,4 @@ def sell_stock(userid, symbol):
         return {'message': "Successfully sold stock", 'statusCode': 200}
 
     else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
