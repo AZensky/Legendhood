@@ -21,3 +21,12 @@ def get_watchlist_by_id(id):
         Watchlist.user_id == current_user.id,  Watchlist.id == id).one_or_none()
     # else should throw 404
     return watchlist.to_dict() if watchlist else {"id": id, "watchlistStocks": []}
+
+
+@watchlist_routes.route('/<int:id>/<symbol>/delete')
+@login_required
+def get_watchlist_by_id(id):
+    watchlist = Watchlist.query.filter(
+        Watchlist.user_id == current_user.id,  Watchlist.id == id).one_or_none()
+    # else should throw 404
+    return watchlist.to_dict() if watchlist else {"id": id, "watchlistStocks": []}
