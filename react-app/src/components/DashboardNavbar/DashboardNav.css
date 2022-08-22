@@ -31,39 +31,6 @@
   height: 100%;
 }
 
-.stock-search-form {
-  display: flex;
-  flex-direction: row;
-  height: 28px;
-  padding: 0.2rem 0.2rem 0.2rem 1rem;
-  border: 1px solid rgb(227, 233, 237);
-  background: none;
-  width: 100%;
-  max-width: 478px;
-  border-radius: 5px;
-}
-
-.stock-search-form:focus-within {
-  box-shadow: 2px 2px 5px rgb(227, 233, 237);
-}
-
-.stock-search-form input[type="text"] {
-  height: 100%;
-  background: none;
-  font-size: 14px;
-  width: 100%;
-  border: none;
-  outline: none;
-}
-
-.fa-magnifying-glass {
-  color: rgb(105, 114, 120);
-  font-size: 1.25rem;
-  margin-right: 0.5rem;
-  align-items: center;
-  padding-top: 2px;
-}
-
 .social-links-account-container {
   display: flex;
   flex-direction: row;
