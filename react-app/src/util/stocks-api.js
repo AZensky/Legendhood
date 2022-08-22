@@ -6,6 +6,35 @@ export const unixToDate = (unixTime) => {
   return humanDateFormat;
 };
 
+export const getCommonKeys = (dateArr, sharedArr) => {
+  if (sharedArr.length === 0) return dateArr;
+  else {
+    let newCommonKeys = [];
+    for (let datetime of dateArr) {
+      if (sharedArr.includes(datetime)) {
+        newCommonKeys.push(datetime);
+      }
+    }
+    return newCommonKeys;
+  }
+};
+
+// Get all stocks owned by a user
+export const fetchUserStocks = async (userId) => {
+  let res = await fetch(`/api/portfolio/${userId}`);
+  let data = await res.json();
+  let assets = data["Assets"];
+
+  let userStocks = {};
+  for (let asset of assets) {
+    userStocks[asset.symbol]
+      ? (userStocks[asset.symbol] += asset.quantity)
+      : (userStocks[asset.symbol] = asset.quantity);
+  }
+
+  return userStocks;
+};
+
 // Get a company's data, useful for getting the current price and percent changed.
 export const fetchStockData = async (symbol) => {
   let res = await fetch(`/api/finnhub/stock-data/${symbol}`);
@@ -27,7 +56,6 @@ export const fetchMarketNews = async () => {
 export const fetchPastWeekClosingPrices = async (symbol) => {
   let res = await fetch(`/api/finnhub/candlestick-data/week/${symbol}`);
   let data = await res.json();
-  console.log("PAST WEEK DATA", data);
   let closingPrices = data.c;
   let datetimes = data.t;
 

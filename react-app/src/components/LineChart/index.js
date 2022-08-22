@@ -34,7 +34,7 @@ function LineChart({ labels, prices }) {
           data: prices,
           type: "line",
           backgroundColor: "black",
-          borderColor: "#5AC53B",
+          borderColor: "rgb(0,200,5)",
           borderWidth: 2,
           pointBorderColor: "rgba(0, 0, 0, 0)",
           pointBackgroundColor: "rgba(0, 0, 0, 0)",

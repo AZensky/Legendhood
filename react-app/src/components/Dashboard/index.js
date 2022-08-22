@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import DashboardNav from "../DashboardNavbar";
 import LineChart from "../LineChart";
 import WatchlistStock from "../WatchlistStock";
@@ -14,6 +15,8 @@ import {
   fetchPastMonthClosingPrices,
   fetchPastThreeMonthClosingPrices,
   fetchPastYearClosingPrices,
+  fetchUserStocks,
+  getCommonKeys,
 } from "../../util/stocks-api";
 import "./Dashboard.css";
 
@@ -25,6 +28,8 @@ function Dashboard() {
   const [timeLabels, setTimeLabels] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [graphLoaded, setGraphLoaded] = useState(false);
+
+  const user = useSelector((state) => state.session.user);
 
   useEffect(() => {
     const stocks = ["AAPL", "TSLA", "AMZN", "META"];
@@ -54,7 +59,10 @@ function Dashboard() {
   useEffect(() => {
     setGraphLoaded(false);
 
-    let map = {};
+    const getUserStocks = async () => {
+      let data = await fetchUserStocks(user.id);
+      return data;
+    };
 
     const todayTickData = async (symbol) => {
       let res = await fetch(`/api/finnhub/today-tick/${symbol}`);
@@ -72,11 +80,35 @@ function Dashboard() {
       setTimeLabels(datetimeLabels);
     };
 
-    const pastWeekClosingPrices = async (symbol) => {
-      let res = await fetchPastWeekClosingPrices(symbol);
+    const pastWeekClosingPrices = async (userStocks) => {
+      let map = {};
+      let commonDatetimeLabels = [];
 
-      setPrices(res["closingPrices"]);
-      setTimeLabels(res["datetimeLabels"]);
+      for (let stock in userStocks) {
+        let res = await fetchPastWeekClosingPrices(stock);
+
+        let quantityOwned = userStocks[stock];
+        let closingPrices = res["closingPrices"];
+        let datetimeLabels = res["datetimeLabels"];
+
+        let commonDates = getCommonKeys(datetimeLabels, commonDatetimeLabels);
+        commonDatetimeLabels = commonDates;
+
+        closingPrices.forEach((price, idx) => {
+          map[datetimeLabels[idx]]
+            ? (map[datetimeLabels[idx]] += quantityOwned * price)
+            : (map[datetimeLabels[idx]] = quantityOwned * price);
+        });
+      }
+
+      let sharedPrices = [];
+
+      for (let date in map) {
+        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+      }
+
+      setPrices(sharedPrices);
+      setTimeLabels(commonDatetimeLabels);
     };
 
     const pastMonthClosingPrices = async (symbol) => {
@@ -101,9 +133,9 @@ function Dashboard() {
     };
 
     const initializeCharts = async () => {
-      // await todayTickData("AAPL");
+      let userStocks = await getUserStocks();
       if (timeSelection === "Live") await todayTickData("AAPL");
-      else if (timeSelection === "1W") await pastWeekClosingPrices("AAPL");
+      else if (timeSelection === "1W") await pastWeekClosingPrices(userStocks);
       else if (timeSelection === "1M") await pastMonthClosingPrices("AAPL");
       else if (timeSelection === "3M")
         await pastThreeMonthClosingPrices("AAPL");
