@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import DashboardNav from "../DashboardNavbar";
 import LineChart from "../LineChart";
 import NewsArticle from "../NewsArticle";
@@ -23,8 +23,14 @@ function DetailsPage() {
     const portfolio = useSelector(state => state.portfolio)
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    const history = useHistory()
 
     useEffect(() => {
+
+        if (!user) {
+            window.alert("Please log in to access this page.")
+            history.push("/")
+        }
 
         const getDetails = async (symbol) => {
             const res = await fetch(`/api/finnhub/company-data/${symbol}`);
