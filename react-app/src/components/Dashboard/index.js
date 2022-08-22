@@ -358,8 +358,7 @@ function Dashboard() {
                   portfolioPercentChanged >= 0 ? "positive" : "negative"
                 }`}
               >
-                {amountChanged >= 0 && "+"}
-                {numberWithCommas(amountChanged)}(
+                {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)}(
                 {portfolioPercentChanged >= 0 && "+"}
                 {portfolioPercentChanged}%) All time
               </p>
