@@ -32,6 +32,8 @@ function WatchListPage() {
         return state.watchlist.watchlists;
     })
 
+
+
     //render component
     if (!watchlist) {
         return <></>;
@@ -41,22 +43,18 @@ function WatchListPage() {
     //get all stocks symbols in the watchlist
     const stockSymbols = []
     for (let stock of watchlist.watchlistStocks) {
-
         stockSymbols.push(stock.symbol)
     }
 
-    //get all stocks data from API call
-    let fetchedData = [];
-    const getStockData = async (symbol) => {
-        let res = await fetch(`/api/finnhub/stock-data/${symbol}`);
-        let data = await res.json();
-        data["name"] = symbol;
-        fetchedData.push(data);
-    };
-    for (let symbol of stockSymbols) {
-        getStockData(symbol);
-    }
-    console.log(fetchedData)
+    // Get a company's data, useful for getting the current price and percent changed.
+
+    // const fetchStockData = async (symbol) => {
+    //     let res = await fetch(`/api/finnhub/stock-data/${symbol}`);
+    //     let data = await res.json();
+    //     data["name"] = symbol;
+
+    //     return data;
+    // };
 
     return (
         <>
@@ -114,58 +112,20 @@ function WatchListPage() {
                                     url={article.url}
                                     source={article.source}
                                 /> */}
-                                <tr>
-                                    <td >Gamestop</td>
-                                    <td>{stockSymbols[0]}</td>
-                                    <td>$41.88</td>
-                                    <td>-0.76%</td>
-                                    <td>12.74B</td>
-                                    <td>
-                                        <button className="watchlist-button">x</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Amazon</td>
-                                    <td>AMZN</td>
-                                    <td>$141.72</td>
-                                    <td>-2.12%</td>
-                                    <td>1.44T</td>
-                                    <td>
-                                        <button className="watchlist-button">x</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Apple</td>
-                                    <td>AAPL</td>
-                                    <td>$173.88</td>
-                                    <td>+0.48%</td>
-                                    <td>2.79T</td>
-                                    <td>
-                                        <button className="watchlist-button">x</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Meta</td>
-                                    <td>META</td>
-                                    <td>$174.87</td>
-                                    <td>-2.55%</td>
-                                    <td>470.32B</td>
-                                    <td>
-                                        <button className="watchlist-button">x</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Tesla</td>
-                                    <td>TSLA</td>
-                                    <td>$883.28</td>
-                                    <td>-2.81%</td>
-                                    <td>948.94B</td>
-                                    <td>
-                                        <button className="watchlist-button">x</button>
-                                    </td>
-                                </tr>
+                                {watchlist.watchlistStocks.map((stock) =>
 
+                                    <tr id={stock.symbol}>
+                                        <td>TODO</td>
+                                        <td >{stock.symbol}</td>
+                                        <td>${stock.currentPrice}</td>
+                                        <td>{getPercentChangeCell(stock.percentChange)}</td>
+                                        <td>TODO</td>
+                                        <td>
+                                            <button className="watchlist-button">x</button>
+                                        </td>
+                                    </tr>
 
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -204,6 +164,18 @@ function WatchListPage() {
         </>
 
     )
+}
+
+const getPercentChangeCell = (change) => {
+    return <>{getArrow(change)} {Math.round(Math.abs(change) * 100) / 100}%</>
+}
+
+const getArrow = (change) => {
+    if (change < 0) {
+        return <span style={{ color: "red" }}>▼</span>
+    } else {
+        return <span style={{ color: "green" }}>▲</span>
+    }
 }
 
 export default WatchListPage
