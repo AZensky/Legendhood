@@ -56,6 +56,13 @@ function WatchListPage() {
         history.push(`/stocks/${stocksym}`)
 
     }
+
+    function ClickList(e) {
+        const listId = e.currentTarget.id;
+        history.push(`/watchlists/${listId}`)
+
+    }
+
     //get all stocks symbols in the watchlist
     const stockSymbols = []
     for (let stock of watchlist.watchlistStocks) {
@@ -128,7 +135,7 @@ function WatchListPage() {
 
                     {watchlists.map((list) =>
                         <>
-                            <div className="watchlist-list-card">
+                            <div id={list.id} onClick={ClickList} className="watchlist-list-card">
                                 <div>
                                     <img className="watchlist-lightning-logo-2" alt="⚡" src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"></img>
                                 </div>
