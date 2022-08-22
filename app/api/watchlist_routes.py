@@ -1,6 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from app.models import Watchlist, WatchlistStock, db
+from .auth_routes import validation_errors_to_error_messages
 
 
 watchlist_routes = Blueprint('watchlist', __name__)
@@ -38,3 +39,38 @@ def delete_watchlist_stock_by_id(id, symbol):
     else:
         return {"message": "Stock not found"}, 404
 
+@watchlist_routes.route('', methods=["POST"])
+@login_required
+def create_watchlist():
+    form = CreateWatchlistForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+        user = current_user
+
+        new_watchlist = Watchlist(name=data['name'], user_id=user.id)
+
+        db.session.add(new_watchlist)
+        db.session.commit()
+
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@watchlist_routes.route('/<watchlistid>', methods=["PUT"])
+@login_required
+def edit_watchlist(watchlistid):
+    form  = EditWatchlistForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        data = form.data
+
+        watch_list = Watchlist.query.get(watchlistid)
+        watch_list.name = data['name']
+        db.session.commit()
+
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
