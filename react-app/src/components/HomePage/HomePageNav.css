@@ -12,16 +12,18 @@ nav {
 }
 
 .home-page-logo {
-  width: 186px;
+  width: 250px;
+  height: 66px;
   border-right: black solid 1px;
 }
 
 .home-page-logo a img {
-  height: 80px;
+  height: auto;
+  width: 238px;
   display: flex;
   position: relative;
   top: -6px;
-  padding: 0px 24px 0px 24px;
+  padding: 13px 12px 0px 12px;
 }
 
 .home-page-login-signup {
