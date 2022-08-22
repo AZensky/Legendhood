@@ -12,10 +12,11 @@
   height: 100%;
   display: flex;
   justify-content: center;
+  gap: 2rem;
 }
 
 .dashboard-left-section {
-  width: 35%;
+  width: 40%;
   max-width: 1014px;
   margin-left: 12px;
   margin-right: 20px;
@@ -53,9 +54,9 @@
 .dashboard-right-side-container {
   padding: 1.5rem;
   /* width: calc(25% - 24px); */
-  max-width: 330px;
+  width: 18%;
+  max-width: 290px;
   min-width: 200px;
-  width: 15%;
   height: 633px;
   max-height: 96%;
   position: sticky;
