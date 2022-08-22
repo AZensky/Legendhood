@@ -31,15 +31,15 @@ def seed_watchlist_stocks():
         watchlist_id=3
     )
     ws8 = WatchlistStock(
-        symbol='VOO',
+        symbol='GME',
         watchlist_id=4
     )
     ws9 = WatchlistStock(
-        symbol='QQQM',
+        symbol='NIO',
         watchlist_id=4
     )
     ws10 = WatchlistStock(
-        symbol='VGT',
+        symbol='DIS',
         watchlist_id=4
     )
     ws11 = WatchlistStock(
