@@ -11,7 +11,7 @@ def seed_watchlists():
         user_id=1
     )
     w3 = Watchlist(
-        name='Upcoming Earning calls',
+        name='Hold',
         user_id=1
     )
     w4 = Watchlist(

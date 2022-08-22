@@ -22,7 +22,6 @@ def get_watchlist_by_id(id):
     # else should throw 404
     return watchlist.to_dict() if watchlist else {"id": id, "watchlistStocks": []}
 
-
 @watchlist_routes.route('/<int:id>/stocks/<symbol>', methods=['DELETE'])
 @login_required
 def delete_watchlist_stock_by_id(id, symbol):
@@ -38,3 +37,4 @@ def delete_watchlist_stock_by_id(id, symbol):
     # else should throw 404
     else:
         return {"message": "Stock not found"}, 404
+
