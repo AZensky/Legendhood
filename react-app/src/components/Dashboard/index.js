@@ -111,35 +111,107 @@ function Dashboard() {
       setTimeLabels(commonDatetimeLabels);
     };
 
-    const pastMonthClosingPrices = async (symbol) => {
-      let res = await fetchPastMonthClosingPrices(symbol);
+    const pastMonthClosingPrices = async (userStocks) => {
+      let map = {};
+      let commonDatetimeLabels = [];
 
-      setPrices(res["closingPrices"]);
-      setTimeLabels(res["datetimeLabels"]);
+      for (let stock in userStocks) {
+        let res = await fetchPastMonthClosingPrices(stock);
+
+        let quantityOwned = userStocks[stock];
+        let closingPrices = res["closingPrices"];
+        let datetimeLabels = res["datetimeLabels"];
+
+        let commonDates = getCommonKeys(datetimeLabels, commonDatetimeLabels);
+        commonDatetimeLabels = commonDates;
+
+        closingPrices.forEach((price, idx) => {
+          map[datetimeLabels[idx]]
+            ? (map[datetimeLabels[idx]] += quantityOwned * price)
+            : (map[datetimeLabels[idx]] = quantityOwned * price);
+        });
+      }
+
+      let sharedPrices = [];
+
+      for (let date in map) {
+        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+      }
+
+      setPrices(sharedPrices);
+      setTimeLabels(commonDatetimeLabels);
     };
 
-    const pastThreeMonthClosingPrices = async (symbol) => {
-      let res = await fetchPastThreeMonthClosingPrices(symbol);
+    const pastThreeMonthClosingPrices = async (userStocks) => {
+      let map = {};
+      let commonDatetimeLabels = [];
 
-      setPrices(res["closingPrices"]);
-      setTimeLabels(res["datetimeLabels"]);
+      for (let stock in userStocks) {
+        let res = await fetchPastThreeMonthClosingPrices(stock);
+
+        let quantityOwned = userStocks[stock];
+        let closingPrices = res["closingPrices"];
+        let datetimeLabels = res["datetimeLabels"];
+
+        let commonDates = getCommonKeys(datetimeLabels, commonDatetimeLabels);
+        commonDatetimeLabels = commonDates;
+
+        closingPrices.forEach((price, idx) => {
+          map[datetimeLabels[idx]]
+            ? (map[datetimeLabels[idx]] += quantityOwned * price)
+            : (map[datetimeLabels[idx]] = quantityOwned * price);
+        });
+      }
+
+      let sharedPrices = [];
+
+      for (let date in map) {
+        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+      }
+
+      setPrices(sharedPrices);
+      setTimeLabels(commonDatetimeLabels);
     };
 
-    const pastYearClosingPrices = async (symbol) => {
-      let res = await fetchPastYearClosingPrices(symbol);
+    const pastYearClosingPrices = async (userStocks) => {
+      let map = {};
+      let commonDatetimeLabels = [];
 
-      setPrices(res["closingPrices"]);
-      setTimeLabels(res["datetimeLabels"]);
+      for (let stock in userStocks) {
+        let res = await fetchPastYearClosingPrices(stock);
+
+        let quantityOwned = userStocks[stock];
+        let closingPrices = res["closingPrices"];
+        let datetimeLabels = res["datetimeLabels"];
+
+        let commonDates = getCommonKeys(datetimeLabels, commonDatetimeLabels);
+        commonDatetimeLabels = commonDates;
+
+        closingPrices.forEach((price, idx) => {
+          map[datetimeLabels[idx]]
+            ? (map[datetimeLabels[idx]] += quantityOwned * price)
+            : (map[datetimeLabels[idx]] = quantityOwned * price);
+        });
+      }
+
+      let sharedPrices = [];
+
+      for (let date in map) {
+        if (commonDatetimeLabels.includes(date)) sharedPrices.push(map[date]);
+      }
+
+      setPrices(sharedPrices);
+      setTimeLabels(commonDatetimeLabels);
     };
 
     const initializeCharts = async () => {
       let userStocks = await getUserStocks();
       if (timeSelection === "Live") await todayTickData("AAPL");
       else if (timeSelection === "1W") await pastWeekClosingPrices(userStocks);
-      else if (timeSelection === "1M") await pastMonthClosingPrices("AAPL");
+      else if (timeSelection === "1M") await pastMonthClosingPrices(userStocks);
       else if (timeSelection === "3M")
-        await pastThreeMonthClosingPrices("AAPL");
-      else if (timeSelection === "1Y") await pastYearClosingPrices("AAPL");
+        await pastThreeMonthClosingPrices(userStocks);
+      else if (timeSelection === "1Y") await pastYearClosingPrices(userStocks);
       setIsLoaded(true);
       setGraphLoaded(true);
     };

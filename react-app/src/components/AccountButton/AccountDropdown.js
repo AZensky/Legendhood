@@ -39,6 +39,8 @@ function AccountDropdown() {
           : (map[asset.symbol] = asset.quantity);
       }
 
+      console.log("USER STOCKS", map);
+
       for (let stock in map) {
         const currentPrice = await getStockData(stock);
         portfolioValue += currentPrice * map[stock];
