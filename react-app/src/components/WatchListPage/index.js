@@ -138,8 +138,7 @@ function WatchListPage() {
                                         <td >{stock.symbol}</td>
                                         <td>${getPercentOnly(stock.currentPrice)}</td>
                                         <td>{getPercentChangeCell(stock.percentChange)}</td>
-                                        {/* <td>{convertNum(stock.marketCap)}</td> */}
-                                        <td>{stock.marketCap}</td>
+                                        <td>{convertNum(stock.marketCap)}</td>
                                         <td>
                                             <button className="watchlist-button">x</button>
                                         </td>
