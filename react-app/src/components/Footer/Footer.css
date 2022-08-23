@@ -38,16 +38,16 @@
   gap: 2rem;
 }
 
-.individual-linkedin p {
+.footer-linkedin-icons-container p {
   color: #ffffff;
   letter-spacing: 0.25px;
 }
 
-.individual-linkedin .fa-linkedin {
+.footer-linkedin-icons-container .fa-linkedin {
   color: #cccccc;
 }
 
-.individual-linkedin .fa-linkedin:hover {
+.footer-linkedin-icons-container .fa-linkedin:hover {
   color: rgb(162, 162, 162);
   cursor: pointer;
 }
