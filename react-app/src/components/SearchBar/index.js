@@ -13,7 +13,6 @@ function SearchBar() {
         if (searchTerm.length) {
             setShowMenu(true);
             setSearchResult(filterStocks(searchTerm));
-            console.log('searchResult', searchResult)
         } else {
             setShowMenu(false);
             setSearchResult([]);
@@ -40,18 +39,19 @@ function SearchBar() {
     return (
         <div className='search-bar'>
             <div className="stock-search-form">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i className="fa-solid fa-magnifying-glass"></i>
                 <input
                     type="text"
                     className="stock-search"
                     placeholder="Search"
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    value={searchTerm}
                 />
             </div>
             {(showMenu && searchResult.length > 0) && (
                 <div className='search-bar-drop-down'>
                     {searchResult.map((stock, index) => (
-                        <Link key={index} to={`/stocks/${stock.Symbol}`} className='search-dropdown-item'>
+                        <Link key={index} onClick={() => setSearchTerm("")} to={`/stocks/${stock.Symbol}`} className='search-dropdown-item'>
                             <p className='search-dropdown-stock-symbol'>{stock.Symbol}</p>
                             <p className='search-dropdown-stock-name'>{stock.Name}</p>
                         </Link>

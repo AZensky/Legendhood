@@ -8,7 +8,7 @@ function HomePageNav() {
         <nav>
             <div className='home-page-logo'>
                 <Link to='/'>
-                    <img src='https://1000logos.net/wp-content/uploads/2021/05/Robinhood-logo.png' alt='logo' />
+                    <img src='https://i.imgur.com/bmoSE5w.png' alt='logo' />
                 </Link>
             </div>
             <div className='home-page-login-signup'>

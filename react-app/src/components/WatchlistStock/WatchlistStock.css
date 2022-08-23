@@ -3,8 +3,9 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  /* border-bottom: 1px solid rgb(227, 233, 237); */
+  border-bottom: 1px solid rgb(227, 233, 237);
   font-size: 13px;
+  color: rgb(0, 0, 0);
 }
 
 .watchlist-stock-container:hover {
@@ -17,6 +18,7 @@
   flex-direction: column;
   padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   gap: 0.5rem;
+  width: 15%;
 }
 
 .watchlist-stock-name {
@@ -26,7 +28,14 @@
 .watchlist-stock-mid {
   height: 20px;
   width: 20%;
-  border-top: 2px dotted lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border-top: 2px dotted lightgray; */
+}
+
+.watchlist-stock-no-live-data {
+  text-align: center;
 }
 
 .watchlist-stock-right {
@@ -35,6 +44,7 @@
   align-items: flex-end;
   padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   gap: 0.5rem;
+  width: 15%;
 }
 
 .positive {

@@ -1,0 +1,31 @@
+.api-calls-exceeded-main-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: black;
+}
+
+.api-calls-exceeded-container-left,
+.api-calls-exceeded-container-right {
+    color: white;
+    width:25%
+}
+
+.api-calls-exceeded-container-left {
+    padding-top: 5rem;
+}
+
+.details-page-buy-sell-stock.button.red.API {
+    margin: 5% 0%;
+    width: 30%;
+}
+
+.details-page-buy-sell-stock.button.green.API {
+    margin: 5% 5%;
+    width: 40%;
+}
+
+.api-calls-exceeded-buttons-div {
+    display: flex;
+    flex-direction: column;
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../store/session";
+import AddBuyingPowerModal from "../AddBuyingPower";
 import "./AccountDropdown.css";
 
 function AccountDropdown() {

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { ReactComponent as RobinhoodLogo } from "../../assets/RBLogo.svg";
+import { ReactComponent as RobinhoodLogo } from "../../assets/LegendhoodLogo.svg";
 import { Link } from 'react-router-dom';
 import AccountDropdown from "../AccountButton/AccountDropdown";
 import './DashboardNav.css'
 import SearchBar from "../SearchBar";
+import AddBuyingPowerModal from "../AddBuyingPower";
 
 function DashboardNav() {
-  const [searchTerm, setSearchTerm] = useState('');
-
   return (
     <div className="dashboard-nav-container">
       {/* left section of navbar */}
@@ -22,6 +21,7 @@ function DashboardNav() {
       <div className="social-links-account-container">
         <a href='https://github.com/AZensky/RobinhoodClone'>Github</a>
         <AccountDropdown />
+        <AddBuyingPowerModal />
       </div>
     </div>
   );

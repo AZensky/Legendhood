@@ -1,0 +1,2046 @@
+{
+    "A": {
+        "Symbol": "A",
+        "Name": "Agilent Technologies Inc."
+    },
+    "AAL": {
+        "Symbol": "AAL",
+        "Name": "American Airlines Group Inc."
+    },
+    "AAP": {
+        "Symbol": "AAP",
+        "Name": "Advance Auto Parts Inc."
+    },
+    "AAPL": {
+        "Symbol": "AAPL",
+        "Name": "Apple Inc."
+    },
+    "ABBV": {
+        "Symbol": "ABBV",
+        "Name": "AbbVie Inc."
+    },
+    "ABC": {
+        "Symbol": "ABC",
+        "Name": "AmerisourceBergen Corporation"
+    },
+    "ABMD": {
+        "Symbol": "ABMD",
+        "Name": "ABIOMED Inc."
+    },
+    "ABT": {
+        "Symbol": "ABT",
+        "Name": "Abbott Laboratories"
+    },
+    "ACN": {
+        "Symbol": "ACN",
+        "Name": "Accenture Plc Class A"
+    },
+    "ADBE": {
+        "Symbol": "ADBE",
+        "Name": "Adobe Incorporated"
+    },
+    "ADI": {
+        "Symbol": "ADI",
+        "Name": "Analog Devices Inc."
+    },
+    "ADM": {
+        "Symbol": "ADM",
+        "Name": "Archer-Daniels-Midland Company"
+    },
+    "ADP": {
+        "Symbol": "ADP",
+        "Name": "Automatic Data Processing Inc."
+    },
+    "ADSK": {
+        "Symbol": "ADSK",
+        "Name": "Autodesk Inc."
+    },
+    "AEE": {
+        "Symbol": "AEE",
+        "Name": "Ameren Corporation"
+    },
+    "AEP": {
+        "Symbol": "AEP",
+        "Name": "American Electric Power Company Inc."
+    },
+    "AES": {
+        "Symbol": "AES",
+        "Name": "AES Corporation"
+    },
+    "AFL": {
+        "Symbol": "AFL",
+        "Name": "Aflac Incorporated"
+    },
+    "AIG": {
+        "Symbol": "AIG",
+        "Name": "American International Group Inc."
+    },
+    "AIZ": {
+        "Symbol": "AIZ",
+        "Name": "Assurant Inc."
+    },
+    "AJG": {
+        "Symbol": "AJG",
+        "Name": "Arthur J. Gallagher & Co."
+    },
+    "AKAM": {
+        "Symbol": "AKAM",
+        "Name": "Akamai Technologies Inc."
+    },
+    "ALB": {
+        "Symbol": "ALB",
+        "Name": "Albemarle Corporation"
+    },
+    "ALGN": {
+        "Symbol": "ALGN",
+        "Name": "Align Technology Inc."
+    },
+    "ALK": {
+        "Symbol": "ALK",
+        "Name": "Alaska Air Group Inc."
+    },
+    "ALL": {
+        "Symbol": "ALL",
+        "Name": "Allstate Corporation"
+    },
+    "ALLE": {
+        "Symbol": "ALLE",
+        "Name": "Allegion Public Limited Company"
+    },
+    "AMAT": {
+        "Symbol": "AMAT",
+        "Name": "Applied Materials Inc."
+    },
+    "AMCR": {
+        "Symbol": "AMCR",
+        "Name": "Amcor PLC"
+    },
+    "AMD": {
+        "Symbol": "AMD",
+        "Name": "Advanced Micro Devices Inc."
+    },
+    "AME": {
+        "Symbol": "AME",
+        "Name": "AMETEK Inc."
+    },
+    "AMGN": {
+        "Symbol": "AMGN",
+        "Name": "Amgen Inc."
+    },
+    "AMP": {
+        "Symbol": "AMP",
+        "Name": "Ameriprise Financial Inc."
+    },
+    "AMT": {
+        "Symbol": "AMT",
+        "Name": "American Tower Corporation"
+    },
+    "AMZN": {
+        "Symbol": "AMZN",
+        "Name": "Amazon.com Inc."
+    },
+    "ANET": {
+        "Symbol": "ANET",
+        "Name": "Arista Networks Inc."
+    },
+    "ANSS": {
+        "Symbol": "ANSS",
+        "Name": "ANSYS Inc."
+    },
+    "AON": {
+        "Symbol": "AON",
+        "Name": "Aon Plc Class A"
+    },
+    "AOS": {
+        "Symbol": "AOS",
+        "Name": "A. O. Smith Corporation"
+    },
+    "APA": {
+        "Symbol": "APA",
+        "Name": "APA Corp."
+    },
+    "APD": {
+        "Symbol": "APD",
+        "Name": "Air Products and Chemicals Inc."
+    },
+    "APH": {
+        "Symbol": "APH",
+        "Name": "Amphenol Corporation Class A"
+    },
+    "APTV": {
+        "Symbol": "APTV",
+        "Name": "Aptiv PLC"
+    },
+    "ARE": {
+        "Symbol": "ARE",
+        "Name": "Alexandria Real Estate Equities Inc."
+    },
+    "ATO": {
+        "Symbol": "ATO",
+        "Name": "Atmos Energy Corporation"
+    },
+    "ATVI": {
+        "Symbol": "ATVI",
+        "Name": "Activision Blizzard Inc."
+    },
+    "AVB": {
+        "Symbol": "AVB",
+        "Name": "AvalonBay Communities Inc."
+    },
+    "AVGO": {
+        "Symbol": "AVGO",
+        "Name": "Broadcom Inc."
+    },
+    "AVY": {
+        "Symbol": "AVY",
+        "Name": "Avery Dennison Corporation"
+    },
+    "AWK": {
+        "Symbol": "AWK",
+        "Name": "American Water Works Company Inc."
+    },
+    "AXP": {
+        "Symbol": "AXP",
+        "Name": "American Express Company"
+    },
+    "AZO": {
+        "Symbol": "AZO",
+        "Name": "AutoZone Inc."
+    },
+    "BA": {
+        "Symbol": "BA",
+        "Name": "Boeing Company"
+    },
+    "BAC": {
+        "Symbol": "BAC",
+        "Name": "Bank of America Corp"
+    },
+    "BALL": {
+        "Symbol": "BALL",
+        "Name": "Ball Corporation"
+    },
+    "BAX": {
+        "Symbol": "BAX",
+        "Name": "Baxter International Inc."
+    },
+    "BBWI": {
+        "Symbol": "BBWI",
+        "Name": "Bath & Body Works Inc."
+    },
+    "BBY": {
+        "Symbol": "BBY",
+        "Name": "Best Buy Co. Inc."
+    },
+    "BDX": {
+        "Symbol": "BDX",
+        "Name": "Becton Dickinson and Company"
+    },
+    "BEN": {
+        "Symbol": "BEN",
+        "Name": "Franklin Resources Inc."
+    },
+    "BF.B": {
+        "Symbol": "BF.B",
+        "Name": "Brown-Forman Corporation Class B"
+    },
+    "BIIB": {
+        "Symbol": "BIIB",
+        "Name": "Biogen Inc."
+    },
+    "BIO": {
+        "Symbol": "BIO",
+        "Name": "Bio-Rad Laboratories Inc. Class A"
+    },
+    "BK": {
+        "Symbol": "BK",
+        "Name": "Bank of New York Mellon Corp"
+    },
+    "BKNG": {
+        "Symbol": "BKNG",
+        "Name": "Booking Holdings Inc."
+    },
+    "BKR": {
+        "Symbol": "BKR",
+        "Name": "Baker Hughes Company Class A"
+    },
+    "BLK": {
+        "Symbol": "BLK",
+        "Name": "BlackRock Inc."
+    },
+    "BMY": {
+        "Symbol": "BMY",
+        "Name": "Bristol-Myers Squibb Company"
+    },
+    "BOX": {
+        "Symbol": "BOX",
+        "Name": "Box"
+    },
+    "BR": {
+        "Symbol": "BR",
+        "Name": "Broadridge Financial Solutions Inc."
+    },
+    "BRK.B": {
+        "Symbol": "BRK.B",
+        "Name": "Berkshire Hathaway Inc. Class B"
+    },
+    "BRO": {
+        "Symbol": "BRO",
+        "Name": "Brown & Brown Inc."
+    },
+    "BSX": {
+        "Symbol": "BSX",
+        "Name": "Boston Scientific Corporation"
+    },
+    "BWA": {
+        "Symbol": "BWA",
+        "Name": "BorgWarner Inc."
+    },
+    "BXP": {
+        "Symbol": "BXP",
+        "Name": "Boston Properties Inc."
+    },
+    "C": {
+        "Symbol": "C",
+        "Name": "Citigroup Inc."
+    },
+    "CAG": {
+        "Symbol": "CAG",
+        "Name": "Conagra Brands Inc."
+    },
+    "CAH": {
+        "Symbol": "CAH",
+        "Name": "Cardinal Health Inc."
+    },
+    "CARR": {
+        "Symbol": "CARR",
+        "Name": "Carrier Global Corp."
+    },
+    "CAT": {
+        "Symbol": "CAT",
+        "Name": "Caterpillar Inc."
+    },
+    "CB": {
+        "Symbol": "CB",
+        "Name": "Chubb Limited"
+    },
+    "CBOE": {
+        "Symbol": "CBOE",
+        "Name": "Cboe Global Markets Inc"
+    },
+    "CBRE": {
+        "Symbol": "CBRE",
+        "Name": "CBRE Group Inc. Class A"
+    },
+    "CCI": {
+        "Symbol": "CCI",
+        "Name": "Crown Castle Inc."
+    },
+    "CCL": {
+        "Symbol": "CCL",
+        "Name": "Carnival Corporation"
+    },
+    "CDAY": {
+        "Symbol": "CDAY",
+        "Name": "Ceridian HCM Holding Inc."
+    },
+    "CDNS": {
+        "Symbol": "CDNS",
+        "Name": "Cadence Design Systems Inc."
+    },
+    "CDW": {
+        "Symbol": "CDW",
+        "Name": "CDW Corp."
+    },
+    "CE": {
+        "Symbol": "CE",
+        "Name": "Celanese Corporation"
+    },
+    "CEG": {
+        "Symbol": "CEG",
+        "Name": "Constellation Energy Corporation"
+    },
+    "CF": {
+        "Symbol": "CF",
+        "Name": "CF Industries Holdings Inc."
+    },
+    "CFG": {
+        "Symbol": "CFG",
+        "Name": "Citizens Financial Group Inc."
+    },
+    "CHD": {
+        "Symbol": "CHD",
+        "Name": "Church & Dwight Co. Inc."
+    },
+    "CHRW": {
+        "Symbol": "CHRW",
+        "Name": "C.H. Robinson Worldwide Inc."
+    },
+    "CHTR": {
+        "Symbol": "CHTR",
+        "Name": "Charter Communications Inc. Class A"
+    },
+    "CI": {
+        "Symbol": "CI",
+        "Name": "Cigna Corporation"
+    },
+    "CINF": {
+        "Symbol": "CINF",
+        "Name": "Cincinnati Financial Corporation"
+    },
+    "CL": {
+        "Symbol": "CL",
+        "Name": "Colgate-Palmolive Company"
+    },
+    "CLX": {
+        "Symbol": "CLX",
+        "Name": "Clorox Company"
+    },
+    "CMA": {
+        "Symbol": "CMA",
+        "Name": "Comerica Incorporated"
+    },
+    "CMCSA": {
+        "Symbol": "CMCSA",
+        "Name": "Comcast Corporation Class A"
+    },
+    "CME": {
+        "Symbol": "CME",
+        "Name": "CME Group Inc. Class A"
+    },
+    "CMG": {
+        "Symbol": "CMG",
+        "Name": "Chipotle Mexican Grill Inc."
+    },
+    "CMI": {
+        "Symbol": "CMI",
+        "Name": "Cummins Inc."
+    },
+    "CMS": {
+        "Symbol": "CMS",
+        "Name": "CMS Energy Corporation"
+    },
+    "CNC": {
+        "Symbol": "CNC",
+        "Name": "Centene Corporation"
+    },
+    "CNP": {
+        "Symbol": "CNP",
+        "Name": "CenterPoint Energy Inc."
+    },
+    "COF": {
+        "Symbol": "COF",
+        "Name": "Capital One Financial Corp"
+    },
+    "COO": {
+        "Symbol": "COO",
+        "Name": "Cooper Companies Inc."
+    },
+    "COP": {
+        "Symbol": "COP",
+        "Name": "ConocoPhillips"
+    },
+    "COST": {
+        "Symbol": "COST",
+        "Name": "Costco Wholesale Corporation"
+    },
+    "CPB": {
+        "Symbol": "CPB",
+        "Name": "Campbell Soup Company"
+    },
+    "CPRT": {
+        "Symbol": "CPRT",
+        "Name": "Copart Inc."
+    },
+    "CPT": {
+        "Symbol": "CPT",
+        "Name": "Camden Property Trust"
+    },
+    "CRL": {
+        "Symbol": "CRL",
+        "Name": "Charles River Laboratories International Inc."
+    },
+    "CRM": {
+        "Symbol": "CRM",
+        "Name": "Salesforce Inc."
+    },
+    "CSCO": {
+        "Symbol": "CSCO",
+        "Name": "Cisco Systems Inc."
+    },
+    "CSX": {
+        "Symbol": "CSX",
+        "Name": "CSX Corporation"
+    },
+    "CTAS": {
+        "Symbol": "CTAS",
+        "Name": "Cintas Corporation"
+    },
+    "CTLT": {
+        "Symbol": "CTLT",
+        "Name": "Catalent Inc"
+    },
+    "CTRA": {
+        "Symbol": "CTRA",
+        "Name": "Coterra Energy Inc."
+    },
+    "CTSH": {
+        "Symbol": "CTSH",
+        "Name": "Cognizant Technology Solutions Corporation Class A"
+    },
+    "CTVA": {
+        "Symbol": "CTVA",
+        "Name": "Corteva Inc"
+    },
+    "CTXS": {
+        "Symbol": "CTXS",
+        "Name": "Citrix Systems Inc."
+    },
+    "CVS": {
+        "Symbol": "CVS",
+        "Name": "CVS Health Corporation"
+    },
+    "CVX": {
+        "Symbol": "CVX",
+        "Name": "Chevron Corporation"
+    },
+    "CZR": {
+        "Symbol": "CZR",
+        "Name": "Caesars Entertainment Inc"
+    },
+    "D": {
+        "Symbol": "D",
+        "Name": "Dominion Energy Inc"
+    },
+    "DAL": {
+        "Symbol": "DAL",
+        "Name": "Delta Air Lines Inc."
+    },
+    "DD": {
+        "Symbol": "DD",
+        "Name": "DuPont de Nemours Inc."
+    },
+    "DE": {
+        "Symbol": "DE",
+        "Name": "Deere & Company"
+    },
+    "DFS": {
+        "Symbol": "DFS",
+        "Name": "Discover Financial Services"
+    },
+    "DG": {
+        "Symbol": "DG",
+        "Name": "Dollar General Corporation"
+    },
+    "DGX": {
+        "Symbol": "DGX",
+        "Name": "Quest Diagnostics Incorporated"
+    },
+    "DHI": {
+        "Symbol": "DHI",
+        "Name": "D.R. Horton Inc."
+    },
+    "DHR": {
+        "Symbol": "DHR",
+        "Name": "Danaher Corporation"
+    },
+    "DIS": {
+        "Symbol": "DIS",
+        "Name": "Walt Disney Company"
+    },
+    "DISH": {
+        "Symbol": "DISH",
+        "Name": "DISH Network Corporation Class A"
+    },
+    "DLR": {
+        "Symbol": "DLR",
+        "Name": "Digital Realty Trust Inc."
+    },
+    "DLTR": {
+        "Symbol": "DLTR",
+        "Name": "Dollar Tree Inc."
+    },
+    "DOV": {
+        "Symbol": "DOV",
+        "Name": "Dover Corporation"
+    },
+    "DOW": {
+        "Symbol": "DOW",
+        "Name": "Dow Inc."
+    },
+    "DPZ": {
+        "Symbol": "DPZ",
+        "Name": "Domino's Pizza Inc."
+    },
+    "DRE": {
+        "Symbol": "DRE",
+        "Name": "Duke Realty Corporation"
+    },
+    "DRI": {
+        "Symbol": "DRI",
+        "Name": "Darden Restaurants Inc."
+    },
+    "DTE": {
+        "Symbol": "DTE",
+        "Name": "DTE Energy Company"
+    },
+    "DUK": {
+        "Symbol": "DUK",
+        "Name": "Duke Energy Corporation"
+    },
+    "DVA": {
+        "Symbol": "DVA",
+        "Name": "DaVita Inc."
+    },
+    "DVN": {
+        "Symbol": "DVN",
+        "Name": "Devon Energy Corporation"
+    },
+    "DXC": {
+        "Symbol": "DXC",
+        "Name": "DXC Technology Co."
+    },
+    "DXCM": {
+        "Symbol": "DXCM",
+        "Name": "DexCom Inc."
+    },
+    "EA": {
+        "Symbol": "EA",
+        "Name": "Electronic Arts Inc."
+    },
+    "EBAY": {
+        "Symbol": "EBAY",
+        "Name": "eBay Inc."
+    },
+    "ECL": {
+        "Symbol": "ECL",
+        "Name": "Ecolab Inc."
+    },
+    "ED": {
+        "Symbol": "ED",
+        "Name": "Consolidated Edison Inc."
+    },
+    "EFX": {
+        "Symbol": "EFX",
+        "Name": "Equifax Inc."
+    },
+    "EIX": {
+        "Symbol": "EIX",
+        "Name": "Edison International"
+    },
+    "EL": {
+        "Symbol": "EL",
+        "Name": "Estee Lauder Companies Inc. Class A"
+    },
+    "ELV": {
+        "Symbol": "ELV",
+        "Name": "Elevance Health Inc."
+    },
+    "EMBC": {
+        "Symbol": "EMBC",
+        "Name": "Embecta Corporation"
+    },
+    "EMN": {
+        "Symbol": "EMN",
+        "Name": "Eastman Chemical Company"
+    },
+    "EMR": {
+        "Symbol": "EMR",
+        "Name": "Emerson Electric Co."
+    },
+    "ENPH": {
+        "Symbol": "ENPH",
+        "Name": "Enphase Energy Inc."
+    },
+    "EOG": {
+        "Symbol": "EOG",
+        "Name": "EOG Resources Inc."
+    },
+    "EPAM": {
+        "Symbol": "EPAM",
+        "Name": "EPAM Systems Inc."
+    },
+    "EQIX": {
+        "Symbol": "EQIX",
+        "Name": "Equinix Inc."
+    },
+    "EQR": {
+        "Symbol": "EQR",
+        "Name": "Equity Residential"
+    },
+    "ES": {
+        "Symbol": "ES",
+        "Name": "Eversource Energy"
+    },
+    "ESS": {
+        "Symbol": "ESS",
+        "Name": "Essex Property Trust Inc."
+    },
+    "ETN": {
+        "Symbol": "ETN",
+        "Name": "Eaton Corp. Plc"
+    },
+    "ETR": {
+        "Symbol": "ETR",
+        "Name": "Entergy Corporation"
+    },
+    "ETSY": {
+        "Symbol": "ETSY",
+        "Name": "Etsy Inc."
+    },
+    "EVRG": {
+        "Symbol": "EVRG",
+        "Name": "Evergy Inc."
+    },
+    "EW": {
+        "Symbol": "EW",
+        "Name": "Edwards Lifesciences Corporation"
+    },
+    "EXC": {
+        "Symbol": "EXC",
+        "Name": "Exelon Corporation"
+    },
+    "EXPD": {
+        "Symbol": "EXPD",
+        "Name": "Expeditors International of Washington Inc."
+    },
+    "EXPE": {
+        "Symbol": "EXPE",
+        "Name": "Expedia Group Inc."
+    },
+    "EXR": {
+        "Symbol": "EXR",
+        "Name": "Extra Space Storage Inc."
+    },
+    "F": {
+        "Symbol": "F",
+        "Name": "Ford Motor Company"
+    },
+    "FANG": {
+        "Symbol": "FANG",
+        "Name": "Diamondback Energy Inc."
+    },
+    "FAST": {
+        "Symbol": "FAST",
+        "Name": "Fastenal Company"
+    },
+    "FBHS": {
+        "Symbol": "FBHS",
+        "Name": "Fortune Brands Home & Security Inc."
+    },
+    "FCX": {
+        "Symbol": "FCX",
+        "Name": "Freeport-McMoRan Inc."
+    },
+    "FDS": {
+        "Symbol": "FDS",
+        "Name": "FactSet Research Systems Inc."
+    },
+    "FDX": {
+        "Symbol": "FDX",
+        "Name": "FedEx Corporation"
+    },
+    "FE": {
+        "Symbol": "FE",
+        "Name": "FirstEnergy Corp."
+    },
+    "FFIV": {
+        "Symbol": "FFIV",
+        "Name": "F5 Inc."
+    },
+    "FIS": {
+        "Symbol": "FIS",
+        "Name": "Fidelity National Information Services Inc."
+    },
+    "FISV": {
+        "Symbol": "FISV",
+        "Name": "Fiserv Inc."
+    },
+    "FITB": {
+        "Symbol": "FITB",
+        "Name": "Fifth Third Bancorp"
+    },
+    "FLT": {
+        "Symbol": "FLT",
+        "Name": "FLEETCOR Technologies Inc."
+    },
+    "FMC": {
+        "Symbol": "FMC",
+        "Name": "FMC Corporation"
+    },
+    "FOX": {
+        "Symbol": "FOX",
+        "Name": "Fox Corporation Class B"
+    },
+    "FOXA": {
+        "Symbol": "FOXA",
+        "Name": "Fox Corporation Class A"
+    },
+    "FRC": {
+        "Symbol": "FRC",
+        "Name": "First Republic Bank"
+    },
+    "FRT": {
+        "Symbol": "FRT",
+        "Name": "Federal Realty Investment Trust"
+    },
+    "FTNT": {
+        "Symbol": "FTNT",
+        "Name": "Fortinet Inc."
+    },
+    "FTV": {
+        "Symbol": "FTV",
+        "Name": "Fortive Corp."
+    },
+    "GD": {
+        "Symbol": "GD",
+        "Name": "General Dynamics Corporation"
+    },
+    "GE": {
+        "Symbol": "GE",
+        "Name": "General Electric Company"
+    },
+    "GILD": {
+        "Symbol": "GILD",
+        "Name": "Gilead Sciences Inc."
+    },
+    "GIS": {
+        "Symbol": "GIS",
+        "Name": "General Mills Inc."
+    },
+    "GL": {
+        "Symbol": "GL",
+        "Name": "Globe Life Inc."
+    },
+    "GLW": {
+        "Symbol": "GLW",
+        "Name": "Corning Inc"
+    },
+    "GM": {
+        "Symbol": "GM",
+        "Name": "General Motors Company"
+    },
+    "GME": {
+        "Symbol": "GME",
+        "Name": "GameStop"
+    },
+    "GNRC": {
+        "Symbol": "GNRC",
+        "Name": "Generac Holdings Inc."
+    },
+    "GOOG": {
+        "Symbol": "GOOG",
+        "Name": "Alphabet Inc. Class C"
+    },
+    "GOOGL": {
+        "Symbol": "GOOGL",
+        "Name": "Alphabet Inc. Class A"
+    },
+    "GPC": {
+        "Symbol": "GPC",
+        "Name": "Genuine Parts Company"
+    },
+    "GPN": {
+        "Symbol": "GPN",
+        "Name": "Global Payments Inc."
+    },
+    "GRMN": {
+        "Symbol": "GRMN",
+        "Name": "Garmin Ltd."
+    },
+    "GS": {
+        "Symbol": "GS",
+        "Name": "Goldman Sachs Group Inc."
+    },
+    "GWW": {
+        "Symbol": "GWW",
+        "Name": "W.W. Grainger Inc."
+    },
+    "HAL": {
+        "Symbol": "HAL",
+        "Name": "Halliburton Company"
+    },
+    "HAS": {
+        "Symbol": "HAS",
+        "Name": "Hasbro Inc."
+    },
+    "HBAN": {
+        "Symbol": "HBAN",
+        "Name": "Huntington Bancshares Incorporated"
+    },
+    "HCA": {
+        "Symbol": "HCA",
+        "Name": "HCA Healthcare Inc"
+    },
+    "HD": {
+        "Symbol": "HD",
+        "Name": "Home Depot Inc."
+    },
+    "HES": {
+        "Symbol": "HES",
+        "Name": "Hess Corporation"
+    },
+    "HIG": {
+        "Symbol": "HIG",
+        "Name": "Hartford Financial Services Group Inc."
+    },
+    "HII": {
+        "Symbol": "HII",
+        "Name": "Huntington Ingalls Industries Inc."
+    },
+    "HLT": {
+        "Symbol": "HLT",
+        "Name": "Hilton Worldwide Holdings Inc"
+    },
+    "HOLX": {
+        "Symbol": "HOLX",
+        "Name": "Hologic Inc."
+    },
+    "HON": {
+        "Symbol": "HON",
+        "Name": "Honeywell International Inc."
+    },
+    "HOOD": {
+        "Symbol": "HOOD",
+        "Name": "Robinhood Markets"
+    },
+    "HPE": {
+        "Symbol": "HPE",
+        "Name": "Hewlett Packard Enterprise Co."
+    },
+    "HPQ": {
+        "Symbol": "HPQ",
+        "Name": "HP Inc."
+    },
+    "HRL": {
+        "Symbol": "HRL",
+        "Name": "Hormel Foods Corporation"
+    },
+    "HSIC": {
+        "Symbol": "HSIC",
+        "Name": "Henry Schein Inc."
+    },
+    "HST": {
+        "Symbol": "HST",
+        "Name": "Host Hotels & Resorts Inc."
+    },
+    "HSY": {
+        "Symbol": "HSY",
+        "Name": "Hershey Company"
+    },
+    "HUM": {
+        "Symbol": "HUM",
+        "Name": "Humana Inc."
+    },
+    "HWM": {
+        "Symbol": "HWM",
+        "Name": "Howmet Aerospace Inc."
+    },
+    "IBM": {
+        "Symbol": "IBM",
+        "Name": "International Business Machines Corporation"
+    },
+    "ICE": {
+        "Symbol": "ICE",
+        "Name": "Intercontinental Exchange Inc."
+    },
+    "IDXX": {
+        "Symbol": "IDXX",
+        "Name": "IDEXX Laboratories Inc."
+    },
+    "IEX": {
+        "Symbol": "IEX",
+        "Name": "IDEX Corporation"
+    },
+    "IFF": {
+        "Symbol": "IFF",
+        "Name": "International Flavors & Fragrances Inc."
+    },
+    "ILMN": {
+        "Symbol": "ILMN",
+        "Name": "Illumina Inc."
+    },
+    "INCY": {
+        "Symbol": "INCY",
+        "Name": "Incyte Corporation"
+    },
+    "INTC": {
+        "Symbol": "INTC",
+        "Name": "Intel Corporation"
+    },
+    "INTU": {
+        "Symbol": "INTU",
+        "Name": "Intuit Inc."
+    },
+    "IP": {
+        "Symbol": "IP",
+        "Name": "International Paper Company"
+    },
+    "IPG": {
+        "Symbol": "IPG",
+        "Name": "Interpublic Group of Companies Inc."
+    },
+    "IQV": {
+        "Symbol": "IQV",
+        "Name": "IQVIA Holdings Inc"
+    },
+    "IR": {
+        "Symbol": "IR",
+        "Name": "Ingersoll Rand Inc."
+    },
+    "IRM": {
+        "Symbol": "IRM",
+        "Name": "Iron Mountain Inc."
+    },
+    "ISRG": {
+        "Symbol": "ISRG",
+        "Name": "Intuitive Surgical Inc."
+    },
+    "IT": {
+        "Symbol": "IT",
+        "Name": "Gartner Inc."
+    },
+    "ITW": {
+        "Symbol": "ITW",
+        "Name": "Illinois Tool Works Inc."
+    },
+    "IVZ": {
+        "Symbol": "IVZ",
+        "Name": "Invesco Ltd."
+    },
+    "J": {
+        "Symbol": "J",
+        "Name": "Jacobs Engineering Group Inc."
+    },
+    "JBHT": {
+        "Symbol": "JBHT",
+        "Name": "J.B. Hunt Transport Services Inc."
+    },
+    "JCI": {
+        "Symbol": "JCI",
+        "Name": "Johnson Controls International plc"
+    },
+    "JKHY": {
+        "Symbol": "JKHY",
+        "Name": "Jack Henry & Associates Inc."
+    },
+    "JNJ": {
+        "Symbol": "JNJ",
+        "Name": "Johnson & Johnson"
+    },
+    "JNPR": {
+        "Symbol": "JNPR",
+        "Name": "Juniper Networks Inc."
+    },
+    "JPM": {
+        "Symbol": "JPM",
+        "Name": "JPMorgan Chase & Co."
+    },
+    "K": {
+        "Symbol": "K",
+        "Name": "Kellogg Company"
+    },
+    "KDP": {
+        "Symbol": "KDP",
+        "Name": "Keurig Dr Pepper Inc."
+    },
+    "KEY": {
+        "Symbol": "KEY",
+        "Name": "KeyCorp"
+    },
+    "KEYS": {
+        "Symbol": "KEYS",
+        "Name": "Keysight Technologies Inc"
+    },
+    "KHC": {
+        "Symbol": "KHC",
+        "Name": "Kraft Heinz Company"
+    },
+    "KIM": {
+        "Symbol": "KIM",
+        "Name": "Kimco Realty Corporation"
+    },
+    "KLAC": {
+        "Symbol": "KLAC",
+        "Name": "KLA Corporation"
+    },
+    "KMB": {
+        "Symbol": "KMB",
+        "Name": "Kimberly-Clark Corporation"
+    },
+    "KMI": {
+        "Symbol": "KMI",
+        "Name": "Kinder Morgan Inc Class P"
+    },
+    "KMX": {
+        "Symbol": "KMX",
+        "Name": "CarMax Inc."
+    },
+    "KO": {
+        "Symbol": "KO",
+        "Name": "Coca-Cola Company"
+    },
+    "KR": {
+        "Symbol": "KR",
+        "Name": "Kroger Co."
+    },
+    "L": {
+        "Symbol": "L",
+        "Name": "Loews Corporation"
+    },
+    "LDOS": {
+        "Symbol": "LDOS",
+        "Name": "Leidos Holdings Inc."
+    },
+    "LEN": {
+        "Symbol": "LEN",
+        "Name": "Lennar Corporation Class A"
+    },
+    "LH": {
+        "Symbol": "LH",
+        "Name": "Laboratory Corporation of America Holdings"
+    },
+    "LHX": {
+        "Symbol": "LHX",
+        "Name": "L3Harris Technologies Inc"
+    },
+    "LIN": {
+        "Symbol": "LIN",
+        "Name": "Linde plc"
+    },
+    "LKQ": {
+        "Symbol": "LKQ",
+        "Name": "LKQ Corporation"
+    },
+    "LLY": {
+        "Symbol": "LLY",
+        "Name": "Eli Lilly and Company"
+    },
+    "LMT": {
+        "Symbol": "LMT",
+        "Name": "Lockheed Martin Corporation"
+    },
+    "LNC": {
+        "Symbol": "LNC",
+        "Name": "Lincoln National Corporation"
+    },
+    "LNT": {
+        "Symbol": "LNT",
+        "Name": "Alliant Energy Corp"
+    },
+    "LOW": {
+        "Symbol": "LOW",
+        "Name": "Lowe's Companies Inc."
+    },
+    "LRCX": {
+        "Symbol": "LRCX",
+        "Name": "Lam Research Corporation"
+    },
+    "LUMN": {
+        "Symbol": "LUMN",
+        "Name": "Lumen Technologies Inc."
+    },
+    "LUV": {
+        "Symbol": "LUV",
+        "Name": "Southwest Airlines Co."
+    },
+    "LVS": {
+        "Symbol": "LVS",
+        "Name": "Las Vegas Sands Corp."
+    },
+    "LW": {
+        "Symbol": "LW",
+        "Name": "Lamb Weston Holdings Inc."
+    },
+    "LYB": {
+        "Symbol": "LYB",
+        "Name": "LyondellBasell Industries NV"
+    },
+    "LYV": {
+        "Symbol": "LYV",
+        "Name": "Live Nation Entertainment Inc."
+    },
+    "MA": {
+        "Symbol": "MA",
+        "Name": "Mastercard Incorporated Class A"
+    },
+    "MAA": {
+        "Symbol": "MAA",
+        "Name": "Mid-America Apartment Communities Inc."
+    },
+    "MAR": {
+        "Symbol": "MAR",
+        "Name": "Marriott International Inc. Class A"
+    },
+    "MAS": {
+        "Symbol": "MAS",
+        "Name": "Masco Corporation"
+    },
+    "MCD": {
+        "Symbol": "MCD",
+        "Name": "McDonald's Corporation"
+    },
+    "MCHP": {
+        "Symbol": "MCHP",
+        "Name": "Microchip Technology Incorporated"
+    },
+    "MCK": {
+        "Symbol": "MCK",
+        "Name": "McKesson Corporation"
+    },
+    "MCO": {
+        "Symbol": "MCO",
+        "Name": "Moody's Corporation"
+    },
+    "MDLZ": {
+        "Symbol": "MDLZ",
+        "Name": "Mondelez International Inc. Class A"
+    },
+    "MDT": {
+        "Symbol": "MDT",
+        "Name": "Medtronic Plc"
+    },
+    "MET": {
+        "Symbol": "MET",
+        "Name": "MetLife Inc."
+    },
+    "META": {
+        "Symbol": "META",
+        "Name": "Meta Platforms Inc. Class A"
+    },
+    "MGM": {
+        "Symbol": "MGM",
+        "Name": "MGM Resorts International"
+    },
+    "MHK": {
+        "Symbol": "MHK",
+        "Name": "Mohawk Industries Inc."
+    },
+    "MKC": {
+        "Symbol": "MKC",
+        "Name": "McCormick & Company Incorporated"
+    },
+    "MKTX": {
+        "Symbol": "MKTX",
+        "Name": "MarketAxess Holdings Inc."
+    },
+    "MLM": {
+        "Symbol": "MLM",
+        "Name": "Martin Marietta Materials Inc."
+    },
+    "MMC": {
+        "Symbol": "MMC",
+        "Name": "Marsh & McLennan Companies Inc."
+    },
+    "MMM": {
+        "Symbol": "MMM",
+        "Name": "3M Company"
+    },
+    "MNST": {
+        "Symbol": "MNST",
+        "Name": "Monster Beverage Corporation"
+    },
+    "MO": {
+        "Symbol": "MO",
+        "Name": "Altria Group Inc"
+    },
+    "MOH": {
+        "Symbol": "MOH",
+        "Name": "Molina Healthcare Inc."
+    },
+    "MOS": {
+        "Symbol": "MOS",
+        "Name": "Mosaic Company"
+    },
+    "MPC": {
+        "Symbol": "MPC",
+        "Name": "Marathon Petroleum Corporation"
+    },
+    "MPWR": {
+        "Symbol": "MPWR",
+        "Name": "Monolithic Power Systems Inc."
+    },
+    "MRK": {
+        "Symbol": "MRK",
+        "Name": "Merck & Co. Inc."
+    },
+    "MRNA": {
+        "Symbol": "MRNA",
+        "Name": "Moderna Inc."
+    },
+    "MRO": {
+        "Symbol": "MRO",
+        "Name": "Marathon Oil Corporation"
+    },
+    "MS": {
+        "Symbol": "MS",
+        "Name": "Morgan Stanley"
+    },
+    "MSCI": {
+        "Symbol": "MSCI",
+        "Name": "MSCI Inc. Class A"
+    },
+    "MSFT": {
+        "Symbol": "MSFT",
+        "Name": "Microsoft Corporation"
+    },
+    "MSI": {
+        "Symbol": "MSI",
+        "Name": "Motorola Solutions Inc."
+    },
+    "MTB": {
+        "Symbol": "MTB",
+        "Name": "M&T Bank Corporation"
+    },
+    "MTCH": {
+        "Symbol": "MTCH",
+        "Name": "Match Group Inc."
+    },
+    "MTD": {
+        "Symbol": "MTD",
+        "Name": "Mettler-Toledo International Inc."
+    },
+    "MU": {
+        "Symbol": "MU",
+        "Name": "Micron Technology Inc."
+    },
+    "NCLH": {
+        "Symbol": "NCLH",
+        "Name": "Norwegian Cruise Line Holdings Ltd."
+    },
+    "NDAQ": {
+        "Symbol": "NDAQ",
+        "Name": "Nasdaq Inc."
+    },
+    "NDSN": {
+        "Symbol": "NDSN",
+        "Name": "Nordson Corporation"
+    },
+    "NEE": {
+        "Symbol": "NEE",
+        "Name": "NextEra Energy Inc."
+    },
+    "NEM": {
+        "Symbol": "NEM",
+        "Name": "Newmont Corporation"
+    },
+    "NFLX": {
+        "Symbol": "NFLX",
+        "Name": "Netflix Inc."
+    },
+    "NI": {
+        "Symbol": "NI",
+        "Name": "NiSource Inc"
+    },
+    "NIO": {
+        "Symbol": "NIO",
+        "Name": "Nio"
+    },
+    "NKE": {
+        "Symbol": "NKE",
+        "Name": "NIKE Inc. Class B"
+    },
+    "NLOK": {
+        "Symbol": "NLOK",
+        "Name": "NortonLifeLock Inc."
+    },
+    "NLSN": {
+        "Symbol": "NLSN",
+        "Name": "Nielsen Holdings Plc"
+    },
+    "NOC": {
+        "Symbol": "NOC",
+        "Name": "Northrop Grumman Corp."
+    },
+    "NOW": {
+        "Symbol": "NOW",
+        "Name": "ServiceNow Inc."
+    },
+    "NRG": {
+        "Symbol": "NRG",
+        "Name": "NRG Energy Inc."
+    },
+    "NSC": {
+        "Symbol": "NSC",
+        "Name": "Norfolk Southern Corporation"
+    },
+    "NTAP": {
+        "Symbol": "NTAP",
+        "Name": "NetApp Inc."
+    },
+    "NTRS": {
+        "Symbol": "NTRS",
+        "Name": "Northern Trust Corporation"
+    },
+    "NUE": {
+        "Symbol": "NUE",
+        "Name": "Nucor Corporation"
+    },
+    "NVDA": {
+        "Symbol": "NVDA",
+        "Name": "NVIDIA Corporation"
+    },
+    "NVR": {
+        "Symbol": "NVR",
+        "Name": "NVR Inc."
+    },
+    "NWL": {
+        "Symbol": "NWL",
+        "Name": "Newell Brands Inc"
+    },
+    "NWS": {
+        "Symbol": "NWS",
+        "Name": "News Corporation Class B"
+    },
+    "NWSA": {
+        "Symbol": "NWSA",
+        "Name": "News Corporation Class A"
+    },
+    "NXPI": {
+        "Symbol": "NXPI",
+        "Name": "NXP Semiconductors NV"
+    },
+    "O": {
+        "Symbol": "O",
+        "Name": "Realty Income Corporation"
+    },
+    "ODFL": {
+        "Symbol": "ODFL",
+        "Name": "Old Dominion Freight Line Inc."
+    },
+    "OGN": {
+        "Symbol": "OGN",
+        "Name": "Organon & Co."
+    },
+    "OKE": {
+        "Symbol": "OKE",
+        "Name": "ONEOK Inc."
+    },
+    "OKTA": {
+        "Symbol": "OKTA",
+        "Name": "Okta"
+    },
+    "OMC": {
+        "Symbol": "OMC",
+        "Name": "Omnicom Group Inc"
+    },
+    "ON": {
+        "Symbol": "ON",
+        "Name": "ON Semiconductor Corporation"
+    },
+    "ORCL": {
+        "Symbol": "ORCL",
+        "Name": "Oracle Corporation"
+    },
+    "ORLY": {
+        "Symbol": "ORLY",
+        "Name": "O'Reilly Automotive Inc."
+    },
+    "OTIS": {
+        "Symbol": "OTIS",
+        "Name": "Otis Worldwide Corporation"
+    },
+    "OXY": {
+        "Symbol": "OXY",
+        "Name": "Occidental Petroleum Corporation"
+    },
+    "PARA": {
+        "Symbol": "PARA",
+        "Name": "Paramount Global Class B"
+    },
+    "PAYC": {
+        "Symbol": "PAYC",
+        "Name": "Paycom Software Inc."
+    },
+    "PAYX": {
+        "Symbol": "PAYX",
+        "Name": "Paychex Inc."
+    },
+    "PCAR": {
+        "Symbol": "PCAR",
+        "Name": "PACCAR Inc"
+    },
+    "PEAK": {
+        "Symbol": "PEAK",
+        "Name": "Healthpeak Properties Inc."
+    },
+    "PEG": {
+        "Symbol": "PEG",
+        "Name": "Public Service Enterprise Group Inc"
+    },
+    "PENN": {
+        "Symbol": "PENN",
+        "Name": "PENN Entertainment Inc."
+    },
+    "PEP": {
+        "Symbol": "PEP",
+        "Name": "PepsiCo Inc."
+    },
+    "PFE": {
+        "Symbol": "PFE",
+        "Name": "Pfizer Inc."
+    },
+    "PFG": {
+        "Symbol": "PFG",
+        "Name": "Principal Financial Group Inc."
+    },
+    "PG": {
+        "Symbol": "PG",
+        "Name": "Procter & Gamble Company"
+    },
+    "PGR": {
+        "Symbol": "PGR",
+        "Name": "Progressive Corporation"
+    },
+    "PH": {
+        "Symbol": "PH",
+        "Name": "Parker-Hannifin Corporation"
+    },
+    "PHM": {
+        "Symbol": "PHM",
+        "Name": "PulteGroup Inc."
+    },
+    "PKG": {
+        "Symbol": "PKG",
+        "Name": "Packaging Corporation of America"
+    },
+    "PKI": {
+        "Symbol": "PKI",
+        "Name": "PerkinElmer Inc."
+    },
+    "PLD": {
+        "Symbol": "PLD",
+        "Name": "Prologis Inc."
+    },
+    "PM": {
+        "Symbol": "PM",
+        "Name": "Philip Morris International Inc."
+    },
+    "PNC": {
+        "Symbol": "PNC",
+        "Name": "PNC Financial Services Group Inc."
+    },
+    "PNR": {
+        "Symbol": "PNR",
+        "Name": "Pentair plc"
+    },
+    "PNW": {
+        "Symbol": "PNW",
+        "Name": "Pinnacle West Capital Corporation"
+    },
+    "POOL": {
+        "Symbol": "POOL",
+        "Name": "Pool Corporation"
+    },
+    "PPG": {
+        "Symbol": "PPG",
+        "Name": "PPG Industries Inc."
+    },
+    "PPL": {
+        "Symbol": "PPL",
+        "Name": "PPL Corporation"
+    },
+    "PRU": {
+        "Symbol": "PRU",
+        "Name": "Prudential Financial Inc."
+    },
+    "PSA": {
+        "Symbol": "PSA",
+        "Name": "Public Storage"
+    },
+    "PSX": {
+        "Symbol": "PSX",
+        "Name": "Phillips 66"
+    },
+    "PTC": {
+        "Symbol": "PTC",
+        "Name": "PTC Inc."
+    },
+    "PVH": {
+        "Symbol": "PVH",
+        "Name": "PVH Corp."
+    },
+    "PWR": {
+        "Symbol": "PWR",
+        "Name": "Quanta Services Inc."
+    },
+    "PXD": {
+        "Symbol": "PXD",
+        "Name": "Pioneer Natural Resources Company"
+    },
+    "PYPL": {
+        "Symbol": "PYPL",
+        "Name": "PayPal Holdings Inc."
+    },
+    "QCOM": {
+        "Symbol": "QCOM",
+        "Name": "Qualcomm Incorporated"
+    },
+    "QRVO": {
+        "Symbol": "QRVO",
+        "Name": "Qorvo Inc."
+    },
+    "RCL": {
+        "Symbol": "RCL",
+        "Name": "Royal Caribbean Group"
+    },
+    "RE": {
+        "Symbol": "RE",
+        "Name": "Everest Re Group Ltd."
+    },
+    "REG": {
+        "Symbol": "REG",
+        "Name": "Regency Centers Corporation"
+    },
+    "REGN": {
+        "Symbol": "REGN",
+        "Name": "Regeneron Pharmaceuticals Inc."
+    },
+    "RF": {
+        "Symbol": "RF",
+        "Name": "Regions Financial Corporation"
+    },
+    "RHI": {
+        "Symbol": "RHI",
+        "Name": "Robert Half International Inc."
+    },
+    "RJF": {
+        "Symbol": "RJF",
+        "Name": "Raymond James Financial Inc."
+    },
+    "RL": {
+        "Symbol": "RL",
+        "Name": "Ralph Lauren Corporation Class A"
+    },
+    "RMD": {
+        "Symbol": "RMD",
+        "Name": "ResMed Inc."
+    },
+    "ROK": {
+        "Symbol": "ROK",
+        "Name": "Rockwell Automation Inc."
+    },
+    "ROL": {
+        "Symbol": "ROL",
+        "Name": "Rollins Inc."
+    },
+    "ROP": {
+        "Symbol": "ROP",
+        "Name": "Roper Technologies Inc."
+    },
+    "ROST": {
+        "Symbol": "ROST",
+        "Name": "Ross Stores Inc."
+    },
+    "RSG": {
+        "Symbol": "RSG",
+        "Name": "Republic Services Inc."
+    },
+    "RTX": {
+        "Symbol": "RTX",
+        "Name": "Raytheon Technologies Corporation"
+    },
+    "SBAC": {
+        "Symbol": "SBAC",
+        "Name": "SBA Communications Corp. Class A"
+    },
+    "SBNY": {
+        "Symbol": "SBNY",
+        "Name": "Signature Bank"
+    },
+    "SBUX": {
+        "Symbol": "SBUX",
+        "Name": "Starbucks Corporation"
+    },
+    "SCHW": {
+        "Symbol": "SCHW",
+        "Name": "Charles Schwab Corp"
+    },
+    "SEDG": {
+        "Symbol": "SEDG",
+        "Name": "SolarEdge Technologies Inc."
+    },
+    "SEE": {
+        "Symbol": "SEE",
+        "Name": "Sealed Air Corporation"
+    },
+    "SHW": {
+        "Symbol": "SHW",
+        "Name": "Sherwin-Williams Company"
+    },
+    "SIVB": {
+        "Symbol": "SIVB",
+        "Name": "SVB Financial Group"
+    },
+    "SJM": {
+        "Symbol": "SJM",
+        "Name": "J.M. Smucker Company"
+    },
+    "SLB": {
+        "Symbol": "SLB",
+        "Name": "Schlumberger NV"
+    },
+    "SNA": {
+        "Symbol": "SNA",
+        "Name": "Snap-on Incorporated"
+    },
+    "SNPS": {
+        "Symbol": "SNPS",
+        "Name": "Synopsys Inc."
+    },
+    "SO": {
+        "Symbol": "SO",
+        "Name": "Southern Company"
+    },
+    "SPG": {
+        "Symbol": "SPG",
+        "Name": "Simon Property Group Inc."
+    },
+    "SPGI": {
+        "Symbol": "SPGI",
+        "Name": "S&P Global Inc."
+    },
+    "SRE": {
+        "Symbol": "SRE",
+        "Name": "Sempra Energy"
+    },
+    "STE": {
+        "Symbol": "STE",
+        "Name": "STERIS Plc"
+    },
+    "STT": {
+        "Symbol": "STT",
+        "Name": "State Street Corporation"
+    },
+    "STX": {
+        "Symbol": "STX",
+        "Name": "Seagate Technology Holdings PLC"
+    },
+    "STZ": {
+        "Symbol": "STZ",
+        "Name": "Constellation Brands Inc. Class A"
+    },
+    "SWK": {
+        "Symbol": "SWK",
+        "Name": "Stanley Black & Decker Inc."
+    },
+    "SWKS": {
+        "Symbol": "SWKS",
+        "Name": "Skyworks Solutions Inc."
+    },
+    "SYF": {
+        "Symbol": "SYF",
+        "Name": "Synchrony Financial"
+    },
+    "SYK": {
+        "Symbol": "SYK",
+        "Name": "Stryker Corporation"
+    },
+    "SYY": {
+        "Symbol": "SYY",
+        "Name": "Sysco Corporation"
+    },
+    "T": {
+        "Symbol": "T",
+        "Name": "AT&T Inc."
+    },
+    "TAP": {
+        "Symbol": "TAP",
+        "Name": "Molson Coors Beverage Company Class B"
+    },
+    "TDG": {
+        "Symbol": "TDG",
+        "Name": "TransDigm Group Incorporated"
+    },
+    "TDY": {
+        "Symbol": "TDY",
+        "Name": "Teledyne Technologies Incorporated"
+    },
+    "TEAM": {
+        "Symbol": "TEAM",
+        "Name": "Atlassian Corporation"
+    },
+    "TECH": {
+        "Symbol": "TECH",
+        "Name": "Bio-Techne Corporation"
+    },
+    "TEL": {
+        "Symbol": "TEL",
+        "Name": "TE Connectivity Ltd."
+    },
+    "TER": {
+        "Symbol": "TER",
+        "Name": "Teradyne Inc."
+    },
+    "TFC": {
+        "Symbol": "TFC",
+        "Name": "Truist Financial Corporation"
+    },
+    "TFX": {
+        "Symbol": "TFX",
+        "Name": "Teleflex Incorporated"
+    },
+    "TGT": {
+        "Symbol": "TGT",
+        "Name": "Target Corporation"
+    },
+    "TJX": {
+        "Symbol": "TJX",
+        "Name": "TJX Companies Inc"
+    },
+    "TMO": {
+        "Symbol": "TMO",
+        "Name": "Thermo Fisher Scientific Inc."
+    },
+    "TMUS": {
+        "Symbol": "TMUS",
+        "Name": "T-Mobile US Inc."
+    },
+    "TPR": {
+        "Symbol": "TPR",
+        "Name": "Tapestry Inc."
+    },
+    "TRMB": {
+        "Symbol": "TRMB",
+        "Name": "Trimble Inc."
+    },
+    "TROW": {
+        "Symbol": "TROW",
+        "Name": "T. Rowe Price Group"
+    },
+    "TRV": {
+        "Symbol": "TRV",
+        "Name": "Travelers Companies Inc."
+    },
+    "TSCO": {
+        "Symbol": "TSCO",
+        "Name": "Tractor Supply Company"
+    },
+    "TSLA": {
+        "Symbol": "TSLA",
+        "Name": "Tesla Inc"
+    },
+    "TSN": {
+        "Symbol": "TSN",
+        "Name": "Tyson Foods Inc. Class A"
+    },
+    "TT": {
+        "Symbol": "TT",
+        "Name": "Trane Technologies plc"
+    },
+    "TTWO": {
+        "Symbol": "TTWO",
+        "Name": "Take-Two Interactive Software Inc."
+    },
+    "TWTR": {
+        "Symbol": "TWTR",
+        "Name": "Twitter Inc."
+    },
+    "TXN": {
+        "Symbol": "TXN",
+        "Name": "Texas Instruments Incorporated"
+    },
+    "TXT": {
+        "Symbol": "TXT",
+        "Name": "Textron Inc."
+    },
+    "TYL": {
+        "Symbol": "TYL",
+        "Name": "Tyler Technologies Inc."
+    },
+    "UAL": {
+        "Symbol": "UAL",
+        "Name": "United Airlines Holdings Inc."
+    },
+    "UDR": {
+        "Symbol": "UDR",
+        "Name": "UDR Inc."
+    },
+    "UHS": {
+        "Symbol": "UHS",
+        "Name": "Universal Health Services Inc. Class B"
+    },
+    "ULTA": {
+        "Symbol": "ULTA",
+        "Name": "Ulta Beauty Inc."
+    },
+    "UNH": {
+        "Symbol": "UNH",
+        "Name": "UnitedHealth Group Incorporated"
+    },
+    "UNP": {
+        "Symbol": "UNP",
+        "Name": "Union Pacific Corporation"
+    },
+    "UPS": {
+        "Symbol": "UPS",
+        "Name": "United Parcel Service Inc. Class B"
+    },
+    "URI": {
+        "Symbol": "URI",
+        "Name": "United Rentals Inc."
+    },
+    "USB": {
+        "Symbol": "USB",
+        "Name": "U.S. Bancorp"
+    },
+    "V": {
+        "Symbol": "V",
+        "Name": "Visa Inc. Class A"
+    },
+    "VFC": {
+        "Symbol": "VFC",
+        "Name": "V.F. Corporation"
+    },
+    "VICI": {
+        "Symbol": "VICI",
+        "Name": "VICI Properties Inc"
+    },
+    "VLO": {
+        "Symbol": "VLO",
+        "Name": "Valero Energy Corporation"
+    },
+    "VMC": {
+        "Symbol": "VMC",
+        "Name": "Vulcan Materials Company"
+    },
+    "VNO": {
+        "Symbol": "VNO",
+        "Name": "Vornado Realty Trust"
+    },
+    "VRSK": {
+        "Symbol": "VRSK",
+        "Name": "Verisk Analytics Inc"
+    },
+    "VRSN": {
+        "Symbol": "VRSN",
+        "Name": "VeriSign Inc."
+    },
+    "VRTX": {
+        "Symbol": "VRTX",
+        "Name": "Vertex Pharmaceuticals Incorporated"
+    },
+    "VTR": {
+        "Symbol": "VTR",
+        "Name": "Ventas Inc."
+    },
+    "VTRS": {
+        "Symbol": "VTRS",
+        "Name": "Viatris Inc."
+    },
+    "VZ": {
+        "Symbol": "VZ",
+        "Name": "Verizon Communications Inc."
+    },
+    "WAB": {
+        "Symbol": "WAB",
+        "Name": "Westinghouse Air Brake Technologies Corporation"
+    },
+    "WAT": {
+        "Symbol": "WAT",
+        "Name": "Waters Corporation"
+    },
+    "WBA": {
+        "Symbol": "WBA",
+        "Name": "Walgreens Boots Alliance Inc."
+    },
+    "WBD": {
+        "Symbol": "WBD",
+        "Name": "Warner Bros. Discovery Inc. Series A"
+    },
+    "WDC": {
+        "Symbol": "WDC",
+        "Name": "Western Digital Corporation"
+    },
+    "WEC": {
+        "Symbol": "WEC",
+        "Name": "WEC Energy Group Inc"
+    },
+    "WELL": {
+        "Symbol": "WELL",
+        "Name": "Welltower Inc"
+    },
+    "WFC": {
+        "Symbol": "WFC",
+        "Name": "Wells Fargo & Company"
+    },
+    "WHR": {
+        "Symbol": "WHR",
+        "Name": "Whirlpool Corporation"
+    },
+    "WM": {
+        "Symbol": "WM",
+        "Name": "Waste Management Inc."
+    },
+    "WMB": {
+        "Symbol": "WMB",
+        "Name": "Williams Companies Inc."
+    },
+    "WMT": {
+        "Symbol": "WMT",
+        "Name": "Walmart Inc."
+    },
+    "WRB": {
+        "Symbol": "WRB",
+        "Name": "W. R. Berkley Corporation"
+    },
+    "WRK": {
+        "Symbol": "WRK",
+        "Name": "WestRock Company"
+    },
+    "WST": {
+        "Symbol": "WST",
+        "Name": "West Pharmaceutical Services Inc."
+    },
+    "WTW": {
+        "Symbol": "WTW",
+        "Name": "Willis Towers Watson Public Limited Company"
+    },
+    "WY": {
+        "Symbol": "WY",
+        "Name": "Weyerhaeuser Company"
+    },
+    "WYNN": {
+        "Symbol": "WYNN",
+        "Name": "Wynn Resorts Limited"
+    },
+    "XEL": {
+        "Symbol": "XEL",
+        "Name": "Xcel Energy Inc."
+    },
+    "XOM": {
+        "Symbol": "XOM",
+        "Name": "Exxon Mobil Corporation"
+    },
+    "XRAY": {
+        "Symbol": "XRAY",
+        "Name": "DENTSPLY SIRONA Inc."
+    },
+    "XYL": {
+        "Symbol": "XYL",
+        "Name": "Xylem Inc."
+    },
+    "YUM": {
+        "Symbol": "YUM",
+        "Name": "Yum! Brands Inc."
+    },
+    "ZBH": {
+        "Symbol": "ZBH",
+        "Name": "Zimmer Biomet Holdings Inc."
+    },
+    "ZBRA": {
+        "Symbol": "ZBRA",
+        "Name": "Zebra Technologies Corporation Class A"
+    },
+    "ZION": {
+        "Symbol": "ZION",
+        "Name": "Zions Bancorporation N.A."
+    },
+    "ZM": {
+        "Symbol": "ZM",
+        "Name": "Zoom"
+    },
+    "ZTS": {
+        "Symbol": "ZTS",
+        "Name": "Zoetis Inc. Class A"
+    }
+}

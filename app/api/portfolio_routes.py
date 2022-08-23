@@ -40,10 +40,10 @@ def purchase_stock(userid):
             return transaction.to_dict()
 
     else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # API route to sell stock
-@portfolio_routes.route('/<userid>/stocks/<symbol>', methods=["DELETE", "GET"])
+@portfolio_routes.route('/<userid>/stocks/<symbol>', methods=["POST"])
 def sell_stock(userid, symbol):
     form = SellStockForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -65,8 +65,8 @@ def sell_stock(userid, symbol):
         if quantity_owned < data['quantity']:
             return {"message": "You can not sell more stock than you own", "statusCode": 400}
 
-        user = User.get(userid)
-        user.buying_power += data['price'] * data['quantity']
+        user = User.query.get(userid)
+        user.buying_power += float(data['price'] * data['quantity'])
 
         transaction = Transaction(
             symbol=symbol, quantity=-abs(data['quantity']), price=data['price'], user_id=userid)
@@ -76,4 +76,4 @@ def sell_stock(userid, symbol):
         return {'message': "Successfully sold stock", 'statusCode': 200}
 
     else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400

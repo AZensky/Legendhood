@@ -65,6 +65,9 @@ export const fetchMarketNews = async () => {
 export const fetchLiveStockData = async (symbol) => {
   let res = await fetch(`/api/finnhub/candlestick-data/live/${symbol}`);
   let data = await res.json();
+  if (data.s === "no_data") {
+    return "Not Available"
+  }
   let closingPrices = data.c;
   let datetimes = data.t;
 

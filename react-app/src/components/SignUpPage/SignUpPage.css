@@ -15,9 +15,13 @@
   border-right: 1px solid rgb(0, 0, 0);
 }
 
-.signup-logo-container {
+svg.signup-logo {
   height: 10;
-  padding: 3rem 0rem 0rem 4rem;
+  padding: 2rem 0rem 2rem 4rem;
+  width: 50%;
+  max-width: 300px;
+  position: relative;
+  left: -20px;
 }
 
 .signup-logo {
@@ -34,12 +38,12 @@
   padding-left: 4rem;
 }
 
-.left-signup-container>p {
+.left-signup-container > p {
   color: rgb(195, 245, 60);
   padding-left: 4rem;
 }
 
-.left-signup-container>img {
+.left-signup-container > img {
   width: 100%;
   margin-top: auto;
 }
@@ -55,6 +59,14 @@
 .signup-form-container {
   width: 80%;
   padding: 2rem;
+  margin-top: 4rem;
+}
+
+.signup-free-stock {
+  font-size: 13px;
+  color: #000001;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
 }
 
 .signup-form {
@@ -78,6 +90,7 @@
 .signup-name-inputs {
   display: flex;
   width: 100%;
+  gap: 2rem;
 }
 
 .signup-name-inputs label {

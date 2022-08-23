@@ -69,7 +69,7 @@ def fetch_live_candlestick_data(symbol):
         query_day = now - datetime.timedelta(days=1)
 
     if now.weekday() == 6:
-        query_day = now.datetime.timedelta(days=2)
+        query_day = now - datetime.timedelta(days=2)
 
     query_day_beginning = datetime.datetime.combine(query_day.today(), datetime.time())
 
@@ -146,6 +146,7 @@ def fetch_company_profile(symbol):
 # API route to get company data
 @finnhub_routes.route('/company-data/<symbol>')
 def fetch_company_data(symbol):
+
     res = requests.get(f'https://www.alphavantage.co/query?function=OVERVIEW&symbol={symbol}&apikey={ALPHA_VANTAGE_API_KEY}')
     data = res.json()
     return data
