@@ -33,6 +33,7 @@ function Dashboard() {
   const [individualPriceLabels, setIndividualPriceLabels] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [graphLoaded, setGraphLoaded] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
   const [amountChanged, setAmountChanged] = useState(0);
   const [portfolioPercentChanged, setPortfolioPercentChanged] = useState(0);
   const [portfolioMarketValue, setPortfolioMarketValue] = useState(0);
@@ -51,7 +52,6 @@ function Dashboard() {
       const res = await fetch(`/api/portfolio/${user.id}`);
       const data = await res.json();
       let assets = data["Assets"];
-      console.log("ASSETS", assets);
 
       let portfolioValue = 0;
 
@@ -85,6 +85,7 @@ function Dashboard() {
       await getPortfolioValue();
 
       setCompanyData(fetchedData);
+      setIsLoaded(true);
     };
 
     initializeDashboard();
@@ -369,22 +370,27 @@ function Dashboard() {
       else if (timeSelection === "3M")
         await pastThreeMonthClosingPrices(userStocks);
       else if (timeSelection === "1Y") await pastYearClosingPrices(userStocks);
-      setIsLoaded(true);
       setGraphLoaded(true);
     };
 
     initializeCharts();
   }, [timeSelection]);
 
+  useEffect(() => {
+    if (graphLoaded && isLoaded) setPageLoaded(true);
+  }, [graphLoaded, isLoaded]);
+
   function handleTimeSelection(selection) {
     setTimeSelection(selection);
   }
+
+  console.log("RENDERING");
 
   return (
     <div className="dashboard-container">
       <DashboardNav />
 
-      {isLoaded ? (
+      {pageLoaded ? (
         <div className="dashboard-content-container">
           <div className="dashboard-left-section">
             {/* User's Portfolio Graph */}
