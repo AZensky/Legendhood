@@ -28,7 +28,6 @@ function FundTransferForm({ onClose }) {
                 setErrors(data);
             } else {
                 onClose();
-                history.push('/dashboard');
             }
         }
     }

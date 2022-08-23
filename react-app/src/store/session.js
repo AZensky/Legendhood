@@ -100,7 +100,7 @@ export const signUp = (firstName, lastName, email, password) => async (dispatch)
 
 export const addBuyingPower = (userId, newTransfer) => async (dispatch) => {
   console.log('newTransfer', newTransfer)
-  const response = await fetch(`api/users/${userId}/buyingpower`, {
+  const response = await fetch(`/api/users/${userId}/buyingpower`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
