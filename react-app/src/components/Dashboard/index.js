@@ -51,6 +51,7 @@ function Dashboard() {
       const res = await fetch(`/api/portfolio/${user.id}`);
       const data = await res.json();
       let assets = data["Assets"];
+      console.log("ASSETS", assets);
 
       let portfolioValue = 0;
 
