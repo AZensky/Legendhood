@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.dashboard-watchlist-stock-link {
+  text-decoration: none;
+}
+
 .dashboard-content-container {
   width: 100%;
   height: 100%;

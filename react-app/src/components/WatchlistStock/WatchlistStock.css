@@ -5,6 +5,7 @@
   width: 100%;
   /* border-bottom: 1px solid rgb(227, 233, 237); */
   font-size: 13px;
+  color: rgb(0, 0, 0);
 }
 
 .watchlist-stock-container:hover {
