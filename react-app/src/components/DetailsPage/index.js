@@ -456,6 +456,10 @@ function DetailsPage() {
         )
     }
 
+    const handleTimeSelection = (timeFrame) => {
+        setTimeSelection(timeFrame)
+    }
+
     return (
         <>
             <DashboardNav />
