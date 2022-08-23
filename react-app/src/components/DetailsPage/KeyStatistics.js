@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 function KeyStatistics({ details, quote }) {
     const [isLoaded, setIsLoaded] = useState(false)
-
+    const history = useHistory()
     useEffect(() => {
-
+        if (!Object.keys(details).length) {
+            history.push("/404-page")
+        }
         setIsLoaded(true)
     }, [])
 
@@ -38,7 +40,7 @@ function KeyStatistics({ details, quote }) {
                     Market cap
                 </div>
                 <div className="details-page-about-key-statistic-item value">
-                    {details["MarketCapitalization"] != "None"? convertNum(details["MarketCapitalization"]) : "--"}
+                    {typeof Number(details["MarketCapitalization"]) === "number"? convertNum(details["MarketCapitalization"]) : "--"}
                 </div>
             </div>
             <div className="details-page-about-key-statistic">
