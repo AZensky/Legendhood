@@ -10,7 +10,8 @@ import ChartTimeLine from "../ChartTimeLine";
 import { useDispatch, useSelector } from "react-redux";
 
 function DetailsPage() {
-    const { symbol } = useParams()
+    let { symbol } = useParams()
+    symbol = symbol.toUpperCase()
     const [isLoaded, setIsLoaded] = useState(false)
     const [assetDetails, setAssetDetails] = useState()
     const [assetQuote, setAssetQuote] = useState()
@@ -312,7 +313,7 @@ function DetailsPage() {
                             <div
                                 onClick={() => setToggleShowMore(!toggleShowMore)}
                             >
-                                {toggleShowMore? "show more": "show less"}
+                                {toggleShowMore ? "show more" : "show less"}
                             </div>
                         )}
                         {/* <div className="details-page-about-tidbits-container">
@@ -359,14 +360,14 @@ function DetailsPage() {
                             <>
                                 <div className="details-page-about-header news">News</div>
                                 {news.map((article) => (
-                                <NewsArticle
-                                    key={article.id}
-                                    headline={article.headline}
-                                    image={article.image}
-                                    summary={article.summary}
-                                    url={article.url}
-                                    source={article.source}
-                                />
+                                    <NewsArticle
+                                        key={article.id}
+                                        headline={article.headline}
+                                        image={article.image}
+                                        summary={article.summary}
+                                        url={article.url}
+                                        source={article.source}
+                                    />
                                 ))}
                             </>
                         )}
@@ -374,8 +375,12 @@ function DetailsPage() {
                 </div>
                 <div className="details-page-right-container">
                     <BuySellForm quote={assetQuote} />
-                    <button>
-                        + Add to Lists
+                    <button
+                        className={`details-page-right-container-add-to-lists-button ${assetQuote.d < 0 ? "red" : "green"}`}
+                    >
+                        <div>
+                            + Add to Lists
+                        </div>
                     </button>
                 </div>
             </div>
