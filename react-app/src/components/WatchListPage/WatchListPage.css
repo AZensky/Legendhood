@@ -208,7 +208,10 @@ div.watchlist-row>div:first-child {
 .watchlist-dropdown-content {
     margin-left: -140px;
     margin-top: 15px;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
     position: absolute;
     width: 180px;
     height: 63px;
@@ -216,4 +219,21 @@ div.watchlist-row>div:first-child {
     background-color: white;
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
+}
+
+.watchlist-dropdown-card {
+    font-size: 13px;
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.watchlist-dropdown-card-content {
+    margin-left: 18px;
+}
+
+.test {
+    font-size: large;
 }

@@ -82,7 +82,7 @@ function WatchListPage() {
                         <div className="watchlist-scroll-title">
                             <div className="watchlist-scroll-listname">{watchlist.name}</div>
                             <div className="watchlist-scroll-ellipsisicon">
-                                <WatchListDropdown />
+                                <WatchListDropdown watchlistName={watchlist.name} />
                             </div>
                         </div>
 
@@ -217,7 +217,7 @@ const getArrow = (change) => {
     if (change < 0) {
         return <span style={{ color: "red" }}>▼</span>;
     } else {
-        return <span style={{ color: "green" }}>▲</span>;
+        return <span style={{ color: "#00c805" }}>▲</span>;
     }
 };
 
