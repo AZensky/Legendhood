@@ -64,6 +64,7 @@ function Dashboard() {
       }
 
       for (let stock in map) {
+        if (map[stock] === 0) continue;
         const data = await getStockData(stock);
         data["sharesOwned"] = map[stock];
         const currentPrice = data.c;
