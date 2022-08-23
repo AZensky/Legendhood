@@ -13,6 +13,9 @@ import WatchListPage from "./components/WatchListPage";
 import DetailsPage from "./components/DetailsPage";
 import LogInPage from "./components/LogInPage";
 import { authenticate } from "./store/session";
+import APICallsExceeded from "./components/APICallsExceeded/Index";
+import DashboardNav from "./components/DashboardNavbar";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -56,8 +59,15 @@ function App() {
         {/* <ProtectedRoute path="/" exact={true}>
           <HomePage />
         </ProtectedRoute> */}
+        <Route exact path="/api-calls-exceeded">
+          <DashboardNav />
+          <APICallsExceeded />
+        </Route>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route>
+          <PageNotFound />
         </Route>
       </Switch>
     </BrowserRouter>
