@@ -393,11 +393,10 @@ function Dashboard() {
                 ${numberWithCommas(portfolioMarketValue)}
               </p>
               <p
-                className={`user-portfolio-percent-changed ${
-                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                className={`user-portfolio-percent-changed ${portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
                     ? "positive"
                     : "negative"
-                }`}
+                  }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
@@ -450,6 +449,7 @@ function Dashboard() {
                 isLoaded &&
                 companyData.map((company, idx) => (
                   <Link
+                    key={idx}
                     to={`/stocks/${company.name}`}
                     className="dashboard-watchlist-stock-link"
                   >

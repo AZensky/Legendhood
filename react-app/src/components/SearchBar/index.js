@@ -40,7 +40,7 @@ function SearchBar() {
     return (
         <div className='search-bar'>
             <div className="stock-search-form">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i className="fa-solid fa-magnifying-glass"></i>
                 <input
                     type="text"
                     className="stock-search"
