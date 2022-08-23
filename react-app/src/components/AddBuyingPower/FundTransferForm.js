@@ -9,7 +9,7 @@ function FundTransferForm({ onClose }) {
     const history = useHistory();
     const user = useSelector(state => state.session.user);
     const [amount, setAmount] = useState(0.00);
-    const [from, setFrom] = useState('');
+    const [fromAccount, setFromAccount] = useState('');
     const [to, setTo] = useState('');
     const [errors, setErrors] = useState([]);
 
@@ -18,7 +18,7 @@ function FundTransferForm({ onClose }) {
         setErrors([]);
         const newTransfer = {
             amount,
-            from,
+            from_account: fromAccount,
             to,
         }
 
@@ -61,9 +61,9 @@ function FundTransferForm({ onClose }) {
                     <label>
                         From
                         <select
-                            name='from'
-                            value={from}
-                            onChange={(e) => setFrom(e.target.value)}
+                            name='fromAccount'
+                            value={fromAccount}
+                            onChange={(e) => setFromAccount(e.target.value)}
                             required
                         >
                             <option value='bank account'>Bank Account</option>
