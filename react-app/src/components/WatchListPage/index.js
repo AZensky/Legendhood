@@ -89,50 +89,33 @@ function WatchListPage() {
                             {" "}
                             {watchlist.watchlistStocks.length} items
                         </div>
-                        {/* <div className="watchlist-table-1">
-                        <header>
-                            <div>Name</div>
-                            <div>Symbol</div>
-                            <div>Price</div>
-                            <div>Today</div>
-                            <div>Market Cap</div>
-                            <div></div>
-                        </header>
-                    </div> */}
-
-                        <div>
-                            <table className="watchlist-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Symbol</th>
-                                        <th>Price</th>
-                                        <th>Today</th>
-                                        <th>Market Cap</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {watchlist.watchlistStocks.map((stock) => (
-                                        <tr id={stock.symbol} onClick={ClickStock}>
-                                            <td>{stock.name}</td>
-                                            <td>{stock.symbol}</td>
-                                            <td>${getPercentOnly(stock.currentPrice)}</td>
-                                            <td>{getPercentChangeCell(stock.percentChange)}</td>
-                                            <td>{convertNum(stock.marketCap)}</td>
-                                            <td>
-                                                <button
-                                                    id={stock.symbol}
-                                                    className="watchlist-button"
-                                                    onClick={deleteStock}
-                                                >
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                        <div className="watchlist-table">
+                            <header className="watchlist-row">
+                                <div>Name</div>
+                                <div>Symbol</div>
+                                <div>Price</div>
+                                <div>Today</div>
+                                <div>Market Cap</div>
+                                <div></div>
+                            </header>
+                            {watchlist.watchlistStocks.map((stock) => (
+                                <div className="watchlist-row">
+                                    <div onClick={ClickStock}>{stock.name}</div>
+                                    <div onClick={ClickStock}>{stock.symbol}</div>
+                                    <div onClick={ClickStock}>${getPercentOnly(stock.currentPrice)}</div>
+                                    <div onClick={ClickStock}>{getPercentChangeCell(stock.percentChange)}</div>
+                                    <div onClick={ClickStock}>{convertNum(stock.marketCap)}</div>
+                                    <div>
+                                        <button
+                                            id={stock.symbol}
+                                            className="watchlist-button"
+                                            onClick={deleteStock}
+                                        >
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
