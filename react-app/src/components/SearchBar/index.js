@@ -46,12 +46,13 @@ function SearchBar() {
                     className="stock-search"
                     placeholder="Search"
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    value={searchTerm}
                 />
             </div>
             {(showMenu && searchResult.length > 0) && (
                 <div className='search-bar-drop-down'>
                     {searchResult.map((stock, index) => (
-                        <Link key={index} to={`/stocks/${stock.Symbol}`} className='search-dropdown-item'>
+                        <Link key={index} onClick={() => setSearchTerm("")} to={`/stocks/${stock.Symbol}`} className='search-dropdown-item'>
                             <p className='search-dropdown-stock-symbol'>{stock.Symbol}</p>
                             <p className='search-dropdown-stock-name'>{stock.Name}</p>
                         </Link>
