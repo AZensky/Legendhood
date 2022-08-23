@@ -7,6 +7,7 @@ import NewsArticle from "../NewsArticle";
 import ChartTimeLine from "../ChartTimeLine";
 import LoadingSpinner from "../LoadingSpinner";
 import GraphLoadingSpinner from "../GraphLoadingSpinner";
+import Footer from "../Footer";
 import {
   unixToDate,
   fetchPastWeekClosingPrices,
@@ -497,6 +498,7 @@ function Dashboard() {
       ) : (
         <LoadingSpinner />
       )}
+      {pageLoaded && <Footer />}
     </div>
   );
 }
