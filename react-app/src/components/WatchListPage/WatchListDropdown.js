@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../store/session";
+import { deleteOneWatchlist, } from "../../store/watchlist";
 import "./WatchListPage.css";
 
-function WatchListDropdown({ watchlistName }) {
+function WatchListDropdown({ watchlistName, watchlist_Id }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -24,6 +26,13 @@ function WatchListDropdown({ watchlistName }) {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+
+  //onClick fucntions
+  function deleteList(e) {
+    // const id = e.currentTarget.parentElement.id;
+    dispatch(deleteOneWatchlist(watchlist_Id))
+    history.push("/dashboard")
+  }
 
   return (
     <>
@@ -48,7 +57,7 @@ function WatchListDropdown({ watchlistName }) {
                 <i class="fa-solid fa-circle-xmark"></i>
               </div>
               <div className="watchlist-dropdown-card-content">
-                Delete {watchlistName}
+                <button className="watchlist-button" onClick={deleteList}>Delete {watchlistName}</button>
               </div>
             </div>
 

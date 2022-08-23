@@ -5,6 +5,7 @@ import {
     clearCurrentWatchlist,
     getWatchlist,
     loadWatchlists,
+    deleteOneStock
 } from "../../store/watchlist";
 import DashboardNav from "../DashboardNavbar";
 import LoadingSpinner from "../LoadingSpinner";
@@ -16,6 +17,7 @@ function WatchListPage() {
     const [isLoaded, setIsLoaded] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
+    const [isShown, setIsShown] = useState(false);
 
     //get watchlist by id
     const { watchlistId } = useParams();
@@ -60,9 +62,15 @@ function WatchListPage() {
         history.push(`/watchlists/${listId}`);
     }
 
+    function createList() {
+        // dispatch
+        setIsShown(current => !current);
+
+    }
+
     function deleteStock(e) {
         const stocksym = e.currentTarget.id;
-        dispatch(watchlistId, stocksym);
+        dispatch(deleteOneStock(watchlistId, stocksym));
     }
 
     return (
@@ -82,7 +90,7 @@ function WatchListPage() {
                         <div className="watchlist-scroll-title">
                             <div className="watchlist-scroll-listname">{watchlist.name}</div>
                             <div className="watchlist-scroll-ellipsisicon">
-                                <WatchListDropdown watchlistName={watchlist.name} />
+                                <WatchListDropdown watchlistName={watchlist.name} watchlist_Id={watchlistId} />
                             </div>
                         </div>
 
@@ -124,9 +132,41 @@ function WatchListPage() {
                         <div className="watchlist-sticky-title">
                             <div className="watchlist-sticky-list">Lists</div>
                             <div className="watchlis-sticky-plus-sign">
-                                <button className="watchlist-button">+</button>
+                                <button className="watchlist-button" onClick={createList}>+</button>
+
                             </div>
                         </div>
+
+                        {isShown && (
+                            <div className="watchlist-createlist-dropdown">
+
+                                <div className="watchlist-createlist-dropdown-row">
+                                    <div>
+                                        <img
+                                            className="watchlist-lightning-logo-2"
+                                            alt="⚡"
+                                            src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
+                                        ></img>
+                                    </div>
+                                    <div>
+                                        <form>
+                                            <input>
+                                            </input>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div className="watchlist-createlist-dropdown-row">
+                                    <div>
+                                        cancel
+                                    </div>
+                                    <div>
+                                        create list
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
 
                         {watchlists.map((list) => (
                             <>
