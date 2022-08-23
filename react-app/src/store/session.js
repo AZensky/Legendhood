@@ -98,6 +98,10 @@ export const signUp = (firstName, lastName, email, password) => async (dispatch)
   }
 }
 
+export const addBuyingPower = (userId, newTransfer) => async (dispatch) => {
+  return
+}
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:

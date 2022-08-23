@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AccountDropdown from "../AccountButton/AccountDropdown";
 import './DashboardNav.css'
 import SearchBar from "../SearchBar";
+import AddBuyingPowerModal from "../AddBuyingPower";
 
 function DashboardNav() {
   return (
@@ -20,6 +21,7 @@ function DashboardNav() {
       <div className="social-links-account-container">
         <a href='https://github.com/AZensky/RobinhoodClone'>Github</a>
         <AccountDropdown />
+        <AddBuyingPowerModal />
       </div>
     </div>
   );
