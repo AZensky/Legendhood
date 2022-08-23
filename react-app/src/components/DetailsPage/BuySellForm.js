@@ -54,7 +54,7 @@ function BuySellForm({ quote }) {
             return
         }
         if (shares * quote.c.toFixed(2) > user.buyingPower.toFixed(2) && buySell === "Buy") {
-            errorsArr.push({ "Insufficient buying power": `You do not currently have anough buying power to purchase the provided quantity of shares. Please reduce the number of stocks to purchase or increase your buying power` })
+            errorsArr.push({ "Insufficient buying power": `Please reduce the number of stocks to purchase or increase your buying power` })
             setErrors(errorsArr)
             return
         }

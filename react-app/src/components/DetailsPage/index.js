@@ -5,9 +5,21 @@ import LineChart from "../LineChart";
 import NewsArticle from "../NewsArticle";
 import BuySellForm from "./BuySellForm";
 import KeyStatistics from "./KeyStatistics";
-import { unixToDate } from "../../util/stocks-api";
 import ChartTimeLine from "../ChartTimeLine";
 import { useDispatch, useSelector } from "react-redux";
+import {
+    unixToDate,
+    fetchPastWeekClosingPrices,
+    fetchStockData,
+    fetchMarketNews,
+    fetchLiveStockData,
+    fetchPastMonthClosingPrices,
+    fetchPastThreeMonthClosingPrices,
+    fetchPastYearClosingPrices,
+    fetchUserStocks,
+    getCommonKeys,
+    numberWithCommas,
+  } from "../../util/stocks-api";
 
 function DetailsPage() {
     let { symbol } = useParams()
@@ -305,7 +317,7 @@ function DetailsPage() {
                             ${assetQuote.c}
                         </div>
                         <div className={`details-page-delta ${assetQuote.d < 0 ? "red" : "green"}`}>
-                            {assetQuote.d < 0 ? "-" : "+"}${assetQuote.d} {`(${assetQuote.d < 0 ? "-" : "+"}${assetQuote.dp}%)`}
+                            {assetQuote.d < 0 ? "-" : "+"}${Math.abs(assetQuote.d)} {`(${assetQuote.dp.toFixed(2)}%)`}
                         </div>
                     </div>
                     <div className="details-page-graph-container">
