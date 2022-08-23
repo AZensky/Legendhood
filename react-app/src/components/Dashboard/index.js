@@ -392,12 +392,16 @@ function Dashboard() {
               </p>
               <p
                 className={`user-portfolio-percent-changed ${
-                  portfolioPercentChanged >= 0 ? "positive" : "negative"
+                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                    ? "positive"
+                    : "negative"
                 }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
-                {portfolioPercentChanged}%) {timeSelectionLabel}
+                {isNaN(portfolioPercentChanged)
+                  ? 0
+                  : portfolioPercentChanged}%) {timeSelectionLabel}
               </p>
               {graphLoaded ? (
                 <div className="dashboard-chart-container">
