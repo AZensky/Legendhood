@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, Link } from 'react-router-dom';
-import { signUp, login } from '../../store/session';
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
+import { signUp, login } from "../../store/session";
 import { ReactComponent as SignupLogo } from "../../assets/Legendhood_logo_grey.svg";
 import "./SignUpPage.css";
 
 function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const user = useSelector(state => state.session.user);
+  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -24,23 +24,23 @@ function SignUpPage() {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(firstName, lastName, email, password));
       if (data) {
-        setErrors(data)
+        setErrors(data);
       }
     } else {
-      setErrors(["Your password and confirmation password do not match."])
+      setErrors(["Your password and confirmation password do not match."]);
     }
   };
 
   const loginDemoUser = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login('demo@aa.io', 'password'))
+    const data = await dispatch(login("demo@aa.io", "password"));
     if (data) {
-      setErrors(data)
+      setErrors(data);
     }
-  }
+  };
 
   if (user) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (
@@ -48,7 +48,7 @@ function SignUpPage() {
       {/* Signup Left Side */}
       <div className="left-signup-container">
         {/* Signup Logo */}
-        <Link to='/' className="signup-logo-container">
+        <Link to="/" className="signup-logo-container">
           <SignupLogo className="signup-logo" />
         </Link>
         <h1 className="signup-title">Invest with zero commission fees</h1>
@@ -124,9 +124,9 @@ function SignUpPage() {
               <button onClick={loginDemoUser}>Demo User</button>
               <button type="submit">Sign Up</button>
             </div>
-            <div className='signup-page-login'>
+            <div className="signup-page-login">
               <span>Already have an account on Robinhood?</span>
-              <Link to='/login'>Log in</Link>
+              <Link to="/login">Log in</Link>
             </div>
           </form>
         </div>
