@@ -9,6 +9,7 @@ import {
 import DashboardNav from "../DashboardNavbar";
 import LoadingSpinner from "../LoadingSpinner";
 // import WatchlistStockCard from "./WatchlistStockCard";
+import WatchListDropdown from "./WatchListDropdown"
 import "./WatchListPage.css";
 
 function WatchListPage() {
@@ -49,7 +50,7 @@ function WatchListPage() {
 
     //onClick fucntions
     function ClickStock(e) {
-        const stocksym = e.currentTarget.id;
+        const stocksym = e.currentTarget.parentElement.id;
         history.push(`/stocks/${stocksym}`);
     }
 
@@ -81,7 +82,7 @@ function WatchListPage() {
                         <div className="watchlist-scroll-title">
                             <div className="watchlist-scroll-listname">{watchlist.name}</div>
                             <div className="watchlist-scroll-ellipsisicon">
-                                <button className="watchlist-button">...</button>
+                                <WatchListDropdown watchlistName={watchlist.name} />
                             </div>
                         </div>
 
@@ -89,50 +90,33 @@ function WatchListPage() {
                             {" "}
                             {watchlist.watchlistStocks.length} items
                         </div>
-                        {/* <div className="watchlist-table-1">
-                        <header>
-                            <div>Name</div>
-                            <div>Symbol</div>
-                            <div>Price</div>
-                            <div>Today</div>
-                            <div>Market Cap</div>
-                            <div></div>
-                        </header>
-                    </div> */}
-
-                        <div>
-                            <table className="watchlist-table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Symbol</th>
-                                        <th>Price</th>
-                                        <th>Today</th>
-                                        <th>Market Cap</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {watchlist.watchlistStocks.map((stock) => (
-                                        <tr id={stock.symbol} onClick={ClickStock}>
-                                            <td>{stock.name}</td>
-                                            <td>{stock.symbol}</td>
-                                            <td>${getPercentOnly(stock.currentPrice)}</td>
-                                            <td>{getPercentChangeCell(stock.percentChange)}</td>
-                                            <td>{convertNum(stock.marketCap)}</td>
-                                            <td>
-                                                <button
-                                                    id={stock.symbol}
-                                                    className="watchlist-button"
-                                                    onClick={deleteStock}
-                                                >
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                        <div className="watchlist-table">
+                            <header className="watchlist-row">
+                                <div>Name</div>
+                                <div>Symbol</div>
+                                <div>Price</div>
+                                <div>Today</div>
+                                <div>Market Cap</div>
+                                <div></div>
+                            </header>
+                            {watchlist.watchlistStocks.map((stock) => (
+                                <div id={stock.symbol} className="watchlist-row">
+                                    <div onClick={ClickStock}>{stock.name}</div>
+                                    <div onClick={ClickStock}>{stock.symbol}</div>
+                                    <div onClick={ClickStock}>${getPercentOnly(stock.currentPrice)}</div>
+                                    <div onClick={ClickStock}>{getPercentChangeCell(stock.percentChange)}</div>
+                                    <div onClick={ClickStock}>{convertNum(stock.marketCap)}</div>
+                                    <div>
+                                        <button
+                                            id={stock.symbol}
+                                            className="watchlist-button"
+                                            onClick={deleteStock}
+                                        >
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -233,7 +217,7 @@ const getArrow = (change) => {
     if (change < 0) {
         return <span style={{ color: "red" }}>▼</span>;
     } else {
-        return <span style={{ color: "green" }}>▲</span>;
+        return <span style={{ color: "#00c805" }}>▲</span>;
     }
 };
 
