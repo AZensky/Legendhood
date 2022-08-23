@@ -67,11 +67,16 @@ function SignUpPage() {
         <div className="signup-form-container">
           <form onSubmit={handleSubmit} className="signup-form">
             <h1 className="signup-form__title">Sign up</h1>
-            <ul className="signup-form__validation-errors">
-              {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
-              ))}
-            </ul>
+            <p className="signup-free-stock">
+              Sign up today for 1 (fake) Robinhood Stock!
+            </p>
+            {errors.length > 0 && (
+              <ul className="signup-form__validation-errors">
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+              </ul>
+            )}
             <div className="signup-name-inputs">
               <label>
                 <input
