@@ -39,7 +39,7 @@ function DetailsPage() {
     const history = useHistory()
 
     useEffect(() => {
-
+        setIsLoaded(false)
         if (!user) {
             window.alert("Please log in to access this page.")
             history.push("/")
@@ -304,12 +304,12 @@ function DetailsPage() {
         setData()
 
         // setIsLoaded(true)
-    }, [])
+    }, [symbol])
 
-    return isLoaded && (
+    return  (
         <>
             <DashboardNav />
-            <div className="details-page-main-container">
+            {isLoaded && (<div className="details-page-main-container">
                 <div className="details-page-left-container">
                     <div className="details-page-title-and-price">
                         <h1 className="details-page-title">{assetDetails.Name}</h1>
@@ -405,7 +405,7 @@ function DetailsPage() {
                         </div>
                     </button>
                 </div>
-            </div>
+            </div>)}
         </>
     );
 }
