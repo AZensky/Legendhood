@@ -9,7 +9,14 @@ import requests
 finnhub_routes = Blueprint('finnhub', __name__)
 
 FINNHUB_API_KEY = os.environ.get('FINNHUB_API_KEY')
-ALPHA_VANTAGE_API_KEY = os.environ.get('ALPHA_VANTAGE_API_KEY')
+ALPHA_VANTAGE_API_KEY1 = os.environ.get('ALPHA_VANTAGE_API_KEY1')
+ALPHA_VANTAGE_API_KEY2 = os.environ.get('ALPHA_VANTAGE_API_KEY2')
+ALPHA_VANTAGE_API_KEY3 = os.environ.get('ALPHA_VANTAGE_API_KEY3')
+ALPHA_VANTAGE_API_KEY4 = os.environ.get('ALPHA_VANTAGE_API_KEY4')
+ALPHA_VANTAGE_API_KEY5 = os.environ.get('ALPHA_VANTAGE_API_KEY5')
+ALPHA_VANTAGE_API_KEY6 = os.environ.get('ALPHA_VANTAGE_API_KEY6')
+
+api_key_list = [ALPHA_VANTAGE_API_KEY1, ALPHA_VANTAGE_API_KEY2, ALPHA_VANTAGE_API_KEY3, ALPHA_VANTAGE_API_KEY4]
 
 # API route to get stock data for a specific company
 # Example output: https://finnhub.io/docs/api/quote
@@ -69,7 +76,7 @@ def fetch_live_candlestick_data(symbol):
         query_day = now - datetime.timedelta(days=1)
 
     if now.weekday() == 6:
-        query_day = now.datetime.timedelta(days=2)
+        query_day = now - datetime.timedelta(days=2)
 
     query_day_beginning = datetime.datetime.combine(query_day.today(), datetime.time())
 
@@ -146,6 +153,12 @@ def fetch_company_profile(symbol):
 # API route to get company data
 @finnhub_routes.route('/company-data/<symbol>')
 def fetch_company_data(symbol):
+    ALPHA_VANTAGE_API_KEY = api_key_list.pop(0)
+    api_key_list.append(ALPHA_VANTAGE_API_KEY)
+    print('------------------')
+    print('KEYYYYYY', ALPHA_VANTAGE_API_KEY)
+    print('------------------')
+
     res = requests.get(f'https://www.alphavantage.co/query?function=OVERVIEW&symbol={symbol}&apikey={ALPHA_VANTAGE_API_KEY}')
     data = res.json()
     return data
