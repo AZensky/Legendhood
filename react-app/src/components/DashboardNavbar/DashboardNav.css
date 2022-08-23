@@ -21,9 +21,10 @@
   margin-left: 3rem;
 }
 
-.rb-logo-container {
-  height: 3rem;
-  width: 3rem;
+.rb-logo-dashboard-nav-logo-search-container a,
+.dashboard-rb-logo {
+  height: 40px;
+  width: 40px;
   margin-right: 30px;
 }
 

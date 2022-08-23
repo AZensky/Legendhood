@@ -86,7 +86,7 @@
     border-bottom: 1px solid rgb(227, 233, 237);
 }
 
-.watchlist-table tr:hover {
+.watchlist-table>tbody>tr:hover {
     background-color: rgb(245, 248, 250);
 
 }
@@ -127,14 +127,12 @@
     padding: 0;
     border: none;
     background: none;
+    font-size: 15px;
 }
 
-/* .watchlist-button:hover {
-    padding: 0;
-    border: none;
-    background: none;
-    color: greenyellow;
-} */
+.watchlist-button:hover {
+    color: #00c805
+}
 
 .watchlist-sticky-title {
     width: 100%;

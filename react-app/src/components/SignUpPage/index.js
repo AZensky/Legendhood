@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom';
 import { signUp, login } from '../../store/session';
-import { ReactComponent as SignupLogo } from "../../assets/RBSignupLogo.svg";
+import { ReactComponent as SignupLogo } from "../../assets/Legendhood_logo_grey.svg";
 import "./SignUpPage.css";
 
 function SignUpPage() {

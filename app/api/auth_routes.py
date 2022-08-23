@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, Transaction, Watchlist, WatchlistStock, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from .finnhub_routes import fetch_stock_data
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -69,6 +70,43 @@ def sign_up():
             password=form.data['password']
         )
         db.session.add(user)
+        db.session.commit()
+
+        transaction = Transaction(
+            symbol='HOOD', quantity=1, price=fetch_stock_data('HOOD')['c'], user_id=user.id)
+        watchlist = Watchlist(
+            name='My First List',
+            user_id=user.id
+        )
+        db.session.add(transaction)
+        db.session.add(watchlist)
+        db.session.commit()
+
+        stock1 = WatchlistStock(
+            symbol='HOOD',
+            watchlist_id=watchlist.id
+        )
+        stock2 = WatchlistStock(
+            symbol='AAPL',
+            watchlist_id=watchlist.id
+        )
+        stock3 = WatchlistStock(
+            symbol='AMZN',
+            watchlist_id=watchlist.id
+        )
+        stock4 = WatchlistStock(
+            symbol='TSLA',
+            watchlist_id=watchlist.id
+        )
+        stock5 = WatchlistStock(
+            symbol='GOOGL',
+            watchlist_id=watchlist.id
+        )
+        db.session.add(stock1)
+        db.session.add(stock2)
+        db.session.add(stock3)
+        db.session.add(stock4)
+        db.session.add(stock5)
         db.session.commit()
         login_user(user)
         return user.to_dict()
