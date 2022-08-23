@@ -471,7 +471,7 @@ function DetailsPage() {
                     <div className="details-page-title-and-price">
                         <h1 className="details-page-title">{assetDetails.Name}</h1>
                         <div className="details-page-price">
-                            ${numberWithCommas(assetQuote.c)}
+                            ${numberWithCommas(assetQuote.c.toFixed(2))}
                         </div>
                         {liveDataAvailable ? (
                             <div className={`details-page-delta ${amountChanged < 0 ? "red" : "green"}`}>
