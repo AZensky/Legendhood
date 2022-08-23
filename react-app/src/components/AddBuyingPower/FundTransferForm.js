@@ -9,8 +9,8 @@ function FundTransferForm({ onClose }) {
     const history = useHistory();
     const user = useSelector(state => state.session.user);
     const [amount, setAmount] = useState(0.00);
-    const [fromAccount, setFromAccount] = useState('');
-    const [to, setTo] = useState('');
+    const [fromAccount, setFromAccount] = useState('bank account');
+    const [to, setTo] = useState('legendhood');
     const [errors, setErrors] = useState([]);
 
     const handleSumbit = async (e) => {
@@ -27,6 +27,7 @@ function FundTransferForm({ onClose }) {
             if (data) {
                 setErrors(data);
             } else {
+                onClose();
                 history.push('/dashboard');
             }
         }

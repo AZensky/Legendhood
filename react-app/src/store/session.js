@@ -99,7 +99,27 @@ export const signUp = (firstName, lastName, email, password) => async (dispatch)
 }
 
 export const addBuyingPower = (userId, newTransfer) => async (dispatch) => {
-  return
+  console.log('newTransfer', newTransfer)
+  const response = await fetch(`api/users/${userId}/buyingpower`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newTransfer)
+  })
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
 }
 
 export default function reducer(state = initialState, action) {
