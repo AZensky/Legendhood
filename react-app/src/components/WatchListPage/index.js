@@ -9,6 +9,7 @@ import {
 import DashboardNav from "../DashboardNavbar";
 import LoadingSpinner from "../LoadingSpinner";
 // import WatchlistStockCard from "./WatchlistStockCard";
+import WatchListDropdown from "./WatchListDropdown"
 import "./WatchListPage.css";
 
 function WatchListPage() {
@@ -49,7 +50,7 @@ function WatchListPage() {
 
     //onClick fucntions
     function ClickStock(e) {
-        const stocksym = e.currentTarget.id;
+        const stocksym = e.currentTarget.parentElement.id;
         history.push(`/stocks/${stocksym}`);
     }
 
@@ -81,7 +82,7 @@ function WatchListPage() {
                         <div className="watchlist-scroll-title">
                             <div className="watchlist-scroll-listname">{watchlist.name}</div>
                             <div className="watchlist-scroll-ellipsisicon">
-                                <button className="watchlist-button">...</button>
+                                <WatchListDropdown />
                             </div>
                         </div>
 
@@ -99,7 +100,7 @@ function WatchListPage() {
                                 <div></div>
                             </header>
                             {watchlist.watchlistStocks.map((stock) => (
-                                <div className="watchlist-row">
+                                <div id={stock.symbol} className="watchlist-row">
                                     <div onClick={ClickStock}>{stock.name}</div>
                                     <div onClick={ClickStock}>{stock.symbol}</div>
                                     <div onClick={ClickStock}>${getPercentOnly(stock.currentPrice)}</div>

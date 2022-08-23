@@ -4,7 +4,7 @@
     min-width: 1036px;
     display: flex;
     justify-content: center;
-    margin: 95px auto 0 auto;
+    margin: 36px auto 0 auto;
 }
 
 .watchlist-scrolllist {
@@ -133,6 +133,15 @@ div.watchlist-row>div:first-child {
     font-size: 15px;
 }
 
+.watchlist-button.dropdown-open {
+    color: #00c805;
+    border-bottom: solid 2px;
+}
+
+.watchlist-button.dropdown-close {
+    border-bottom: solid 2px transparent;
+}
+
 .watchlist-button:hover {
     color: #00c805
 }
@@ -194,4 +203,17 @@ div.watchlist-row>div:first-child {
 .watchlist-list-name {
     font-size: 13.5px;
     margin-left: 20px;
+}
+
+.watchlist-dropdown-content {
+    margin-left: -140px;
+    margin-top: 15px;
+    display: block;
+    position: absolute;
+    width: 180px;
+    height: 63px;
+    padding: 12px 0px;
+    background-color: white;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
 }
