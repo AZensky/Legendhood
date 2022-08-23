@@ -10,6 +10,7 @@ function WatchlistStock({
   percentChanged,
   labels,
   prices,
+  liveDataAvailable,
 }) {
   return (
     <div className="watchlist-stock-container">
@@ -18,7 +19,11 @@ function WatchlistStock({
         <span>{numberWithCommas(sharesOwned)}</span>
       </div>
       <div className="watchlist-stock-mid">
-        <LineChart labels={labels} prices={prices} />
+        {liveDataAvailable ? (
+          <LineChart labels={labels} prices={prices} />
+        ) : (
+          <div className="watchlist-stock-no-live-data">Market Closed</div>
+        )}
       </div>
       <div className="watchlist-stock-right">
         <span>${numberWithCommas(currentPrice)}</span>

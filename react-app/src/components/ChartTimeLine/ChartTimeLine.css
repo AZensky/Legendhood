@@ -28,30 +28,34 @@
   border-bottom: 2px solid #5ac53b;
 }
 
-
 /* added by zeus to be reactive to share changes*/
 .time-btn:hover.green {
-  color: rgb(0,200,5);
+  color: rgb(0, 200, 5);
   cursor: pointer;
 }
 
 .time-btn.active.green {
-  color: rgb(0,200,5);
+  color: rgb(0, 200, 5);
 }
 
 .time-btn.active.green {
-  border-bottom: 2px solid rgb(0,200,5);
+  border-bottom: 2px solid rgb(0, 200, 5);
 }
 
 .time-btn:hover.red {
-  color: rgb(255,80,0);
+  color: rgb(255, 80, 0);
   cursor: pointer;
 }
 
 .time-btn.active.red {
-  color: rgb(255,80,0);
+  color: rgb(255, 80, 0);
 }
 
 .time-btn.active.red {
-  border-bottom: 2px solid rgb(255,80,0);
+  border-bottom: 2px solid rgb(255, 80, 0);
+}
+
+.disabled-time {
+  pointer-events: none;
+  color: grey;
 }
