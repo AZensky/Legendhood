@@ -21,6 +21,7 @@ import {
   numberWithCommas,
 } from "../../util/stocks-api";
 import "./Dashboard.css";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const [companyData, setCompanyData] = useState([]);
@@ -391,12 +392,16 @@ function Dashboard() {
               </p>
               <p
                 className={`user-portfolio-percent-changed ${
-                  portfolioPercentChanged >= 0 ? "positive" : "negative"
+                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                    ? "positive"
+                    : "negative"
                 }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
-                {portfolioPercentChanged}%) {timeSelectionLabel}
+                {isNaN(portfolioPercentChanged)
+                  ? 0
+                  : portfolioPercentChanged}%) {timeSelectionLabel}
               </p>
               {graphLoaded ? (
                 <div className="dashboard-chart-container">
@@ -442,15 +447,20 @@ function Dashboard() {
               {companyData.length > 0 &&
                 isLoaded &&
                 companyData.map((company, idx) => (
-                  <WatchlistStock
-                    key={company.name}
-                    name={company.name}
-                    currentPrice={company.c.toFixed(2)}
-                    percentChanged={company.dp.toFixed(2)}
-                    sharesOwned={company.sharesOwned}
-                    labels={timeLabels}
-                    prices={individualPriceLabels[idx]}
-                  />
+                  <Link
+                    to={`/stocks/${company.name}`}
+                    className="dashboard-watchlist-stock-link"
+                  >
+                    <WatchlistStock
+                      key={company.name}
+                      name={company.name}
+                      currentPrice={company.c.toFixed(2)}
+                      percentChanged={company.dp.toFixed(2)}
+                      sharesOwned={company.sharesOwned}
+                      labels={timeLabels}
+                      prices={individualPriceLabels[idx]}
+                    />
+                  </Link>
                 ))}
             </div>
           </div>
