@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./DetailsPage.css"
-import { purchaseSellStocksThunk, getUserPortfolioThunk } from "../../store/portfolio";
+import { purchaseStocksThunk, sellStocksThunk, getUserPortfolioThunk } from "../../store/portfolio";
 import { authenticate } from "../../store/session";
 
 function BuySellForm({ quote }) {
@@ -61,7 +61,7 @@ function BuySellForm({ quote }) {
 
         const order = {
             symbol: symbol.toUpperCase(),
-            quantity: buySell === "Buy" ? shares : -shares,
+            quantity: shares,
             price: (quote.c).toFixed(2),
             user_id: user.id
         }
@@ -69,10 +69,10 @@ function BuySellForm({ quote }) {
 
 
         if (buySell === "Buy") {
-            const result = await dispatch(purchaseSellStocksThunk(order))
+            const result = await dispatch(purchaseStocksThunk(order))
             console.log(result)
         } else {
-            const result = await dispatch(purchaseSellStocksThunk(order))
+            const result = await dispatch(sellStocksThunk(order))
             console.log(result)
         }
         await dispatch(authenticate())
