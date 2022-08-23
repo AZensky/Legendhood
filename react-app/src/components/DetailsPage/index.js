@@ -19,6 +19,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import GraphLoadingSpinner from "../GraphLoadingSpinner";
 import APICallsExceeded from "../APICallsExceeded/Index";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import STOCKSLIST from "../../util/stock_list.json"
 import STOCKLISTOBJ from "../../util/stock_list_obj.json"
 
 function DetailsPage() {
@@ -34,10 +35,10 @@ function DetailsPage() {
     const [graphLoaded, setGraphLoaded] = useState(false)
     const [prices, setPrices] = useState([]);
     const [timeLabels, setTimeLabels] = useState([]);
-    const [timeSelection, setTimeSelection] = useState("1W")
+    const [timeSelection, setTimeSelection] = useState("1M")
     const [amountChanged, setAmountChanged] = useState(0)
     const [percentChanged, setPercentChanged] = useState(0)
-    const [timeSelectionLabel, setTimeSelectionLabel] = useState("Past week")
+    const [timeSelectionLabel, setTimeSelectionLabel] = useState("Past month")
     const [liveDataAvailable, setLiveDataAvailable] = useState(true)
     const [APICallsExceededCheck, setAPICallsExceededCheck] = useState(false)
 
@@ -54,7 +55,7 @@ function DetailsPage() {
 
             //reset loaded state for when the user uses the search bar
             setIsLoaded(false)
-            setTimeSelection("1W")
+            setTimeSelection("1M")
             setTimeSelectionLabel("Past week")
             setLiveDataAvailable(true)
 
@@ -85,21 +86,21 @@ function DetailsPage() {
                 return data;
             }
 
-            const pastWeekClosingPrices = async (symbol) => {
-                let res = await fetchPastWeekClosingPrices(symbol);
+            // const pastWeekClosingPrices = async (symbol) => {
+            //     let res = await fetchPastWeekClosingPrices(symbol);
 
-                let closingPrices = res["closingPrices"];
-                let datetimeLabels = res["datetimeLabels"];
+            //     let closingPrices = res["closingPrices"];
+            //     let datetimeLabels = res["datetimeLabels"];
 
-                let priceChanged = closingPrices[closingPrices.length - 1] - closingPrices[0]
-                let percentChanged = ((closingPrices[closingPrices.length - 1] - closingPrices[0]) / closingPrices[0]) * 100;
+            //     let priceChanged = closingPrices[closingPrices.length - 1] - closingPrices[0]
+            //     let percentChanged = ((closingPrices[closingPrices.length - 1] - closingPrices[0]) / closingPrices[0]) * 100;
 
-                setPrices(closingPrices);
-                setTimeLabels(datetimeLabels);
-                setAmountChanged(priceChanged);
-                setPercentChanged(percentChanged.toFixed(2));
-                setTimeSelectionLabel("Past Week");
-            };
+            //     setPrices(closingPrices);
+            //     setTimeLabels(datetimeLabels);
+            //     setAmountChanged(priceChanged);
+            //     setPercentChanged(percentChanged.toFixed(2));
+            //     setTimeSelectionLabel("Past Week");
+            // };
 
             const getNews = async (symbol) => {
                 let res = await fetch(`/api/finnhub/company/${symbol}/news`);
@@ -323,7 +324,7 @@ function DetailsPage() {
             const setData = async () => {
                 await getDetails(symbol);
                 await getQuote(symbol);
-                await pastWeekClosingPrices(symbol);
+                // await pastWeekClosingPrices(symbol);
                 await getNews(symbol);
                 setIsLoaded(true);
             }
@@ -440,12 +441,7 @@ function DetailsPage() {
         }
     }, [timeSelection]);
 
-
-    const handleTimeSelection = (selection) => {
-        setTimeSelection(selection)
-    }
-
-    if (!STOCKLISTOBJ[symbol]) {
+   if (!STOCKLISTOBJ[symbol]) {
         return (
             <PageNotFound />
         )
