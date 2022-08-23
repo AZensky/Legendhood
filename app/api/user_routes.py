@@ -24,6 +24,7 @@ def user(id):
 @user_routes.route('/<int:userId>/buyingpower', methods=['PUT'])
 @login_required
 def add_buying_power(userId):
+    print('userId', userId)
     form = AddBuyingPowerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
