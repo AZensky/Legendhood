@@ -6,7 +6,8 @@ import { purchaseSellStocksThunk, getUserPortfolioThunk } from "../../store/port
 import { authenticate } from "../../store/session";
 
 function BuySellForm({ quote }) {
-    const { symbol } = useParams()
+    let { symbol } = useParams()
+    symbol = symbol.toUpperCase()
     const [isLoaded, setIsLoaded] = useState(false)
     const [shares, setShares] = useState(0)
     const [buySell, setBuySell] = useState("Buy")
@@ -41,18 +42,19 @@ function BuySellForm({ quote }) {
         e.preventDefault()
 
         const errorsArr = []
-
-        if (shares < 0 || Number.isInteger(shares)) {
-            errorsArr.push("Invalid share quantity. Please input integer values greater than 0")
+        console.log("TESTING", typeof shares, !Number.isInteger(shares))
+        if (shares < 0 || !Number.isInteger(shares) || Number(shares.toString()[0]) === 0) {
+            errorsArr.push({ "Invalid quantity": "Invalid share quantity. Please input integer values greater than 0" })
+            setErrors(errorsArr)
+            return
         }
         if (shares > (portfolio[symbol] ? portfolio[symbol].quantity : 0) && buySell === "Sell") {
-            errorsArr.push(`You do not currently own enough stocks. Max quantity to sell: ${portfolio[symbol] ? portfolio[symbol].quantity : 0}`)
+            errorsArr.push({ "Insufficient stocks": `You do not currently own enough stocks. Max quantity to sell: ${portfolio[symbol] ? portfolio[symbol].quantity : 0}` })
+            setErrors(errorsArr)
+            return
         }
         if (shares * quote.c.toFixed(2) > user.buyingPower.toFixed(2) && buySell === "Buy") {
-            errorsArr.push(`You do not currently have anough buying power to purchase ${shares} shares. Please reduce the number of stocks to purchase or increase your buying power`)
-        }
-
-        if (errorsArr.length > 0) {
+            errorsArr.push({ "Insufficient buying power": `You do not currently have anough buying power to purchase the provided quantity of shares. Please reduce the number of stocks to purchase or increase your buying power` })
             setErrors(errorsArr)
             return
         }
@@ -85,70 +87,85 @@ function BuySellForm({ quote }) {
             >
                 <div className="details-page-buy-sell-switch">
                     <div
-                        className={`details-page-buy-${buySell === "Buy" ? "active" : "inactive"}`}
+                        className={`details-page-buy ${buySell === "Buy" ? "active" : "inactive"}`}
                         onClick={() => setBuySell("Buy")}
                     >
                         Buy {symbol}
                     </div>
                     <div
-                        className={`details-page-sell-${buySell === "Sell" ? "active" : "inactive"}`}
+                        className={`details-page-sell ${buySell === "Sell" ? "active" : "inactive"}`}
                         onClick={() => setBuySell("Sell")}
                     >
                         Sell {symbol}
                     </div>
                 </div>
-                <div className="details-page-buy-in-labels">
-                    <div>
-                        Buy in:
+                <div className="details-page-buy-sell-stock-form-middle">
+                    <div className="details-page-buy-in-labels">
+                        <div>
+                            Buy in
+                        </div>
+                        <div style={{ fontWeight: "bold" }}>
+                            Shares
+                        </div>
                     </div>
-                    <div>
-                        Shares
-                    </div>
-                </div>
-                <label className="details-page-buy-sell-stock">
-                    <div className="details-page-buy-sell-stock-label">
-                        Shares:
-                    </div>
-                    <input
-                        className="details-page-buy-sell-stock-input"
-                        onChange={e => setShares(e.target.value)}
-                        value={shares}
+                    <label className="details-page-buy-sell-stock">
+                        <div className="details-page-buy-sell-stock-label">
+                            Shares
+                        </div>
+                        <input
+                            className={`details-page-buy-sell-stock-input ${quote.d < 0 ? "red" : "green"}`}
+                            onChange={e => setShares(Number(e.target.value))}
+                            placeholder={0}
+                        >
+                        </input>
+                    </label>
+                    <div
+                        className="details-page-buy-sell-stocks-owned"
+                        style={{ visibility: buySell === "Sell" ? "visible" : "hidden" }}
                     >
-                    </input>
-                </label>
-                <div
-                    className="details-page-buy-sell-stocks-owned"
-                    style={{ visibility: buySell === "Sell" ? "visible" : "hidden" }}
-                >
-                    {`(${portfolio[symbol] ? portfolio[symbol].quantity : 0} Shares owned)`}
-                </div>
-                <div className="details-page-buy-sell-stock-market-price">
-                    <span>Market Price</span>
-                    <span> ${quote.c}</span>
-                </div>
-                <div className="details-page-buy-sell-stock-estimated-cost">
-                    <span>Estimated Cost</span>
-                    <span> ${(shares * quote.c).toFixed(2)}</span>
-                </div>
-                {errors.length > 0 && (
-                    <div className="details-page-buy-sell-stock-errors">
-                        <ul>
-                            {errors.map((errorMessage, i) => (
-                                <li key={i}>
-                                    {errorMessage}
-                                </li>
-                            ))}
-
-                        </ul>
+                        {`(${portfolio[symbol] ? portfolio[symbol].quantity : 0} Shares owned)`}
                     </div>
-                )}
-                <div className="details-page-buy-sell-stock-button-container">
-                    <button className={`details-page-buy-sell-stock button ${quote.d < 0 ? "red" : "green"}`}>
-                            {buySell === "Buy" ? "Place Order" : "Sell Stock"}
-                    </button>
+                    <div className="details-page-buy-sell-stock-market-price">
+                        <span className={`details-page-buy-sell-stock-market-price-label ${quote.d < 0 ? "red" : "green"}`}>Market Price</span>
+                        <span> ${quote.c}</span>
+                    </div>
+                    <div className="details-page-buy-sell-stock-estimated-cost">
+                        <span className="details-page-buy-sell-stock-estimated-cost-label">Estimated Cost</span>
+                        <span> ${(shares * quote.c).toFixed(2)}</span>
+                    </div>
+                    {errors.length > 0 && (
+                        <div className="details-page-buy-sell-stock-errors">
+                            {errors.map((errorMessage, i) => {
+                                const key = Object.keys(errorMessage)[0]
+                                const value = Object.values(errorMessage)[0]
+                                return (
+                                    <div key={i}>
+                                        <div key={key} className="details-page-buy-sell-stock-errors-header">
+                                            {key}
+                                        </div>
+                                        <div key={value} className="details-page-buy-sell-stock-errors-message">
+                                            {value}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )}
                 </div>
-                <div>
-                    ${user.buyingPower.toFixed(2)} buying power available
+                <div className="details-page-buy-sell-stock-form-bottom">
+                    <div className="details-page-buy-sell-stock-button-container">
+                        <button className={`details-page-buy-sell-stock button ${quote.d < 0 ? "red" : "green"}`}>
+                            {buySell === "Buy" ? "Place Order" : "Sell Stock"}
+                        </button>
+                    </div>
+                    <div className="details-page-buy-sell-stock-buying-power-container">
+                        <div className="details-page-buy-sell-stock-buying-power-value">
+                            ${user.buyingPower.toFixed(2)}
+                        </div>
+                        <div className="details-page-buy-sell-stock-buying-power-text">
+                            buying power available
+                        </div>
+                    </div>
                 </div>
             </form>
         </>
