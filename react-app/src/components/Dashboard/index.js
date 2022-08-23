@@ -384,8 +384,6 @@ function Dashboard() {
     setTimeSelection(selection);
   }
 
-  console.log("RENDERING");
-
   return (
     <div className="dashboard-container">
       <DashboardNav />
@@ -422,6 +420,7 @@ function Dashboard() {
               <ChartTimeLine
                 handleClick={handleTimeSelection}
                 time={timeSelection}
+                delta={amountChanged}
               />
             </div>
 
