@@ -1,0 +1,22 @@
+.api-calls-exceeded-main-container {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+}
+
+.api-calls-exceeded-container-left,
+.api-calls-exceeded-container-right {
+    width:25%
+}
+
+.details-page-buy-sell-stock.button.green.API {
+    margin: 5% 5%;
+    width: 40%;
+}
+
+.api-calls-exceeded-buttons-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

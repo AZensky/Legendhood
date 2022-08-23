@@ -38,7 +38,7 @@ function KeyStatistics({ details, quote }) {
                     Market cap
                 </div>
                 <div className="details-page-about-key-statistic-item value">
-                    {convertNum(details["MarketCapitalization"])}
+                    {details["MarketCapitalization"] != "None"? convertNum(details["MarketCapitalization"]) : "--"}
                 </div>
             </div>
             <div className="details-page-about-key-statistic">
@@ -46,7 +46,7 @@ function KeyStatistics({ details, quote }) {
                     Price earnings ratio
                 </div>
                 <div className="details-page-about-key-statistic-item value">
-                    {details["PERatio"]}
+                    {details["PERatio"] != "None"? details["PERatio"] : "--"}
                 </div>
             </div>
             <div className="details-page-about-key-statistic">
@@ -54,7 +54,7 @@ function KeyStatistics({ details, quote }) {
                     Dividend yield
                 </div>
                 <div className="details-page-about-key-statistic-item value">
-                    {details["DividendYield"]}
+                    {details["DividendYield"] != "None"? details["DividendYield"] : "--"}
                 </div>
             </div>
             {/* <div className="details-page-about-key-statistic">
@@ -70,7 +70,7 @@ function KeyStatistics({ details, quote }) {
                     High today
                 </div>
                 <div className="details-page-about-key-statistic-item value">
-                    ${quote.h}
+                    {quote.h? `$${quote.h}` : "--"}
                 </div>
             </div>
             <div className="details-page-about-key-statistic">

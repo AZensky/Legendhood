@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import "./DetailsPage.css"
 import { purchaseStocksThunk, sellStocksThunk, getUserPortfolioThunk } from "../../store/portfolio";
 import { authenticate } from "../../store/session";
+import { numberWithCommas } from "../../util/stocks-api";
 
-function BuySellForm({ quote }) {
+function BuySellForm({ quote, amountChanged }) {
     let { symbol } = useParams()
     symbol = symbol.toUpperCase()
     const [isLoaded, setIsLoaded] = useState(false)
@@ -22,6 +23,10 @@ function BuySellForm({ quote }) {
     useEffect(() => {
         setErrors([])
     }, [buySell, shares])
+
+    useEffect(() => {
+        setShares("")
+    },[buySell, portfolio])
 
     useEffect(() => {
 
@@ -113,9 +118,10 @@ function BuySellForm({ quote }) {
                             Shares
                         </div>
                         <input
-                            className={`details-page-buy-sell-stock-input ${quote.d < 0 ? "red" : "green"}`}
+                            className={`details-page-buy-sell-stock-input ${amountChanged < 0 ? "red" : "green"}`}
                             onChange={e => setShares(Number(e.target.value))}
                             placeholder={0}
+                            value={shares}
                         >
                         </input>
                     </label>
@@ -126,12 +132,12 @@ function BuySellForm({ quote }) {
                         {`(${portfolio[symbol] ? portfolio[symbol].quantity : 0} Shares owned)`}
                     </div>
                     <div className="details-page-buy-sell-stock-market-price">
-                        <span className={`details-page-buy-sell-stock-market-price-label ${quote.d < 0 ? "red" : "green"}`}>Market Price</span>
+                        <span className={`details-page-buy-sell-stock-market-price-label ${amountChanged < 0 ? "red" : "green"}`}>Market Price</span>
                         <span> ${quote.c}</span>
                     </div>
                     <div className="details-page-buy-sell-stock-estimated-cost">
                         <span className="details-page-buy-sell-stock-estimated-cost-label">Estimated Cost</span>
-                        <span> ${(shares * quote.c).toFixed(2)}</span>
+                        <span> ${numberWithCommas((shares * quote.c).toFixed(2))}</span>
                     </div>
                     {errors.length > 0 && (
                         <div className="details-page-buy-sell-stock-errors">
@@ -154,13 +160,13 @@ function BuySellForm({ quote }) {
                 </div>
                 <div className="details-page-buy-sell-stock-form-bottom">
                     <div className="details-page-buy-sell-stock-button-container">
-                        <button className={`details-page-buy-sell-stock button ${quote.d < 0 ? "red" : "green"}`}>
+                        <button className={`details-page-buy-sell-stock button ${amountChanged < 0 ? "red" : "green"}`}>
                             {buySell === "Buy" ? "Place Order" : "Sell Stock"}
                         </button>
                     </div>
                     <div className="details-page-buy-sell-stock-buying-power-container">
                         <div className="details-page-buy-sell-stock-buying-power-value">
-                            ${user.buyingPower.toFixed(2)}
+                            ${numberWithCommas(user.buyingPower.toFixed(2))}
                         </div>
                         <div className="details-page-buy-sell-stock-buying-power-text">
                             buying power available

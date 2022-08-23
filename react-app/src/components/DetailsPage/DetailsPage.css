@@ -35,11 +35,18 @@
 }
 
 .details-page-graph-container {
-    max-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
 }
 
 .details-page-graph-timeline {
     border-bottom: 1px solid rgb(190, 190, 190);
+}
+
+.details-page-no-live-data {
+    font-size: 2rem;
 }
 
 .details-page-about-header {
@@ -52,9 +59,8 @@
     border-bottom: none;
 }
 
-.details-page-about.narrow {
-    max-height:200px;
-    overflow-y: hidden;
+.details-page-about {
+    line-height: 1.5rem;
 }
 
 .details-page-about-details{

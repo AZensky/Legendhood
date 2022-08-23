@@ -19,7 +19,10 @@ import {
     fetchUserStocks,
     getCommonKeys,
     numberWithCommas,
-  } from "../../util/stocks-api";
+} from "../../util/stocks-api";
+import LoadingSpinner from "../LoadingSpinner";
+import GraphLoadingSpinner from "../GraphLoadingSpinner";
+import APICallsExceeded from "../APICallsExceeded/Index";
 
 function DetailsPage() {
     let { symbol } = useParams()
@@ -28,18 +31,31 @@ function DetailsPage() {
     const [assetDetails, setAssetDetails] = useState()
     const [assetQuote, setAssetQuote] = useState()
     const [news, setNews] = useState()
-    const [weekClosingPrices, setWeekClosingPrices] = useState([]);
-    const [weekDateLabels, setWeekDateLabels] = useState([]);
-    const [showLink, setShowLink] = useState(false);
-    const [toggleShowMore, setToggleShowMore] = useState(false);
 
-    const portfolio = useSelector(state => state.portfolio)
+    //values and labels to be handed to graph as props
+    const [graphLoaded, setGraphLoaded] = useState(false)
+    const [prices, setPrices] = useState([]);
+    const [timeLabels, setTimeLabels] = useState([]);
+    const [timeSelection, setTimeSelection] = useState("1W")
+    const [amountChanged, setAmountChanged] = useState(0)
+    const [percentChanged, setPercentChanged] = useState(0)
+    const [timeSelectionLabel, setTimeSelectionLabel] = useState("Past week")
+    const [liveDataAvailable, setLiveDataAvailable] = useState(true)
+    const [ APICallsExceededCheck, setAPICallsExceededCheck] = useState(false)
+
+
     const user = useSelector(state => state.session.user);
+
     const dispatch = useDispatch();
     const history = useHistory()
 
     useEffect(() => {
+        //reset loaded state for when the user uses the search bar
         setIsLoaded(false)
+        setTimeSelection("1W")
+        setTimeSelectionLabel("Past week")
+        setLiveDataAvailable(true)
+
         if (!user) {
             window.alert("Please log in to access this page.")
             history.push("/")
@@ -48,7 +64,13 @@ function DetailsPage() {
         const getDetails = async (symbol) => {
             const res = await fetch(`/api/finnhub/company-data/${symbol}`);
             const data = await res.json();
+            if (data.Note) {
+                setAPICallsExceededCheck(true)
+                return
+            }
+
             setAssetDetails(data)
+            console.log("DETAILS", data)
             return data;
         }
 
@@ -56,24 +78,24 @@ function DetailsPage() {
             const res = await fetch(`/api/finnhub/stock-data/${symbol}`);
             const data = await res.json();
             setAssetQuote(data)
+            console.log("QUOTE", data)
             return data;
         }
 
         const pastWeekClosingPrices = async (symbol) => {
-            let res = await fetch(`/api/finnhub/candlestick-data/week/${symbol}`);
-            let data = await res.json();
-            console.log(symbol)
-            let closingPrices = data.c;
-            let datetimes = data.t;
+            let res = await fetchPastWeekClosingPrices(symbol);
 
-            let datetimeLabels = [];
+            let closingPrices = res["closingPrices"];
+            let datetimeLabels = res["datetimeLabels"];
 
-            datetimes.forEach((unixtime) => {
-                let datetime = unixToDate(unixtime);
-                datetimeLabels.push(datetime);
-            });
-            setWeekClosingPrices(closingPrices);
-            setWeekDateLabels(datetimeLabels);
+            let priceChanged = closingPrices[closingPrices.length - 1] - closingPrices[0]
+            let percentChanged = ((closingPrices[closingPrices.length - 1] - closingPrices[0]) / closingPrices[0]) * 100;
+
+            setPrices(closingPrices);
+            setTimeLabels(datetimeLabels);
+            setAmountChanged(priceChanged);
+            setPercentChanged(percentChanged.toFixed(2));
+            setTimeSelectionLabel("Past Week");
         };
 
         const getNews = async (symbol) => {
@@ -83,7 +105,8 @@ function DetailsPage() {
             setNews(topNews);
         };
 
-        // setWeekClosingPrices([
+        // STATIC DATA TO USE SO WE DON'T RUN OUT OF API CALLS PER MIN WHEN TESTING
+        // setClosingPrices([
         //     133.15,
         //     133.31,
         //     133.31,
@@ -197,7 +220,7 @@ function DetailsPage() {
         //     1660950000
         // ]
 
-        // setWeekDateLabels(datetimes.map((unixtime) => unixToDate(unixtime)));
+        // setDateLabels(datetimes.map((unixtime) => unixToDate(unixtime)));
 
         // setAssetDetails({
         //     "Symbol": "IBM",
@@ -302,77 +325,168 @@ function DetailsPage() {
             setIsLoaded(true);
         }
         setData()
-
-        // setIsLoaded(true)
     }, [symbol])
 
-    return  (
+
+    // useEffect to detect changes in timeframes for stocks to render data. Will run fetch request to get data and reload the graph
+    useEffect(() => {
+        setGraphLoaded(false);
+        setLiveDataAvailable(true)
+        setAmountChanged(0)
+        setPercentChanged(0)
+        setTimeSelectionLabel("-")
+
+        const getLiveData = async (stock) => {
+            let res = await fetchLiveStockData(stock);
+
+            if (res === "Not Available") {
+                setLiveDataAvailable(false)
+                setAmountChanged(-1)
+                return
+            }
+
+            let closingPrices = res["closingPrices"];
+            let datetimeLabels = res["datetimeLabels"];
+
+            let priceChanged = closingPrices[closingPrices.length - 1] - closingPrices[0]
+            let percentChanged = ((closingPrices[closingPrices.length - 1] - closingPrices[0]) / closingPrices[0]) * 100;
+
+            setPrices(closingPrices);
+            setTimeLabels(datetimeLabels);
+            setAmountChanged(priceChanged);
+            setPercentChanged(percentChanged.toFixed(2));
+            setTimeSelectionLabel("Live");
+        };
+
+        const pastWeekClosingPrices = async (stock) => {
+            let res = await fetchPastWeekClosingPrices(stock);
+
+            let closingPrices = res["closingPrices"];
+            let datetimeLabels = res["datetimeLabels"];
+
+            let priceChanged = closingPrices[closingPrices.length - 1] - closingPrices[0]
+            let percentChanged = ((closingPrices[closingPrices.length - 1] - closingPrices[0]) / closingPrices[0]) * 100;
+
+            setPrices(closingPrices);
+            setTimeLabels(datetimeLabels);
+            setAmountChanged(priceChanged);
+            setPercentChanged(percentChanged.toFixed(2));
+            setTimeSelectionLabel("Past Week");
+        };
+
+        const pastMonthClosingPrices = async (stock) => {
+            let res = await fetchPastMonthClosingPrices(stock);
+
+            let closingPrices = res["closingPrices"];
+            let datetimeLabels = res["datetimeLabels"];
+
+            let priceChanged = closingPrices[closingPrices.length - 1] - closingPrices[0]
+            let percentChanged = ((closingPrices[closingPrices.length - 1] - closingPrices[0]) / closingPrices[0]) * 100;
+
+            setPrices(closingPrices);
+            setTimeLabels(datetimeLabels);
+            setAmountChanged(priceChanged);
+            setPercentChanged(percentChanged.toFixed(2));
+            setTimeSelectionLabel("Past Month");
+        };
+
+        const pastThreeMonthClosingPrices = async (stock) => {
+            let res = await fetchPastThreeMonthClosingPrices(stock);
+
+            let closingPrices = res["closingPrices"];
+            let datetimeLabels = res["datetimeLabels"];
+
+            let priceChanged = closingPrices[closingPrices.length - 1] - closingPrices[0]
+            let percentChanged = ((closingPrices[closingPrices.length - 1] - closingPrices[0]) / closingPrices[0]) * 100;
+
+            setPrices(closingPrices);
+            setTimeLabels(datetimeLabels);
+            setAmountChanged(priceChanged);
+            setPercentChanged(percentChanged.toFixed(2));
+            setTimeSelectionLabel("Past 3 Months");
+        };
+
+        const pastYearClosingPrices = async (stock) => {
+            let res = await fetchPastYearClosingPrices(stock);
+
+            let closingPrices = res["closingPrices"];
+            let datetimeLabels = res["datetimeLabels"];
+
+            let priceChanged = closingPrices[closingPrices.length - 1] - closingPrices[0]
+            let percentChanged = ((closingPrices[closingPrices.length - 1] - closingPrices[0]) / closingPrices[0]) * 100;
+
+            setPrices(closingPrices);
+            setTimeLabels(datetimeLabels);
+            setAmountChanged(priceChanged);
+            setPercentChanged(percentChanged.toFixed(2));
+            setTimeSelectionLabel("Past Year");
+        };
+
+        const initializeCharts = async () => {
+            if (timeSelection === "Live") await getLiveData(symbol);
+            else if (timeSelection === "1W") await pastWeekClosingPrices(symbol);
+            else if (timeSelection === "1M") await pastMonthClosingPrices(symbol);
+            else if (timeSelection === "3M") await pastThreeMonthClosingPrices(symbol);
+            else if (timeSelection === "1Y") await pastYearClosingPrices(symbol);
+            setGraphLoaded(true);
+        };
+        initializeCharts();
+
+    }, [timeSelection]);
+
+
+    const handleTimeSelection = (selection) => {
+        setTimeSelection(selection)
+    }
+
+    if (APICallsExceededCheck) {
+        return (
+            <>
+            <DashboardNav />
+            <APICallsExceeded symbol={symbol} reset={setAPICallsExceededCheck}/>
+            </>
+        )
+    }
+
+    return (
         <>
             <DashboardNav />
+            {!isLoaded && (
+                <LoadingSpinner />
+            )}
             {isLoaded && (<div className="details-page-main-container">
                 <div className="details-page-left-container">
                     <div className="details-page-title-and-price">
                         <h1 className="details-page-title">{assetDetails.Name}</h1>
                         <div className="details-page-price">
-                            ${assetQuote.c}
+                            ${numberWithCommas(assetQuote.c)}
                         </div>
-                        <div className={`details-page-delta ${assetQuote.d < 0 ? "red" : "green"}`}>
-                            {assetQuote.d < 0 ? "-" : "+"}${Math.abs(assetQuote.d)} {`(${assetQuote.dp.toFixed(2)}%)`}
-                        </div>
+                        {liveDataAvailable ? (
+                            <div className={`details-page-delta ${amountChanged < 0 ? "red" : "green"}`}>
+                                {amountChanged < 0 ? "-" : "+"}${Math.abs(amountChanged).toFixed(2)} {`(${percentChanged}%)`} {timeSelectionLabel}
+                            </div>
+                        ) : (
+                            <div className={`details-page-delta red`}>
+                                {"$- (-%)"}
+                            </div>
+                        )}
                     </div>
                     <div className="details-page-graph-container">
-                        <LineChart labels={weekDateLabels} prices={weekClosingPrices} />
+                        {graphLoaded && liveDataAvailable && (<LineChart labels={timeLabels} prices={prices} />)}
+                        {!graphLoaded && (<LoadingSpinner />)}
+                        {!liveDataAvailable && (
+                            <div className="details-page-no-live-data">NO LIVE DATA AVAILABLE</div>
+                        )}
                     </div>
                     <div className="details-page-graph-timeline">
-                        <ChartTimeLine />
+                        <ChartTimeLine handleClick={handleTimeSelection} time={timeSelection} delta={amountChanged}/>
                     </div>
-                    <div className="details-page-about narrow">
+                    {assetDetails.Description != "None" && (<div className="details-page-about narrow">
                         <div className="details-page-about-header">About</div>
                         <p className="details-page-about-details">
                             {assetDetails.Description}
                         </p>
-                        {showLink && (
-                            <div
-                                onClick={() => setToggleShowMore(!toggleShowMore)}
-                            >
-                                {toggleShowMore ? "show more" : "show less"}
-                            </div>
-                        )}
-                        {/* <div className="details-page-about-tidbits-container">
-                        <div className="details-page-about-tidbit">
-                            <div>
-                                CEO
-                            </div>
-                            <div>
-                                { }
-                            </div>
-                        </div>
-                        <div className="details-page-about-tidbit">
-                            <div>
-                                Employees
-                            </div>
-                            <div>
-                                { }
-                            </div>
-                        </div>
-                        <div className="details-page-about-tidbit">
-                            <div>
-                                Headquarters
-                            </div>
-                            <div>
-                                { }
-                            </div>
-                        </div>
-                        <div className="details-page-about-tidbit">
-                            <div>
-                                Founded
-                            </div>
-                            <div>
-                                { }
-                            </div>
-                        </div>
-                    </div> */}
-                    </div>
+                    </div>)}
                     <div className="details-page-about-header">Key Statistics</div>
                     <div className="details-page-about-key-statistics-container">
                         <KeyStatistics details={assetDetails} quote={assetQuote} />
@@ -396,9 +510,9 @@ function DetailsPage() {
                     </div>
                 </div>
                 <div className="details-page-right-container">
-                    <BuySellForm quote={assetQuote} />
+                    <BuySellForm quote={assetQuote} amountChanged={amountChanged} />
                     <button
-                        className={`details-page-right-container-add-to-lists-button ${assetQuote.d < 0 ? "red" : "green"}`}
+                        className={`details-page-right-container-add-to-lists-button ${amountChanged < 0 ? "red" : "green"}`}
                     >
                         <div>
                             + Add to Lists
