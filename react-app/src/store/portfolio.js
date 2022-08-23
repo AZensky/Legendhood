@@ -5,8 +5,26 @@ const setPortfolio = (portfolio) => ({
   payload: portfolio
 });
 
-export const purchaseSellStocksThunk = (order) => async (dispatch) => {
+export const purchaseStocksThunk = (order) => async (dispatch) => {
     const response = await fetch(`/api/portfolio/${order.user_id}/stocks`,{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(order)
+    })
+
+    const data = await response.json();
+    if (response.ok) {
+        await dispatch(getUserPortfolioThunk(order.user_id))
+        return data;
+    } else {
+        return data;
+    }
+}
+
+export const sellStocksThunk = (order) => async (dispatch) => {
+    const response = await fetch(`/api/portfolio/${order.user_id}/stocks/${order.symbol}`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
