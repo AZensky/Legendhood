@@ -19,6 +19,7 @@ import LoadingSpinner from "../LoadingSpinner";
 import GraphLoadingSpinner from "../GraphLoadingSpinner";
 import APICallsExceeded from "../APICallsExceeded/Index";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import STOCKSLIST from "../../util/stock_list.json"
 import STOCKLISTOBJ from "../../util/stock_list_obj.json"
 
 function DetailsPage() {
@@ -440,12 +441,7 @@ function DetailsPage() {
         }
     }, [timeSelection]);
 
-
-    const handleTimeSelection = (selection) => {
-        setTimeSelection(selection)
-    }
-
-    if (!STOCKLISTOBJ[symbol]) {
+   if (!STOCKLISTOBJ[symbol]) {
         return (
             <PageNotFound />
         )
