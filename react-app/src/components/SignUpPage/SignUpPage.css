@@ -59,7 +59,14 @@ svg.signup-logo {
 .signup-form-container {
   width: 80%;
   padding: 2rem;
-  margin-top: 5rem;
+  margin-top: 4rem;
+}
+
+.signup-free-stock {
+  font-size: 13px;
+  color: #000001;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
 }
 
 .signup-form {
