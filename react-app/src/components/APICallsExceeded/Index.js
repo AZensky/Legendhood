@@ -19,21 +19,21 @@ function APICallsExceeded({ symbol, reset }) {
                 </p>)}
                 {!noSymbol && (<div className="api-calls-exceeded-buttons-div">
                     <button
-                        className="details-page-buy-sell-stock button green API"
+                        className="details-page-buy-sell-stock button red API"
                         onClick={() => reset(false)}
                     >
                         {`Return to ${symbol}`}
                     </button>
                     <button
-                        className="details-page-buy-sell-stock button green API"
+                        className="details-page-buy-sell-stock button red API"
                         onClick={() => history.push(`/`)}
                     >
                         Return to dashboard
                     </button>
                 </div>)}
-                {noSymbol && (<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                {noSymbol && (<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style={{textDecoration: "none"}}>
                     <button
-                        className="details-page-buy-sell-stock button"
+                        className="details-page-buy-sell-stock button green API"
                     >
                         Return to dashboard
                     </button>

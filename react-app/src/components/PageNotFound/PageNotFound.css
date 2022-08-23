@@ -1,0 +1,43 @@
+
+.page-not-found-h1 {
+    margin-top: 7rem;
+    font-size: 24px;
+    font-weight: lighter;
+    color: white;
+}
+
+.page-not-found-h2 {
+    color: white;
+}
+
+.page-not-found-text {
+    font-size: 15px;
+    color: white;
+}
+
+.page-not-found-main-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: black;
+}
+
+.page-not-found-container-left {
+    padding: 2% 2%;
+    width:19%
+}
+
+.page-not-found-container-right {
+    width: 30%;
+}
+
+.page-not-found-button-div {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.details-page-buy-sell-stock.button.green.page-not-found {
+    color: black;
+    margin-top: 2rem;
+    width: 40%;
+}
