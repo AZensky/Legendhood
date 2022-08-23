@@ -83,6 +83,9 @@ export const createOneWatchlist = (payload) => async (dispatch) => {
     const response = await fetch('/api/watchlists',
         {
             method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 name,
             }),
@@ -97,6 +100,9 @@ export const createOneWatchlist = (payload) => async (dispatch) => {
 export const editOneWatchlist = (id, payload) => async (dispatch) => {
     const response = await fetch(`/api/watchlists/${id}`, {
         method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(payload),
     });
     if (response.ok) {

@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Watchlist, WatchlistStock, db
+from app.forms import CreateWatchlistForm, EditWatchlistForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
 
@@ -56,7 +57,9 @@ def create_watchlist():
 
         db.session.add(new_watchlist)
         db.session.commit()
-
+        
+        return new_watchlist.to_dict()
+    
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -74,6 +77,8 @@ def edit_watchlist(watchlistid):
         watch_list = Watchlist.query.get(watchlistid)
         watch_list.name = data['name']
         db.session.commit()
+        
+        return watch_list.to_dict()
 
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
