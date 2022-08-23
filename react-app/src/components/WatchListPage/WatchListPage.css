@@ -237,3 +237,21 @@ div.watchlist-row>div:first-child {
 .test {
     font-size: large;
 }
+
+.watchlist-createlist-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+.watchlist-createlist-dropdown-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.watchlist-dropdown-card-content button {
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 13px;
+    font-weight: bold;
+}
