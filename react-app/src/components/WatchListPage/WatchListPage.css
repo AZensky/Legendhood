@@ -25,6 +25,15 @@
 
 .watchlist-scroll-listname {
     font-size: 23px;
+    padding: 10px 280px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.watchlist-scroll-listname:hover {
+    background-color: rgb(245, 248, 250);
 }
 
 .watchlist-scroll-ellipsisicon button {
@@ -242,6 +251,12 @@ div.watchlist-row>div:first-child {
 
 .watchlist-dropdown-x-mark {
     font-size: large;
+    vertical-align: middle;
+}
+
+.watchlist-dropdown-span {
+    margin-left: 10px;
+    vertical-align: middle;
 }
 
 .watchlist-createlist-dropdown {
@@ -261,3 +276,12 @@ div.watchlist-row>div:first-child {
     font-size: 13px;
     font-weight: bold;
 }
+
+/* .watchlist-scroll-title button {
+    width: 240px;
+}
+
+.watchlist-scroll-title button:hover {
+    background-color: rgb(245, 248, 250);
+
+} */

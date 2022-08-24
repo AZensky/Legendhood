@@ -52,12 +52,15 @@ function WatchListDropdown({ watchlistName, watchlist_Id }) {
             </div> */}
 
             <div className="watchlist-dropdown-card">
-              <div className="watchlist-dropdown-card-content watchlist-dropdown-x-mark">
-                <i class="fa-solid fa-circle-xmark"></i>
-              </div>
               <div className="watchlist-dropdown-card-content">
                 <button className="watchlist-button" onClick={deleteList}>
-                  Delete {watchlistName}</button>
+                  <span className="watchlist-dropdown-x-mark">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                  </span>
+                  <span className="watchlist-dropdown-span">
+                    Delete {watchlistName}
+                  </span>
+                </button>
               </div>
             </div>
 
