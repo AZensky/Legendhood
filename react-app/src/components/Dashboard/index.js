@@ -396,8 +396,6 @@ function Dashboard() {
     setTimeSelection(selection);
   }
 
-  console.log("LIVE DATA", liveDataAvailable);
-
   return (
     <div className="dashboard-container">
       <DashboardNav />
