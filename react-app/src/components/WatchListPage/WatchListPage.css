@@ -298,15 +298,6 @@ div.watchlist-row>div:first-child {
     font-weight: bold;
 }
 
-/* .watchlist-scroll-title button {
-    width: 240px;
-}
-
-.watchlist-scroll-title button:hover {
-    background-color: rgb(245, 248, 250);
-
-} */
-
 .watchlist-cancel-button {
     background-color: white;
     font-weight: bolder;
