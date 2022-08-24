@@ -819,6 +819,10 @@
         "Symbol": "GM",
         "Name": "General Motors Company"
     },
+    "GME": {
+        "Symbol": "GME",
+        "Name": "GameStop"
+    },
     "GNRC": {
         "Symbol": "GNRC",
         "Name": "Generac Holdings Inc."
@@ -1327,6 +1331,10 @@
         "Symbol": "NI",
         "Name": "NiSource Inc"
     },
+    "NIO": {
+        "Symbol": "NIO",
+        "Name": "Nio"
+    },
     "NKE": {
         "Symbol": "NKE",
         "Name": "NIKE Inc. Class B"
@@ -1406,6 +1414,10 @@
     "OKE": {
         "Symbol": "OKE",
         "Name": "ONEOK Inc."
+    },
+    "OKTA": {
+        "Symbol": "OKTA",
+        "Name": "Okta"
     },
     "OMC": {
         "Symbol": "OMC",

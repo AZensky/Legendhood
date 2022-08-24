@@ -1,21 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import DashboardNav from "../DashboardNavbar";
+import LoadingSpinner from "../LoadingSpinner";
+import Footer from "../Footer";
+import WatchListDropdown from "./WatchListDropdown";
+import "./WatchListPage.css";
 import {
     clearCurrentWatchlist,
     getWatchlist,
     loadWatchlists,
+    createOneWatchlist,
+    editOneWatchlist,
+    deleteOneStock,
 } from "../../store/watchlist";
-import DashboardNav from "../DashboardNavbar";
-import LoadingSpinner from "../LoadingSpinner";
-// import WatchlistStockCard from "./WatchlistStockCard";
-import WatchListDropdown from "./WatchListDropdown"
-import "./WatchListPage.css";
 
 function WatchListPage() {
-    const [isLoaded, setIsLoaded] = useState(false);
+
     const dispatch = useDispatch();
     const history = useHistory();
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [isShown, setIsShown] = useState(false);
+    const [isEditShown, setIsEditShown] = useState(true);
+    const [showEdit, setShowEdit] = useState(false)
+    const [name, setName] = useState("");
+
+    const [showMenu, setShowMenu] = useState(false);
+
+    const openMenu = () => {
+        if (showMenu) return;
+        setShowMenu(true);
+    };
+
+    useEffect(() => {
+        if (!showMenu) return;
+
+        const closeMenu = () => { setShowMenu(false); };
+
+        document.addEventListener("click", closeMenu);
+
+        return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
 
     //get watchlist by id
     const { watchlistId } = useParams();
@@ -55,14 +80,41 @@ function WatchListPage() {
     }
 
     function ClickList(e) {
-        setIsLoaded(false)
+        setIsLoaded(false);
         const listId = e.currentTarget.id;
         history.push(`/watchlists/${listId}`);
     }
+    function listnameclick() {
+        setShowEdit(true)
+    }
+    function showCreateList() {
+        // dispatch
+        setIsShown((current) => !current);
+    }
+
+    function clickCancel() {
+        setIsShown(false);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await dispatch(createOneWatchlist({ name })).then((watchlist) =>
+            history.push(`/watchlists/${watchlist?.id}`)
+        );
+        setIsShown(false);
+    };
+
+    const handleEditSubmit = async (e) => {
+        e.preventDefault();
+        await dispatch(editOneWatchlist(watchlistId, { name })).then((watchlist) =>
+            history.push(`/watchlists/${watchlist?.id}`)
+        );
+        setIsEditShown(false);
+    };
 
     function deleteStock(e) {
         const stocksym = e.currentTarget.id;
-        dispatch(watchlistId, stocksym);
+        dispatch(deleteOneStock(watchlistId, stocksym));
     }
 
     return (
@@ -80,15 +132,38 @@ function WatchListPage() {
                         </div>
 
                         <div className="watchlist-scroll-title">
-                            <div className="watchlist-scroll-listname">{watchlist.name}</div>
+                            {(!showEdit) && (
+
+                                <div className="watchlist-scroll-listname" onClick={listnameclick}>
+                                    {watchlist?.name}
+                                </div>
+
+
+                            )}
+                            {showEdit && (
+                                <div>
+                                    <form onSubmit={handleEditSubmit}>
+                                        <input
+                                            type="text"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            required
+                                        ></input>
+                                        <button type="submit">yes</button>
+                                    </form>
+                                </div>
+                            )}
                             <div className="watchlist-scroll-ellipsisicon">
-                                <WatchListDropdown watchlistName={watchlist.name} />
+                                <WatchListDropdown
+                                    watchlistName={watchlist?.name}
+                                    watchlist_Id={watchlistId}
+                                />
                             </div>
                         </div>
 
                         <div className="watchlist-itemnum">
                             {" "}
-                            {watchlist.watchlistStocks.length} items
+                            {watchlist?.watchlistStocks.length} items
                         </div>
                         <div className="watchlist-table">
                             <header className="watchlist-row">
@@ -99,12 +174,16 @@ function WatchListPage() {
                                 <div>Market Cap</div>
                                 <div></div>
                             </header>
-                            {watchlist.watchlistStocks.map((stock) => (
+                            {watchlist?.watchlistStocks.map((stock) => (
                                 <div id={stock.symbol} className="watchlist-row">
                                     <div onClick={ClickStock}>{stock.name}</div>
                                     <div onClick={ClickStock}>{stock.symbol}</div>
-                                    <div onClick={ClickStock}>${getPercentOnly(stock.currentPrice)}</div>
-                                    <div onClick={ClickStock}>{getPercentChangeCell(stock.percentChange)}</div>
+                                    <div onClick={ClickStock}>
+                                        ${getPercentOnly(stock.currentPrice)}
+                                    </div>
+                                    <div onClick={ClickStock}>
+                                        {getPercentChangeCell(stock.percentChange)}
+                                    </div>
                                     <div onClick={ClickStock}>{convertNum(stock.marketCap)}</div>
                                     <div>
                                         <button
@@ -124,9 +203,53 @@ function WatchListPage() {
                         <div className="watchlist-sticky-title">
                             <div className="watchlist-sticky-list">Lists</div>
                             <div className="watchlis-sticky-plus-sign">
-                                <button className="watchlist-button">+</button>
+                                <button className="watchlist-button" onClick={showCreateList}>
+                                    +
+                                </button>
                             </div>
                         </div>
+
+                        {isShown && (
+                            <div className="watchlist-createlist-dropdown">
+                                <div className="watchlist-createlist-dropdown-row">
+                                    <div>
+                                        <div>
+                                            <img
+                                                className="watchlist-lightning-logo-2"
+                                                alt="⚡"
+                                                src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
+                                            ></img>
+                                        </div>
+                                        <div>
+                                            <form onSubmit={handleSubmit}>
+                                                <input
+                                                    type="text"
+                                                    value={name}
+                                                    onChange={(e) => setName(e.target.value)}
+                                                    required
+                                                ></input>
+                                                <div className="watchlist-createlist-dropdown-row">
+                                                    <div>
+                                                        <button
+                                                            type="button"
+                                                            className="watchlist-button"
+                                                            onClick={clickCancel}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="submit" className="watchlist-button">
+                                                            Create List
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         {watchlists.map((list) => (
                             <>
@@ -152,6 +275,8 @@ function WatchListPage() {
             ) : (
                 <LoadingSpinner />
             )}
+
+            {isLoaded && <Footer />}
         </>
     );
 }

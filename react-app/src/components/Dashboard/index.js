@@ -7,6 +7,7 @@ import NewsArticle from "../NewsArticle";
 import ChartTimeLine from "../ChartTimeLine";
 import LoadingSpinner from "../LoadingSpinner";
 import GraphLoadingSpinner from "../GraphLoadingSpinner";
+import Footer from "../Footer";
 import {
   unixToDate,
   fetchPastWeekClosingPrices,
@@ -34,6 +35,7 @@ function Dashboard() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [graphLoaded, setGraphLoaded] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
+  const [liveDataAvailable, setLiveDataAvailable] = useState(true);
   const [amountChanged, setAmountChanged] = useState(0);
   const [portfolioPercentChanged, setPortfolioPercentChanged] = useState(0);
   const [portfolioMarketValue, setPortfolioMarketValue] = useState(0);
@@ -93,6 +95,7 @@ function Dashboard() {
 
   useEffect(() => {
     setGraphLoaded(false);
+    // setLiveDataAvailable(true);
 
     const getUserStocks = async () => {
       let data = await fetchUserStocks(user.id);
@@ -107,6 +110,10 @@ function Dashboard() {
 
       for (let stock in userStocks) {
         let res = await fetchLiveStockData(stock);
+        if (res === "Not Available") {
+          setLiveDataAvailable(false);
+          return;
+        }
 
         let quantityOwned = userStocks[stock];
         let closingPrices = res["closingPrices"];
@@ -384,6 +391,8 @@ function Dashboard() {
     setTimeSelection(selection);
   }
 
+  console.log("LIVE DATA", liveDataAvailable);
+
   return (
     <div className="dashboard-container">
       <DashboardNav />
@@ -397,10 +406,11 @@ function Dashboard() {
                 ${numberWithCommas(portfolioMarketValue)}
               </p>
               <p
-                className={`user-portfolio-percent-changed ${portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                className={`user-portfolio-percent-changed ${
+                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
                     ? "positive"
                     : "negative"
-                  }`}
+                }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
@@ -410,7 +420,18 @@ function Dashboard() {
               </p>
               {graphLoaded ? (
                 <div className="dashboard-chart-container">
-                  <LineChart labels={timeLabels} prices={prices} />
+                  {timeSelection === "Live" && liveDataAvailable && (
+                    <LineChart labels={timeLabels} prices={prices} />
+                  )}
+                  {timeSelection === "Live" && !liveDataAvailable && (
+                    <div className="dashboard-no-live-data">
+                      <p>Market is currently closed, no live data available</p>
+                    </div>
+                  )}
+
+                  {timeSelection !== "Live" && (
+                    <LineChart labels={timeLabels} prices={prices} />
+                  )}
                 </div>
               ) : (
                 <div className="dashboard-chart-container">
@@ -421,6 +442,7 @@ function Dashboard() {
                 handleClick={handleTimeSelection}
                 time={timeSelection}
                 delta={amountChanged}
+                graphLoaded={graphLoaded}
               />
             </div>
 
@@ -466,6 +488,7 @@ function Dashboard() {
                       sharesOwned={company.sharesOwned}
                       labels={timeLabels}
                       prices={individualPriceLabels[idx]}
+                      liveDataAvailable={liveDataAvailable}
                     />
                   </Link>
                 ))}
@@ -475,6 +498,7 @@ function Dashboard() {
       ) : (
         <LoadingSpinner />
       )}
+      {pageLoaded && <Footer />}
     </div>
   );
 }

@@ -13,7 +13,6 @@ function SearchBar() {
         if (searchTerm.length) {
             setShowMenu(true);
             setSearchResult(filterStocks(searchTerm));
-            console.log('searchResult', searchResult)
         } else {
             setShowMenu(false);
             setSearchResult([]);

@@ -26,8 +26,6 @@ function LineChart({ labels, prices }) {
 
   const [chartOptions, setChartOptions] = useState();
 
-  console.log(prices);
-
   const increasing = prices[0] <= prices[prices.length - 1];
 
   const graphColor = increasing ? "rgb(0, 200, 5)" : "rgb(255,80,0)";

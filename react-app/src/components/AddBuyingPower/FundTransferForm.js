@@ -9,8 +9,8 @@ function FundTransferForm({ onClose }) {
     const history = useHistory();
     const user = useSelector(state => state.session.user);
     const [amount, setAmount] = useState(0.00);
-    const [from, setFrom] = useState('');
-    const [to, setTo] = useState('');
+    const [fromAccount, setFromAccount] = useState('bank account');
+    const [to, setTo] = useState('legendhood');
     const [errors, setErrors] = useState([]);
 
     const handleSumbit = async (e) => {
@@ -18,7 +18,7 @@ function FundTransferForm({ onClose }) {
         setErrors([]);
         const newTransfer = {
             amount,
-            from,
+            from_account: fromAccount,
             to,
         }
 
@@ -27,7 +27,7 @@ function FundTransferForm({ onClose }) {
             if (data) {
                 setErrors(data);
             } else {
-                history.push('/dashboard');
+                onClose();
             }
         }
     }
@@ -61,9 +61,9 @@ function FundTransferForm({ onClose }) {
                     <label>
                         From
                         <select
-                            name='from'
-                            value={from}
-                            onChange={(e) => setFrom(e.target.value)}
+                            name='fromAccount'
+                            value={fromAccount}
+                            onChange={(e) => setFromAccount(e.target.value)}
                             required
                         >
                             <option value='bank account'>Bank Account</option>
