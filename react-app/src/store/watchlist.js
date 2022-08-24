@@ -143,7 +143,6 @@ export default function watchlistRuducer(state = initialState, action) {
             newState = { ...state, currentWatchlist: action.payload }
             return newState;
         case EDIT_WATCHLIST:
-            debugger
             newState = {
                 ...state,
                 currentWatchlist: {

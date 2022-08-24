@@ -21,7 +21,6 @@ function WatchListPage() {
     const history = useHistory();
     const [isLoaded, setIsLoaded] = useState(false);
     const [isShown, setIsShown] = useState(false);
-    const [isEditShown, setIsEditShown] = useState(true);
     const [showEdit, setShowEdit] = useState(false)
     const [name, setName] = useState("");
 
@@ -46,17 +45,16 @@ function WatchListPage() {
     const { watchlistId } = useParams();
 
     useEffect(() => {
+        setIsLoaded(false)
         const intializeWatchlistPage = async () => {
             await dispatch(getWatchlist(watchlistId));
             await dispatch(loadWatchlists());
             setIsLoaded(true);
         };
-
         intializeWatchlistPage();
 
         return () => {
             dispatch(clearCurrentWatchlist());
-            setIsLoaded(false);
         };
     }, [dispatch, watchlistId]);
 
@@ -79,7 +77,6 @@ function WatchListPage() {
     }
 
     function clickList(e) {
-        setIsLoaded(false);
         const listId = e.currentTarget.id;
         history.push(`/watchlists/${listId}`);
     }
@@ -106,7 +103,6 @@ function WatchListPage() {
     const handleEditSubmit = async (name) => {
         await dispatch(editOneWatchlist(watchlistId, { name }));
         dispatch(loadWatchlists());
-        setName(name);
         setShowEdit(false)
     };
 
@@ -132,7 +128,7 @@ function WatchListPage() {
                         <div className="watchlist-scroll-title">
                             {(!showEdit) && (
                                 <div className={"watchlist-scroll-listname"} onClick={listnameClick}>
-                                    {watchlist.name}
+                                    {watchlist?.name}
                                 </div>
                             )}
                             {showEdit && (
@@ -141,8 +137,7 @@ function WatchListPage() {
                                         className={"watchlist-scroll-listname"}
                                         type="text"
                                         autoFocus
-                                        defaultValue={watchlist.name}
-                                        onChange={(e) => setName(e.target.value)}
+                                        defaultValue={watchlist?.name}
                                         onBlur={(e) => {
                                             handleEditSubmit(e.target.value)
                                         }}
@@ -214,41 +209,42 @@ function WatchListPage() {
                         {isShown && (
                             <div className="watchlist-createlist-dropdown">
                                 <div className="watchlist-createlist-dropdown-row">
-                                    <div>
-                                        <div>
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="watchlist-createlist-dropdown-content">
                                             <img
-                                                className="watchlist-lightning-logo-2"
+                                                className="watchlist-lightning-logo-3"
                                                 alt="⚡"
                                                 src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
                                             ></img>
+                                            <input
+                                                className="watchlist-createlist-input"
+                                                type="text"
+                                                placeholder="List Name"
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                required
+                                            />
                                         </div>
-                                        <div>
-                                            <form onSubmit={handleSubmit}>
-                                                <input
-                                                    type="text"
-                                                    value={name}
-                                                    onChange={(e) => setName(e.target.value)}
-                                                    required
-                                                ></input>
-                                                <div className="watchlist-createlist-dropdown-row">
-                                                    <div>
-                                                        <button
-                                                            type="button"
-                                                            className="watchlist-button"
-                                                            onClick={clickCancel}
-                                                        >
-                                                            Cancel
-                                                        </button>
-                                                    </div>
-                                                    <div>
-                                                        <button type="submit" className="watchlist-button">
-                                                            Create List
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                        <div className="watchlist-createlist-dropdown-row">
+                                            <div>
+                                                <button
+                                                    type="button"
+                                                    className="watchlist-cancel-button"
+                                                    onClick={clickCancel}
+                                                >
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <button
+                                                    type="submit"
+                                                    className="watchlist-confirm-button"
+                                                >
+                                                    Create List
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         )}
