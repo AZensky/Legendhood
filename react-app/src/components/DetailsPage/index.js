@@ -497,7 +497,7 @@ function DetailsPage() {
                         )}
                     </div>
                     <div className="details-page-graph-timeline">
-                        <ChartTimeLine handleClick={handleTimeSelection} time={timeSelection} delta={amountChanged} graphLoaded={graphLoaded}/>
+                        <ChartTimeLine handleClick={handleTimeSelection} time={timeSelection} delta={amountChanged} graphLoaded={graphLoaded} />
                     </div>
                     {assetDetails.Description != "None" && (<div className="details-page-about narrow">
                         <div className="details-page-about-header">About</div>
@@ -528,9 +528,9 @@ function DetailsPage() {
                     </div>
                 </div>
                 <div className="details-page-right-container">
+                    <div className="details-page-right-container-inner"></div>
                     <BuySellForm quote={assetQuote} amountChanged={amountChanged} />
-                    <ZAddToWatchlistModal amountChanged={amountChanged}/>
-                    {/* <ZAddToWatchlistForm /> */}
+                    <ZAddToWatchlistModal amountChanged={amountChanged} />
                 </div>
             </div>)}
             {isLoaded && (<Footer />)}

@@ -124,9 +124,13 @@ function BuySellForm({ quote, amountChanged }) {
                             Shares
                         </div>
                         <input
+                            type="number"
                             className={`details-page-buy-sell-stock-input ${amountChanged < 0 ? "red" : "green"}`}
-                            onChange={e => setShares(Number(e.target.value))}
-                            placeholder={0}
+                            onChange={e => {
+                                setShares(Number(e.target.value))
+                            }}
+                            min={0}
+                            // placeholder={0}
                             value={shares}
                         >
                         </input>
@@ -143,7 +147,7 @@ function BuySellForm({ quote, amountChanged }) {
                     </div>
                     <div className="details-page-buy-sell-stock-estimated-cost">
                         <span className="details-page-buy-sell-stock-estimated-cost-label">Estimated Cost</span>
-                        <span> ${numberWithCommas((shares * quote.c).toFixed(2))}</span>
+                        <span className="details-page-buy-sell-stock-estimated-cost-label-price"> ${numberWithCommas((shares * quote.c).toFixed(2))}</span>
                     </div>
                     {errors.length > 0 && (
                         <div className="details-page-buy-sell-stock-errors">
