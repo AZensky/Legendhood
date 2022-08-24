@@ -425,7 +425,7 @@ function Dashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (name.length < 15) {
+    if (name.length <= 15) {
       await dispatch(createOneWatchlist({ name })).then((watchlist) =>
         history.push(`/watchlists/${watchlist?.id}`)
       );
@@ -449,8 +449,8 @@ function Dashboard() {
               </p>
               <p
                 className={`user-portfolio-percent-changed ${portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
-                    ? "positive"
-                    : "negative"
+                  ? "positive"
+                  : "negative"
                   }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (

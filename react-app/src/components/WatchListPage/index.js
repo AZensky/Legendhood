@@ -104,7 +104,7 @@ function WatchListPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (name.length < 15) {
+        if (name.length <= 15) {
             await dispatch(createOneWatchlist({ name })).then((watchlist) =>
                 history.push(`/watchlists/${watchlist?.id}`))
             setIsShown(false);
@@ -116,7 +116,7 @@ function WatchListPage() {
     };
 
     const handleEditSubmit = async (name) => {
-        if (name.length < 15) {
+        if (name.length <= 15) {
             setEditErrors([])
             await dispatch(editOneWatchlist(watchlistId, { name }));
             setShowEdit(false)
