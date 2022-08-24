@@ -39,7 +39,7 @@ function LogInPage() {
             <div className='login-page-right-panel'>
                 <div className='login-form'>
                     <form onSubmit={handleSubmit}>
-                        <p>Log in to Robinhood</p>
+                        <p>Log in to Legendhood</p>
                         <ul>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
@@ -72,7 +72,7 @@ function LogInPage() {
                             <button onClick={loginDemoUser}>Demo User</button>
                         </div>
                         <div className='login-page-signup'>
-                            <span>Not on Robinhood?</span>
+                            <span>Not on Legendhood?</span>
                             <Link to='/signup'>Create an account</Link>
                         </div>
                     </form>
