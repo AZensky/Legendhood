@@ -27,7 +27,7 @@
   position: absolute;
   top: 200px;
   left: 75%;
-  z-index: 4;
+  /* z-index: 4; */
   animation: change1 20s infinite;
 }
 
@@ -35,7 +35,7 @@
   0% {
     top: 200px;
     left: 75%;
-    z-index: 4;
+    z-index: 3001;
   }
 
   25% {
@@ -47,19 +47,19 @@
   50% {
     top: 100px;
     left: 55%;
-    z-index: 2;
+    z-index: 1001;
   }
 
   75% {
     top: 150px;
     left: 65%;
-    z-index: 3;
+    z-index: 2001;
   }
 
   100% {
     top: 200px;
     left: 75%;
-    z-index: 4;
+    z-index: 3001;
   }
 }
 
@@ -67,7 +67,7 @@
   position: absolute;
   top: 150px;
   left: 65%;
-  z-index: 3;
+  /* z-index: 3; */
   animation: change2 20s infinite;
 }
 
@@ -75,13 +75,13 @@
   0% {
     top: 150px;
     left: 65%;
-    z-index: 3;
+    z-index: 2001;
   }
 
   25% {
     top: 200px;
     left: 75%;
-    z-index: 4;
+    z-index: 3001;
   }
 
   50% {
@@ -93,13 +93,13 @@
   75% {
     top: 100px;
     left: 55%;
-    z-index: 2;
+    z-index: 1001;
   }
 
   100% {
     top: 150px;
     left: 65%;
-    z-index: 3;
+    z-index: 2001;
   }
 }
 
@@ -114,19 +114,19 @@
   0% {
     top: 100px;
     left: 55%;
-    z-index: 2;
+    z-index: 1001;
   }
 
   25% {
     top: 150px;
     left: 65%;
-    z-index: 3;
+    z-index: 2001;
   }
 
   50% {
     top: 200px;
     left: 75%;
-    z-index: 4;
+    z-index: 3001;
   }
 
   75% {
@@ -138,7 +138,7 @@
   100% {
     top: 100px;
     left: 55%;
-    z-index: 2;
+    z-index: 1001;
   }
 }
 
@@ -159,19 +159,19 @@
   25% {
     top: 100px;
     left: 55%;
-    z-index: 2;
+    z-index: 1001;
   }
 
   50% {
     top: 150px;
     left: 65%;
-    z-index: 3;
+    z-index: 2001;
   }
 
   75% {
     top: 200px;
     left: 75%;
-    z-index: 4;
+    z-index: 3001;
   }
 
   100% {
