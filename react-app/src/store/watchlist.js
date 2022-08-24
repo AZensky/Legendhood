@@ -51,10 +51,15 @@ export const getWatchlist = (id) => async (dispatch) => {
 }
 
 export const loadWatchlists = () => async (dispatch) => {
+    console.log("BEFORE THE IF!")
     const response = await fetch(`/api/watchlists`)
     if (response.ok) {
         const watchlists = await response.json();
+        console.log("HBKBHJBNLJJHVIBKB", watchlists)
         dispatch(loadAllWatchlists(watchlists.watchlists))
+        return watchlists
+    } else {
+        console.log("NOOOOOOOOOOOOOOOOOOOOOOOOO")
     }
 
 }
@@ -79,7 +84,7 @@ export default function watchlistRuducer(state = initialState, action) {
             newState = { ...state, currentWatchlist: action.payload }
             return newState;
         case LOAD_WATCHLISTS:
-            newState = { ...state, watchlists: action.payload }
+            newState = {watchlists: action.payload }
             return newState;
         // case DELETE_WATCHLIST_STOCK:
         //     const stocktodelete =
