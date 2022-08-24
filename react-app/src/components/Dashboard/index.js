@@ -21,15 +21,13 @@ import {
   getCommonKeys,
   numberWithCommas,
 } from "../../util/stocks-api";
-import {
-  loadWatchlists,
-} from "../../store/watchlist";
+import { loadWatchlists } from "../../store/watchlist";
 import "./Dashboard.css";
 import { Link, useHistory } from "react-router-dom";
 
 function Dashboard() {
-  const history = useHistory()
-  const dispatch = useDispatch()
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [companyData, setCompanyData] = useState([]);
   const [marketNews, setMarketNews] = useState([]);
   const [timeSelection, setTimeSelection] = useState("Live");
@@ -46,6 +44,10 @@ function Dashboard() {
   const [portfolioMarketValue, setPortfolioMarketValue] = useState(0);
 
   const user = useSelector((state) => state.session.user);
+
+  const watchlists = useSelector((state) => {
+    return state.watchlist.watchlists;
+  });
 
   useEffect(() => {
     let fetchedData = [];
@@ -402,11 +404,6 @@ function Dashboard() {
     setTimeSelection(selection);
   }
 
-
-  const watchlists = useSelector((state) => {
-    return state.watchlist.watchlists;
-  });
-
   function clickList(e) {
     const listId = e.currentTarget.id;
     history.push(`/watchlists/${listId}`);
@@ -425,10 +422,11 @@ function Dashboard() {
                 ${numberWithCommas(portfolioMarketValue)}
               </p>
               <p
-                className={`user-portfolio-percent-changed ${portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
-                  ? "positive"
-                  : "negative"
-                  }`}
+                className={`user-portfolio-percent-changed ${
+                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                    ? "positive"
+                    : "negative"
+                }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
@@ -516,11 +514,11 @@ function Dashboard() {
                 <div
                   id={list.id}
                   onClick={clickList}
-                  className="watchlist-list-card"
+                  className="dashboard-watchlist-list-card"
                 >
                   <div>
                     <img
-                      className="watchlist-lightning-logo-2"
+                      className="dashboard-watchlist-lightning-logo-2"
                       alt="⚡"
                       src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
                     ></img>
