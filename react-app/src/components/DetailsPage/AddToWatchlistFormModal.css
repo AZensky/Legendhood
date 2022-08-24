@@ -1,0 +1,140 @@
+#modal-content {
+    width: min-content;
+    border-radius: 5px;
+}
+
+.add-to-watchlst-form-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.add-to-watchlst-form-title {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.add-to-watchlst-form-x {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.add-to-watchlst-form-x:hover {
+    background-color: rgb(238, 238, 238);
+    cursor: pointer;
+}
+
+.add-to-watchlst-form-list-container {
+    font-size: 15px;
+    padding: 16px 20px 30px 20px;
+    display:flex;
+    flex-direction: column;
+    width:300px;
+    min-height: min-content;
+    border-radius: 50px;
+}
+
+.add-to-watchlst-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.add-to-watchlst-form-list {
+    display:flex;
+    width: 100%;
+    height: 64px;
+    padding: 8px 0px;
+
+}
+
+
+.add-to-watchlst-form-list-checkbox{
+    width: 5%;
+    border: none;
+}
+
+.add-to-watchlst-form-list-checkbox.green {
+    border: 2px solid #00c805;
+    color: #00c805;
+    background-color: #00c805;;
+
+}
+
+.add-to-watchlst-form-list-checkbox:checked {
+    border: 2px solid #00c805;
+    color: #00c805;
+    background-color: #00c805;
+
+}
+
+.add-to-watchlst-form-list-checkbox.red {
+    border: 2px solid #00c805;
+    color: #00c805;
+}
+
+.add-to-watchlst-form-logo-container {
+    display: flex;
+    width: 55px;
+    margin: 5px 10px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+
+}
+
+.add-to-watchlst-form-logo {
+    scale: 0.5;
+
+}
+
+.add-to-watchlst-form-list-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.add-to-watchlst-form-list-name.title {
+    font-weight: bold;
+}
+
+.add-to-watchlst-form-list-name.items {
+    color: rgb(100, 100, 100);
+}
+
+.add-to-watchlst-form-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.add-to-watchlst-form-save-changes-button {
+    margin-top: 2rem;
+    width: 90%;
+    height: 45px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 23px;
+    color: white;
+}
+
+.add-to-watchlst-form-save-changes-button.green {
+    background-color: rgb(0,200,5);
+}
+
+.add-to-watchlst-form-save-changes-button.red {
+    background-color: rgb(255,80,0);
+}
+
+.add-to-watchlst-form-save-changes-button.green:hover {
+    background-color: rgb(0,180,5);
+}
+
+.add-to-watchlst-form-save-changes-button.red:hover {
+    background-color: rgb(235,80,0);
+}

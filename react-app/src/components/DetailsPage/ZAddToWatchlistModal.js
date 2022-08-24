@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import ZAddToWatchlistForm from './ZAddToWatchlistForm';
+import "./AddToWatchlistFormModal.css"
 
 function ZAddToWatchlistModal({ amountChanged }) {
     const [showModal, setShowModal] = useState(false);
@@ -17,7 +18,7 @@ function ZAddToWatchlistModal({ amountChanged }) {
             {showModal && (
                 <>
                     <Modal onClose={() => setShowModal(false)} formType="edit-group">
-                        <ZAddToWatchlistForm setShowModal={setShowModal} />
+                        <ZAddToWatchlistForm setShowModal={setShowModal} amountChanged={amountChanged} />
                     </Modal>
                 </>
             )}
