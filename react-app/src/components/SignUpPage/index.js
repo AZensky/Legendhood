@@ -68,7 +68,7 @@ function SignUpPage() {
           <form onSubmit={handleSubmit} className="signup-form">
             <h1 className="signup-form__title">Sign up</h1>
             <p className="signup-free-stock">
-              Sign up today for 1 (fake) Robinhood Stock!
+              Sign up for 1 (fake) Robinhood Stock!
             </p>
             {errors.length > 0 && (
               <ul className="signup-form__validation-errors">
@@ -130,7 +130,7 @@ function SignUpPage() {
               <button type="submit">Sign Up</button>
             </div>
             <div className="signup-page-login">
-              <span>Already have an account on Robinhood?</span>
+              <span>Already have an account on Legendhood?</span>
               <Link to="/login">Log in</Link>
             </div>
           </form>
