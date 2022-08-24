@@ -425,7 +425,7 @@ function Dashboard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (name.length < 15) {
+    if (name.length <= 15) {
       await dispatch(createOneWatchlist({ name })).then((watchlist) =>
         history.push(`/watchlists/${watchlist?.id}`)
       );
@@ -536,7 +536,7 @@ function Dashboard() {
                 ))}
 
               <div className="watchlist-sticky-title">
-                <div className="watchlist-sticky-list">Lists</div>
+                <div className="dashboard-right-side-title">Lists</div>
                 <div className="watchlis-sticky-plus-sign">
                   <button className="watchlist-button" onClick={showCreateList}>
                     +
@@ -563,6 +563,7 @@ function Dashboard() {
                           placeholder="List Name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
+                          maxlength="15"
                           required
                         />
                       </div>

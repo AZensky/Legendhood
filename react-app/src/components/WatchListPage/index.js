@@ -104,7 +104,7 @@ function WatchListPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (name.length < 15) {
+        if (name.length <= 15) {
             await dispatch(createOneWatchlist({ name })).then((watchlist) =>
                 history.push(`/watchlists/${watchlist?.id}`))
             setIsShown(false);
@@ -116,7 +116,7 @@ function WatchListPage() {
     };
 
     const handleEditSubmit = async (name) => {
-        if (name.length < 15) {
+        if (name.length <= 15) {
             setEditErrors([])
             await dispatch(editOneWatchlist(watchlistId, { name }));
             setShowEdit(false)
@@ -170,6 +170,7 @@ function WatchListPage() {
                                                 handleEditSubmit(e.target.value)
                                             }
                                         }}
+                                        maxlength="15"
                                         required
                                     ></input>
                                 </div>
@@ -262,6 +263,7 @@ function WatchListPage() {
                                                 placeholder="List Name"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
+                                                maxlength="15"
                                                 required
                                             />
                                         </div>
@@ -318,6 +320,7 @@ function WatchListPage() {
                                 </div>
                             </>
                         ))}
+
                     </div>
                 </div>
             ) : (
