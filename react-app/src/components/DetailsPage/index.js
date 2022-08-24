@@ -24,6 +24,7 @@ import STOCKLISTOBJ from "../../util/stock_list_obj.json"
 import { loadWatchlists } from "../../store/watchlist";
 import AddToWatchlistForm from "./AddToWatchlistForm";
 import { unixToDate } from "../../util/stocks-api";
+import Footer from "../Footer"
 
 function DetailsPage() {
     let { symbol } = useParams()
@@ -553,6 +554,7 @@ function DetailsPage() {
                     <AddToWatchlistForm />
                 </div>
             </div>)}
+            {isLoaded && (<Footer />)}
         </>
     );
 }
