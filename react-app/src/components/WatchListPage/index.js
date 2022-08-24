@@ -193,38 +193,46 @@ function WatchListPage() {
                             {" "}
                             {watchlist?.watchlistStocks?.length} items
                         </div>
-                        <div className="watchlist-table">
-                            <header className="watchlist-row">
-                                <div>Name</div>
-                                <div>Symbol</div>
-                                <div>Price</div>
-                                <div>Today</div>
-                                <div>Market Cap</div>
-                                <div></div>
-                            </header>
-                            {watchlist?.watchlistStocks.map((stock) => (
-                                <div id={stock.symbol} className="watchlist-row">
-                                    <div onClick={clickStock}>{stock.name}</div>
-                                    <div onClick={clickStock}>{stock.symbol}</div>
-                                    <div onClick={clickStock}>
-                                        ${getPercentOnly(stock.currentPrice)}
+                        {!watchlist?.watchlistStocks?.length && (
+                            <div className="watchlist-empty">
+                                <div className="watchlist-empty-1">Feels a little empty in here...</div>
+                                <div className="watchlist-empty-2">Search for companies to add and stay up to date.</div>
+                            </div>
+                        )}
+                        {watchlist?.watchlistStocks?.length ? (
+                            <div className="watchlist-table">
+                                <header className="watchlist-row">
+                                    <div>Name</div>
+                                    <div>Symbol</div>
+                                    <div>Price</div>
+                                    <div>Today</div>
+                                    <div>Market Cap</div>
+                                    <div></div>
+                                </header>
+                                {watchlist?.watchlistStocks.map((stock) => (
+                                    <div id={stock.symbol} className="watchlist-row">
+                                        <div onClick={clickStock}>{stock.name}</div>
+                                        <div onClick={clickStock}>{stock.symbol}</div>
+                                        <div onClick={clickStock}>
+                                            ${getPercentOnly(stock.currentPrice)}
+                                        </div>
+                                        <div onClick={clickStock}>
+                                            {getPercentChangeCell(stock.percentChange)}
+                                        </div>
+                                        <div onClick={clickStock}>{convertNum(stock.marketCap)}</div>
+                                        <div>
+                                            <button
+                                                id={stock.symbol}
+                                                className="watchlist-button"
+                                                onClick={deleteStock}
+                                            >
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div onClick={clickStock}>
-                                        {getPercentChangeCell(stock.percentChange)}
-                                    </div>
-                                    <div onClick={clickStock}>{convertNum(stock.marketCap)}</div>
-                                    <div>
-                                        <button
-                                            id={stock.symbol}
-                                            className="watchlist-button"
-                                            onClick={deleteStock}
-                                        >
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : null}
                     </div>
 
                     <div className="watchlist-stickylist">
