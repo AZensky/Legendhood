@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { authenticate } from "../../store/session";
-import { loadWatchlists } from "../../store/watchlist";
+import { createOneStock, deleteOneStockFromDetailsPage, loadWatchlists } from "../../store/watchlist";
 
 
 function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
@@ -17,52 +17,79 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
     const dispatch = useDispatch()
     let user = useSelector(state => state.session.user)
     const [watchlist, setWatchList] = useState([])
+    const [changesMade, setChangesMade] = useState(false)
+    const [saveChanges, setSaveChanges] = useState(false)
+
+    const initializeForm = async () => {
+        const res = await fetch("/api/watchlists")
+        const data = await res.json()
+
+        let userwatchlist = data.watchlists
+        const origState = {}
+        const listLengths = {}
+        userwatchlist.forEach((list) => {
+            let check = false
+            for (let item of list.watchlistStocks) {
+                if (item["symbol"] === symbol) check = true
+            }
+            origState[list.id] = check
+            listLengths[list.id] = list.watchlistStocks.length
+        })
+        setOriginalState(origState)
+        setNewState(origState)
+        setWatchList(userwatchlist)
+        setListCounts(listLengths)
+        setIsLoaded2(true)
+    }
 
     useEffect(() => {
-
-        const initializeForm = async () => {
-            const res = await fetch("/api/watchlists")
-            const data = await res.json()
-
-            let userwatchlist = data.watchlists
-            const origState = {}
-            const listLengths = {}
-            userwatchlist.forEach((list) => {
-                let check = false
-                for (let item of list.watchlistStocks) {
-                    console.log(item["symbol"] === symbol)
-                    if (item["symbol"] === symbol) check = true
-                }
-                origState[list.id] = check
-                listLengths[list.id] = list.watchlistStocks.length
-            })
-            console.log("ORIGINAL STATE", origState)
-            setOriginalState(origState)
-            setNewState(origState)
-            setWatchList(userwatchlist)
-            setListCounts(listLengths)
-            setIsLoaded2(true)
-        }
-
         initializeForm()
 
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        let changed = false
+        for (let listId in originalState) {
+            if (originalState[listId] !== newState[listId]) {
+                const action = newState[listId] ? "POST" : "DELETE"
+                console.log("Action:", action)
+                if (action === "DELETE") {
+                    await dispatch(deleteOneStockFromDetailsPage(listId, symbol))
+                } else if (action === "POST") {
+                    console.log("POSTING")
+                    const payload = {
+                        "symbol": symbol,
+                        "watchlist_id": listId
+                    }
+                    await dispatch(createOneStock(payload))
+                }
+                changed = true
+            }
+        }
 
+        if(changed) {
+            setChangesMade(changed)
+            initializeForm()
+        }
         await dispatch(authenticate())
     }
 
     useEffect(() => {
-        console.log(originalState)
-        console.log(newState)
+        let changed = false
+        for (let listId in originalState) {
+            if (originalState[listId] !== newState[listId]) {
+                changed = true
+            }
+        }
+        setSaveChanges(changed)
     }, [newState])
 
     const handleChange = (id) => {
         let changed = { ...newState }
         changed[id] = !changed[id]
         setNewState(changed)
+        setChangesMade(false)
     }
 
     return isLoaded2 && (
@@ -71,12 +98,14 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
                 <div className="add-to-watchlst-form-title">{`Add ${symbol} to Your Lists`}</div>
                 <div className="add-to-watchlst-form-x" onClick={() => setShowModal(false)}><i className="fa-solid fa-xmark"></i></div>
             </div>
+            <div style={{visibility: `${changesMade? "visible" : "hidden"}`}}>
+                Your lists have been updated
+            </div>
             <form
                 onSubmit={handleSubmit}
                 className="add-to-watchlst-form"
             >
                 {watchlist.length > 0 && watchlist.map((lst) => {
-                    console.log(lst.name, ",", lst.id, ",", newState[lst.id])
                     return (
                         <div key={lst.id} className="add-to-watchlst-form-list">
                             <input
@@ -105,7 +134,10 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
                 <div
                     className="add-to-watchlst-form-button-container"
                 >
-                    <button className={`add-to-watchlst-form-save-changes-button ${amountChanged < 0 ? "red" : "green"}`}>
+                    <button
+                        className={`add-to-watchlst-form-save-changes-button ${amountChanged < 0 ? "red" : "green"} ${saveChanges? "enabled":"disabled"}`}
+                        disabled={!saveChanges}
+                    >
                         Save Changes
                     </button>
                 </div>

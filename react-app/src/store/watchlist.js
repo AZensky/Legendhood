@@ -145,6 +145,36 @@ export const deleteOneStock = (watchlistId, stocksym) => async (dispatch) => {
     }
 }
 
+export const deleteOneStockFromDetailsPage = (watchlistId, stocksym) => async (dispatch) => {
+    const response = await fetch(`/api/watchlists/${watchlistId}/stocks/${stocksym}`, { method: 'DELETE' });
+
+    if (response.ok) {
+        dispatch(loadWatchlists())
+    }
+}
+
+export const createOneStock = (payload) => async (dispatch) => {
+    const { symbol, watchlist_id } = payload;
+    const stocksym = symbol
+    const watchlistId = watchlist_id
+    console.log("STARTED POST:", stocksym, watchlistId)
+    const response = await fetch(`/api/watchlists/${watchlistId}/stocks/${stocksym}`,
+        {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                symbol,
+                watchlist_id
+            }),
+        });
+    if (response.ok) {
+        console.log("SUCCESSFULLY ADDED TO WATCHLIST")
+        await dispatch(loadWatchlists());
+    }
+}
+
 // Reducer
 const initialState = { watchlists: [], currentWatchlist: null };
 
