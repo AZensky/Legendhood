@@ -58,23 +58,15 @@
     border: none;
 }
 
-.add-to-watchlst-form-list-checkbox.green {
-    border: 2px solid #00c805;
-    color: #00c805;
-    background-color: #00c805;;
-
-}
-
-.add-to-watchlst-form-list-checkbox:checked {
-    border: 2px solid #00c805;
-    color: #00c805;
-    background-color: #00c805;
-
+.add-to-watchlst-form-list-checkbox.green:checked {
+    background-color: #e9ecee;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #99a1a7;
 }
 
 .add-to-watchlst-form-list-checkbox.red {
-    border: 2px solid #00c805;
-    color: #00c805;
+    accent-color: rgb(255,80,0);
 }
 
 .add-to-watchlst-form-logo-container {
@@ -123,18 +115,27 @@
     color: white;
 }
 
-.add-to-watchlst-form-save-changes-button.green {
+.add-to-watchlst-form-save-changes-button.green.enabled {
     background-color: rgb(0,200,5);
 }
 
-.add-to-watchlst-form-save-changes-button.red {
+.add-to-watchlst-form-save-changes-button.red.enabled {
     background-color: rgb(255,80,0);
 }
 
-.add-to-watchlst-form-save-changes-button.green:hover {
+.add-to-watchlst-form-save-changes-button.green:hover.enabled {
     background-color: rgb(0,180,5);
 }
 
-.add-to-watchlst-form-save-changes-button.red:hover {
+.add-to-watchlst-form-save-changes-button.red:hover.enabled {
     background-color: rgb(235,80,0);
+    background-color: #b4bdc2;
+}
+
+.add-to-watchlst-form-save-changes-button.disabled {
+    background-color: #b4bdc2;
+}
+
+.add-to-watchlst-form-save-changes-button.disabled:hover {
+    cursor:default;
 }
