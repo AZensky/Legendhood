@@ -26,7 +26,7 @@ def get_watchlist_by_id(id):
         return watchlist.to_dict()
     else:
        return  {"id": id, "watchlistStocks": []}, 404
-     
+
 
 
 @watchlist_routes.route('', methods=["POST"])
@@ -86,7 +86,7 @@ def delete_watchlist(watchlistid):
 @login_required
 def delete_watchlist_stock_by_id(id, symbol):
 
-    watchlist_stock = WatchlistStock.query.filter(WatchlistStock.watchlist_id == id, WatchlistStock.symbol == symbol).one()
+    watchlist_stock = WatchlistStock.query.filter(WatchlistStock.watchlist_id == id, WatchlistStock.symbol == symbol).first()
 
     if watchlist_stock is not None:
         db.session.delete(watchlist_stock)
@@ -107,7 +107,7 @@ def create_watchlist_stock_by_id(id, symbol):
 
     if form.validate_on_submit():
         data = form.data
-        new_watchlist_stock = Watchlist(symbol=data['symbol'], watchlist_id = data['watchlist_id'])
+        new_watchlist_stock = WatchlistStock(symbol=data['symbol'], watchlist_id = data['watchlist_id'])
         db.session.add(new_watchlist_stock)
         db.session.commit()
         return new_watchlist_stock.to_dict()
