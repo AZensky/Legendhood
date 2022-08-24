@@ -2,7 +2,6 @@ from re import U
 from flask import Blueprint, jsonify
 import datetime
 import time
-import pytz
 
 import os
 import requests
@@ -65,7 +64,6 @@ def fetch_today_tick_data(symbol):
 @finnhub_routes.route('/candlestick-data/live/<symbol>')
 def fetch_live_candlestick_data(symbol):
     now = datetime.datetime.now()
-    # pytz.timezone('America/Los_Angeles')
     query_day = now
     if now.weekday() == 5:
         query_day = now - datetime.timedelta(days=1)
