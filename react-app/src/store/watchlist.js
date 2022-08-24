@@ -66,20 +66,17 @@ export const getWatchlist = (id) => async (dispatch) => {
             stock.marketCap = res["marketCapitalization"]
         }
         dispatch(setCurrentWatchlist(watchlist))
-    }
+        return watchlist
+    } else return
 }
 
 export const loadWatchlists = () => async (dispatch) => {
     const response = await fetch('/api/watchlists')
     if (response.ok) {
         const watchlists = await response.json();
-        console.log("HBKBHJBNLJJHVIBKB", watchlists)
         dispatch(loadAllWatchlists(watchlists.watchlists))
         return watchlists
-    } else {
-        console.log("NOOOOOOOOOOOOOOOOOOOOOOOOO")
     }
-
 }
 
 export const createOneWatchlist = (payload) => async (dispatch) => {
