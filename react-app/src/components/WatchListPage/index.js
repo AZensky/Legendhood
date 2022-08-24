@@ -156,7 +156,7 @@ function WatchListPage() {
                                 </div>
                             )}
                             {showEdit && (
-                                <div>
+                                <div className={"watchlist-edit"}>
                                     <input
                                         className={"watchlist-scroll-listname"}
                                         type="text"
