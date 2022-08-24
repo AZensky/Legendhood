@@ -114,6 +114,8 @@ function Dashboard() {
         if (res === "Not Available") {
           console.log("stock", stock);
           setLiveDataAvailable(false);
+          setAmountChanged(0);
+          setPortfolioPercentChanged(0);
           return;
         }
 
