@@ -1,6 +1,7 @@
 #modal-content {
     width: min-content;
     border-radius: 5px;
+    max-height: 70vh;
 }
 
 .add-to-watchlst-form-title-container {
@@ -36,12 +37,15 @@
     width: 300px;
     min-height: min-content;
     border-radius: 50px;
+    max-height: 60vh;
 }
 
 .add-to-watchlst-form {
     display: flex;
     flex-direction: column;
     width: 300px;
+    max-height: 50%;
+    overflow-y: auto;
 }
 
 .add-to-watchlst-form-list {
