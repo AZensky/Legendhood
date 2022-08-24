@@ -31,9 +31,9 @@
 .add-to-watchlst-form-list-container {
     font-size: 15px;
     padding: 16px 20px 30px 20px;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    width:300px;
+    width: 300px;
     min-height: min-content;
     border-radius: 50px;
 }
@@ -45,7 +45,7 @@
 }
 
 .add-to-watchlst-form-list {
-    display:flex;
+    display: flex;
     width: 100%;
     height: 64px;
     padding: 8px 0px;
@@ -53,17 +53,17 @@
 }
 
 
-.add-to-watchlst-form-list-checkbox{
+.add-to-watchlst-form-list-checkbox {
     width: 5%;
     border: none;
 }
 
 .add-to-watchlst-form-list-checkbox.green:checked {
-    accent-color: rgb(0,180,5);
+    accent-color: rgb(0, 180, 5);
 }
 
 .add-to-watchlst-form-list-checkbox.red {
-    accent-color: rgb(255,80,0);
+    accent-color: rgb(255, 80, 0);
 }
 
 .add-to-watchlst-form-logo-container {
@@ -72,7 +72,22 @@
     margin: 5px 10px;
     background-color: #f3f3f3;
     border-radius: 5px;
+}
 
+.add-to-watchlst-form-logo-container.plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-to-watchlst-form-logo-container.plus.red {
+    background-color: #ffede5;
+    color: #ff5000;
+}
+
+.add-to-watchlst-form-logo-container.plus.green {
+    background-color: #e5f9e6;
+    color: #00c805;
 }
 
 .add-to-watchlst-form-logo {
@@ -113,19 +128,19 @@
 }
 
 .add-to-watchlst-form-save-changes-button.green.enabled {
-    background-color: rgb(0,200,5);
+    background-color: rgb(0, 200, 5);
 }
 
 .add-to-watchlst-form-save-changes-button.red.enabled {
-    background-color: rgb(255,80,0);
+    background-color: rgb(255, 80, 0);
 }
 
 .add-to-watchlst-form-save-changes-button.green:hover.enabled {
-    background-color: rgb(0,180,5);
+    background-color: rgb(0, 180, 5);
 }
 
 .add-to-watchlst-form-save-changes-button.red:hover.enabled {
-    background-color: rgb(235,80,0);
+    background-color: rgb(235, 80, 0);
 }
 
 .add-to-watchlst-form-save-changes-button.disabled {
@@ -133,5 +148,44 @@
 }
 
 .add-to-watchlst-form-save-changes-button.disabled:hover {
-    cursor:default;
+    cursor: default;
+}
+
+/* for the creata list form dropdown */
+.watchlist-confirm-button.red {
+    background-color: rgb(255, 80, 0);
+}
+
+.watchlist-confirm-button.red:hover {
+    background-color: rgb(235, 80, 0);
+}
+
+.watchlist-confirm-button.green {
+    background-color: rgb(0, 200, 5);
+}
+
+.watchlist-confirm-button.green:hover {
+    background-color: rgb(0, 180, 5);
+}
+
+.watchlist-cancel-button.green {
+    color: rgb(0,200,5);
+    border: 1px solid rgb(0,200,5);
+}
+
+.watchlist-cancel-button.red {
+    color: rgb(255,80,0);
+    border: 1px solid rgb(255,80,0);
+}
+
+.watchlist-cancel-button.green:hover {
+    background-color: rgb(226, 244, 227);
+}
+
+.watchlist-cancel-button.red:hover {
+    background-color: rgba(255,80,0,0.2);
+}
+
+.add-to-watchlst-form-list.create {
+    cursor: pointer;
 }

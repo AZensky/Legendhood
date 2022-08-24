@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { authenticate } from "../../store/session";
-import { createOneStock, deleteOneStockFromDetailsPage, loadWatchlists } from "../../store/watchlist";
+import { createOneStock, deleteOneStockFromDetailsPage, loadWatchlists, createOneWatchlist } from "../../store/watchlist";
 
 
 function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
@@ -19,6 +19,9 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
     const [watchlist, setWatchList] = useState([])
     const [changesMade, setChangesMade] = useState(false)
     const [saveChanges, setSaveChanges] = useState(false)
+    const [isShown, setIsShown] = useState(false)
+    const [name, setName] = useState("")
+    const [errors, setErrors] = useState([])
 
     const initializeForm = async () => {
         const res = await fetch("/api/watchlists")
@@ -68,7 +71,7 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
             }
         }
 
-        if(changed) {
+        if (changed) {
             setChangesMade(changed)
             initializeForm()
             setShowModal(false)
@@ -93,6 +96,18 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
         setChangesMade(false)
     }
 
+    const handleNewListSubmit = async (e) => {
+        e.preventDefault();
+
+        if (name.length < 15) {
+            await dispatch(createOneWatchlist({ name }))
+            initializeForm()
+            setIsShown(false)
+        } else {
+            setErrors(["Watchlist's name must be 15 characters or less."]);
+        }
+    };
+
     return isLoaded2 && (
         <div className="add-to-watchlst-form-list-container">
             <div className="add-to-watchlst-form-title-container">
@@ -102,6 +117,75 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
             {/* <div style={{visibility: `${changesMade? "visible" : "hidden"}`}}>
                 Your lists have been updated
             </div> */}
+            {!isShown && (
+                <div onClick={() => setIsShown(true)} className="add-to-watchlst-form-list create">
+                    <input
+                        className={`add-to-watchlst-form-list-checkbox ${amountChanged < 0 ? "red" : "green"}`}
+                        type="checkbox"
+                        style={{ visibility: "hidden" }}
+                    ></input>
+                    <div className={`add-to-watchlst-form-logo-container plus ${amountChanged < 0 ? "red" : "green"}`}>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div className="add-to-watchlst-form-list-name">
+                        Create New List
+                    </div>
+                </div>
+            )}
+            {isShown && (
+                <div className="dashboard-watchlist-createlist-dropdown">
+                    <div className="dashboard-watchlist-createlist-dropdown-row">
+                        <form
+                            onSubmit={handleNewListSubmit}
+                            className="dashboard-watchlist-form"
+                        >
+                            <div className="watchlist-createlist-dropdown-content">
+                                <img
+                                    className="dashboard-watchlist-lightning-logo-3"
+                                    alt="⚡"
+                                    src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
+                                ></img>
+                                <input
+                                    className="dashboard-watchlist-createlist-input"
+                                    type="text"
+                                    placeholder="List Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="watchlist-createlist-dropdown-row">
+                                <div className="dashboard-watchlist-btn-container">
+                                    <button
+                                        type="button"
+                                        className={`watchlist-cancel-button ${amountChanged < 0 ? "red" : "green"}`}
+                                        onClick={() => setIsShown(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                                <div className="dashboard-watchlist-btn-container">
+                                    <button
+                                        type="submit"
+                                        className={`watchlist-confirm-button ${amountChanged < 0 ? "red" : "green"}`}
+                                    >
+                                        Create List
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="watchlist-create-errors">
+                        {errors.length > 0 && (
+                            <ul>
+                                {errors.map((error) => (
+                                    <li>{error}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                </div>
+            )}
             <form
                 onSubmit={handleSubmit}
                 className="add-to-watchlst-form"
@@ -136,7 +220,7 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
                     className="add-to-watchlst-form-button-container"
                 >
                     <button
-                        className={`add-to-watchlst-form-save-changes-button ${amountChanged < 0 ? "red" : "green"} ${saveChanges? "enabled":"disabled"}`}
+                        className={`add-to-watchlst-form-save-changes-button ${amountChanged < 0 ? "red" : "green"} ${saveChanges ? "enabled" : "disabled"}`}
                         disabled={!saveChanges}
                     >
                         Save Changes
