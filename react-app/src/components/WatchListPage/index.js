@@ -23,6 +23,7 @@ function WatchListPage() {
     const [isShown, setIsShown] = useState(false);
     const [showEdit, setShowEdit] = useState(false)
     const [name, setName] = useState("");
+    const [errors, setErrors] = useState([]);
 
     const [showMenu, setShowMenu] = useState(false);
 
@@ -63,7 +64,8 @@ function WatchListPage() {
         const currentWatchlist = state.watchlist.currentWatchlist;
         return String(currentWatchlist?.id) === watchlistId
             ? currentWatchlist
-            : null;
+            // 
+            : history.push('/404');;
     });
 
     const watchlists = useSelector((state) => {
@@ -90,20 +92,34 @@ function WatchListPage() {
 
     function clickCancel() {
         setIsShown(false);
+        setErrors([])
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await dispatch(createOneWatchlist({ name })).then((watchlist) =>
-            history.push(`/watchlists/${watchlist?.id}`)
-        );
-        setIsShown(false);
+
+        if (name.length < 15) {
+            await dispatch(createOneWatchlist({ name })).then((watchlist) =>
+                history.push(`/watchlists/${watchlist?.id}`))
+            setIsShown(false);
+        } else {
+            setErrors(["Watchlist's name must be 15 characters or less."])
+        }
+
+
     };
 
     const handleEditSubmit = async (name) => {
-        await dispatch(editOneWatchlist(watchlistId, { name }));
-        dispatch(loadWatchlists());
-        setShowEdit(false)
+        if (name.length < 15) {
+            setErrors([])
+            await dispatch(editOneWatchlist(watchlistId, { name }));
+            setShowEdit(false)
+            dispatch(loadWatchlists());
+
+        } else {
+            setErrors(["Watchlist's name must be 15 characters or less."])
+        }
+
     };
 
     const deleteStock = async (e) => {
@@ -159,7 +175,15 @@ function WatchListPage() {
                                 />
                             </div>
                         </div>
-
+                        <div className="watchlist-create-errors">
+                            {errors.length > 0 && (
+                                <ul>
+                                    {errors.map((error) => (
+                                        <li>{error}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div >
                         <div className="watchlist-itemnum">
                             {" "}
                             {watchlist?.watchlistStocks?.length} items
@@ -245,9 +269,20 @@ function WatchListPage() {
                                                     Create List
                                                 </button>
                                             </div>
+
                                         </div>
                                     </form>
+
                                 </div>
+                                <div className="watchlist-create-errors">
+                                    {errors.length > 0 && (
+                                        <ul>
+                                            {errors.map((error) => (
+                                                <li>{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div >
                             </div>
                         )}
 
