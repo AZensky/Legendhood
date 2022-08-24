@@ -177,9 +177,17 @@ export default function watchlistRuducer(state = initialState, action) {
             newState = { ...state, watchlists: newwatchlists }
             return newState;
         case DELETE_WATCHLIST_STOCK:
-            const stocktodelete = state.currentWatchlist.watchlistStocks.find(stock => stock.symbol === action.payload.stocksym);
-            let newcurrent = state.currentWatchlist.watchlistStocks.filter(f => f !== stocktodelete);
-            newState = { ...state, currentWatchlist: newcurrent }
+            const stocktodelete = state.currentWatchlist.watchlistStocks
+                .find(stock => stock.symbol === action.payload.stocksym);
+            let newWatchlistStocks = state.currentWatchlist.watchlistStocks
+                .filter(f => f !== stocktodelete);
+            newState = {
+                ...state,
+                currentWatchlist: {
+                    ...state.currentWatchlist,
+                    watchlistStocks: newWatchlistStocks
+                }
+            }
             return newState;
         case CLEAR_CURRENT_WATCHLIST:
             newState = { ...state, currentWatchlist: null }
