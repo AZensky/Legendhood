@@ -124,9 +124,13 @@ function BuySellForm({ quote, amountChanged }) {
                             Shares
                         </div>
                         <input
+                            type="number"
                             className={`details-page-buy-sell-stock-input ${amountChanged < 0 ? "red" : "green"}`}
-                            onChange={e => setShares(Number(e.target.value))}
-                            placeholder={0}
+                            onChange={e => {
+                                setShares(Number(e.target.value))
+                            }}
+                            min={0}
+                            // placeholder={0}
                             value={shares}
                         >
                         </input>
