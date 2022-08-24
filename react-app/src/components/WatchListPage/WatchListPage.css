@@ -11,6 +11,7 @@
 .watchlist-scrolllist {
     width: 60%;
     font-size: 13px;
+    overflow-y: auto;
 }
 
 .watchlist-lightning-logo {
@@ -156,7 +157,10 @@ div.watchlist-row>div:first-child {
     position: sticky;
     border-radius: 0.25rem;
     box-shadow: rgb(0 0 0/ 24%) 0px 3px 8px;
+    overflow-y: auto;
+
 }
+
 
 .watchlist-button {
     padding: 0;
@@ -255,7 +259,7 @@ div.watchlist-row>div:first-child {
     font-weight: bold;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 

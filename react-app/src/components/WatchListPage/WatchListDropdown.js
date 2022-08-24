@@ -41,16 +41,6 @@ function WatchListDropdown({ watchlistName, watchlist_Id }) {
       {showMenu && (
         <>
           <div className="watchlist-dropdown-content">
-
-            {/* <div className="watchlist-dropdown-card">
-              <div className="watchlist-dropdown-card-content">
-                <i class="fa-solid fa-circle-xmark"></i>
-              </div>
-              <div className="watchlist-dropdown-card-content">
-                <button className="watchlist-button" >Edit {watchlistName}</button>
-              </div>
-            </div> */}
-
             <div className="watchlist-dropdown-card">
               <div className="watchlist-dropdown-card-content">
                 <button className="watchlist-button" onClick={deleteList}>
