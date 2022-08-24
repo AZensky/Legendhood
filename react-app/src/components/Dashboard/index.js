@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DashboardNav from "../DashboardNavbar";
 import LineChart from "../LineChart";
 import WatchlistStock from "../WatchlistStock";
@@ -21,10 +21,15 @@ import {
   getCommonKeys,
   numberWithCommas,
 } from "../../util/stocks-api";
+import {
+  loadWatchlists,
+} from "../../store/watchlist";
 import "./Dashboard.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Dashboard() {
+  const history = useHistory()
+  const dispatch = useDispatch()
   const [companyData, setCompanyData] = useState([]);
   const [marketNews, setMarketNews] = useState([]);
   const [timeSelection, setTimeSelection] = useState("Live");
@@ -85,6 +90,7 @@ function Dashboard() {
     const initializeDashboard = async () => {
       await getMarketNews();
       await getPortfolioValue();
+      await dispatch(loadWatchlists());
 
       setCompanyData(fetchedData);
       setIsLoaded(true);
@@ -396,6 +402,16 @@ function Dashboard() {
     setTimeSelection(selection);
   }
 
+
+  const watchlists = useSelector((state) => {
+    return state.watchlist.watchlists;
+  });
+
+  function clickList(e) {
+    const listId = e.currentTarget.id;
+    history.push(`/watchlists/${listId}`);
+  }
+
   return (
     <div className="dashboard-container">
       <DashboardNav />
@@ -409,11 +425,10 @@ function Dashboard() {
                 ${numberWithCommas(portfolioMarketValue)}
               </p>
               <p
-                className={`user-portfolio-percent-changed ${
-                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
-                    ? "positive"
-                    : "negative"
-                }`}
+                className={`user-portfolio-percent-changed ${portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                  ? "positive"
+                  : "negative"
+                  }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
@@ -495,6 +510,24 @@ function Dashboard() {
                     />
                   </Link>
                 ))}
+
+              <p className="dashboard-right-side-title">Lists</p>
+              {watchlists.map((list) => (
+                <div
+                  id={list.id}
+                  onClick={clickList}
+                  className="watchlist-list-card"
+                >
+                  <div>
+                    <img
+                      className="watchlist-lightning-logo-2"
+                      alt="⚡"
+                      src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
+                    ></img>
+                  </div>
+                  <div className="watchlist-list-name">{list.name}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

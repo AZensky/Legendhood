@@ -314,7 +314,6 @@ function WatchListPage() {
                                         ></img>
                                     </div>
                                     <div className="watchlist-list-name">{list.name}</div>
-                                    <div className="watchlist-hide">...</div>
                                 </div>
                             </>
                         ))}
