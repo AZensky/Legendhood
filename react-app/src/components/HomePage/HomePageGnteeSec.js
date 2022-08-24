@@ -4,7 +4,7 @@ function HomePageGnteeSec() {
     return (
         <div className='home-page-gntee-sec'>
             <div className='gntee-title'>
-                <p>Robinhood Protection Guarantee</p>
+                <p>Legendhood Protection Guarantee</p>
             </div>
             <div className='gntee-icons'>
                 <div className='gntee-icon-ind'>
