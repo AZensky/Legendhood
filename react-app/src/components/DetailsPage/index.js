@@ -22,9 +22,10 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import STOCKSLIST from "../../util/stock_list.json"
 import STOCKLISTOBJ from "../../util/stock_list_obj.json"
 import { loadWatchlists } from "../../store/watchlist";
-import AddToWatchlistForm from "./AddToWatchlistForm";
+import ZAddToWatchlistForm from "./ZAddToWatchlistForm";
 import { unixToDate } from "../../util/stocks-api";
 import Footer from "../Footer"
+import ZAddToWatchlistModal from "./ZAddToWatchlistModal";
 
 function DetailsPage() {
     let { symbol } = useParams()
@@ -528,14 +529,8 @@ function DetailsPage() {
                 </div>
                 <div className="details-page-right-container">
                     <BuySellForm quote={assetQuote} amountChanged={amountChanged} />
-                    <button
-                        className={`details-page-right-container-add-to-lists-button ${amountChanged < 0 ? "red" : "green"}`}
-                    >
-                        <div onClick={() => getListStock()}>
-                            + Add to Lists
-                        </div>
-                    </button>
-                    <AddToWatchlistForm />
+                    <ZAddToWatchlistModal amountChanged={amountChanged}/>
+                    {/* <ZAddToWatchlistForm /> */}
                 </div>
             </div>)}
             {isLoaded && (<Footer />)}
