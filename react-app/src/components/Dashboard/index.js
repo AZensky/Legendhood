@@ -396,24 +396,6 @@ function Dashboard() {
     setTimeSelection(selection);
   }
 
-  console.log("LIVE DATA", liveDataAvailable);
-  var currentdate = new Date();
-  var datetime =
-    "Last Sync: " +
-    currentdate.getDate() +
-    "/" +
-    (currentdate.getMonth() + 1) +
-    "/" +
-    currentdate.getFullYear() +
-    " @ " +
-    currentdate.getHours() +
-    ":" +
-    currentdate.getMinutes() +
-    ":" +
-    currentdate.getSeconds();
-
-  console.log("DATETIME", datetime);
-
   return (
     <div className="dashboard-container">
       <DashboardNav />

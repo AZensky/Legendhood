@@ -142,6 +142,15 @@ export default function watchlistRuducer(state = initialState, action) {
         case SET_CURRENT_WATCHLIST:
             newState = { ...state, currentWatchlist: action.payload }
             return newState;
+        case EDIT_WATCHLIST:
+            newState = {
+                ...state,
+                currentWatchlist: {
+                    ...state.currentWatchlist,
+                    name: action.payload.watchlist.name
+                }
+            }
+            return newState
         case LOAD_WATCHLISTS:
             newState = { ...state, watchlists: action.payload }
             return newState;
