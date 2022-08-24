@@ -2,6 +2,7 @@
     width: 90%;
     max-width: 1500px;
     min-width: 1036px;
+    height: 920px;
     display: flex;
     justify-content: center;
     margin: 36px auto 0 auto;
@@ -354,4 +355,10 @@ div.watchlist-row>div:first-child {
     background-color: white;
     border: solid 1px #cacacb;
     margin-right: 8px;
+}
+
+.watchlist-create-errors {
+    font-size: 13px;
+    font-weight: bold;
+    color: #00c805;
 }
