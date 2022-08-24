@@ -170,6 +170,7 @@ function WatchListPage() {
                                                 handleEditSubmit(e.target.value)
                                             }
                                         }}
+                                        maxlength="15"
                                         required
                                     ></input>
                                 </div>
@@ -262,6 +263,7 @@ function WatchListPage() {
                                                 placeholder="List Name"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
+                                                maxlength="15"
                                                 required
                                             />
                                         </div>
