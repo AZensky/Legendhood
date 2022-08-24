@@ -106,9 +106,11 @@ function WatchListPage() {
         setShowEdit(false)
     };
 
-    function deleteStock(e) {
+    const deleteStock = async (e) => {
         const stocksym = e.currentTarget.id;
-        dispatch(deleteOneStock(watchlistId, stocksym));
+        await dispatch(deleteOneStock(watchlistId, stocksym)).then(() =>
+            history.push(`/watchlists/${watchlistId}`)
+        );
     }
 
     return (
