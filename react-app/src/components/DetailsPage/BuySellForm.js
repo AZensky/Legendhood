@@ -14,6 +14,8 @@ function BuySellForm({ quote, amountChanged }) {
     const [buySell, setBuySell] = useState("Buy")
     const [ownedStocks, setOwnedStocks] = useState(0)
     const [errors, setErrors] = useState([])
+    const [successfulTransaction, setSuccessfulTransaction] = useState(false)
+    const [transactionShares, setTransactionShares] = useState(0)
 
 
     const dispatch = useDispatch()
@@ -26,7 +28,7 @@ function BuySellForm({ quote, amountChanged }) {
 
     useEffect(() => {
         setShares("")
-    },[buySell, portfolio])
+    }, [buySell, portfolio])
 
     useEffect(() => {
 
@@ -45,6 +47,7 @@ function BuySellForm({ quote, amountChanged }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setSuccessfulTransaction(false)
 
         const errorsArr = []
         console.log("TESTING", typeof shares, !Number.isInteger(shares))
@@ -81,12 +84,15 @@ function BuySellForm({ quote, amountChanged }) {
             console.log(result)
         }
         await dispatch(authenticate())
+        console.log(shares)
+        setTransactionShares(shares)
+        setSuccessfulTransaction(true)
     }
 
 
     return isLoaded && (
         <>
-            <form
+            {!successfulTransaction && (<form
                 onSubmit={handleSubmit}
                 className="details-page-buy-sell-stock-form"
             >
@@ -173,7 +179,40 @@ function BuySellForm({ quote, amountChanged }) {
                         </div>
                     </div>
                 </div>
-            </form>
+            </form>)}
+            {successfulTransaction && (
+                <div className="details-page-buy-sell-stock-form">
+                    <div className="details-page-buy-sell-switch">
+                        <div
+                            className={`details-page-buy`}
+                        >
+                            {`${buySell === "Buy" ? "Purchase" : "Sale"} successful`}
+                        </div>
+                    </div>
+                    <div className="details-page-buy-sell-stock-form-middle receipt">
+                        <div className="details-page-buy-in-labels">
+                            <span className={`details-page-buy-sell-stock-market-price-label`}>{`Amount ${buySell === "Buy" ? "purchased" : "sold"}`}</span>
+                            <span>{transactionShares}</span>
+                        </div>
+                        <div className="details-page-buy-in-labels">
+                            <span className={`details-page-buy-sell-stock-market-price-label`}>{`Total ${buySell === "Buy" ? "purchase" : "sale"} price`}</span>
+                            <span> ${(quote.c * transactionShares).toFixed(2)}</span>
+                        </div>
+                        <div className="details-page-buy-in-labels">
+                            {`Your ${buySell === "Buy" ? "purchase" : "sale"} of ${shares} ${symbol} shares was successful. You currently own ${portfolio[symbol].quantity} shares of ${symbol}.`}
+                        </div>
+                        <div className="details-page-buy-sell-stock-button-container">
+                            <button
+                                className={`details-page-buy-sell-stock button ${amountChanged < 0 ? "red" : "green"}`}
+                                onClick={() => setSuccessfulTransaction(false)}
+                            >
+                                Dismiss
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            )}
         </>
     );
 }

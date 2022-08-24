@@ -111,6 +111,7 @@ function Dashboard() {
       for (let stock in userStocks) {
         let res = await fetchLiveStockData(stock);
         if (res === "Not Available") {
+          console.log("stock", stock);
           setLiveDataAvailable(false);
           return;
         }

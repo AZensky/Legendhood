@@ -34,7 +34,6 @@ def delete_watchlist_stock_by_id(id, symbol):
     if watchlist_stock is not None:
         db.session.delete(watchlist_stock)
         db.session.commit()
-
         return {"message": "Successfully deleted"}
 
     # else should throw 404
@@ -52,12 +51,9 @@ def create_watchlist():
     if form.validate_on_submit():
         data = form.data
         user = current_user
-
         new_watchlist = Watchlist(name=data['name'], user_id=user.id)
-
         db.session.add(new_watchlist)
         db.session.commit()
-        
         return new_watchlist.to_dict()
     
     else:
@@ -73,16 +69,23 @@ def edit_watchlist(watchlistid):
 
     if form.validate_on_submit():
         data = form.data
-
         watch_list = Watchlist.query.get(watchlistid)
         watch_list.name = data['name']
         db.session.commit()
-        
         return watch_list.to_dict()
 
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+
+
+# Remove a stock from a watchlist
+@watchlist_routes.route('/<int:watchlistid>/stocks/<int:stockid>/delete')
+@login_required
+def remove_watchlist_stock(watchlistid, stockid):
+    watchlist_stock = WatchlistStock.query.filter(WatchlistStock.id == stockid, WatchlistStock.watchlist_id == watchlistid).one()
+
+    return watchlist_stock.to_dict_no_watchlist()
 
 @watchlist_routes.route('/<watchlistid>', methods=["DELETE"])
 @login_required
@@ -93,9 +96,9 @@ def delete_watchlist(watchlistid):
     if watch_list is not None:
         db.session.delete(watch_list)
         db.session.commit()
-
         return {"message": "Successfully deleted"}
 
     # else should throw 404
     else:
         return {"message": "Stock not found"}, 404
+
