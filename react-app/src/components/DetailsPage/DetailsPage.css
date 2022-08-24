@@ -94,6 +94,7 @@
     flex-direction: column;
     align-items: center;
     width: 15%;
+    min-width: 200px;
     padding-top: 2%;
 }
 
@@ -105,16 +106,6 @@
     align-items: center;
     height: 100%;
   }
-
-  /* .dashboard-right-side-content-container {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 5px;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgb(226, 233, 237);
-    border-radius: 0.25rem;
-    width: 100%;
-    height: 100%;
-  } */
 
 
 .details-page-buy-sell-stock-form {
@@ -187,6 +178,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 3% 8%;
+}
+
+.details-page-buy-sell-stock-estimated-cost-label-price{
+    overflow: hidden;
 }
 
 .details-page-buy-sell-stock-market-price,
