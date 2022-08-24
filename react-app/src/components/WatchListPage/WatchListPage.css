@@ -28,7 +28,7 @@
     font-size: 23px;
     height: 47px;
     line-height: 47px;
-    width: 720px;
+    width: 80%;
     border-radius: 5px;
     justify-content: flex-start;
 }
@@ -37,14 +37,19 @@
     background-color: rgb(245, 248, 250);
 }
 
-input.watchlist-scroll-listname {
+input .watchlist-scroll-listname {
     font-size: 23px;
     height: 47px;
     line-height: 47px;
-    width: 720px;
+    /* width: 720px; */
+    width: 80%;
     border-radius: 5px;
     justify-content: flex-start;
     border: blue;
+}
+
+.watchlist-edit {
+    width: 100%;
 }
 
 .watchlist-scroll-ellipsisicon button {
