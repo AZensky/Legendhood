@@ -24,6 +24,7 @@ function WatchListPage() {
     const [showEdit, setShowEdit] = useState(false)
     const [name, setName] = useState("");
     const [errors, setErrors] = useState([]);
+    const [editErrors, setEditErrors] = useState([]);
 
     const [showMenu, setShowMenu] = useState(false);
 
@@ -116,13 +117,13 @@ function WatchListPage() {
 
     const handleEditSubmit = async (name) => {
         if (name.length < 15) {
-            setErrors([])
+            setEditErrors([])
             await dispatch(editOneWatchlist(watchlistId, { name }));
             setShowEdit(false)
             dispatch(loadWatchlists());
 
         } else {
-            setErrors(["Watchlist's name must be 15 characters or less."])
+            setEditErrors(["Watchlist's name must be 15 characters or less."])
         }
 
     };
@@ -181,9 +182,9 @@ function WatchListPage() {
                             </div>
                         </div>
                         <div className="watchlist-create-errors">
-                            {errors.length > 0 && (
+                            {editErrors.length > 0 && (
                                 <ul>
-                                    {errors.map((error) => (
+                                    {editErrors.map((error) => (
                                         <li>{error}</li>
                                     ))}
                                 </ul>
