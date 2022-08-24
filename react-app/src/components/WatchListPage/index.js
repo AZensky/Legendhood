@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import DashboardNav from "../DashboardNavbar";
+import LoadingSpinner from "../LoadingSpinner";
+import Footer from "../Footer";
+import WatchListDropdown from "./WatchListDropdown";
+import "./WatchListPage.css";
 import {
     clearCurrentWatchlist,
     getWatchlist,
@@ -9,18 +14,15 @@ import {
     editOneWatchlist,
     deleteOneStock,
 } from "../../store/watchlist";
-import DashboardNav from "../DashboardNavbar";
-import LoadingSpinner from "../LoadingSpinner";
-import WatchListDropdown from "./WatchListDropdown";
-import Footer from "../Footer";
-import "./WatchListPage.css";
 
 function WatchListPage() {
-    const [isLoaded, setIsLoaded] = useState(false);
+
     const dispatch = useDispatch();
     const history = useHistory();
+    const [isLoaded, setIsLoaded] = useState(false);
     const [isShown, setIsShown] = useState(false);
     const [isEditShown, setIsEditShown] = useState(true);
+    const [showEdit, setShowEdit] = useState(false)
     const [name, setName] = useState("");
 
     const [showMenu, setShowMenu] = useState(false);
@@ -82,7 +84,9 @@ function WatchListPage() {
         const listId = e.currentTarget.id;
         history.push(`/watchlists/${listId}`);
     }
-
+    function listnameclick() {
+        setShowEdit(true)
+    }
     function showCreateList() {
         // dispatch
         setIsShown((current) => !current);
@@ -128,12 +132,15 @@ function WatchListPage() {
                         </div>
 
                         <div className="watchlist-scroll-title">
-                            {!isEditShown && (
-                                <div className="watchlist-scroll-listname">
+                            {(!showEdit) && (
+
+                                <div className="watchlist-scroll-listname" onClick={listnameclick}>
                                     {watchlist?.name}
                                 </div>
+
+
                             )}
-                            {isEditShown && (
+                            {showEdit && (
                                 <div>
                                     <form onSubmit={handleEditSubmit}>
                                         <input
