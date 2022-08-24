@@ -116,6 +116,7 @@ function Dashboard() {
           setLiveDataAvailable(false);
           setAmountChanged(0);
           setPortfolioPercentChanged(0);
+          setTimeSelectionLabel("Live");
           return;
         }
 
