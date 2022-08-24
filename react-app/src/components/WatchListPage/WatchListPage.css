@@ -1,377 +1,371 @@
 .watchlist-container {
-    width: 90%;
-    max-width: 1500px;
-    min-width: 1036px;
-    height: 920px;
-    display: flex;
-    justify-content: center;
-    margin: 36px auto 0 auto;
+  width: 90%;
+  max-width: 1500px;
+  min-width: 1036px;
+  height: 920px;
+  display: flex;
+  justify-content: center;
+  margin: 36px auto 0 auto;
 }
 
 .watchlist-scrolllist {
-    width: 60%;
-    font-size: 13px;
+  width: 60%;
+  font-size: 13px;
 }
 
 .watchlist-lightning-logo {
-    height: 56px;
-    width: 56px;
+  height: 56px;
+  width: 56px;
 }
 
 .watchlist-scroll-title {
-    margin-top: 25px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .watchlist-scroll-listname {
-    font-size: 23px;
-    height: 47px;
-    line-height: 47px;
-    width: 720px;
-    border-radius: 5px;
-    justify-content: flex-start;
+  font-size: 23px;
+  height: 47px;
+  line-height: 47px;
+  width: 720px;
+  border-radius: 5px;
+  justify-content: flex-start;
 }
 
 .watchlist-scroll-listname:hover {
-    background-color: rgb(245, 248, 250);
+  background-color: rgb(245, 248, 250);
 }
 
 input.watchlist-scroll-listname {
-    font-size: 23px;
-    height: 47px;
-    line-height: 47px;
-    width: 720px;
-    border-radius: 5px;
-    justify-content: flex-start;
-    border: blue;
+  font-size: 23px;
+  height: 47px;
+  line-height: 47px;
+  width: 720px;
+  border-radius: 5px;
+  justify-content: flex-start;
+  border: blue;
 }
 
 .watchlist-scroll-ellipsisicon button {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .watchlist-itemnum {
-    margin-top: 10px;
-    color: #6a7278;
+  margin-top: 10px;
+  color: #6a7278;
 }
 
 .watchlist-table {
-    display: flex;
-    margin-top: 24px;
-    flex-direction: column;
+  display: flex;
+  margin-top: 24px;
+  flex-direction: column;
 }
 
 .watchlist-row {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(227, 233, 237);
-    height: 59px;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(227, 233, 237);
+  height: 59px;
+  flex-direction: row;
+  align-items: center;
 }
 
 header.watchlist-row {
-    height: 47px;
-    color: #6a7278;
-    font-weight: 30;
-    padding: 0 25px 0 0;
-    height: 47px;
+  height: 47px;
+  color: #6a7278;
+  font-weight: 30;
+  padding: 0 25px 0 0;
+  height: 47px;
 }
 
-.watchlist-row>div {
-    margin-left: 0px;
-    flex-direction: column;
+.watchlist-row > div {
+  margin-left: 0px;
+  flex-direction: column;
 }
 
-header.watchlist-row>div {
-    height: 100%;
-    line-height: 47px;
+header.watchlist-row > div {
+  height: 100%;
+  line-height: 47px;
 }
 
-div.watchlist-row>div {
-    height: 100%;
-    line-height: 59px;
+div.watchlist-row > div {
+  height: 100%;
+  line-height: 59px;
 }
-
 
 div.watchlist-row {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-div.watchlist-row>div:first-child {
-    font-weight: bold;
+div.watchlist-row > div:first-child {
+  font-weight: bold;
 }
 
-
-.watchlist-row>div:first-child {
-    flex: 0 0 250px
+.watchlist-row > div:first-child {
+  flex: 0 0 250px;
 }
 
-.watchlist-row>div:nth-child(2) {
-    flex: 0 0 95px
+.watchlist-row > div:nth-child(2) {
+  flex: 0 0 95px;
 }
 
-.watchlist-row>div:nth-child(3) {
-    flex: 0 0 108px
+.watchlist-row > div:nth-child(3) {
+  flex: 0 0 108px;
 }
 
-.watchlist-row>div:nth-child(4) {
-    flex: 0 0 108px
+.watchlist-row > div:nth-child(4) {
+  flex: 0 0 108px;
 }
 
-.watchlist-row>div:nth-child(5) {
-    flex: 0 0 107px
+.watchlist-row > div:nth-child(5) {
+  flex: 0 0 107px;
 }
 
-.watchlist-row>div:last-child {
-    margin-right: 10px;
+.watchlist-row > div:last-child {
+  margin-right: 10px;
 }
 
-.watchlist-table>div.watchlist-row:hover {
-    background-color: rgb(245, 248, 250);
+.watchlist-table > div.watchlist-row:hover {
+  background-color: rgb(245, 248, 250);
 }
 
 .watchlist-stockcard {
-    height: 50px;
-    padding: 0 25px 0 0;
-    border-bottom-style: solid;
-    border-color: #aaaeb0;
-    border-width: 1px;
+  height: 50px;
+  padding: 0 25px 0 0;
+  border-bottom-style: solid;
+  border-color: #aaaeb0;
+  border-width: 1px;
 }
-
 
 .watchlist-stickylist {
-    height: 780px;
-    width: 280px;
-    border: solid;
-    border-width: 1px;
-    border-color: rgb(227, 233, 237);
-    margin-left: 80px;
-    font-family: "Capsule Sans Display", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    top: 76px;
-    position: sticky;
-    border-radius: 0.25rem;
-    box-shadow: rgb(0 0 0/ 24%) 0px 3px 8px;
+  height: 780px;
+  width: 280px;
+  border: solid;
+  border-width: 1px;
+  border-color: rgb(227, 233, 237);
+  margin-left: 80px;
+  font-family: "Capsule Sans Display", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  top: 76px;
+  position: sticky;
+  border-radius: 0.25rem;
+  box-shadow: rgb(0 0 0/ 24%) 0px 3px 8px;
 }
 
-
-
 .watchlist-button {
-    padding: 0;
-    border: none;
-    background: none;
-    font-size: 15px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 15px;
 }
 
 .watchlist-button:hover {
-    color: #00c805
+  color: #00c805;
 }
 
 .watchlist-sticky-title {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom-style: solid;
-    border-width: 1px;
-    border-color: rgb(227, 233, 237);
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: rgb(227, 233, 237);
 }
 
 .watchlist-sticky-list {
-    margin-left: 20px;
-    font-weight: 600;
+  margin-left: 20px;
+  font-weight: 600;
 }
 
 .watchlis-sticky-plus-sign button {
-    font-size: 20px;
-    margin-right: 20px;
+  font-size: 20px;
+  margin-right: 20px;
 }
 
 .watchlist-list-card {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin: auto;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto;
 }
 
 .watchlist-list-card:hover {
-    background-color: rgb(245, 248, 250);
+  background-color: rgb(245, 248, 250);
+  cursor: pointer;
 }
 
-.watchlist-list-name:hover+.hide {
-    display: block;
-    color: red;
+.watchlist-list-name:hover + .hide {
+  display: block;
+  color: red;
 }
-
 
 .watchlist-lightning-logo-2 {
-    height: 20px;
-    width: 20px;
-    margin-left: 20px;
-    padding: 8px 3px;
-    border-radius: 0.25rem;
-    background-color: #F5F8FA;
+  height: 20px;
+  width: 20px;
+  margin-left: 20px;
+  padding: 8px 3px;
+  border-radius: 0.25rem;
+  background-color: #f5f8fa;
 }
 
 .watchlist-list-name {
-    font-size: 13.5px;
-    margin-left: 20px;
+  font-size: 13.5px;
+  margin-left: 20px;
 }
 
 /* Dropdown CSS */
 .watchlist-button.dropdown-open {
-    color: #00c805;
-    border-bottom: solid 2px;
+  color: #00c805;
+  border-bottom: solid 2px;
 }
 
 .watchlist-button.dropdown-close {
-    border-bottom: solid 2px transparent;
+  border-bottom: solid 2px transparent;
 }
 
 .watchlist-dropdown-content {
-    margin-left: -140px;
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    position: absolute;
-    width: 180px;
-    height: 63px;
-    padding: 12px 0px;
-    background-color: white;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
-    border-radius: 5px;
+  margin-left: -140px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  position: absolute;
+  width: 180px;
+  height: 63px;
+  padding: 12px 0px;
+  background-color: white;
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
 }
 
 .watchlist-dropdown-card {
-    font-size: 13px;
-    font-weight: bold;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20px;
 }
 
 .watchlist-dropdown-card:hover {
-    color: #00c805;
+  color: #00c805;
 }
 
 .watchlist-dropdown-card-content {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .watchlist-dropdown-x-mark {
-    font-size: large;
-    vertical-align: middle;
+  font-size: large;
+  vertical-align: middle;
 }
 
 .watchlist-dropdown-span {
-    margin-left: 10px;
-    vertical-align: middle;
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
 .watchlist-createlist-dropdown {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .watchlist-createlist-dropdown-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .watchlist-dropdown-card-content button {
-    padding: 0;
-    border: none;
-    background: none;
-    font-size: 13px;
-    font-weight: bold;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .watchlist-cancel-button {
-    background-color: white;
-    font-weight: bolder;
-    color: #00c805;
-    border: solid 1px #00c805;
-    border-radius: 20px;
-    height: 36px;
-    width: 96px;
-    margin-right: 8px;
+  background-color: white;
+  font-weight: bolder;
+  color: #00c805;
+  border: solid 1px #00c805;
+  border-radius: 20px;
+  height: 36px;
+  width: 96px;
+  margin-right: 8px;
 }
 
-
 .watchlist-cancel-button:hover {
-    background-color: rgb(226, 244, 227);
+  background-color: rgb(226, 244, 227);
 }
 
 .watchlist-confirm-button {
-    background-color: #00c805;
-    font-weight: bolder;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    height: 36px;
-    width: 112px;
+  background-color: #00c805;
+  font-weight: bolder;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  height: 36px;
+  width: 112px;
 }
 
 .watchlist-confirm-button:hover {
-    background-color: #01a006;
+  background-color: #01a006;
 }
 
 .watchlist-createlist-dropdown-content {
-    display: flex;
-    margin: 8px 0;
+  display: flex;
+  margin: 8px 0;
 }
 
 .watchlist-createlist-input {
-    padding: 0 12px;
-    height: 36px;
-    border-radius: 5px;
-    border: none;
-    background-color: #F5F8FA;
+  padding: 0 12px;
+  height: 36px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f5f8fa;
 }
 
 .watchlist-createlist-input::placeholder {
-    color: #cacacb;
+  color: #cacacb;
 }
 
-
 .watchlist-lightning-logo-3 {
-    height: 20px;
-    width: 20px;
-    padding: 8px 8px;
-    border-radius: 3px;
-    background-color: white;
-    border: solid 1px #cacacb;
-    margin-right: 8px;
+  height: 20px;
+  width: 20px;
+  padding: 8px 8px;
+  border-radius: 3px;
+  background-color: white;
+  border: solid 1px #cacacb;
+  margin-right: 8px;
 }
 
 .watchlist-create-errors {
-    font-size: 13px;
-    font-weight: bold;
-    color: #00c805;
+  font-size: 13px;
+  font-weight: bold;
+  color: #00c805;
 }
 
 .watchlist-empty {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .watchlist-empty-1 {
-    font-size: 21px;
+  font-size: 21px;
 }
 
 .watchlist-empty-2 {
-    font-size: 15px;
-    margin-top: 25px;
+  font-size: 15px;
+  margin-top: 25px;
 }

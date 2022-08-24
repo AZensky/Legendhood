@@ -21,16 +21,13 @@ import {
   getCommonKeys,
   numberWithCommas,
 } from "../../util/stocks-api";
-import {
-  loadWatchlists,
-  createOneWatchlist
-} from "../../store/watchlist";
+import { loadWatchlists, createOneWatchlist } from "../../store/watchlist";
 import "./Dashboard.css";
 import { Link, useHistory } from "react-router-dom";
 
 function Dashboard() {
-  const history = useHistory()
-  const dispatch = useDispatch()
+  const history = useHistory();
+  const dispatch = useDispatch();
   const [companyData, setCompanyData] = useState([]);
   const [marketNews, setMarketNews] = useState([]);
   const [timeSelection, setTimeSelection] = useState("Live");
@@ -406,7 +403,6 @@ function Dashboard() {
     setTimeSelection(selection);
   }
 
-
   const watchlists = useSelector((state) => {
     return state.watchlist.watchlists;
   });
@@ -423,7 +419,7 @@ function Dashboard() {
 
   function clickCancel() {
     setIsShown(false);
-    setErrors([])
+    setErrors([]);
   }
 
   const handleSubmit = async (e) => {
@@ -431,13 +427,12 @@ function Dashboard() {
 
     if (name.length < 15) {
       await dispatch(createOneWatchlist({ name })).then((watchlist) =>
-        history.push(`/watchlists/${watchlist?.id}`))
+        history.push(`/watchlists/${watchlist?.id}`)
+      );
       setIsShown(false);
     } else {
-      setErrors(["Watchlist's name must be 15 characters or less."])
+      setErrors(["Watchlist's name must be 15 characters or less."]);
     }
-
-
   };
 
   return (
@@ -453,10 +448,11 @@ function Dashboard() {
                 ${numberWithCommas(portfolioMarketValue)}
               </p>
               <p
-                className={`user-portfolio-percent-changed ${portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
-                  ? "positive"
-                  : "negative"
-                  }`}
+                className={`user-portfolio-percent-changed ${
+                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                    ? "positive"
+                    : "negative"
+                }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
@@ -539,7 +535,6 @@ function Dashboard() {
                   </Link>
                 ))}
 
-              {/* <div className="watchlist-stickylist"> */}
               <div className="watchlist-sticky-title">
                 <div className="watchlist-sticky-list">Lists</div>
                 <div className="watchlis-sticky-plus-sign">
@@ -550,17 +545,20 @@ function Dashboard() {
               </div>
 
               {isShown && (
-                <div className="watchlist-createlist-dropdown">
-                  <div className="watchlist-createlist-dropdown-row">
-                    <form onSubmit={handleSubmit}>
+                <div className="dashboard-watchlist-createlist-dropdown">
+                  <div className="dashboard-watchlist-createlist-dropdown-row">
+                    <form
+                      onSubmit={handleSubmit}
+                      className="dashboard-watchlist-form"
+                    >
                       <div className="watchlist-createlist-dropdown-content">
                         <img
-                          className="watchlist-lightning-logo-3"
+                          className="dashboard-watchlist-lightning-logo-3"
                           alt="⚡"
                           src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
                         ></img>
                         <input
-                          className="watchlist-createlist-input"
+                          className="dashboard-watchlist-createlist-input"
                           type="text"
                           placeholder="List Name"
                           value={name}
@@ -569,7 +567,7 @@ function Dashboard() {
                         />
                       </div>
                       <div className="watchlist-createlist-dropdown-row">
-                        <div>
+                        <div className="dashboard-watchlist-btn-container">
                           <button
                             type="button"
                             className="watchlist-cancel-button"
@@ -578,7 +576,7 @@ function Dashboard() {
                             Cancel
                           </button>
                         </div>
-                        <div>
+                        <div className="dashboard-watchlist-btn-container">
                           <button
                             type="submit"
                             className="watchlist-confirm-button"
@@ -586,10 +584,8 @@ function Dashboard() {
                             Create List
                           </button>
                         </div>
-
                       </div>
                     </form>
-
                   </div>
                   <div className="watchlist-create-errors">
                     {errors.length > 0 && (
@@ -599,7 +595,7 @@ function Dashboard() {
                         ))}
                       </ul>
                     )}
-                  </div >
+                  </div>
                 </div>
               )}
 
@@ -608,20 +604,23 @@ function Dashboard() {
                   <div
                     id={list.id}
                     onClick={clickList}
-                    className="watchlist-list-card"
+                    className="dashboard-watchlist-list-card"
                   >
-                    <div>
+                    <div className="dashboard-watchlist-img-title">
                       <img
-                        className="watchlist-lightning-logo-2"
+                        className="dashboard-watchlist-lightning-logo-2"
                         alt="⚡"
                         src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
                       ></img>
+
+                      <div className="watchlist-list-name">{list.name}</div>
                     </div>
-                    <div className="watchlist-list-name">{list.name}</div>
+                    <div className="watchlist-nav-button">
+                      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
                   </div>
                 </>
               ))}
-              {/* </div> */}
             </div>
           </div>
         </div>
