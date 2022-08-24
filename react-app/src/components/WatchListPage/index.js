@@ -48,24 +48,29 @@ function WatchListPage() {
     useEffect(() => {
         setIsLoaded(false)
         const intializeWatchlistPage = async () => {
-            await dispatch(getWatchlist(watchlistId));
-            await dispatch(loadWatchlists());
-            setIsLoaded(true);
+            const data = await dispatch(getWatchlist(watchlistId));
+            if (!data) {
+                history.push('/404');
+            } else {
+                await dispatch(loadWatchlists());
+                setIsLoaded(true);
+            }
+
         };
+
         intializeWatchlistPage();
 
         return () => {
             dispatch(clearCurrentWatchlist());
         };
-    }, [dispatch, watchlistId]);
+    }, [dispatch, history, watchlistId]);
 
     //set backend returned data into variable
     const watchlist = useSelector((state) => {
         const currentWatchlist = state.watchlist.currentWatchlist;
+
         return String(currentWatchlist?.id) === watchlistId
-            ? currentWatchlist
-            // 
-            : history.push('/404');;
+            ? currentWatchlist : null
     });
 
     const watchlists = useSelector((state) => {

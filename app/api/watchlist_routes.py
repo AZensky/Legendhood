@@ -22,7 +22,11 @@ def get_watchlist_by_id(id):
     watchlist = Watchlist.query.filter(
         Watchlist.user_id == current_user.id,  Watchlist.id == id).one_or_none()
     # else should throw 404
-    return watchlist.to_dict() if watchlist else {"id": id, "watchlistStocks": []}
+    if watchlist:
+        return watchlist.to_dict()
+    else:
+       return  {"id": id, "watchlistStocks": []}, 404
+     
 
 
 @watchlist_routes.route('', methods=["POST"])
