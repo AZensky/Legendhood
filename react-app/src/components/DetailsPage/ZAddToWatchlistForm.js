@@ -71,6 +71,7 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
         if(changed) {
             setChangesMade(changed)
             initializeForm()
+            setShowModal(false)
         }
         await dispatch(authenticate())
     }
@@ -98,9 +99,9 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
                 <div className="add-to-watchlst-form-title">{`Add ${symbol} to Your Lists`}</div>
                 <div className="add-to-watchlst-form-x" onClick={() => setShowModal(false)}><i className="fa-solid fa-xmark"></i></div>
             </div>
-            <div style={{visibility: `${changesMade? "visible" : "hidden"}`}}>
+            {/* <div style={{visibility: `${changesMade? "visible" : "hidden"}`}}>
                 Your lists have been updated
-            </div>
+            </div> */}
             <form
                 onSubmit={handleSubmit}
                 className="add-to-watchlst-form"
