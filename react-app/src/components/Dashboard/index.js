@@ -448,11 +448,10 @@ function Dashboard() {
                 ${numberWithCommas(portfolioMarketValue)}
               </p>
               <p
-                className={`user-portfolio-percent-changed ${
-                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                className={`user-portfolio-percent-changed ${portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
                     ? "positive"
                     : "negative"
-                }`}
+                  }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
@@ -563,6 +562,7 @@ function Dashboard() {
                           placeholder="List Name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
+                          maxlength="15"
                           required
                         />
                       </div>
