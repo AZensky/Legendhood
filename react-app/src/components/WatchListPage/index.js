@@ -24,6 +24,7 @@ function WatchListPage() {
     const [showEdit, setShowEdit] = useState(false)
     const [name, setName] = useState("");
     const [errors, setErrors] = useState([]);
+    const [editErrors, setEditErrors] = useState([]);
 
     const [showMenu, setShowMenu] = useState(false);
 
@@ -116,13 +117,13 @@ function WatchListPage() {
 
     const handleEditSubmit = async (name) => {
         if (name.length < 15) {
-            setErrors([])
+            setEditErrors([])
             await dispatch(editOneWatchlist(watchlistId, { name }));
             setShowEdit(false)
             dispatch(loadWatchlists());
 
         } else {
-            setErrors(["Watchlist's name must be 15 characters or less."])
+            setEditErrors(["Watchlist's name must be 15 characters or less."])
         }
 
     };
@@ -155,7 +156,7 @@ function WatchListPage() {
                                 </div>
                             )}
                             {showEdit && (
-                                <div>
+                                <div className={"watchlist-edit"}>
                                     <input
                                         className={"watchlist-scroll-listname"}
                                         type="text"
@@ -181,9 +182,9 @@ function WatchListPage() {
                             </div>
                         </div>
                         <div className="watchlist-create-errors">
-                            {errors.length > 0 && (
+                            {editErrors.length > 0 && (
                                 <ul>
-                                    {errors.map((error) => (
+                                    {editErrors.map((error) => (
                                         <li>{error}</li>
                                     ))}
                                 </ul>
@@ -193,38 +194,46 @@ function WatchListPage() {
                             {" "}
                             {watchlist?.watchlistStocks?.length} items
                         </div>
-                        <div className="watchlist-table">
-                            <header className="watchlist-row">
-                                <div>Name</div>
-                                <div>Symbol</div>
-                                <div>Price</div>
-                                <div>Today</div>
-                                <div>Market Cap</div>
-                                <div></div>
-                            </header>
-                            {watchlist?.watchlistStocks.map((stock) => (
-                                <div id={stock.symbol} className="watchlist-row">
-                                    <div onClick={clickStock}>{stock.name}</div>
-                                    <div onClick={clickStock}>{stock.symbol}</div>
-                                    <div onClick={clickStock}>
-                                        ${getPercentOnly(stock.currentPrice)}
+                        {!watchlist?.watchlistStocks?.length && (
+                            <div className="watchlist-empty">
+                                <div className="watchlist-empty-1">Feels a little empty in here...</div>
+                                <div className="watchlist-empty-2">Search for companies to add and stay up to date.</div>
+                            </div>
+                        )}
+                        {watchlist?.watchlistStocks?.length ? (
+                            <div className="watchlist-table">
+                                <header className="watchlist-row">
+                                    <div>Name</div>
+                                    <div>Symbol</div>
+                                    <div>Price</div>
+                                    <div>Today</div>
+                                    <div>Market Cap</div>
+                                    <div></div>
+                                </header>
+                                {watchlist?.watchlistStocks.map((stock) => (
+                                    <div id={stock.symbol} className="watchlist-row">
+                                        <div onClick={clickStock}>{stock.name}</div>
+                                        <div onClick={clickStock}>{stock.symbol}</div>
+                                        <div onClick={clickStock}>
+                                            ${getPercentOnly(stock.currentPrice)}
+                                        </div>
+                                        <div onClick={clickStock}>
+                                            {getPercentChangeCell(stock.percentChange)}
+                                        </div>
+                                        <div onClick={clickStock}>{convertNum(stock.marketCap)}</div>
+                                        <div>
+                                            <button
+                                                id={stock.symbol}
+                                                className="watchlist-button"
+                                                onClick={deleteStock}
+                                            >
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div onClick={clickStock}>
-                                        {getPercentChangeCell(stock.percentChange)}
-                                    </div>
-                                    <div onClick={clickStock}>{convertNum(stock.marketCap)}</div>
-                                    <div>
-                                        <button
-                                            id={stock.symbol}
-                                            className="watchlist-button"
-                                            onClick={deleteStock}
-                                        >
-                                            <i class="fa-solid fa-xmark"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : null}
                     </div>
 
                     <div className="watchlist-stickylist">
@@ -306,7 +315,6 @@ function WatchListPage() {
                                         ></img>
                                     </div>
                                     <div className="watchlist-list-name">{list.name}</div>
-                                    <div className="watchlist-hide">...</div>
                                 </div>
                             </>
                         ))}

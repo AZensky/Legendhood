@@ -94,10 +94,18 @@
     flex-direction: column;
     align-items: center;
     width: 15%;
+    min-width: 200px;
     padding-top: 2%;
 }
 
 /* buy and sell stock form */
+
+.details-page-right-container {
+    position: sticky;
+    top: 76px;
+    align-items: center;
+    height: 100%;
+  }
 
 
 .details-page-buy-sell-stock-form {
@@ -170,6 +178,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 3% 8%;
+}
+
+.details-page-buy-sell-stock-estimated-cost-label-price{
+    overflow: hidden;
 }
 
 .details-page-buy-sell-stock-market-price,
