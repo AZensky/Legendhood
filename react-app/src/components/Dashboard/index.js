@@ -23,6 +23,7 @@ import {
 } from "../../util/stocks-api";
 import {
   loadWatchlists,
+  createOneWatchlist
 } from "../../store/watchlist";
 import "./Dashboard.css";
 import { Link, useHistory } from "react-router-dom";
@@ -44,6 +45,9 @@ function Dashboard() {
   const [amountChanged, setAmountChanged] = useState(0);
   const [portfolioPercentChanged, setPortfolioPercentChanged] = useState(0);
   const [portfolioMarketValue, setPortfolioMarketValue] = useState(0);
+  const [name, setName] = useState("");
+  const [isShown, setIsShown] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const user = useSelector((state) => state.session.user);
 
@@ -412,6 +416,30 @@ function Dashboard() {
     history.push(`/watchlists/${listId}`);
   }
 
+  function showCreateList() {
+    // dispatch
+    setIsShown((current) => !current);
+  }
+
+  function clickCancel() {
+    setIsShown(false);
+    setErrors([])
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (name.length < 15) {
+      await dispatch(createOneWatchlist({ name })).then((watchlist) =>
+        history.push(`/watchlists/${watchlist?.id}`))
+      setIsShown(false);
+    } else {
+      setErrors(["Watchlist's name must be 15 characters or less."])
+    }
+
+
+  };
+
   return (
     <div className="dashboard-container">
       <DashboardNav />
@@ -511,23 +539,89 @@ function Dashboard() {
                   </Link>
                 ))}
 
-              <p className="dashboard-right-side-title">Lists</p>
-              {watchlists.map((list) => (
-                <div
-                  id={list.id}
-                  onClick={clickList}
-                  className="watchlist-list-card"
-                >
-                  <div>
-                    <img
-                      className="watchlist-lightning-logo-2"
-                      alt="⚡"
-                      src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
-                    ></img>
+              <div className="watchlist-stickylist">
+                <div className="watchlist-sticky-title">
+                  <div className="watchlist-sticky-list">Lists</div>
+                  <div className="watchlis-sticky-plus-sign">
+                    <button className="watchlist-button" onClick={showCreateList}>
+                      +
+                    </button>
                   </div>
-                  <div className="watchlist-list-name">{list.name}</div>
                 </div>
-              ))}
+
+                {isShown && (
+                  <div className="watchlist-createlist-dropdown">
+                    <div className="watchlist-createlist-dropdown-row">
+                      <form onSubmit={handleSubmit}>
+                        <div className="watchlist-createlist-dropdown-content">
+                          <img
+                            className="watchlist-lightning-logo-3"
+                            alt="⚡"
+                            src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
+                          ></img>
+                          <input
+                            className="watchlist-createlist-input"
+                            type="text"
+                            placeholder="List Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="watchlist-createlist-dropdown-row">
+                          <div>
+                            <button
+                              type="button"
+                              className="watchlist-cancel-button"
+                              onClick={clickCancel}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                          <div>
+                            <button
+                              type="submit"
+                              className="watchlist-confirm-button"
+                            >
+                              Create List
+                            </button>
+                          </div>
+
+                        </div>
+                      </form>
+
+                    </div>
+                    <div className="watchlist-create-errors">
+                      {errors.length > 0 && (
+                        <ul>
+                          {errors.map((error) => (
+                            <li>{error}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div >
+                  </div>
+                )}
+
+                {watchlists.map((list) => (
+                  <>
+                    <div
+                      id={list.id}
+                      onClick={clickList}
+                      className="watchlist-list-card"
+                    >
+                      <div>
+                        <img
+                          className="watchlist-lightning-logo-2"
+                          alt="⚡"
+                          src="https://cdn.robinhood.com/emoji/v0/128/26a1.png"
+                        ></img>
+                      </div>
+                      <div className="watchlist-list-name">{list.name}</div>
+                    </div>
+                  </>
+                ))}
+              </div>
             </div>
           </div>
         </div>
