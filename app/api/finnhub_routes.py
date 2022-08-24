@@ -64,7 +64,8 @@ def fetch_today_tick_data(symbol):
 # Example output: https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=D&from=1572651390&to=1575243390&token=cbu2r6iad3i96b4mbifg
 @finnhub_routes.route('/candlestick-data/live/<symbol>')
 def fetch_live_candlestick_data(symbol):
-    now = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
+    now = datetime.datetime.now()
+    # pytz.timezone('America/Los_Angeles')
     query_day = now
     if now.weekday() == 5:
         query_day = now - datetime.timedelta(days=1)
@@ -76,6 +77,8 @@ def fetch_live_candlestick_data(symbol):
 
     unix_today = int(time.mktime(query_day.timetuple()))
     unix_start = int(time.mktime(query_day_beginning.timetuple()))
+    print('today', unix_today)
+    print('start', unix_start)
 
     res = requests.get(f'https://finnhub.io/api/v1/stock/candle?symbol={symbol}&resolution=5&from={unix_start}&to={unix_today}&token={FINNHUB_API_KEY}')
     data = res.json()
