@@ -76,6 +76,8 @@
   border-radius: 0.25rem;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .dashboard-right-side-title {
@@ -183,4 +185,8 @@
 
 .dashboard-watchlist-btn-container button {
   width: 100%;
+}
+
+.watchlist-sticky-title .dashboard-right-side-title {
+  border-bottom: none;
 }

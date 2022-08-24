@@ -448,10 +448,11 @@ function Dashboard() {
                 ${numberWithCommas(portfolioMarketValue)}
               </p>
               <p
-                className={`user-portfolio-percent-changed ${portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
-                  ? "positive"
-                  : "negative"
-                  }`}
+                className={`user-portfolio-percent-changed ${
+                  portfolioPercentChanged >= 0 || isNaN(portfolioPercentChanged)
+                    ? "positive"
+                    : "negative"
+                }`}
               >
                 {amountChanged >= 0 && "+"}${numberWithCommas(amountChanged)} (
                 {portfolioPercentChanged >= 0 && "+"}
@@ -535,7 +536,7 @@ function Dashboard() {
                 ))}
 
               <div className="watchlist-sticky-title">
-                <div className="watchlist-sticky-list">Lists</div>
+                <div className="dashboard-right-side-title">Lists</div>
                 <div className="watchlis-sticky-plus-sign">
                   <button className="watchlist-button" onClick={showCreateList}>
                     +
