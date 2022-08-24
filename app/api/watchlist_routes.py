@@ -78,6 +78,15 @@ def edit_watchlist(watchlistid):
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+
+# Remove a stock from a watchlist
+@watchlist_routes.route('/<int:watchlistid>/stocks/<int:stockid>/delete')
+@login_required
+def remove_watchlist_stock(watchlistid, stockid):
+    watchlist_stock = WatchlistStock.query.filter(WatchlistStock.id == stockid, WatchlistStock.watchlist_id == watchlistid).one()
+
+    return watchlist_stock.to_dict_no_watchlist()
+
 @watchlist_routes.route('/<watchlistid>', methods=["DELETE"])
 @login_required
 def delete_watchlist(watchlistid):
@@ -92,3 +101,4 @@ def delete_watchlist(watchlistid):
     # else should throw 404
     else:
         return {"message": "Stock not found"}, 404
+
