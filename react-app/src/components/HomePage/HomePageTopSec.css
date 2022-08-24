@@ -38,6 +38,18 @@
     z-index: 3001;
   }
 
+  12% {
+    top: -500px;
+    left: 75%;
+    z-index: 3001;
+  }
+
+  13% {
+    top: -500px;
+    left: 45%;
+    z-index: 1;
+  }
+
   25% {
     top: 50px;
     left: 45%;
@@ -82,6 +94,18 @@
     top: 200px;
     left: 75%;
     z-index: 3001;
+  }
+
+  37% {
+    top: -500px;
+    left: 75%;
+    z-index: 3001;
+  }
+
+  38% {
+    top: -500px;
+    left: 45%;
+    z-index: 1;
   }
 
   50% {
@@ -129,6 +153,18 @@
     z-index: 3001;
   }
 
+  62% {
+    top: -500px;
+    left: 75%;
+    z-index: 3001;
+  }
+
+  63% {
+    top: -500px;
+    left: 45%;
+    z-index: 1;
+  }
+
   75% {
     top: 50px;
     left: 45%;
@@ -172,6 +208,18 @@
     top: 200px;
     left: 75%;
     z-index: 3001;
+  }
+
+  87% {
+    top: -500px;
+    left: 75%;
+    z-index: 3001;
+  }
+
+  88% {
+    top: -500px;
+    left: 45%;
+    z-index: 1;
   }
 
   100% {
