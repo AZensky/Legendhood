@@ -496,7 +496,7 @@ function DetailsPage() {
                         )}
                     </div>
                     <div className="details-page-graph-timeline">
-                        <ChartTimeLine handleClick={handleTimeSelection} time={timeSelection} delta={amountChanged} />
+                        <ChartTimeLine handleClick={handleTimeSelection} time={timeSelection} delta={amountChanged} graphLoaded={graphLoaded}/>
                     </div>
                     {assetDetails.Description != "None" && (<div className="details-page-about narrow">
                         <div className="details-page-about-header">About</div>
