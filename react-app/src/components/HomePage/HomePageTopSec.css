@@ -28,7 +28,7 @@
   top: 200px;
   left: 75%;
   /* z-index: 4; */
-  animation: change1 20s infinite;
+  animation: change1 15s infinite;
 }
 
 @keyframes change1 {
@@ -36,6 +36,18 @@
     top: 200px;
     left: 75%;
     z-index: 3001;
+  }
+
+  12% {
+    top: -500px;
+    left: 75%;
+    z-index: 3001;
+  }
+
+  13% {
+    top: -500px;
+    left: 45%;
+    z-index: 1;
   }
 
   25% {
@@ -68,7 +80,7 @@
   top: 150px;
   left: 65%;
   /* z-index: 3; */
-  animation: change2 20s infinite;
+  animation: change2 15s infinite;
 }
 
 @keyframes change2 {
@@ -82,6 +94,18 @@
     top: 200px;
     left: 75%;
     z-index: 3001;
+  }
+
+  37% {
+    top: -500px;
+    left: 75%;
+    z-index: 3001;
+  }
+
+  38% {
+    top: -500px;
+    left: 45%;
+    z-index: 1;
   }
 
   50% {
@@ -107,7 +131,7 @@
   position: absolute;
   top: 100px;
   left: 55%;
-  animation: change3 20s infinite;
+  animation: change3 15s infinite;
 }
 
 @keyframes change3 {
@@ -129,6 +153,18 @@
     z-index: 3001;
   }
 
+  62% {
+    top: -500px;
+    left: 75%;
+    z-index: 3001;
+  }
+
+  63% {
+    top: -500px;
+    left: 45%;
+    z-index: 1;
+  }
+
   75% {
     top: 50px;
     left: 45%;
@@ -146,7 +182,7 @@
   position: absolute;
   top: 50px;
   left: 45%;
-  animation: change4 20s infinite;
+  animation: change4 15s infinite;
 }
 
 @keyframes change4 {
@@ -172,6 +208,18 @@
     top: 200px;
     left: 75%;
     z-index: 3001;
+  }
+
+  87% {
+    top: -500px;
+    left: 75%;
+    z-index: 3001;
+  }
+
+  88% {
+    top: -500px;
+    left: 45%;
+    z-index: 1;
   }
 
   100% {
