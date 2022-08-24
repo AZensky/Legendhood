@@ -362,3 +362,19 @@ div.watchlist-row>div:first-child {
     font-weight: bold;
     color: #00c805;
 }
+
+.watchlist-empty {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.watchlist-empty-1 {
+    font-size: 21px;
+}
+
+.watchlist-empty-2 {
+    font-size: 15px;
+    margin-top: 25px;
+}
