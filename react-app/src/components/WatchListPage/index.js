@@ -63,7 +63,6 @@ function WatchListPage() {
     //set backend returned data into variable
     const watchlist = useSelector((state) => {
         const currentWatchlist = state.watchlist.currentWatchlist;
-
         return String(currentWatchlist?.id) === watchlistId
             ? currentWatchlist
             : null;
@@ -74,17 +73,17 @@ function WatchListPage() {
     });
 
     //onClick fucntions
-    function ClickStock(e) {
+    function clickStock(e) {
         const stocksym = e.currentTarget.parentElement.id;
         history.push(`/stocks/${stocksym}`);
     }
 
-    function ClickList(e) {
+    function clickList(e) {
         setIsLoaded(false);
         const listId = e.currentTarget.id;
         history.push(`/watchlists/${listId}`);
     }
-    function listnameclick() {
+    function listnameClick() {
         setShowEdit(true)
     }
     function showCreateList() {
@@ -104,12 +103,11 @@ function WatchListPage() {
         setIsShown(false);
     };
 
-    const handleEditSubmit = async (e) => {
-        e.preventDefault();
-        await dispatch(editOneWatchlist(watchlistId, { name })).then((watchlist) =>
-            history.push(`/watchlists/${watchlist?.id}`)
-        );
-        setIsEditShown(false);
+    const handleEditSubmit = async (name) => {
+        await dispatch(editOneWatchlist(watchlistId, { name }));
+        dispatch(loadWatchlists());
+        setName(name);
+        setShowEdit(false)
     };
 
     function deleteStock(e) {
@@ -133,24 +131,28 @@ function WatchListPage() {
 
                         <div className="watchlist-scroll-title">
                             {(!showEdit) && (
-
-                                <div className="watchlist-scroll-listname" onClick={listnameclick}>
-                                    {watchlist?.name}
+                                <div className={"watchlist-scroll-listname"} onClick={listnameClick}>
+                                    {watchlist.name}
                                 </div>
-
-
                             )}
                             {showEdit && (
                                 <div>
-                                    <form onSubmit={handleEditSubmit}>
-                                        <input
-                                            type="text"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
-                                            required
-                                        ></input>
-                                        <button type="submit">yes</button>
-                                    </form>
+                                    <input
+                                        className={"watchlist-scroll-listname"}
+                                        type="text"
+                                        autoFocus
+                                        defaultValue={watchlist.name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        onBlur={(e) => {
+                                            handleEditSubmit(e.target.value)
+                                        }}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter') {
+                                                handleEditSubmit(e.target.value)
+                                            }
+                                        }}
+                                        required
+                                    ></input>
                                 </div>
                             )}
                             <div className="watchlist-scroll-ellipsisicon">
@@ -163,7 +165,7 @@ function WatchListPage() {
 
                         <div className="watchlist-itemnum">
                             {" "}
-                            {watchlist?.watchlistStocks.length} items
+                            {watchlist?.watchlistStocks?.length} items
                         </div>
                         <div className="watchlist-table">
                             <header className="watchlist-row">
@@ -176,15 +178,15 @@ function WatchListPage() {
                             </header>
                             {watchlist?.watchlistStocks.map((stock) => (
                                 <div id={stock.symbol} className="watchlist-row">
-                                    <div onClick={ClickStock}>{stock.name}</div>
-                                    <div onClick={ClickStock}>{stock.symbol}</div>
-                                    <div onClick={ClickStock}>
+                                    <div onClick={clickStock}>{stock.name}</div>
+                                    <div onClick={clickStock}>{stock.symbol}</div>
+                                    <div onClick={clickStock}>
                                         ${getPercentOnly(stock.currentPrice)}
                                     </div>
-                                    <div onClick={ClickStock}>
+                                    <div onClick={clickStock}>
                                         {getPercentChangeCell(stock.percentChange)}
                                     </div>
-                                    <div onClick={ClickStock}>{convertNum(stock.marketCap)}</div>
+                                    <div onClick={clickStock}>{convertNum(stock.marketCap)}</div>
                                     <div>
                                         <button
                                             id={stock.symbol}
@@ -255,7 +257,7 @@ function WatchListPage() {
                             <>
                                 <div
                                     id={list.id}
-                                    onClick={ClickList}
+                                    onClick={clickList}
                                     className="watchlist-list-card"
                                 >
                                     <div>
@@ -274,7 +276,8 @@ function WatchListPage() {
                 </div>
             ) : (
                 <LoadingSpinner />
-            )}
+            )
+            }
 
             {isLoaded && <Footer />}
         </>

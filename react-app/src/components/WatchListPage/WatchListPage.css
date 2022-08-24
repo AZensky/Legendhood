@@ -25,15 +25,25 @@
 
 .watchlist-scroll-listname {
     font-size: 23px;
-    padding: 10px 280px;
+    height: 47px;
+    line-height: 47px;
+    width: 720px;
     border-radius: 5px;
-    display: flex;
     justify-content: flex-start;
-
 }
 
 .watchlist-scroll-listname:hover {
     background-color: rgb(245, 248, 250);
+}
+
+input.watchlist-scroll-listname {
+    font-size: 23px;
+    height: 47px;
+    line-height: 47px;
+    width: 720px;
+    border-radius: 5px;
+    justify-content: flex-start;
+    border: blue;
 }
 
 .watchlist-scroll-ellipsisicon button {
@@ -72,6 +82,17 @@ header.watchlist-row {
     margin-left: 0px;
     flex-direction: column;
 }
+
+header.watchlist-row>div {
+    height: 100%;
+    line-height: 47px;
+}
+
+div.watchlist-row>div {
+    height: 100%;
+    line-height: 59px;
+}
+
 
 div.watchlist-row {
     cursor: pointer;
