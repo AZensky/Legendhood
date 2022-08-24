@@ -1,92 +1,88 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { authenticate } from "../../store/session";
-import { loadWatchlists } from "../../store/watchlist";
+import "./DetailsPage.css"
 
-function AddToWatchlistForm() {
-
-    let { symbol } = useParams()
-    symbol = symbol.toUpperCase()
-
-    const [isLoaded2, setIsLoaded2] = useState(false)
-    const [originalState, setOriginalState] = useState({})
-    const [newState, setNewState] = useState({})
-    const dispatch = useDispatch()
-    let user = useSelector(state => state.session.user)
-    const [watchlist, setWatchList] = useState([])
+function AddToWatchListForm() {
+    const { symbol } = useParams()
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [lists, setLists] = useState([])
 
     useEffect(() => {
+        // get all lists as an array
+        setLists([
+            {
+                id: 1,
+                name: "test list 1",
+                watchlist_stocks: [
+                    {
+                        id: 1,
+                        symbol: "TEST",
+                        name: "test1"
+                    },
+                    {
+                        id: 1,
+                        symbol: "TST",
+                        name: "test2"
+                    },
+                    {
+                        id: 1,
+                        symbol: "TEEST",
+                        name: "Test 3"
+                    },
+                ]
+            },
+            {
+                id: 1,
+                name: "test list 2",
+                watchlist_stocks: [
+                    {
+                        id: 1,
+                        symbol: "IBM",
+                        name: "test1"
+                    },
+                ]
+            }
+        ])
 
-        const initializeForm = async () => {
-            const res = await fetch("/api/watchlists")
-            const data = await res.json()
 
-            let userwatchlist = data.watchlists
-            console.log("_____________________",userwatchlist)
-            const origState = {}
-            userwatchlist.forEach((list) => {
-                let check = false
-                for (let item of list.watchlistStocks) {
-                    console.log(item["symbol"] === symbol)
-                    if (item["symbol"] === symbol) check = true
-                }
-                origState[list.id] = check
-            })
-            console.log("ORIGINAL STATE",origState)
-            setOriginalState(origState)
-            setNewState(origState)
-            setWatchList(userwatchlist)
-            setIsLoaded2(true)
-        }
-
-        initializeForm()
-
+        setIsLoaded(true)
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await dispatch(authenticate())
     }
 
-    useEffect(() => {
-        console.log(originalState)
-        console.log(newState)
-    }, [newState])
 
-    const handleChange = (id) => {
-        let changed = {...newState}
-        changed[id] = !changed[id]
-        setNewState(changed)
-    }
-
-    return isLoaded2 && (
-        <div>
+    return isLoaded && (
+        <div className="details-page-watchlist-form">
             <form
-
+                onSubmit={handleSubmit}
+                className="details-page-watch-list-form"
             >
-                {watchlist.length > 0 && watchlist.map((lst) => {
-                    console.log(lst.name,",",lst.id, ",", newState[lst.id])
-                    return (
-                        <div key={lst.id} className="add-to-watchlst-form">
-                            <input
-                                type="checkbox"
-                                onChange={() => handleChange(lst.id)}
-                                checked={newState[lst.id]}
-                            ></input>
-                            <div>
-                                logo
-                            </div>
-                            <div>
-                                {lst.name}
-                            </div>
-                        </div>
-                    )
-                })}
+                {lists.length > 0 && (
+                    lists.map((list, i) => {
+
+
+                        return (
+                            <label
+
+                            >
+                                <input
+                                    type="checkbox"
+                                    className="details-page-watchlist-form-listitem"
+                                >
+                                </input>
+                                <div className="details-page-watchlist-form-list-logo">LOGO</div>
+                                <div className="details-page-watchlist-form-list-name">{list.name}</div>
+                            </label>
+                        )
+                    })
+                )}
+                <button className="details-page-watch-list-button">Save Changes</button>
             </form>
         </div>
     );
 }
 
-export default AddToWatchlistForm;
+export default AddToWatchListForm;
