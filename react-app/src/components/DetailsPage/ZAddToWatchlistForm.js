@@ -222,6 +222,7 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
                     className="add-to-watchlst-form-button-container"
                 >
                     <button
+                        onClick={handleSubmit}
                         className={`add-to-watchlst-form-save-changes-button ${amountChanged < 0 ? "red" : "green"} ${saveChanges ? "enabled" : "disabled"}`}
                         disabled={!saveChanges}
                     >
