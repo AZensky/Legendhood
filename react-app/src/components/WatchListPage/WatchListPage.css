@@ -3,7 +3,7 @@
     max-width: 1500px;
     min-width: 1036px;
     display: flex;
-    height: 90vh;
+    min-height: 90vh;
     justify-content: center;
     margin: 36px auto 0 auto;
 }
