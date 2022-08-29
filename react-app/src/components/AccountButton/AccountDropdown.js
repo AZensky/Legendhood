@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../store/session";
+import { numberWithCommas } from "../../util/stocks-api";
 import AddBuyingPowerModal from "../AddBuyingPower";
 import "./AccountDropdown.css";
 
@@ -81,11 +82,11 @@ function AccountDropdown() {
           </h3>
           <div className="account-balance-summary">
             <div className="account-portfolio-value">
-              <h3>{portfolioValue}</h3>
+              <h3>{numberWithCommas(portfolioValue)}</h3>
               <div>Portfolio Value</div>
             </div>
             <div className="account-buying-power">
-              <h3>{user.buyingPower.toFixed(2)}</h3>
+              <h3>{numberWithCommas(user.buyingPower.toFixed(2))}</h3>
               <div>Buying Power</div>
             </div>
           </div>
