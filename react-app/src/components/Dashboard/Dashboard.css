@@ -51,8 +51,14 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 24px 0;
+  padding: 1.5rem 0;
   font-weight: 700;
+  border-bottom: 1px solid rgb(227, 233, 237);
+}
+
+.market-news-title {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .dashboard-right-side-container {
