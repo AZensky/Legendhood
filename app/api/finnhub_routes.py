@@ -71,7 +71,9 @@ def fetch_live_candlestick_data(symbol):
     if now.weekday() == 6:
         query_day = now - datetime.timedelta(days=2)
 
-    query_day_beginning = datetime.datetime.combine(query_day.today(), datetime.time())
+    query_day_beginning = datetime.datetime.combine(query_day, datetime.time())
+
+    print('DATES', query_day, query_day_beginning)
 
     unix_today = int(time.mktime(query_day.timetuple()))
     unix_start = int(time.mktime(query_day_beginning.timetuple()))

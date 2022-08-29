@@ -494,6 +494,8 @@ function Dashboard() {
               <p>${user && numberWithCommas(user.buyingPower.toFixed(2))}</p>
             </div>
 
+            <h4 className="market-news-title">News</h4>
+
             <div className="market-news-container">
               {marketNews.length > 0 &&
                 marketNews.map((article) => (
