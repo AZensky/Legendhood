@@ -117,9 +117,7 @@ function Dashboard() {
 
       for (let stock in userStocks) {
         let res = await fetchLiveStockData(stock);
-        console.log("STOCK", stock);
         if (res === "Not Available") {
-          console.log("stock", stock);
           setLiveDataAvailable(false);
           setAmountChanged(0);
           setPortfolioPercentChanged(0);
@@ -390,8 +388,6 @@ function Dashboard() {
           userStocks[stock] = allUserStocks[stock];
         }
       }
-
-      console.log("USER STOCKS", userStocks);
 
       if (timeSelection === "Live") await getLiveData(userStocks);
       else if (timeSelection === "1W") await pastWeekClosingPrices(userStocks);

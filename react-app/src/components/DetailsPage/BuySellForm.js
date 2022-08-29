@@ -50,7 +50,6 @@ function BuySellForm({ quote, amountChanged }) {
         setSuccessfulTransaction(false)
 
         const errorsArr = []
-        console.log("TESTING", typeof shares, !Number.isInteger(shares))
         if (shares < 0 || !Number.isInteger(shares) || Number(shares.toString()[0]) === 0) {
             errorsArr.push({ "Invalid quantity": "Invalid share quantity. Please input integer values greater than 0" })
             setErrors(errorsArr)
@@ -78,13 +77,10 @@ function BuySellForm({ quote, amountChanged }) {
 
         if (buySell === "Buy") {
             const result = await dispatch(purchaseStocksThunk(order))
-            console.log(result)
         } else {
             const result = await dispatch(sellStocksThunk(order))
-            console.log(result)
         }
         await dispatch(authenticate())
-        console.log(shares)
         setTransactionShares(shares)
         setSuccessfulTransaction(true)
     }

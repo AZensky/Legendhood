@@ -56,11 +56,10 @@ function ZAddToWatchlistForm({ setShowModal, amountChanged }) {
         for (let listId in originalState) {
             if (originalState[listId] !== newState[listId]) {
                 const action = newState[listId] ? "POST" : "DELETE"
-                console.log("Action:", action)
+
                 if (action === "DELETE") {
                     await dispatch(deleteOneStockFromDetailsPage(listId, symbol))
                 } else if (action === "POST") {
-                    console.log("POSTING")
                     const payload = {
                         "symbol": symbol,
                         "watchlist_id": listId

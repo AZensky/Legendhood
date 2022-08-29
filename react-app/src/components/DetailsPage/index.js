@@ -84,7 +84,6 @@ function DetailsPage() {
                 }
 
                 setAssetDetails(data)
-                console.log("DETAILS", data)
                 return data;
             }
 
@@ -92,7 +91,6 @@ function DetailsPage() {
                 const res = await fetch(`/api/finnhub/stock-data/${symbol}`);
                 const data = await res.json();
                 setAssetQuote(data)
-                console.log("QUOTE", data)
                 return data;
             }
 
@@ -457,13 +455,11 @@ function DetailsPage() {
     const getUserLists = async () => {
         const res = await fetch('/api/watchlists')
         const data = await res.json()
-        console.log(data)
     }
 
     const getListStock = async () => {
         const res = await fetch(`/api/watchlists/${4}/stocks/${9}/delete`)
         const data = await res.json()
-        console.log(data)
     }
 
     return (
