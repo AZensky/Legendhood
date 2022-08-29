@@ -382,7 +382,17 @@ function Dashboard() {
     };
 
     const initializeCharts = async () => {
-      let userStocks = await getUserStocks();
+      let allUserStocks = await getUserStocks();
+      let userStocks = {};
+
+      for (let stock in allUserStocks) {
+        if (allUserStocks[stock] !== 0) {
+          userStocks[stock] = allUserStocks[stock];
+        }
+      }
+
+      console.log("USER STOCKS", userStocks);
+
       if (timeSelection === "Live") await getLiveData(userStocks);
       else if (timeSelection === "1W") await pastWeekClosingPrices(userStocks);
       else if (timeSelection === "1M") await pastMonthClosingPrices(userStocks);
