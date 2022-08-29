@@ -2,8 +2,8 @@
     width: 90%;
     max-width: 1500px;
     min-width: 1036px;
-    height: 920px;
     display: flex;
+    height: 90vh;
     justify-content: center;
     margin: 36px auto 0 auto;
 }
